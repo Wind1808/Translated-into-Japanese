@@ -1,0 +1,299 @@
+https://hacks.mozilla.org/2020/12/welcome-yari-mdn-web-docs-has-a-new-platform/
+
+Welcome Yari: MDN Web Docs has a new platform
+ようこそ Yari：MDN Web Docs には新しいプラットフォームがあります
+
+By Chris Mills
+
+Posted on December 14, 2020 in Featured Article, MDN, and Release
+2020年12月14日に特集記事、MDN、およびリリースで投稿されました
+
+After several intense months of work on such a significant change, the day is finally upon us: MDN Web Docs’ new platform (codenamed Yari) is finally launched!
+このような重要な変更に数か月にわたって取り組んだ後、ついにその日がやってきました。 MDN Web Docs の新しいプラットフォーム（コードネーム Yari）がついにリリースされました。
+
+icon for yari, includes a man with a spear, plus the text yari, the mdn web docs platform
+yari のアイコンには、槍を持った男と、テキスト yari, the mdn web docs platform が含まれます
+
+Between November 2 and December 14, we ran a beta period in which a number of our fabulous community members tested out the new platform, submitted content changes, allowed us to try out the new contribution workflow, and suggested improvements to both the platform and styling. All of you have our heartfelt thanks.
+11月2日から12月14日まで、多くのすばらしいコミュニティメンバーが新しいプラットフォームをテストし、コンテンツの変更を送信し、新しい投稿ワークフローを試すことができ、プラットフォームとスタイルの両方の改善を提案するベータ期間を実施しました。 心より感謝申し上げます。
+
+This post serves to provide an update on where we are now, what we’re aiming to do next, and what you can do to help.
+この投稿は、私たちが今どこにいるのか、次に何を目指しているのか、そしてあなたが助けるために何ができるのかについての最新情報を提供するのに役立ちます。
+
+
+
+
+Where we are now
+私たちが今いる場所
+
+We’ve pulled together a working system in a short amount of time that vastly improves on the previous platform, and solves a number of tangible issues. There is certainly a lot of work still to do, but this new release provides a stable base to iterate from, and you’ll see a lot of further improvements in the coming months. Here’s a peek at where we are now:
+以前のプラットフォームを大幅に改善し、多くの具体的な問題を解決する、動作中のシステムを短時間でまとめました。 確かにまだやるべきことはたくさんありますが、この新しいリリースは反復するための安定した基盤を提供し、今後数か月でさらに多くの改善が見られるでしょう。 現在の状況を確認します。
+
+
+
+
+Contributing in GitHub
+GitHub での貢献
+
+The most significant difference with the new platform is that we’ve decentralized the content from a SQL database to files in a git repository. To edit content, you now submit pull requests against the https://github.com/mdn/content repo, rather than editing the wiki using the old WYSIWYG editor.
+新しいプラットフォームとの最も重要な違いは、コンテンツを SQL データベースから git リポジトリ内のファイルに分散化したことです。 コンテンツを編集するには、古い WYSIWYG エディターを使用して Wiki を編集するのではなく、https://github.com/mdn/content リポジトリに対してプルリクエストを送信するようになりました。
+
+This has a huge advantage in terms of contribution workflow — because it’s a GitHub repo, you can insert it into your workflow however you feel comfortable, mass changes are easier to make programmatically, and you can lump together edits across multiple pages in a single pull request rather than as scattered individual edits, and we can apply intelligent automatic linting to edits to speed up work.
+これは、投稿ワークフローの点で大きな利点があります。 これは GitHub リポジトリであるため、ワークフローに挿入できますが、快適に感じることができ、プログラムで大量の変更を行うのが簡単で、1回のプルで複数のページにまたがる編集をまとめることができます。 個別の編集を分散させるのではなく、リクエストを送信します。 インテリジェントな自動リンティングを編集に適用して、作業をスピードアップできます。
+
+The content repo initially comes with a few basic CLI tools to help you with fundamental tasks, such as yarn start (to create a live preview of what your document will look like when rendered on MDN), yarn content create (to add a new page), yarn content move (to move an existing page), etc. You can find more details of these, and other contribution instructions, in the repo’s README file.
+コンテンツリポジトリには、yarn start（MDNでレンダリングしたときにドキュメントがどのように表示されるかのライブプレビューを作成するため）、yarn content create（新しいページを追加するため）、ヤーンコンテンツの移動（既存のページを移動するため）など基本的なタスクを支援するためのいくつかの基本的な CLI ツールが最初に付属しています。 これらの詳細やその他の投稿手順は、リポジトリの README ファイルにあります。
+
+
+
+
+Caring for the community
+コミュニティの世話
+
+Community interactions will not just be improved, but transformed. You can now have a conversation about a change over a pull request before it is finalized and submitted, making suggestions and iterating, rather than worrying about getting it perfect the first time round.
+コミュニティの相互作用は改善されるだけでなく、変革されます。 これで、プルリクエストが確定して送信される前に、最初のラウンドで完全になることを心配することなく、提案や反復を行って、プルリクエストの変更について話し合うことができます。
+
+We think that this model will give contributors more confidence in making changes, and allow us to build a much better relationship with our community and help them improve their contributions.
+このモデルにより、貢献者は変更を加えることに自信を持てるようになり、コミュニティとのより良い関係を構築し、貢献を改善できるようになると考えています。
+
+
+
+
+Reducing developer burden
+開発者の負担を軽減
+
+Our developer maintenance burden is also now much reduced with this update. The existing (Kuma) platform is complex,  hard to maintain, and adding new features is very difficult. The update will vastly simplify the platform code — we estimate that we can remove a significant chunk of the existing codebase, meaning easier maintenance and contributions.
+今回のアップデートにより、開発者のメンテナンス負担も大幅に軽減されました。 既存の（Kuma）プラットフォームは複雑で、保守が難しく、新しい機能を追加することは非常に困難です。 この更新により、プラットフォームコードが大幅に簡素化されます。 既存のコードベースのかなりの部分を削除できると推定されます。 つまり、メンテナンスと貢献が容易になります。
+
+This is also true of our front-end architecture: The existing MDN platform has a number of front-end inconsistencies and accessibility issues, which we’ve wanted to tackle for some time. The move to a new, simplified platform gives us a perfect opportunity to fix such issues.
+これは、フロントエンドアーキテクチャにも当てはまります。 既存の MDN プラットフォームには、フロントエンドの不整合やアクセシビリティの問題がいくつかあり、しばらくの間取り組んでいました。 新しい簡素化されたプラットフォームへの移行は、そのような問題を修正する絶好の機会を与えてくれます。
+
+
+
+
+What we’re doing next
+次に行うこと
+
+There are a number of things that we could do to further improve the new platform going forward. Last week, for example, we already talked about our plans for the future of l10n on MDN.
+今後、新しいプラットフォームをさらに改善するためにできることはたくさんあります。 たとえば先週、MDN での l10n の将来の計画についてはすでに話しました。
+
+The first thing we’ll be working on in the new year is ironing out the kinks in the new platform. After that, we can start to serve our readers and contributors much better than before, implementing new features faster and more confidently, which will lead to an even more useful MDN, with an even more powerful contribution model.
+新年に最初に取り組むことは、新しいプラットフォームの問題を解決することです。 その後、読者と寄稿者に以前よりもはるかに優れたサービスを提供し、新しい機能をより迅速かつ自信を持って実装できるようになります。 これにより、さらに強力な寄稿モデルを備えた、さらに便利な MDN が実現します。
+
+The sections below are by no means definite, but they do provide a useful idea of what we’ve got planned next for the platform. We are aiming to publish a public roadmap in the future, so that you can find out where we’re at, and make suggestions.
+以下のセクションは明確なものではありませんが、プラットフォームで次に計画していることについての有用なアイデアを提供します。 将来的には公開ロードマップを公開し、現在の状況を把握して提案できるようにすることを目指しています。
+
+
+
+
+Moving to Markdown
+Markdown への移行
+
+At its launch, the content is stored in HTML format. This is OK — we all know a little HTML — but it is not the most convenient format to edit and write, especially if you are creating a sizable new page from scratch. Most people find Markdown easier to write than HTML, so we want to eventually move to storing our core content in Markdown (or maybe some other format) rather than HTML.
+起動時に、コンテンツは HTML 形式で保存されます。 これは問題ありません — 私たちは皆少し HTML を知っています — しかし、特に大きな新しいページを最初から作成する場合は、編集や書き込みに最も便利な形式ではありません。 ほとんどの人は Markdown を HTML よりも書きやすいと感じているので、最終的にはコアコンテンツを HTML ではなく Markdown（または他の形式）で保存することに移行したいと考えています。
+
+
+
+
+Improving search
+検索の改善
+
+For a long time, the search functionality has been substandard on MDN. Going forward, we not only want to upgrade our search to return useful results, but we also want to search more usefully, for example fuzzy search, search by popularity search by titles, summaries, full text search, and more.
+長い間、検索機能は MDN では標準以下でした。 今後は、検索をアップグレードして有用な結果を返すだけでなく、あいまい検索、人気による検索、タイトルによる検索、要約、全文検索など、より便利な検索を行いたいと考えています。
+
+
+
+
+Representing MDN meta pages
+MDN メタページの表現
+
+Currently only the MDN content pages are represented in our new content repo. We’d eventually like to stop using our old home, profile, and search pages, which are still currently served from our old Django-based platform, and bring those into the new platform with all the advantages that it brings.
+現在、MDN コンテンツページのみが新しいコンテンツリポジトリに表示されています。 最終的には、現在も古い Django ベースのプラットフォームから提供されている古いホーム、プロフィール、検索ページの使用をやめ、それらがもたらすすべての利点を備えた新しいプラットフォームに取り入れたいと考えています。
+
+
+
+
+And there’s more!
+そして、もっとあります！
+
+We’d also like to start exploring:
+また、調査を開始したいと思います。
+
+    Optimizing file attachments
+     添付ファイルの最適化
+
+    Implementing and enforcing CSP on MDN
+     MDN での CSP の実装と実施
+
+    Automated linting and formatting of all code snippets
+     すべてのコードスニペットの自動化されたリンティングとフォーマット
+
+    Gradually removing the old-style KumaScript macros that remain in MDN content, removing, rendering, or replacing them as appropriate. For example, link macros can just be rendered out, as standard HTML links will work fine, whereas all the sidebar macros we have should be replaced by a proper sidebar system built into the actual platform.
+     MDN コンテンツに残っている古いスタイルの KumaScript マクロを徐々に削除し、必要に応じて削除、レンダリング、または置換します。 たとえば、標準の HTML リンクが正常に機能するため、リンクマクロをレンダリングするだけで済みますが、実際のプラットフォームに組み込まれている適切なサイドバーシステムに置き換える必要があります。
+
+
+
+
+
+What you can do to help
+あなたが助けるために何ができるか
+
+As you’ll have seen from the above next steps, there is still a lot to do, and we’d love the community to help us with future MDN content and platform work.
+上記の次のステップからわかるように、やるべきことはまだたくさんあります。 コミュニティが将来の MDN コンテンツとプラットフォームの作業を支援してくれることを願っています。
+
+    If you are more interested in helping with content work, you can find out how to help at Contributing to MDN.
+     コンテンツ作業の支援にもっと興味がある場合は、MDNへの貢献で支援する方法を見つけることができます。
+
+    If you are more interested in helping with MDN platform development, the best place to learn where to start is the Yari README.
+     MDN プラットフォームの開発を支援することにもっと興味がある場合は、どこから始めればよいかを学ぶのに最適な場所は Yari README です。
+
+    In terms of finding a good general place to chat about MDN, you can join the discussion on the MDN Web Docs chat room on Matrix.
+     MDN についてチャットするのに適した一般的な場所を見つけるという点では、Matrix の MDN Web Docs チャットルームのディスカッションに参加できます。
+
+
+
+
+
+About Chris Mills
+
+Chris Mills is a senior tech writer at Mozilla, where he writes docs and demos about open web apps, HTML/CSS/JavaScript, A11y, WebAssembly, and more. He loves tinkering around with web technologies, and gives occasional tech talks at conferences and universities. He used to work for Opera and W3C, and enjoys playing heavy metal drums and drinking good beer. He lives near Manchester, UK, with his good lady and three beautiful children.
+
+More articles by Chris Mills…
+Discover great resources for web development
+
+Sign up for the Mozilla Developer Newsletter:
+E-mail
+I'm okay with Mozilla handling my info as explained in this Privacy Policy.
+10 comments
+
+    maxloh
+
+        The following MDN article suggest users to determine license of code samples by checking the time when they was added to MDN. If a code sample was added after August 20, 2010, it is CC0, otherwise it is MIT.
+        次の MDN の記事では、MDN に追加された時刻を確認して、コードサンプルのライセンスを決定することをユーザーに提案しています。 2010年8月20日以降にコードサンプルが追加された場合は CC0、それ以外の場合は MIT です。
+
+        https://developer.mozilla.org/en-US/docs/MDN/About#Copyrights_and_licenses
+
+        However, this method doesn’t work anymore after MDN’s transition to Yari because the GitHub repo doesn’t contain articles’ history before 15 Sep 2020.
+         ただし、GitHub リポジトリには2020年9月15日より前の記事の履歴が含まれていないため、MDN が Yari に移行した後は、この方法は機能しなくなります。
+
+        How should we figure out which license applies to a specific code sample, after the transition to Yari?
+         Yari に移行した後、特定のコードサンプルにどのライセンスが適用されるかをどのように判断する必要がありますか？
+
+    December 14th, 2020 at 17:37
+
+    Reply
+        Chris Mills
+
+            This is an issue, yes, and we’re currently looking into the best way to handle this. More soon.
+            これは問題です。 はい、現在、これを処理するための最良の方法を検討しています。 詳細は近日中に。
+
+        December 15th, 2020 at 00:27
+
+        Reply
+    Al
+
+        Congratulations!
+
+    December 15th, 2020 at 04:44
+
+    Reply
+    Yinsi Rio
+
+        Off topic, but is the picture based on Yukimura Sanada from Samurai Warriors?
+        話題外ですが、戦国無双の真田幸村を原作とした写真ですか？
+
+    December 15th, 2020 at 08:04
+
+    Reply
+    Rami Yushuvaev
+
+        Great news!
+        素晴らしいニュース！
+
+        @Chris , Is it final we can start using Markdown?
+        @Chris、Markdown を使い始めることができるのは最終的なことですか？
+
+    December 15th, 2020 at 12:56
+
+    Reply
+        Chris Mills
+
+            Not yet ;-)
+            未だに ;-）
+
+            Moving to markdown is in the roadmap for a future iteration of the platform.
+            markdown への移行は、プラットフォームの将来のイテレーションのロードマップにあります。
+
+        December 16th, 2020 at 01:28
+
+        Reply
+    h.rayflood
+
+        the samurai in logo picture is SANADA Yukimura from Samurai Warriors 4 created by KOEI TECMO HOLDINGS.
+        ロゴ写真の侍は、コーエーテクモホールディングスが制作した戦国無双4の真田幸村です。
+
+        https://www.gamecity.ne.jp/sengoku4/chara00.html
+
+        https://www.koeitecmoamerica.com/sw4/chara00.html
+
+        does this picture have any issues about copyright ? because this picture based on original image.
+        この写真には著作権に関する問題がありますか？ この写真は元の画像に基づいているからです。
+
+    December 15th, 2020 at 14:43
+
+    Reply
+    Tim E
+
+        This is very exciting! We’ve done a lot of research at Condé Nast about markdown, and I would say that it has lots of issues for non-technical contributors. If all folks using the docs are proficient in markdown, great!
+        これはとてもエキサイティングです！ コンデナストでは markdown について多くの調査を行ってきましたが、技術者以外の貢献者にとっては多くの問題があると思います。 ドキュメントを使用しているすべての人が markdown に習熟しているなら、素晴らしいです！
+
+        The issues we came up with are that all the markup data is in a “data lake” of sorts that makes it hard to bulk analyze or extract information from. This has made it hard for us to understand what features are used often and new features we should provide for editors.
+        私たちが思いついた問題は、すべてのマークアップデータが一種の「データレイク」にあり、情報の一括分析や抽出が困難なことです。 このため、頻繁に使用される機能や、編集者に提供する必要のある新機能を理解するのが難しくなっています。
+
+        There’s no such thing as invalid markdown! This was something that caught me by surprise. To provide feedback, we need to understand what looks like a mistake.
+        無効な markdown などはありえない！ これは私を驚かせたものでした。 フィードバックを提供するには、間違いのように見えるものを理解する必要があります。
+
+        The rest of this is related to rich text editing, but it stands that these provided a major pain point for moving our editors from editing in markdown directly to rich text editing. Delimiter runs are complicated and understanding what the proper nesting for something without breaking what users intend is messy. Machine written markdown for 90% of things that are written is quite easy, but the rest of it becomes really difficult to do correctly. (I have personally spent several years working on code to wrangle our markdown).
+        これの残りはリッチテキスト編集に関連していますが、これらはエディターを markdown での編集からリッチテキスト編集に直接移行するための大きな問題点を提供したことは明らかです。 区切り文字の流れは複雑であり、ユーザーの意図を壊さずに何かを適切にネストすることは面倒です。 書かれているものの90%の機械で書かれた markdown は非常に簡単ですが、それ以外の部分は正しく行うのが非常に難しくなります。 （私は個人的に数年を費やして、 markdown を解決するためのコードに取り組んできました）。
+
+        Finally, writing in markdown in languages that do not use spaces liberally makes it impossible to format specific ranges of text how they would like to (in part due to our custom markdown extensions). The reason for this in particular is due to how delimiter runs work in markdown and how they interact with spaces.
+        最後に、スペースを自由に使用しない言語で markdown を書き込むと、特定の範囲のテキストを希望どおりにフォーマットできなくなります（一部はカスタム markdown 拡張機能が原因です）。 特にこの理由は、区切り文字の流れが markdown でどのように機能するか、および区切り文字がスペースとどのように相互作用するかによるものです。
+
+        (Also to note that markdown wasn’t intended for storage, see: https://twitter.com/gruber/status/1106278808137666563)
+        （ markdown はストレージを目的としていないことにも注意してください：https://twitter.com/gruber/status/1106278808137666563 を参照してください）
+
+        If anyone would like to chat more, we’d be happy! Reach out, and congrats again on this milestone!
+        誰かがもっとチャットしたいなら、私たちは幸せです！ 手を差し伸べて、このマイルストーンをもう一度おめでとう！
+
+    December 15th, 2020 at 17:18
+
+    Reply
+    Knissing
+
+        it is great. can’t wait for contributing
+        それは素晴らしいです。 貢献するのが待ちきれません
+
+    December 16th, 2020 at 19:58
+
+    Reply
+    Sudarshan
+
+        This is great news! Thanks for all your hard work.
+        これは素晴らしいニュースです！ お疲れ様でした。
+
+        Will help to my greatest extent.
+        私の最大の範囲で役立ちます。
+
+    December 26th, 2020 at 17:05
+
+    Reply
+
+Post Your Comment
+
+Your name *
+Your e-mail *
+Spam robots, please fill in this field. Humans should leave it blank.
+Your comment
+
+Except where otherwise noted, content on this site is licensed under the Creative Commons Attribution Share-Alike License v3.0 or any later version.
+the Mozilla dino logo

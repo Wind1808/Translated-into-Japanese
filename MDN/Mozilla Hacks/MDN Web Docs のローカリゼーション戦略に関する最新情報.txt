@@ -1,0 +1,285 @@
+https://hacks.mozilla.org/2020/12/an-update-on-mdn-web-docs-localization-strategy/
+
+An update on MDN Web Docs’ localization strategy
+MDN Web Docs のローカリゼーション戦略に関する最新情報
+
+By Chris Mills
+
+Posted on December 8, 2020 in Featured Article and MDN
+2020年12月8日に特集記事と MDN に投稿されました
+
+In our previous post — MDN Web Docs evolves! Lowdown on the upcoming new platform — we talked about many aspects of the new MDN Web Docs platform that we’re launching on December 14th. In this post, we’ll look at one aspect in more detail — how we are handling localization going forward. We’ll talk about how our thinking has changed since our previous post, and detail our updated course of action.
+前回の投稿 — MDN Web Docs が進化します！ 今後の新しいプラットフォームの詳細 — 12月14日にリリースする新しい MDN Web Docs プラットフォームの多くの側面について話しました。 この投稿では、1つの側面、つまり今後のローカリゼーションの 処理方法について詳しく見ていきます。 前回の投稿から私たちの考え方がどのように変わったかについて話し、更新された行動方針について詳しく説明します。
+
+
+
+
+Updated course of action
+更新された行動方針
+
+Based on thoughtful feedback from the community, we did some additional investigation and determined a stronger, clearer path forward.
+コミュニティからの思慮深いフィードバックに基づいて、追加の調査を行い、より強力で明確な前進の道を決定しました。
+
+First of all, we want to keep a clear focus on work leading up to the launch of our new platform, and making sure the overall system works smoothly. This means that upon launch, we still plan to display translations in all existing locales, but they will all initially be frozen — read-only, not editable.
+まず、新しいプラットフォームの立ち上げに至るまでの作業に明確に焦点を当て、システム全体がスムーズに機能するようにします。 つまり、リリース時に、既存のすべてのロケールで翻訳を表示する予定ですが、最初はすべてフリーズされます — 読み取り専用で、編集できません。
+
+We were considering automated translations as the main way forward. One key issue was that automated translations into European languages are seen as an acceptable solution, but automated translations into CJK languages are far from ideal — they have a very different structure to English and European languages, plus many Europeans are able to read English well enough to fall back on English documentation when required, whereas some CJK communities do not commonly read English so do not have that luxury.
+私たちは、自動翻訳を今後の主な方法として検討していました。 重要な問題の1つは、ヨーロッパ言語への自動翻訳は許容できる解決策と見なされているが、CJK 言語への自動翻訳は理想からはほど遠いことでした。 英語やヨーロッパ言語とは構造が大きく異なり、多くのヨーロッパ人は英語を十分に読むことができます。 一部の CJK コミュニティは一般的に英語を読まないため、そのような贅沢はありませんが、必要に応じて英語のドキュメントに頼ることができます。
+
+Many folks we talked to said that automated translations wouldn’t be acceptable in their languages. Not only would they be substandard, but a lot of MDN Web Docs communities center around translating documents. If manual translations went away, those vibrant and highly involved communities would probably go away — something we certainly want to avoid!
+私たちが話をした多くの人々は、自動翻訳は彼らの言語では受け入れられないと言いました。 それらは標準以下であるだけでなく、多くの MDN Web Docs コミュニティはドキュメントの翻訳を中心としています。 手作業による翻訳がなくなると、活気に満ちた非常に関与しているコミュニティはおそらくなくなるでしょう。 これは絶対に避けたいことです。
+
+We are therefore focusing on limited manual translations as our main way forward instead, looking to unfreeze a number of key locales as soon as possible after the new platform launch.
+そのため、新しいプラットフォームのリリース後できるだけ早く多くの主要なロケールのフリーズを解除することを目指して、代わりに主な方法として限定的な手動翻訳に焦点を当てています。
+
+
+
+
+Limited manual translations
+限られた手動翻訳
+
+Rigorous testing has been done, and it looks like building translated content as part of the main build process is doable. We are separating locales into two tiers in order to determine which will be unfrozen and which will remain locked.
+厳密なテストが行​​われ、メインのビルドプロセスの一部として翻訳されたコンテンツをビルドできるようです。 ロケールを2つの層に分けて、どちらが凍結解除され、どちらがロックされたままになるかを決定します。
+
+    Tier 1 locales will be unfrozen and manually editable via pull requests. These locales are required to have at least one representative who will act as a community lead. The community members will be responsible for monitoring the localized pages, updating translations of key content once the English versions are changed, reviewing edits, etc. The community lead will additionally be in charge of making decisions related to that locale, and acting as a point of contact between the community and the MDN staff team.
+    Tier 1 ロケールはフリーズ解除され、プルリクエストを介して手動で編集できます。 これらのロケールには、コミュニティリーダーとして機能する代表者が少なくとも1人いる必要があります。 コミュニティメンバーは、ローカライズされたページの監視、英語バージョンの変更後の主要コンテンツの翻訳の更新、編集のレビューなどを担当します。 コミュニティリーダーは、そのロケールに関連する決定を行い、コミュニティと MDN スタッフチーム間の連絡先のポイントとして機能します。
+
+    Tier 2 locales will be frozen, and not accept pull requests, because they have no community to maintain them.
+    Tier 2 ロケールは凍結され、プルリクエストを受け入れるコミュニティがないため、プルリクエストを受け入れません。
+
+The Tier 1 locales we are starting with unfreezing are:
+解凍を開始する Tier 1 ロケールは次のとおりです。
+
+    Simplified Chinese (zh-CN)
+    簡体字中国語（zh-CN）
+
+    Traditional Chinese (zh-TW)
+    繁体字中国語（zh-TW）
+
+    French (fr)
+    フランス語（fr）
+
+    Japanese (ja)
+    日本語（ja）
+
+If you wish for a Tier 2 locale to be unfrozen, then you need to come to us with a proposal, including evidence of an active team willing to be responsible for the work associated with that locale. If this is the case, then we can promote the locale to Tier 1, and you can start work.
+Tier 2 ロケールの凍結を解除したい場合は、そのロケールに関連する作業に責任を負うことをいとわないアクティブなチームの証拠を含む提案を提出する必要があります。 この場合、ロケールを Tier 1 に昇格させて、作業を開始できます。
+
+We will monitor the activity on the Tier 1 locales. If a Tier 1 locale is not being maintained by its community, we shall demote it to Tier 2 after a certain period of time, and it will become frozen again.
+Tier 1 ロケールでのアクティビティを監視します。 Tier 1 ロケールがコミュニティによって維持されていない場合、一定期間後に Tier 2 に降格し、再び凍結されます。
+
+We are looking at this new system as a reasonable compromise — providing a path for you the community to continue work on MDN translations providing the interest is there, while also ensuring that locale maintenance is viable, and content won’t get any further out of date. With most locales unmaintained, changes weren’t being reviewed effectively, and readers of those locales were often confused between using their preferred locale or English, their experience suffering as a result.
+私たちは、この新しいシステムを合理的な妥協案と見なしています。 コミュニティが MDN 翻訳に取り組み続けるためのパスを提供すると同時に、ロケールのメンテナンスが実行可能であり、コンテンツがそれ以上古くなってしまうこともありません。 ほとんどのロケールが維持されておらず、変更が効果的にレビューされておらず、それらのロケールの読者は、好みのロケールと英語のどちらを使用するか混乱することが多く、その結果、経験が損なわれていました。
+
+
+
+
+Review process
+レビュープロセス
+
+The review process will be quite simple.
+レビュープロセスは非常に簡単です。
+
+    The content for each Tier 1 locale will be kept in its own separate repo.
+     各 Tier 1 ロケールのコンテンツは、独自の個別のリポジトリに保持されます。
+
+    When a PR is made against that repo, the localization community will be pinged for a review.
+     そのリポジトリに対して PR が行われると、ローカリゼーションコミュニティはレビューのために ping されます。
+
+    When the content has been reviewed, an MDN admin will be pinged to merge the change. We should be able to set up the system so that this happens automatically.
+     コンテンツが確認されると、MDN 管理者に ping が送信され、変更がマージされます。 これが自動的に行われるようにシステムを設定できるはずです。
+
+    There will also be some user-submitted content bugs filed at https://github.com/mdn/sprints/issues, as well as on the issue trackers for each locale repo. When triaged, the “sprints” issues will be assigned to the relevant localization team to fix, but the relevant localization team is responsible for triaging and resolving issues filed on their own repo.
+     また、https://github.com/mdn/sprints/issues や、各ロケールリポジトリの課題追跡システムにユーザーが送信したコンテンツのバグがいくつか提出されます。 トリアージされると、「sprints」の問題が関連するローカリゼーションチームに割り当てられて修正されますが、関連するローカリゼーションチームは、独自のリポジトリに提出された問題のトリアージと解決を担当します。
+
+
+
+
+
+Machine translations alongside manual translations
+手動翻訳と一緒に機械翻訳
+
+We previously talked about the potential involvement of machine translations to enhance the new localization process. We still have this in mind, but we are looking to keep the initial system simple, in order to make it achievable. The next step in Q1 2021 will be to start looking into how we could most effectively make use of machine translations. We’ll give you another update in mid-Q1, once we’ve made more progress.
+以前、新しいローカリゼーションプロセスを強化するための機械翻訳の潜在的な関与について話しました。 私たちはまだこれを念頭に置いていますが、それを実現可能にするために、初期システムをシンプルに保つことを目指しています。 2021年第1四半期の次のステップは、機械翻訳を最も効果的に利用する方法の調査を開始することです。 さらに進展が見られたら、第1四半期半ばに別のアップデートを提供します。
+
+
+
+
+About Chris Mills
+
+Chris Mills is a senior tech writer at Mozilla, where he writes docs and demos about open web apps, HTML/CSS/JavaScript, A11y, WebAssembly, and more. He loves tinkering around with web technologies, and gives occasional tech talks at conferences and universities. He used to work for Opera and W3C, and enjoys playing heavy metal drums and drinking good beer. He lives near Manchester, UK, with his good lady and three beautiful children.
+
+More articles by Chris Mills…
+Discover great resources for web development
+
+Sign up for the Mozilla Developer Newsletter:
+E-mail
+I'm okay with Mozilla handling my info as explained in this Privacy Policy.
+8 comments
+
+    Janet Swisher
+
+        Glad to hear that you’ve found a way to support active localization communities, while minimizing the maintenance burden of inactive locales.
+非アクティブなロケールのメンテナンス負担を最小限に抑えながら、アクティブなローカリゼーションコミュニティをサポートする方法を見つけたと聞いてうれしいです。
+
+    December 8th, 2020 at 10:22
+
+    Reply
+        Chris Mills
+
+            Thanks Janet, lovely to hear from you!
+            ジャネット、ありがとうございます。
+
+        December 9th, 2020 at 08:18
+
+        Reply
+    Eric Shepherd
+
+        While I”m thrilled that a solution has been found to provide good support for localization, I’m still disappointed by the loss of the user-friendly aspects of the current contribution workflow. I definitely agree that having a contribute-review-publish model is key to improving the overall quality of MDN content and the communication among the contributors and staff.
+        ローカリゼーションを適切にサポートするソリューションが見つかったことに興奮していますが、現在の投稿ワークフローのユーザーフレンドリーな側面が失われていることに失望しています。 私は、寄稿-レビュー-公開モデルを持つことが、MDN コンテンツの全体的な品質と寄稿者とスタッフ間のコミュニケーションを改善するための鍵であることに間違いなく同意します。
+
+        But as most people who’ve spent a long stretch of time working with me know, I’m a huge believer in the WYSIWYG editing approach for documentation content. I’m frustrated to see MDN throw away this key feature of its current design. Obviously, while I was still on staff, I was frequently verbal with my concerns about this. I was also very surprised to find out how many people prefer to edit the HTML by hand over using a nice WYWIWYG editor.
+        しかし、長い間私と一緒に仕事をしてきたほとんどの人が知っているように、私はドキュメントコンテンツの WYSIWYG 編集アプローチを大いに信じています。 MDN が現在の設計のこの重要な機能を破棄するのを見てイライラしています。 明らかに、私がまだスタッフにいる間、私はこれについての私の懸念についてしばしば口頭で話しました。 また、すばらしい WYWIWYG エディターを使用するよりも HTML を手動で編集することを好む人がどれほどいるのかを知って非常に驚きました。
+
+        Perhaps the problem was the quirks and flaws in the existing editor experience, many of which are caused by the poor support for editing within the HTML spec at this time. Regardless, once you learned these problems, you could usually avoid them easily enough.
+        おそらく問題は、既存のエディターエクスペリエンスの癖と欠陥でした。 これらの多くは、現時点での HTML 仕様内での編集のサポートが不十分であることが原因です。 とにかく、これらの問題を学んだら、通常は簡単に回避できます。
+
+        It’s probably for the best that I’m not on staff anymore (even though I totally miss it). Going to an edit-the-source approach would have at least doubled how long it took me to get anything done, and would have driven me absolutely insane to boot. I’d have hated it. And I can say that any chances of my continued contributions — even small ones — have, sadly, died entirely. ☹️
+        私がもうスタッフにいないので、それはおそらく最善のことです（私は完全にそれを逃していますが）。 ソースを編集するアプローチを採用すると、何かを成し遂げるのにかかる時間が少なくとも2倍になり、起動するのが非常に狂ってしまいます。 私はそれを嫌っていただろう。 そして、悲しいことに、私の継続的な貢献の可能性は、たとえ小さなものであっても、悲しいかな、完全に死んでしまったと言えます。 ☹️
+
+    December 8th, 2020 at 10:52
+
+    Reply
+        Chris Mills
+
+            Lovely to hear from you Sheppy, and we miss you too! You’ve made your feelings on this subject abundantly clear throughout ;-)
+            Sheppy からのご連絡をお待ちしております。 私たちもあなたがいなくて寂しいです！ あなたはこの主題についてのあなたの気持ちを全体を通して豊富に明らかにしました ;-)
+
+            It is worth noting that we are intending to add to the Yari toolset as we move forward after the launch, based on feedback that comes in. It is also worth noting that having the workflow based on GitHub makes it easy to plug it in to whatever workflow/toolset you want. I’m sure there are more folks out there than just you that value the WYSIWYG approach, and that a solution will emerge for such contributors.
+             寄せられたフィードバックに基づいて、リリース後の前進に合わせて Yari ツールセットに追加する予定であることは注目に値します。 GitHub に基づくワークフローを使用すると、どのようなものにも簡単にプラグインできることにも注目してください。 必要なワークフロー/ツールセット。 WYSIWYG のアプローチを高く評価している人はあなただけではなく、そのような貢献者のための解決策が生まれると確信しています。
+
+        December 9th, 2020 at 08:21
+
+        Reply
+    Daniele Mte90 Scasciafratte
+
+        Honestly I am against the automatic localization also for european languages, in my case italian.
+        正直なところ、私はヨーロッパの言語、私の場合はイタリア語の自動ローカリゼーションにも反対しています。
+
+        In our experience (also as developer) this is very bad because this means that technical terms will be localized (not all the languages have the relative for a term and use the English version) at the same time terms that are localized in a way, inside Firefox or Chrome as example, in the documentation have different terms (for the same feature) with all the confusion that this can have to the users.
+         私たちの経験（開発者としても）では、これは非常に悪いことです。 これは、技術用語がローカライズされる（すべての言語が用語の相対を持ち、英語版を使用するわけではない）と同時に、ある方法でローカライズされることを意味するためです。 例として Firefox または Chrome の内部では、ドキュメントには（同じ機能に対して）異なる用語があり、これがユーザーに与える可能性のあるすべての混乱を伴います。
+
+        In this way the volunteers will use their time to fix the automatic localization, WordPress community had that in the past and was removed after few months for all this issues and cleaning required years because somewhere there are still those issues.
+         このようにして、ボランティアは時間を使って自動ローカリゼーションを修正します。 WordPress コミュニティは過去にそれを持っていましたが、この問題がすべて残っているため、数か月後に削除され、クリーニングには何年もの時間が必要でした。
+
+        The same reasons why big companies don’t automatically localize stuff without humans to avoid these errors because create an issue with the project brand.
+         プロジェクトのブランドに問題が発生するため、大企業がこれらのエラーを回避するために人間なしでコンテンツを自動的にローカライズしないのと同じ理由です。
+
+    December 9th, 2020 at 05:36
+
+    Reply
+        Chris Mills
+
+            Hi Daniele!
+
+            In an ideal world, we wouldn’t use automated translations. I appreciate that they are not completely ideal. But the suggested solution is a compomise between allowing active locales to keep being manually maintained where there is interest in doing so, while not keeping around too many outdated, non-maintained translations. We don’t have the resources to properly maintain all these locales, without the help of community teams.
+            理想的な世界では、自動翻訳は使用しません。 それらが完全に理想的ではないことを感謝します。 しかし、提案された解決策は、アクティブなロケールを手動で維持し続けることを許可する一方で、あまりにも多くの古くて維持されていない翻訳を維持しないことです。 コミュニティチームの助けがなければ、これらすべてのロケールを適切に維持するためのリソースがありません。
+
+            We are intending to use a glossary of terms (maintained inside the Firefox team) along with the automated translation system, to ensure that technical terms are either not translated at all, or translated consistently, as appropriate. With the aim of reducing such confusion.
+             技術用語がまったく翻訳されないようにするか、必要に応じて一貫して翻訳されるように、自動翻訳システムとともに用語集（Firefox チーム内で管理）を使用する予定です。 そのような混乱を減らすことを目的としています。
+
+        December 9th, 2020 at 08:17
+
+        Reply
+    Jean-Baptiste
+
+        if your machine translation mechanism is generic, it could be used by everyone, and therefore receive contributions from everyone.
+        機械翻訳メカニズムが汎用的である場合、それはすべての人が使用できるため、すべての人から貢献を受け取ることができます。
+
+        Let’s say the content follow these steps:
+        コンテンツが次の手順に従っているとしましょう。
+
+        1. Human-managed English repository
+        1. 人間が管理する英語リポジトリ
+
+        2. Machine-managed translation template repository
+        2. 機械が管理する翻訳テンプレートリポジトリ
+
+        3. Human-managed translation repository (via a translation platform)
+        3. 人間が管理する翻訳リポジトリ（翻訳プラットフォーム経由）
+
+        4. Machine-completed translation repository
+        4. 機械で完成した翻訳リポジトリ
+
+        5. Publication repository
+        5. 公開リポジトリ
+
+        The translation machine would only intervene between 3 and 4, the human would go through the “normal” translation process to correct what is not right. This correction process would therefore be generic (what would be specific is the way to easily access the string to be translated).
+        翻訳機は3から4の間にしか介入せず、人間は「通常の」翻訳プロセスを経て、正しくないものを修正します。　したがって、この修正プロセスは一般的です（具体的には、翻訳する文字列に簡単にアクセスする方法です）。
+
+        As a result, the translation machine is generic, everyone can add content to it, or test alternative engines depending on the language.
+        その結果、翻訳機は汎用的であり、誰もがそれにコンテンツを追加したり、言語に応じて代替エンジンをテストしたりできます。
+
+        In existing translation memories, we have for example what the amagama project is doing: https://github.com/translate/amagama-updater/
+        既存の翻訳メモリには、たとえば amagama プロジェクトが行っていることがあります：https://github.com/translate/amagama-updater/
+
+        or what I do with Fedora content https://jibecfed.fedorapeople.org/partage/fedora-localization-statistics/f32/language/fr/
+        または私が Fedora コンテンツで何をするか https://jibecfed.fedorapeople.org/partage/fedora-localization-statistics/f32/language/fr/
+
+        or the different Weblate around the world: https://weblate.org/fr/news/archive/weblate-even-more-open-now/
+        または世界中のさまざまな Weblate：https://weblate.org/fr/news/archive/weblate-even-more-open-now/
+
+        or the Ubuntu langpacks: https://launchpad.net/~ubuntu-langpack/+maintained-packages
+        または Ubuntu langpacks：https://launchpad.net/~ubuntu-langpack/+maintained-packages
+
+        I can help in this work, with the hope that:
+        私はこの仕事を手伝うことができます。
+
+        * any free project can query the translation engine for its own needs (although prior authorization might be required)
+        * 無料のプロジェクトは、翻訳エンジンに独自のニーズを問い合わせることができます（ただし、事前の承認が必要な場合があります）
+
+        * every language has a right to exist, even if Mozilla will focus on its own shortlist.
+        * Mozilla が独自の候補リストに焦点を合わせたとしても、すべての言語には存在する権利があります。
+
+        Realistic scenario:
+        現実的なシナリオ：
+
+        * could we fill in the gaps in translations of the Fedora translation for example?
+        * たとえば、Fedora 翻訳の翻訳のギャップを埋めることはできますか？
+
+        * could we fill in the gaps in the LibreOffice translation?
+        * LibreOffice 翻訳のギャップを埋めることはできますか？
+
+        * etc…
+        * など…
+
+    December 12th, 2020 at 03:41
+
+    Reply
+    Harvey Liu
+
+        Haven’t visited to MDN for some time and really surprised that the whole website shifted to Github. (I planned to comment on the Oct. article but the comment there was closed.)
+        しばらく MDN にアクセスしておらず、ウェブサイト全体が Github に移行したことに本当に驚いています。 （10月の記事にコメントする予定でしたが、そこのコメントは締め切られていました。）
+
+        Like many others already suggested, WYWIWYG editor is way better than the current solution where everyone send PR on Github. Other sites like Wikipedia do have better managements over user edits.
+         他の多くの人がすでに提案しているように、WYWIWYG エディターは、誰もが Github で PR を送信する現在のソリューションよりもはるかに優れています。 ウィキペディアのような他のサイトは、ユーザーの編集よりも優れた管理を行っています。
+
+        Personally, I do find the edit history important as well. In a way I can see how such technology evolved and how it can be linked to other technologies in history.
+         個人的には、編集履歴も重要だと思います。 ある意味で、そのような技術がどのように進化し、歴史上の他の技術とどのようにリンクできるかを見ることができます。
+
+        The activities of user profiles also disappear along the “decouple” and now the profile is nothing more than a description. I used to imagine MDN community can grow to a forum like StackOverflow.
+         ユーザープロファイルのアクティビティも「分離」に沿って消え、プロファイルは説明にすぎません。 私は、MDN コミュニティが StackOverflow のようなフォーラムに成長できると想像していました。
+
+    December 18th, 2020 at 13:54
+
+    Reply
+
+Post Your Comment
+
+Your name *
+Your e-mail *
+Spam robots, please fill in this field. Humans should leave it blank.
+Your comment
+
+Except where otherwise noted, content on this site is licensed under the Creative Commons Attribution Share-Alike License v3.0 or any later version.
+the Mozilla dino logo
