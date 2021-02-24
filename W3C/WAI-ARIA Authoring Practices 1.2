@@ -1,25 +1,37 @@
 （訳注：
 英単語で表記すべき所もほとんどを日本語に翻訳して、英単語は必要と思われる所でカッコ内に示しています。
 ただし、キーボードに関しては、キーに書かれた英単語を優先しています。
+WAI-ARIA Authoring Practices 1.1 を元にして、追加変更された行を追加しています。
+削除された行や変更前の行には、行頭に --- を付けて残しておきます。
 ）
 
 W3C
 
-WAI-ARIA Authoring Practices 1.1
-WAI-ARIA の著作の実践 1.1
+---WAI-ARIA Authoring Practices 1.1
+---WAI-ARIA の著作の実践 1.1
 
-W3C Working Group Note 14 August 2019
-W3C ワーキンググループノート 2019年8月14日
+WAI-ARIA Authoring Practices 1.2
+WAI-ARIA の著作の実践 1.2
+
+---W3C Working Group Note 14 August 2019
+---W3C ワーキンググループノート 2019年8月14日
+
+W3C Working Draft 18 December 2019
+W3C ワーキングドラフト 2019年12月18日
 
 This version:
 このバージョン：
 
-    https://www.w3.org/TR/2019/NOTE-wai-aria-practices-1.1-20190814/ 
+---    https://www.w3.org/TR/2019/NOTE-wai-aria-practices-1.1-20190814/ 
+
+    https://www.w3.org/TR/2019/WD-wai-aria-practices-1.2-20191218/ 
 
 Latest published version:
 最新の公開バージョン：
 
-    https://www.w3.org/TR/wai-aria-practices-1.1/ 
+---    https://www.w3.org/TR/wai-aria-practices-1.1/ 
+
+    https://www.w3.org/TR/wai-aria-practices-1.2/ 
 
 Latest editor's draft:
 最新の編集者の下書き：
@@ -29,7 +41,9 @@ Latest editor's draft:
 Previous version:
 前のバージョン：
 
-    https://www.w3.org/TR/2019/NOTE-wai-aria-practices-1.1-20190207/
+---    https://www.w3.org/TR/2019/NOTE-wai-aria-practices-1.1-20190207/
+
+    https://www.w3.org/TR/2018/WD-wai-aria-practices-1.2-20181218/
 
 Editors:
 編集者：
@@ -53,16 +67,21 @@ Former editors:
 
     Rich Schwerdtfeger (IBM Corporation) (Editor until October 2014)
 
-Copyright © 2015-2019 W3C® (MIT, ERCIM, Keio, Beihang). W3C liability, trademark and permissive document license rules apply.
-Copyright © 2015-2019 W3C®（MIT、ERCIM、慶應義塾大学、北京航空航天大学）。 W3C の責任、商標、および寛容な文書ライセンス規則が適用されます。
+---Copyright © 2015-2019 W3C® (MIT, ERCIM, Keio, Beihang). W3C liability, trademark and permissive document license rules apply.
+---Copyright © 2015-2019 W3C®（MIT、ERCIM、慶應義塾大学、北京航空航天大学）。 W3C の責任、商標、および寛容な文書ライセンス規則が適用されます。
 
+Copyright © 2018-2019 W3C® (MIT, ERCIM, Keio, Beihang). W3C liability, trademark and permissive document license rules apply.
+Copyright © 2018-2019 W3C®（MIT、ERCIM、慶應義塾大学、北京航空航天大学）。 W3C の責任、商標、および許容文書のライセンス規則が適用されます。
 
 
 Abstract
 概要
 
-This document provides readers with an understanding of how to use WAI-ARIA 1.1 [WAI-ARIA] to create accessible rich internet applications. It describes considerations that might not be evident to most authors from the WAI-ARIA specification alone and recommends approaches to make widgets, navigation, and behaviors accessible using WAI-ARIA roles, states, and properties. This document is directed primarily to Web application developers, but the guidance is also useful for user agent and assistive technology developers.
-この文書は、WAI-ARIA 1.1 [WAI-ARIA] を使用してアクセス可能なリッチインターネットアプリケーションを作成する方法を読者に理解してもらうためのものです。  WAI-ARIA 仕様だけではほとんどの作成者には明らかではないかもしれない考慮事項について説明し、WAI-ARIA のロール（roles、役割）、状態（states）、およびプロパティ（properties）を使用してウィジェット、ナビゲーション、および振る舞いをアクセス可能にするアプローチを推奨します。 この文書は主にウェブアプリケーション開発者を対象としていますが、ガイダンスはユーザーエージェントおよび支援技術開発者にも役立ちます。
+---This document provides readers with an understanding of how to use WAI-ARIA 1.1 [WAI-ARIA] to create accessible rich internet applications. It describes considerations that might not be evident to most authors from the WAI-ARIA specification alone and recommends approaches to make widgets, navigation, and behaviors accessible using WAI-ARIA roles, states, and properties. This document is directed primarily to Web application developers, but the guidance is also useful for user agent and assistive technology developers.
+---この文書は、WAI-ARIA 1.1 [WAI-ARIA] を使用してアクセス可能なリッチインターネットアプリケーションを作成する方法を読者に理解してもらうためのものです。  WAI-ARIA 仕様だけではほとんどの作成者には明らかではないかもしれない考慮事項について説明し、WAI-ARIA のロール（roles、役割）、状態（states）、およびプロパティ（properties）を使用してウィジェット、ナビゲーション、および振る舞いをアクセス可能にするアプローチを推奨します。 この文書は主にウェブアプリケーション開発者を対象としていますが、ガイダンスはユーザーエージェントおよび支援技術開発者にも役立ちます。
+
+This document provides readers with an understanding of how to use WAI-ARIA 1.2 [WAI-ARIA] to create accessible rich internet applications. It describes considerations that might not be evident to most authors from the WAI-ARIA specification alone and recommends approaches to make widgets, navigation, and behaviors accessible using WAI-ARIA roles, states, and properties. This document is directed primarily to Web application developers, but the guidance is also useful for user agent and assistive technology developers.
+この文書は、WAI-ARIA 1.2 [WAI-ARIA] を使用してアクセス可能なリッチインターネットアプリケーションを作成する方法を読者に理解してもらうためのものです。  WAI-ARIA 仕様だけではほとんどの作成者には明らかではないかもしれない考慮事項について説明し、WAI-ARIA のロール（roles、役割）、状態（states）、およびプロパティ（properties）を使用してウィジェット、ナビゲーション、および振る舞いをアクセス可能にするアプローチを推奨します。 この文書は主にウェブアプリケーション開発者を対象としていますが、ガイダンスはユーザーエージェントおよび支援技術開発者にも役立ちます。
 
 This document is part of the WAI-ARIA suite described in the WAI-ARIA Overview.
 この文書は、WAI-ARIA の概要で説明されている WAI-ARIA スイートの一部です。
@@ -77,26 +96,84 @@ This section describes the status of this document at the time of its publicatio
 このセクションでは、発行時のこの文書のステータスについて説明します。 他の文書がこの文書に取って代わる場合があります。 現在の W3C 出版物のリストとこのテクニカルレポートの最新リビジョンは、https://www.w3.org/TR/ の W3C テクニカルレポートインデックスにあります。
 
 
-This is the WAI-ARIA Authoring Practices 1.1 Working Group Note by the Accessible Rich Internet Applications Working Group. It supports the Accessible Rich Internet Applications 1.1 W3C Recommendation [wai-aria-1.1], providing detailed advice and examples beyond what would be appropriate to a technical specification but which are important to understand the specification.
-これは、アクセス可能なリッチインターネットアプリケーションのワーキンググループ（Accessible Rich Internet Applications Working Group）による WAI-ARIA の著作の実践 1.1 のワーキンググループノート （WAI-ARIA Authoring Practices 1.1 Working Group Note）です。 これは、アクセス可能なリッチインターネットアプリケーション 1.1 W3C 勧告（Accessible Rich Internet Applications 1.1 W3C Recommendation） [wai-aria-1.1] をサポートし、技術仕様に適切であるが仕様を理解するために重要なものを超えた詳細なアドバイスと例を提供します。
+---This is the WAI-ARIA Authoring Practices 1.1 Working Group Note by the Accessible Rich Internet Applications Working Group. It supports the Accessible Rich Internet Applications 1.1 W3C Recommendation [wai-aria-1.1], providing detailed advice and examples beyond what would be appropriate to a technical specification but which are important to understand the specification.
+---これは、アクセス可能なリッチインターネットアプリケーションのワーキンググループ（Accessible Rich Internet Applications Working Group）による WAI-ARIA の著作の実践 1.1 のワーキンググループノート （WAI-ARIA Authoring Practices 1.1 Working Group Note）です。 これは、アクセス可能なリッチインターネットアプリケーション 1.1 W3C 勧告（Accessible Rich Internet Applications 1.1 W3C Recommendation） [wai-aria-1.1] をサポートし、技術仕様に適切であるが仕様を理解するために重要なものを超えた詳細なアドバイスと例を提供します。
 
-WAI-ARIA Authoring Practices 1.1 was previously published as a Working Group Note in December 2017, to accompany the WAI-ARIA 1.1 Recommendation, and was republished in July 2018 and February 2019 with additional design pattern and examples, quality improvements, and improveed support for WAI-ARIA 1.1. Details of changes are described in the change log. Separately, WAI-ARIA Authoring Practices 1.2 includes the improvements in this document plus additional features specific to WAI-ARIA 1.2.
-WAI-ARIA の著作の実践 1.1 は、WAI-ARIA 1.1 勧告に付随して、2017年12月にワーキンググループノートとして以前に発行され、2018年7月と2019年2月に再発行され、追加のデザインパターンと例、品質の改善、WAI-ARIA 1.1 のサポートの改善が行われました。 変更の詳細は、変更ログに記載されています。 これとは別に、WAI-ARIA の著作の実践 1.2 には、この文書の改善点に加えて、WAI-ARIA 1.2 に固有の追加機能が含まれています。
+This is a Working Draft by the Accessible Rich Internet Applications Working Group of the Web Accessibility Initiative. It supports the WAI-ARIA 1.2 [WAI-ARIA-1.2] specification, providing detailed advice and examples beyond what would be appropriate to a technical specification but which are important to understand the specification.
+これは、ウェブアクセシビリティイニシアチブ（Web Accessibility Initiative、WAI）のアクセス可能なリッチインターネットアプリケーション（Accessible Rich Internet Applications、ARIA）ワーキンググループによるワーキングドラフトです。 WAI-ARIA 1.2 [WAI-ARIA-1.2] 仕様をサポートし、技術仕様に適切であるが仕様を理解するために重要なものを超えた詳細なアドバイスと例を提供します。
+
+---WAI-ARIA Authoring Practices 1.1 was previously published as a Working Group Note in December 2017, to accompany the WAI-ARIA 1.1 Recommendation, and was republished in July 2018 and February 2019 with additional design pattern and examples, quality improvements, and improveed support for WAI-ARIA 1.1. Details of changes are described in the change log. Separately, WAI-ARIA Authoring Practices 1.2 includes the improvements in this document plus additional features specific to WAI-ARIA 1.2.
+---WAI-ARIA の著作の実践 1.1 は、WAI-ARIA 1.1 勧告に付随して、2017年12月にワーキンググループノートとして以前に発行され、2018年7月と2019年2月に再発行され、追加のデザインパターンと例、品質の改善、WAI-ARIA 1.1 のサポートの改善が行われました。 変更の詳細は、変更ログに記載されています。 これとは別に、WAI-ARIA の著作の実践 1.2 には、この文書の改善点に加えて、WAI-ARIA 1.2 に固有の追加機能が含まれています。
+
+This version includes additions and revisions to support changes to ARIA made in the current draft of version 1.2 of the specification. Significant changes include:
+このバージョンには、仕様のバージョン 1.2 の現在のドラフトで行われた ARIA への変更をサポートするための追加と改訂が含まれています。 重要な変更は次のとおりです。
+
+    Addition of guidance on the use of 18 roles that are new in ARIA 1.2.
+    ARIA 1.2 で新しく追加された 18 のロールの使用に関するガイダンスの追加。
+
+    Revisions to guidance on accessible naming to incorporate the new ARIA 1.2 prohibition of names on some elements and removal of naming requirements for other elements.
+    新しい ARIA 1.2 による一部の要素の命名の禁止と、他の要素に対する命名の要件の削除を盛り込んだ、アクセス可能な命名に関するガイダンスの改訂。
+
+
+    A complete rewrite of the combobox pattern and 4 combobox examples to illustrate changes made to the definition of the combobox role in ARIA 1.2.
+    ARIA 1.2 でのコンボボックスロールの定義に加えられた変更を説明するために、コンボボックスのパターンと4つのコンボボックスの例を完全に書き直しました。
+
+    Addition of a design pattern and example implementation for the new meter role.
+    新しいメーターロールのデザインパターンと実装例の追加。
+
+    Revisions to listbox and menu patterns and examples to reflect new support for named groups of options and menuitems.
+    オプションとメニュー項目の名前付きグループの新しいサポートを反映するためのリストボックスとメニューのパターンと例の改訂。 
+
+A complete list of changes is available in the change history.
+変更の完全なリストは、変更履歴にあります。
+
+This draft includes only a portion of content planned for WAI-ARIA Authoring Practices 1.2. To see plans for the complete guide, review the Authoring Practices Milestone Plan.
+このドラフトには、WAI-ARIA Authoring Practices 1.2 で計画されているコンテンツの一部のみが含まれています。 完全なガイドの計画を確認するには、Authoring Practices Milestone Plan を確認してください。
+
+Feedback on the information provided here is essential to the ultimate success of Rich Internet Applications that afford full access to their information and operations. The Accessible Rich Internet Applications Working Group asks in particular:
+ここで提供される情報に関するフィードバックは、情報と操作への完全なアクセスを提供するリッチインターネットアプリケーションの最終的な成功に不可欠です。 Accessible Rich Internet Applications ワーキンググループは、特に次のように質問しています。
+
+    Is it clear how to create accessible Rich Internet Applications?
+    アクセス可能なリッチインターネットアプリケーションを作成する方法は明確ですか？
+
+    Is the usage of roles, states, and properties clear?
+    ロール、状態、およびプロパティの使用法は明確ですか？
+
+    Are the various types of rich Web content covered?
+    さまざまな種類のリッチウェブコンテンツがカバーされていますか？
+
+    Are considerations beyond the use of WAI-ARIA sufficiently explained?
+    WAI-ARIA の使用以外の考慮事項は十分に説明されていますか？
+
+    Is the relationship of this document to the WAI-ARIA specification clear?
+    このドキュメントと WAI-ARIA 仕様との関係は明確ですか？
+
+    Are the design patterns clear?
+    デザインパターンは明確ですか？ 
 
 To comment, file an issue in the W3C ARIA Practices GitHub repository, or if that is not possible, send email to public-aria@w3.org (comment archive).
 コメントするには、W3C ARIA Practices GitHub リポジトリーに問題を提出するか、それが不可能な場合は、public-aria@w3.org（コメントアーカイブ）に電子メールを送信してください。
 
-This document was published by the Accessible Rich Internet Applications Working Group as a Working Group Note.
-この文書は、Accessible Rich Internet Applications ワーキンググループによってワーキンググループノートとして公開されました。
+---This document was published by the Accessible Rich Internet Applications Working Group as a Working Group Note.
+---この文書は、Accessible Rich Internet Applications ワーキンググループによってワーキンググループノートとして公開されました。
 
-Comments regarding this document are welcome. Please send them to public-aria@w3.org (archives).
-この文書に関するコメントは大歓迎です。 それらを public-aria@w3.org（アーカイブ）に送ってください。
+This document was published by the Accessible Rich Internet Applications Working Group as a Working Draft.
+この文書は、Accessible Rich Internet Applications ワーキンググループによってワーキングドラフトとして公開されました。
 
-Publication as a Working Group Note does not imply endorsement by the W3C Membership. This is a draft document and may be updated, replaced or obsoleted by other documents at any time. It is inappropriate to cite this document as other than work in progress.
-ワーキンググループノートとしての発行は、W3C メンバーシップによる承認を意味するものではありません。 これはドラフト文書であり、いつでも他の文書によって更新、置換、または廃止される可能性があります。 この文書を進行中の作業以外のものとして引用することは不適切です。
+---Comments regarding this document are welcome. Please send them to public-aria@w3.org (archives).
+---この文書に関するコメントは大歓迎です。 それらを public-aria@w3.org（アーカイブ）に送ってください。
 
-This document was produced by a group operating under the W3C Patent Policy.
-この文書は、W3C 特許ポリシーに基づいて運営されているグループによって作成されました。
+---Publication as a Working Group Note does not imply endorsement by the W3C Membership. This is a draft document and may be updated, replaced or obsoleted by other documents at any time. It is inappropriate to cite this document as other than work in progress.
+---ワーキンググループノートとしての発行は、W3C メンバーシップによる承認を意味するものではありません。 これはドラフト文書であり、いつでも他の文書によって更新、置換、または廃止される可能性があります。 この文書を進行中の作業以外のものとして引用することは不適切です。
+
+Publication as a Working Draft does not imply endorsement by the W3C Membership. This is a draft document and may be updated, replaced or obsoleted by other documents at any time. It is inappropriate to cite this document as other than work in progress.
+ワーキングドラフトとしての発行は、W3C メンバーシップによる承認を意味するものではありません。 これはドラフト文書であり、いつでも他の文書によって更新、置換、または廃止される可能性があります。 この文書を進行中の作業以外のものとして引用することは不適切です。
+
+---This document was produced by a group operating under the W3C Patent Policy.
+---この文書は、W3C 特許ポリシーに基づいて運営されているグループによって作成されました。
+
+This document was produced by a group operating under the W3C Patent Policy. The group does not expect this document to become a W3C Recommendation. W3C maintains a public list of any patent disclosures made in connection with the deliverables of the group; that page also includes instructions for disclosing a patent. An individual who has actual knowledge of a patent which the individual believes contains Essential Claim(s) must disclose the information in accordance with section 6 of the W3C Patent Policy.
+この文書は、W3C 特許ポリシーに基づいて運営されているグループによって作成されました。 このグループは、この文書が W3C 勧告になることを期待していません。 W3C は、グループの成果物に関連して行われた特許開示の公開リストを維持しています。 そのページには、特許を開示するための指示も含まれています。 エッセンシャルクレーム（Essential Claim(s)）が含まれていると個人が信じる特許について実際の知識を持っている個人は、W3C 特許ポリシーのセクション 6 に従って情報を開示する必要があります。
 
 This document is governed by the 1 March 2019 W3C Process Document.
 この文書は、2019年3月1日の W3C プロセス文書に準拠しています。
@@ -174,7 +251,10 @@ Table of Contents
 
         3.8
 
-        Combo Box
+---        Combo Box
+---        コンボボックス
+
+        Combobox
         コンボボックス
 
         3.9
@@ -219,55 +299,82 @@ Table of Contents
 
         3.17
 
+        Meter
+        メーター
+
+---        3.17
+
+        3.18
+
         Radio Group
         ラジオグループ
 
-        3.18
+---        3.18
+
+        3.19
 
         Slider
         スライダー
 
-        3.19
+---        3.19
+
+        3.20
 
         Slider (Multi-Thumb)
         スライダー（複数つまみ）
 
-        3.20
+---        3.20
+
+        3.21
 
         Spinbutton
         スピンボタン
 
-        3.21
+---        3.21
+
+        3.22
 
         Table
         テーブル
 
-        3.22
+---        3.22
+
+        3.23
 
         Tabs
         タブ
 
-        3.23
+---        3.23
+
+        3.24
 
         Toolbar
         ツールバー
 
-        3.24
+---        3.24
+
+        3.25
 
         Tooltip Widget
         ツールチップウィジェット
 
-        3.25
+---        3.25
+
+        3.26
 
         Tree View
         ツリービュー
 
-        3.26
+---        3.26
+
+        3.27
 
         Treegrid
         ツリーグリッド
 
-        3.27
+---        3.27
+
+        3.28
 
         Window Splitter
         ウィンドウスプリッター
@@ -642,6 +749,11 @@ Table of Contents
     Roles That Automatically Hide Semantics by Making Their Descendants Presentational
     子孫をプレゼンテーション化することによって意味論を自動的に隠すロール
 
+    10.
+
+    Structural Roles
+    構造的なロール
+
     A.
 
     Indexes
@@ -654,28 +766,58 @@ Table of Contents
 
         B.1
 
-        Changes in July 2019 Publication of Note Release 4
-        2019年7月のノートリリース4の発行における変更
+        Changes in November 2019 publication of the 3rd working draft of version 1.2
+        バージョン1.2の3番目のワーキングドラフトの2019年11月の公開における変更
+
+---        B.1
 
         B.2
 
-        Changes in January 2019 Publication of Note Release 3
-        2019年1月のノートリリース3の発行における変更
+---        Changes in July 2019 Publication of Note Release 4
+---        2019年7月のノートリリース4の発行における変更
+
+        Changes in July 2019 Publication of APG 1.1 Release 4
+        2019年7月の APG 1.1 リリース4の発行における変更
+
+---        B.2
 
         B.3
 
-        Changes in July 2018 Publication of Note Release 2
-        2018年7月のノートリリース2の発行における変更
+---        Changes in January 2019 Publication of Note Release 3
+---        2019年1月のノートリリース3の発行における変更
+
+        Changes in January 2019 Publication of APG 1.1 Release 3
+        2019年1月の APG 1.1 リリース3の発行における変更
+
+---        B.3
 
         B.4
 
-        Changes in December 2017 Publication as Note
-        2017年12月のノートとしての発行における変更
+---        Changes in July 2018 Publication of Note Release 2
+---        2018年7月のノートリリース2の発行における変更
+
+        Changes in July 2018 Publication of APG 1.1 Release 2
+        2018年7月の APG 1.1 リリース2の発行における変更
+
+---        B.4
 
         B.5
 
-        Changes in June 2017 Working Draft
-        2017年6月のワーキングドラフトにおける変更
+---        Changes in December 2017 Publication as Note
+---        2017年12月のノートとしての発行における変更
+
+        Changes in December 2017 Publication of APG 1.1 Release 1
+        2017年12月の APG 1.1 リリース1の発行おける変更
+
+---        B.5
+
+        B.6
+
+---        Changes in June 2017 Working Draft
+---        2017年6月のワーキングドラフトにおける変更
+
+        Changes in June 2017 APG 1.1 Working Draft
+        2017年6月の APG 1.1 ワーキングドラフトにおける変更
 
     C.
 
@@ -722,8 +864,11 @@ Table of Contents
 This section is informative.
 このセクションは参考情報となります。
 
-WAI-ARIA Authoring Practices is a guide for understanding how to use WAI-ARIA 1.1 to create an accessible Rich Internet Application. It provides guidance on the appropriate application of WAI-ARIA, describes recommended WAI-ARIA usage patterns, and explains concepts behind them.
-WAI-ARIA の著作の実践は、WAI-ARIA 1.1 を使用してアクセス可能なリッチインターネットアプリケーションを作成する方法を理解するためのガイドです。 WAI-ARIA の適切なアプリケーションに関するガイダンスを提供し、推奨される WAI-ARIA の使用パターンを説明し、その背後にある概念を説明します。
+---WAI-ARIA Authoring Practices is a guide for understanding how to use WAI-ARIA 1.1 to create an accessible Rich Internet Application. It provides guidance on the appropriate application of WAI-ARIA, describes recommended WAI-ARIA usage patterns, and explains concepts behind them.
+---WAI-ARIA の著作の実践は、WAI-ARIA 1.1 を使用してアクセス可能なリッチインターネットアプリケーションを作成する方法を理解するためのガイドです。 WAI-ARIA の適切なアプリケーションに関するガイダンスを提供し、推奨される WAI-ARIA の使用パターンを説明し、その背後にある概念を説明します。
+
+WAI-ARIA Authoring Practices is a guide for understanding how to use WAI-ARIA 1.2 to create an accessible Rich Internet Application. It provides guidance on the appropriate application of WAI-ARIA, describes recommended WAI-ARIA usage patterns, and explains concepts behind them.
+WAI-ARIA の著作の実践は、WAI-ARIA 1.2 を使用してアクセス可能なリッチインターネットアプリケーションを作成する方法を理解するためのガイドです。 WAI-ARIA の適切なアプリケーションに関するガイダンスを提供し、推奨される WAI-ARIA の使用パターンを説明し、その背後にある概念を説明します。
 
 Languages used to create rich and dynamic web sites, e.g., HTML, JavaScript, CSS, and SVG, do not natively include all the features required to make sites usable by people who use assistive technologies (AT) or who rely on keyboard navigation. The W3C Web Accessibility Initiative's (WAI) Accessible Rich Internet Applications working group (ARIA WG) is addressing these deficiencies through several W3C standards efforts. The WAI-ARIA Overview provides additional background on WAI-ARIA, summarizes those efforts, and lists the other documents included in the WAI-ARIA suite.
 HTML、JavaScript、CSS、SVG などのリッチで動的なウェブサイトの作成に使用される言語には、支援技術（assistive technologies、AT）を使用するユーザーやキーボードナビゲーションに依存するユーザーがサイトを使用できるようにするために必要なすべての機能がネイティブに含まれているわけではありません。 W3C ウェブアクセシビリティイニシアチブ（W3C Web Accessibility Initiative、WAI）のアクセス可能なリッチインターネットアプリケーションのワーキンググループ（Accessible Rich Internet Applications working group、ARIA WG）は、いくつかの W3C 標準の取り組みを通じてこれらの欠陥に取り組んでいます。 WAI-ARIA の概要（WAI-ARIA Overview）では、WAI-ARIA に関する追加の背景情報を提供し、それらの取り組みを要約し、WAI-ARIA スイートに含まれる他の文書を一覧表示します。
@@ -838,14 +983,22 @@ This is also the danger of ARIA. Authors can inadvertently override accessibilit
 2.2 Browser and Assistive Technology Support
 2.2 ブラウザーと支援技術のサポート
 
-Testing assistive technology interoperability is essential before using code from this guide in production. Because the purpose of this guide is to illustrate appropriate use of ARIA 1.1 as defined in the ARIA specification, the design patterns, reference examples, and sample code intentionally do not describe and implement coding techniques for working around problems caused by gaps in support for ARIA 1.1 in browsers and assistive technologies. It is thus advisable to test implementations thoroughly with each browser and assistive technology combination that is relevant within a target audience.
-このガイドのコードを本番環境で使用する前に、支援技術の相互運用性をテストすることが不可欠です。 このガイドの目的は、ARIA 仕様で定義されている ARIA 1.1 の適切な使用法を説明することであるため、デザインパターン、参照例、およびサンプルコードは、ブラウザーと支援技術における ARIA 1.1 のサポートのギャップによって引き起こされる問題を回避するためのコーディング手法を意図的に説明および実装していません。 したがって、対象者（target audience）内で関連する各ブラウザーと支援技術の組み合わせを使用して実装を徹底的にテストすることをお勧めします。
+---Testing assistive technology interoperability is essential before using code from this guide in production. Because the purpose of this guide is to illustrate appropriate use of ARIA 1.1 as defined in the ARIA specification, the design patterns, reference examples, and sample code intentionally do not describe and implement coding techniques for working around problems caused by gaps in support for ARIA 1.1 in browsers and assistive technologies. It is thus advisable to test implementations thoroughly with each browser and assistive technology combination that is relevant within a target audience.
+---このガイドのコードを本番環境で使用する前に、支援技術の相互運用性をテストすることが不可欠です。 このガイドの目的は、ARIA 仕様で定義されている ARIA 1.1 の適切な使用法を説明することであるため、デザインパターン、参照例、およびサンプルコードは、ブラウザーと支援技術における ARIA 1.1 のサポートのギャップによって引き起こされる問題を回避するためのコーディング手法を意図的に説明および実装していません。 したがって、対象者（target audience）内で関連する各ブラウザーと支援技術の組み合わせを使用して実装を徹底的にテストすることをお勧めします。
+
+Testing assistive technology interoperability is essential before using code from this guide in production. Because the purpose of this guide is to illustrate appropriate use of ARIA 1.2 as defined in the ARIA specification, the design patterns, reference examples, and sample code intentionally do not describe and implement coding techniques for working around problems caused by gaps in support for ARIA 1.2 in browsers and assistive technologies. It is thus advisable to test implementations thoroughly with each browser and assistive technology combination that is relevant within a target audience.
+このガイドのコードを本番環境で使用する前に、支援技術の相互運用性をテストすることが不可欠です。 このガイドの目的は、ARIA 仕様で定義されている ARIA 1.2 の適切な使用法を説明することであるため、デザインパターン、参照例、およびサンプルコードは、ブラウザーと支援技術における ARIA 1.2 のサポートのギャップによって引き起こされる問題を回避するためのコーディング手法を意図的に説明および実装していません。 したがって、対象者（target audience）内で関連する各ブラウザーと支援技術の組み合わせを使用して実装を徹底的にテストすることをお勧めします。
+
 
 Similarly, JavaScript and CSS in this guide is written to be compatible with the most recent version of Chrome, Firefox, Internet Explorer, and Safari at the time of writing. In particular, some JavaScript and CSS may not function correctly in Internet Explorer version 10 or earlier.
 同様に、このガイドの JavaScript と CSS は、執筆時点での Chrome、Firefox、Internet Explorer、および Safari の最新バージョンと互換性があるように記述されています。 特に、一部の JavaScript および CSS は、Internet Explorer バージョン 10 以前では正しく機能しない場合があります。
 
-Except in cases where the ARIA Working Group and other contributors have overlooked an error, examples in this guide that do not function well in a particular browser or with a specific assistive technology are demonstrating browser or assistive technology bugs. Browser and assistive technology developers can thus utilize code in this guide to help assess the quality of their support for ARIA 1.1.
-ARIA ワーキンググループや他の寄稿者がエラーを見落としている場合を除いて、このガイドおいて特定のブラウザーまたは特定の支援技術ではうまく機能しない例は、ブラウザーまたは支援技術のバグを示しています。 したがって、ブラウザーおよび支援技術の開発者は、このガイドのコードを利用して、ARIA 1.1 のサポートの品質を評価できます。
+---Except in cases where the ARIA Working Group and other contributors have overlooked an error, examples in this guide that do not function well in a particular browser or with a specific assistive technology are demonstrating browser or assistive technology bugs. Browser and assistive technology developers can thus utilize code in this guide to help assess the quality of their support for ARIA 1.1.
+---ARIA ワーキンググループや他の寄稿者がエラーを見落としている場合を除いて、このガイドおいて特定のブラウザーまたは特定の支援技術ではうまく機能しない例は、ブラウザーまたは支援技術のバグを示しています。 したがって、ブラウザーおよび支援技術の開発者は、このガイドのコードを利用して、ARIA 1.1 のサポートの品質を評価できます。
+
+Except in cases where the ARIA Working Group and other contributors have overlooked an error, examples in this guide that do not function well in a particular browser or with a specific assistive technology are demonstrating browser or assistive technology bugs. Browser and assistive technology developers can thus utilize code in this guide to help assess the quality of their support for ARIA 1.2.
+ARIA ワーキンググループや他の寄稿者がエラーを見落としている場合を除いて、このガイドおいて特定のブラウザーまたは特定の支援技術ではうまく機能しない例は、ブラウザーまたは支援技術のバグを示しています。 したがって、ブラウザーおよび支援技術の開発者は、このガイドのコードを利用して、ARIA 1.2 のサポートの品質を評価できます。
+
 
 
 
@@ -1007,6 +1160,9 @@ Keyboard Interaction
 An alert (WAI-ARIA live region) does not require any keyboard interaction.
 アラート（WAI-ARIA ライブリージョン）では、キーボードの相互作用は必要ありません。
 
+Not applicable.
+該当しません。
+
 
 
 
@@ -1138,8 +1294,12 @@ The types of actions performed by buttons are distinctly different from the func
 Examples
 例
 
-Button Examples: Examples of clickable HTML div and span elements made into accessible command and toggle buttons.
-ボタンの例：クリック可能な HTML の div 要素と span 要素をアクセス可能なコマンドボタンとトグルボタンにした例。
+    Button Examples: Examples of clickable HTML div and span elements made into accessible command and toggle buttons.
+    ボタンの例：クリック可能な HTML の div 要素と span 要素をアクセス可能なコマンドボタンとトグルボタンにした例。
+
+    Button Examples (IDL): Examples of clickable HTML div and span elements made into accessible command and toggle buttons. This example uses the IDL Interface.
+    ボタンの例（IDL）：クリック可能な HTML の div 要素と span 要素をアクセス可能なコマンドボタンとトグルボタンにした例。 この例では、IDL インターフェイスを使用しています。
+
 
 
 
@@ -1524,62 +1684,113 @@ WAI-ARIA のロール、状態、およびプロパティ
 
 
 
-3.8 Combo Box
+---3.8 Combo Box
+---3.8 コンボボックス
+
+3.8 Combobox
 3.8 コンボボックス
 
-A combobox is a widget made up of the combination of two distinct elements: 1) a single-line textbox, and 2) an associated pop-up element for helping users set the value of the textbox. The popup may be a listbox, grid, tree, or dialog. Many implementations also include a third optional element -- a graphical button adjacent to the textbox, indicating the availability of the popup. Activating the button displays the popup if suggestions are available.
-コンボボックス（combobox）は、2つの異なる要素の組み合わせで構成されるウィジェットです。 1）単一行テキストボックスと、2）ユーザーがテキストボックスの値を設定するのに役立つ関連するポップアップ要素です。 ポップアップは、リストボックス、グリッド、ツリー、またはダイアログの場合があります。 多くの実装には、3番目の任意要素（テキストボックスに隣接するグラフィカルボタン）も含まれており、ポップアップが利用可能であることを示します。 ボタンをアクティブ化すると、提案が利用可能な場合にポップアップが表示されます。
+---A combobox is a widget made up of the combination of two distinct elements: 1) a single-line textbox, and 2) an associated pop-up element for helping users set the value of the textbox. The popup may be a listbox, grid, tree, or dialog. Many implementations also include a third optional element -- a graphical button adjacent to the textbox, indicating the availability of the popup. Activating the button displays the popup if suggestions are available.
+---コンボボックス（combobox）は、2つの異なる要素の組み合わせで構成されるウィジェットです。 1）単一行テキストボックスと、2）ユーザーがテキストボックスの値を設定するのに役立つ関連するポップアップ要素です。 ポップアップは、リストボックス、グリッド、ツリー、またはダイアログの場合があります。 多くの実装には、3番目の任意要素（テキストボックスに隣接するグラフィカルボタン）も含まれており、ポップアップが利用可能であることを示します。 ボタンをアクティブ化すると、提案が利用可能な場合にポップアップが表示されます。
 
-The popup is hidden by default, and the conditions that trigger its display are specific to each implementation. Some possible popup display conditions include:
-ポップアップはデフォルトで非表示になっており、その表示をトリガーする条件は各実装に固有です。 考えられるポップアップ表示条件には、次のものがあります。
+A combobox is an input widget with an associated popup that enables users to select a value for the combobox from a collection of possible values. In some implementations, the popup presents allowed values, while in other implementations, the popup presents suggested values, and users may either select one of the suggestions or type a value. The popup may be a listbox, grid, tree, or dialog. Many implementations also include a third optional element -- a graphical "Open" button adjacent to the combobox, which indicates availability of the popup. Activating the "Open" button displays the popup if suggestions are available.
+コンボボックス（combobox）は、ユーザーが可能な値のコレクションからコンボボックスの値を選択できるようにするポップアップが関連付けられた入力ウィジェットです。 一部の実装では、ポップアップに許可された値が示されますが、他の実装では、ポップアップに提案値が示され、ユーザーは提案の1つを選択するか、値をタイプ入力できます。 ポップアップは、リストボックス、グリッド、ツリー、またはダイアログの場合があります。 多くの実装には、3番目の任意要素（コンボボックスの横にあるグラフィカルな「開く」ボタン）も含まれています。 これは、ポップアップが利用可能であることを示します。 「開く」ボタンをアクティブ化すると、提案が利用可能な場合にポップアップが表示されます。
 
-    It is displayed only if a certain number of characters are typed in the textbox and those characters match some portion of one of the suggested values.
-    テキストボックスに特定の数の文字がタイプ入力され、それらの文字が提案値の1つの一部と一致する場合にのみ表示されます。
+The combobox pattern supports several optional behaviors. The one that most shapes interaction is text input. Some comboboxes allow users to type and edit text in the combobox and others do not. If a combobox does not support text input, it is referred to as select-only, meaning the only way users can set a value is by selecting a value in the popup. For example, in some browsers, an HTML select element with size="1" is presented to assistive technologies as a combobox. Alternatively, if a combobox supports text input, it is referred to as editable. An editable combobox may either allow users to input any arbitrary value, or it may restrict its value to a discrete set of allowed values, in which case typing input serves to filter suggestions presented in the popup.
+コンボボックスのパターンは、いくつかの任意の振る舞いをサポートしています。 相互作用を最も形作るのはテキスト入力です。 一部のコンボボックスでは、ユーザーがコンボボックスにテキストをタイプ入力および編集できますが、そうでないものもあります。 コンボボックスがテキスト入力をサポートしていない場合、それは選択専用と呼ばれます。 つまり、ユーザーが値を設定できる唯一の方法は、ポップアップで値を選択することです。 例えば、一部のブラウザーでは、size="1" の HTML 選択要素が支援技術にコンボボックスとして示されます。 あるいは、コンボボックスがテキスト入力をサポートしている場合、それは編集可能と呼ばれます。 編集可能なコンボボックスは、ユーザーが任意の値を入力できるようにするか、その値を許可された値の個別のセットに制限する場合があります。 その場合、タイプ入力で入力すると、ポップアップに示される提案をフィルタリングできます。
 
-    It is displayed as soon as the textbox is focused, even if the textbox is empty.
-    テキストボックスが空の場合でも、テキストボックスがフォーカスされるとすぐに表示されます。
+---The popup is hidden by default, and the conditions that trigger its display are specific to each implementation. Some possible popup display conditions include:
+---ポップアップはデフォルトで非表示になっており、その表示をトリガーする条件は各実装に固有です。 考えられるポップアップ表示条件には、次のものがあります。
 
-    It is displayed when the Down Arrow key is pressed or the "show" button is activated, possibly with a dependency on the content of the textbox.
-    下矢印キーが押されたとき、または「表示」ボタンがアクティブ化されたときに表示されます。 テキストボックスの内容に依存している可能性があります。
+The popup is hidden by default, i.e., the default state is collapsed. The conditions that trigger expansion -- display of the popup --are specific to each implementation. Some possible conditions that trigger expansion include:
+ポップアップはデフォルトで非表示になっています。 つまり、デフォルトの状態は折りたたまれています。 展開をトリガーする条件（ポップアップの表示）は、各実装に固有です。 展開をトリガーするいくつかの可能な条件は次のとおりです。
 
-    It is displayed if the value of the textbox is altered in a way that creates one or more partial matches to a suggested value.
-    テキストボックスの値が、提案値と1つ以上の部分一致を成すように変更された場合に表示されます。
+---    It is displayed only if a certain number of characters are typed in the textbox and those characters match some portion of one of the suggested values.
+---    テキストボックスに特定の数の文字がタイプ入力され、それらの文字が提案値の1つの一部と一致する場合にのみ表示されます。
 
-Combobox widgets are useful for setting the value of a single-line textbox in one of two types of scenarios:
-コンボボックスウィジェットは、次の2種類のシナリオのいずれかで単一行テキストボックスの値を設定するのに役立ちます。
+---    It is displayed as soon as the textbox is focused, even if the textbox is empty.
+---    テキストボックスが空の場合でも、テキストボックスがフォーカスされるとすぐに表示されます。
 
-    The value for the textbox must be chosen from a predefined set of allowed values, e.g., a location field must contain a valid location name. Note that the listbox and menu button patterns are also useful in this scenario; differences between combobox and alternative patterns are described below.
-    1. テキストボックスの値は、事前定義された許可された値のセットから選択する必要があります。 例えば、場所フィールドには有効な場所名が含まれている必要があります。 このシナリオでは、リストボックスとメニューボタンのパターンも役立つことに注意してください。 コンボボックスと代替パターンの違いを以下に説明します。
+---    It is displayed when the Down Arrow key is pressed or the "show" button is activated, possibly with a dependency on the content of the textbox.
+---    下矢印キーが押されたとき、または「表示」ボタンがアクティブ化されたときに表示されます。 テキストボックスの内容に依存している可能性があります。
 
-    The textbox may contain any arbitrary value, but it is advantageous to suggest possible values to the user, e.g., a search field may suggest similar or previous searches to save the user time.
-    2. テキストボックスには任意の値を含めることができますが、ユーザーに可能な値を提案することは有利です。 例えば、検索フィールドは、ユーザーの時間を節約するために類似または以前の検索を提案する場合があります。
+---    It is displayed if the value of the textbox is altered in a way that creates one or more partial matches to a suggested value.
+---    テキストボックスの値が、提案値と1つ以上の部分一致を成すように変更された場合に表示されます。
 
-The nature of the suggested values and the way the suggestions are presented is called the autocomplete behavior. Comboboxes can have one of four forms of autocomplete:
-提案値の性質と提案の提示方法は、自動補完（autocomplete、オートコンプリート）の振る舞いと呼ばれます。 コンボボックスには、自動補完の4つの形式のいずれかを含めることができます。
+    It is displayed when the Down Arrow key is pressed or the "Open" button is activated. Optionally, if the combobox is editable and contains a string that does not match an allowed value, expansion does not occur.
+    下矢印キーを押すか、「開く」ボタンを押すと表示されます。 任意で、コンボボックスが編集可能であり、許可された値と一致しない文字列が含まれている場合、展開は発生しません。
 
-    No autocomplete: When the popup is triggered, the suggested values it contains are the same regardless of the characters typed in the textbox. For example, the popup suggests a set of recently entered values, and the suggestions do not change as the user types.
-    1. 自動補完なし：ポップアップがトリガーされると、ポップアップに含まれる提案値は、テキストボックスにタイプ入力された文字に関係なく同じです。 例えば、ポップアップは最近入力された値のセットを提案し、ユーザーがタイプ入力しても提案は変更されません。
+    It is displayed when the combobox receives focus even if the combobox is editable and empty.
+    コンボボックスが編集可能で空の場合でも、コンボボックスがフォーカスを受け取ると表示されます。
 
-    List autocomplete with manual selection: When the popup is triggered, it presents suggested values that complete or logically correspond to the characters typed in the textbox. The character string the user has typed will become the value of the textbox unless the user selects a value in the popup.
-    2. 手動選択によるリストの自動補完：ポップアップがトリガーされると、テキストボックスにタイプ入力された文字に完全または論理的に対応する提案値が示されます。 ユーザーがポップアップで値を選択しない限り、ユーザーがタイプ入力した文字列がテキストボックスの値になります。
+    If the combobox is editable, the popup is displayed only if a certain number of characters are typed in the combobox and those characters match some portion of one of the suggested values.
+    コンボボックスが編集可能である場合、ポップアップは、特定の数の文字がコンボボックスにタイプ入力され、それらの文字が提案された値の1つの一部と一致する場合にのみ表示されます。 
 
-    List autocomplete with automatic selection: When the popup is triggered, it presents suggested values that complete or logically correspond to the characters typed in the textbox, and the first suggestion is automatically highlighted as selected. The automatically selected suggestion becomes the value of the textbox when the combobox loses focus unless the user chooses a different suggestion or changes the character string in the textbox.
-    3. 自動選択によるリストの自動補完：ポップアップがトリガーされると、テキストボックスにタイプ入力された文字に完全または論理的に対応する提案値が示され、最初の提案が選択済みとして自動的に強調表示されます。 自動的に選択された提案は、ユーザーが別の提案を選択したり、テキストボックスの文字列を変更したりしない限り、コンボボックスがフォーカスを失ったときにテキストボックスの値になります。
+---Combobox widgets are useful for setting the value of a single-line textbox in one of two types of scenarios:
+---コンボボックスウィジェットは、次の2種類のシナリオのいずれかで単一行テキストボックスの値を設定するのに役立ちます。
 
-    List with inline autocomplete: This is the same as list with automatic selection with one additional feature. The portion of the selected suggestion that has not been typed by the user, a completion string, appears inline after the input cursor in the textbox. The inline completion string is visually highlighted and has a selected state.
-    4. インライン自動補完によるリスト：これは、自動選択によるリストと同じですが、1つの追加機能があります。 選択した提案のうち、ユーザーがタイプ入力していない部分である補完文字列は、テキストボックスの入力カーソルの後にインラインで表示されます。 インライン補完文字列は視覚的に強調表示され、選択状態にされています。
+Combobox widgets are useful for acquiring user input in either of two scenarios:
+コンボボックスウィジェットは、次の2つのシナリオのいずれかでユーザー入力を取得するのに役立ちます。
 
-With any form of list autocomplete, the popup may appear and disappear as the user types. For example, if the user types a two character string that triggers five suggestions to be displayed but then types a third character that forms a string that does not have any matching suggestions, the popup may close and, if present, the inline completion string disappears.
-どの形式のリストの自動補完でも、ユーザーがタイプ入力するとポップアップが表示されたり消えたりする場合があります。 例えば、ユーザーが5つの提案を表示するトリガーとなる2文字の文字列をタイプ入力した後、一致する提案がない文字列を形成する3番目の文字をタイプ入力すると、ポップアップが閉じ、インライン補完文字列が消える場合があります。
+---    The value for the textbox must be chosen from a predefined set of allowed values, e.g., a location field must contain a valid location name. Note that the listbox and menu button patterns are also useful in this scenario; differences between combobox and alternative patterns are described below.
+---    1. テキストボックスの値は、事前定義された許可された値のセットから選択する必要があります。 例えば、場所フィールドには有効な場所名が含まれている必要があります。 このシナリオでは、リストボックスとメニューボタンのパターンも役立つことに注意してください。 コンボボックスと代替パターンの違いを以下に説明します。
 
-When constructing a widget that is both visually compact and enables users to choose one value from a set of discrete values, often either a listbox or menu button is simpler to implement and use. One feature of combobox that distinguishes it from both listbox and menu button is that the value of the combobox is presented in an edit field. Thus, the combobox gives users one function that both listbox and menu button lack, namely the ability to select some or all of the value for copying to the clipboard. One feature that distinguishes both combobox and menu button widgets from listbox widgets is their ability to provide an undo mechanism. In many implementations, users can navigate the set of allowed values in a combobox or menu and then decide to revert to the value the widget had before navigating by pressing escape. In contrast, navigating a listbox immediately changes its value, and escape does not provide an undo mechanism.
-視覚的にコンパクトで、ユーザーが離散値のセットから1つの値を選択できるウィジェットを構築する場合、多くの場合、リストボックスまたはメニューボタンのいずれかを実装して使用する方が簡単です。 リストボックスとメニューボタンの両方と区別するコンボボックスの機能の1つは、コンボボックスの値が編集フィールドに提示されることです。 このように、コンボボックスは、リストボックスとメニューボタンの両方に欠けている1つの機能、つまりクリップボードにコピーする値の一部またはすべてを選択する機能をユーザーに提供します。 コンボボックスウィジェットとメニューボタンウィジェットの両方をリストボックスウィジェットと区別する1つの機能は、元に戻すメカニズムを提供する機能です。 多くの実装では、ユーザーはコンボボックスまたはメニューで許可された値のセットをナビゲートし、Escape を押してナビゲートする前にウィジェットが持っていた値に戻すことを決定できます。 対照的に、リストボックスをナビゲートするとその値がすぐに変更され、Escape は元に戻すメカニズムを提供しません。
+    The value must be one of a predefined set of allowed values, e.g., a location field must contain a valid location name. Note that the listbox and menu button patterns are also useful in this scenario; differences between combobox and alternative patterns are described below.
+    1. 値は、事前定義された許可された値のセットの1つである必要があります。 例えば、場所フィールドには有効な場所名が含まれている必要があります。 このシナリオでは、リストボックスとメニューボタンのパターンも役立つことに注意してください。 コンボボックスと代替パターンの違いを以下に説明します。
 
-Note
-注意
+---    The textbox may contain any arbitrary value, but it is advantageous to suggest possible values to the user, e.g., a search field may suggest similar or previous searches to save the user time.
+---    2. テキストボックスには任意の値を含めることができますが、ユーザーに可能な値を提案することは有利です。 例えば、検索フィールドは、ユーザーの時間を節約するために類似または以前の検索を提案する場合があります。
 
-The options for a combobox to popup a grid, tree, or dialog were introduced in ARIA 1.1. Changes made in the ARIA 1.1 specification also add support for a code pattern that enables assistive technologies to present the textbox and popup as separately perceivable elements. both ARIA 1.0 and 1.1 patterns are described in the following sections. While using the ARIA 1.1 pattern is recommended as soon as assistive technology support is sufficient, there are no plans to deprecate the ARIA 1.0 pattern.
-グリッド、ツリー、またはダイアログをポップアップするコンボボックスのオプションは、ARIA 1.1 で導入されました。 ARIA 1.1 仕様で行われた変更により、支援技術がテキストボックスとポップアップを別々に認識可能な要素として提示できるようにするコードパターンのサポートも追加されます。 次のセクションでは、ARIA 1.0 と 1.1 の両方のパターンについて説明します。 支援技術のサポートが十分になったらすぐに ARIA 1.1 パターンを使用することをお勧めしますが、ARIA 1.0 パターンを廃止する予定はありません。
+    An arbitrary value is allowed, but it is advantageous to suggest possible values to users. For example, a search field may suggest similar or previous searches to save the user time.
+    2. 任意の値が許可されますが、ユーザーに可能な値を提案することは有利です。 例えば、検索フィールドは、ユーザーの時間を節約するために、類似または以前の検索を提案する場合があります。 
+
+---The nature of the suggested values and the way the suggestions are presented is called the autocomplete behavior. Comboboxes can have one of four forms of autocomplete:
+---提案値の性質と提案の提示方法は、自動補完（autocomplete、オートコンプリート）の振る舞いと呼ばれます。 コンボボックスには、自動補完の4つの形式のいずれかを含めることができます。
+
+The nature of possible values presented by a popup and the way they are presented is called the autocomplete behavior. Comboboxes can have one of four forms of autocomplete:
+ポップアップによって示される可能性のある値の性質とそれらが示される方法は、自動補完（autocomplete、オートコンプリート）の振る舞いと呼ばれます。 コンボボックスには、次の自動補完の4つの形式のいずれかを含めることができます。
+
+---    No autocomplete: When the popup is triggered, the suggested values it contains are the same regardless of the characters typed in the textbox. For example, the popup suggests a set of recently entered values, and the suggestions do not change as the user types.
+---    1. 自動補完なし：ポップアップがトリガーされると、ポップアップに含まれる提案値は、テキストボックスにタイプ入力された文字に関係なく同じです。 例えば、ポップアップは最近入力された値のセットを提案し、ユーザーがタイプ入力しても提案は変更されません。
+
+    No autocomplete: The combobox is editable, and when the popup is triggered, the suggested values it contains are the same regardless of the characters typed in the combobox. For example, the popup suggests a set of recently entered values, and the suggestions do not change as the user types.
+    1. 自動補完なし：コンボボックスは編集可能であり、ポップアップがトリガーされると、コンボボックスにタイプ入力された文字に関係なく、ポップアップに含まれる提案値は同じになります。 例えば、ポップアップは最近入力された値のセットを提案し、ユーザーがタイプ入力しても提案は変更されません。
+
+---    List autocomplete with manual selection: When the popup is triggered, it presents suggested values that complete or logically correspond to the characters typed in the textbox. The character string the user has typed will become the value of the textbox unless the user selects a value in the popup.
+---    2. 手動選択によるリストの自動補完：ポップアップがトリガーされると、テキストボックスにタイプ入力された文字に完全または論理的に対応する提案値が示されます。 ユーザーがポップアップで値を選択しない限り、ユーザーがタイプ入力した文字列がテキストボックスの値になります。
+
+    List autocomplete with manual selection: When the popup is triggered, it presents suggested values. If the combobox is editable, the suggested values complete or logically correspond to the characters typed in the combobox. The character string the user has typed will become the value of the combobox unless the user selects a value in the popup.
+    2. 手動選択によるリストの自動補完：ポップアップがトリガーされると、提案値が表示されます。 コンボボックスが編集可能である場合、提案された値は、コンボボックスにタイプ入力された文字に完全または論理的に対応しています。 ユーザーがポップアップで値を選択しない限り、ユーザーがタイプ入力した文字列がコンボボックスの値になります。
+
+---    List autocomplete with automatic selection: When the popup is triggered, it presents suggested values that complete or logically correspond to the characters typed in the textbox, and the first suggestion is automatically highlighted as selected. The automatically selected suggestion becomes the value of the textbox when the combobox loses focus unless the user chooses a different suggestion or changes the character string in the textbox.
+---    3. 自動選択によるリストの自動補完：ポップアップがトリガーされると、テキストボックスにタイプ入力された文字に完全または論理的に対応する提案値が示され、最初の提案が選択済みとして自動的に強調表示されます。 自動的に選択された提案は、ユーザーが別の提案を選択したり、テキストボックスの文字列を変更したりしない限り、コンボボックスがフォーカスを失ったときにテキストボックスの値になります。
+
+    List autocomplete with automatic selection: The combobox is editable, and when the popup is triggered, it presents suggested values that complete or logically correspond to the characters typed in the combobox, and the first suggestion is automatically highlighted as selected. The automatically selected suggestion becomes the value of the combobox when the combobox loses focus unless the user chooses a different suggestion or changes the character string in the combobox.
+    3. 自動選択によるリストの自動補完：コンボボックスは編集可能であり、ポップアップがトリガーされると、コンボボックスにタイプ入力された文字に完全または論理的に対応する提案値が示され、最初の提案が選択済みとして自動的に強調表示されます。 ユーザーが別の提案を選択したり、コンボボックス内の文字列を変更したりしない限り、コンボボックスがフォーカスを失ったときに、自動的に選択された提案がコンボボックスの値になります。
+
+---    List with inline autocomplete: This is the same as list with automatic selection with one additional feature. The portion of the selected suggestion that has not been typed by the user, a completion string, appears inline after the input cursor in the textbox. The inline completion string is visually highlighted and has a selected state.
+---    4. インライン自動補完によるリスト：これは、自動選択によるリストと同じですが、1つの追加機能があります。 選択した提案のうち、ユーザーがタイプ入力していない部分である補完文字列は、テキストボックスの入力カーソルの後にインラインで表示されます。 インライン補完文字列は視覚的に強調表示され、選択状態にされています。
+
+    List with inline autocomplete: This is the same as list with automatic selection with one additional feature. The portion of the selected suggestion that has not been typed by the user, a completion string, appears inline after the input cursor in the combobox. The inline completion string is visually highlighted and has a selected state.
+    4. インライン自動補完によるリスト：これは、自動選択によるリストと同じですが、1つの追加機能があります。 選択した提案のうち、ユーザーがタイプ入力していない部分である補完文字列は、コンボボックスの入力カーソルの後にインラインで現われます。 インライン補完文字列は視覚的に強調表示され、選択状態にされています。
+
+---With any form of list autocomplete, the popup may appear and disappear as the user types. For example, if the user types a two character string that triggers five suggestions to be displayed but then types a third character that forms a string that does not have any matching suggestions, the popup may close and, if present, the inline completion string disappears.
+---どの形式のリストの自動補完でも、ユーザーがタイプ入力するとポップアップが表示されたり消えたりする場合があります。 例えば、ユーザーが5つの提案を表示するトリガーとなる2文字の文字列をタイプ入力した後、一致する提案がない文字列を形成する3番目の文字をタイプ入力すると、ポップアップが閉じ、インライン補完文字列が消える場合があります。
+
+If a combobox is editable and has any form of list autocomplete, the popup may appear and disappear as the user types. For example, if the user types a two character string that triggers five suggestions to be displayed but then types a third character that forms a string that does not have any matching suggestions, the popup may close and, if present, the inline completion string disappears.
+コンボボックスが編集可能で、リストの自動補完の形式がある場合、ユーザーがタイプ入力するとポップアップが表示されたり消えたりすることがあります。 例えば、ユーザーが5つの提案を表示するトリガーとなる2文字の文字列をタイプ入力した後、一致する提案がない文字列を形成する3番目の文字をタイプ入力すると、ポップアップが閉じ、インライン補完文字列が消える場合があります。
+
+---When constructing a widget that is both visually compact and enables users to choose one value from a set of discrete values, often either a listbox or menu button is simpler to implement and use. One feature of combobox that distinguishes it from both listbox and menu button is that the value of the combobox is presented in an edit field. Thus, the combobox gives users one function that both listbox and menu button lack, namely the ability to select some or all of the value for copying to the clipboard. One feature that distinguishes both combobox and menu button widgets from listbox widgets is their ability to provide an undo mechanism. In many implementations, users can navigate the set of allowed values in a combobox or menu and then decide to revert to the value the widget had before navigating by pressing escape. In contrast, navigating a listbox immediately changes its value, and escape does not provide an undo mechanism.
+---視覚的にコンパクトで、ユーザーが離散値のセットから1つの値を選択できるウィジェットを構築する場合、多くの場合、リストボックスまたはメニューボタンのいずれかを実装して使用する方が簡単です。 リストボックスとメニューボタンの両方と区別するコンボボックスの機能の1つは、コンボボックスの値が編集フィールドに提示されることです。 このように、コンボボックスは、リストボックスとメニューボタンの両方に欠けている1つの機能、つまりクリップボードにコピーする値の一部またはすべてを選択する機能をユーザーに提供します。 コンボボックスウィジェットとメニューボタンウィジェットの両方をリストボックスウィジェットと区別する1つの機能は、元に戻すメカニズムを提供する機能です。 多くの実装では、ユーザーはコンボボックスまたはメニューで許可された値のセットをナビゲートし、Escape を押してナビゲートする前にウィジェットが持っていた値に戻すことを決定できます。 対照的に、リストボックスをナビゲートするとその値がすぐに変更され、Escape は元に戻すメカニズムを提供しません。
+
+Two other widgets that are also visually compact and enable users to make a single choice from a set of discrete choices are listbox and menu button. One feature that distinguishes combobox from both listbox and menu button is that the user's choice can be presented as a value in an editable field, which gives users the ability to select some or all of the value for copying to the clipboard. Comboboxes and menu buttons can be implemented so users can explore the set of allowed choices without losing a previously made choice. That is, users can navigate the set of available choices in a combobox popup or menu and then press escape, which closes the popup or menu without changing previous input. In contrast, navigating among options in a single-select listbox immediately changes its value, and Escape does not provide an undo mechanism. Comboboxes and listboxes can be marked as required with aria-required="true", and they have an accessible name that is distinct from their value. Thus, when assistive technology users focus either a combobox or listbox in its default state, they can perceive both a name and value for the widget. However, a menu button cannot be marked required, and while it has an accessible name, it does not have a value so is not suitable for conveying the user's choice in its collapsed state.
+視覚的にコンパクトで、ユーザーが個別の選択肢のセットから1つの選択肢を選択できるようにする、他の2つのウィジェットは、リストボックスとメニューボタンです。 コンボボックスをリストボックスとメニューボタンの両方と区別する1つの機能は、ユーザーの選択を編集可能なフィールドの値として示せることです。 これにより、ユーザーはクリップボードにコピーする値の一部またはすべてを選択できます。 コンボボックスとメニューボタンを実装することで、ユーザーは以前に行った選択を失うことなく、許可された選択肢のセットを探索できます。 つまり、ユーザーはコンボボックスのポップアップまたはメニューで使用可能な選択肢のセットをナビゲートしてから Escape キーを押すと、前の入力を変更せずにポップアップまたはメニューを閉じることができます。 対照的に、単一選択リストボックス内のオプション間をナビゲートすると、その値がすぐに変更され、Escape キーは元に戻すメカニズムを提供しません。 コンボボックスとリストボックスは、aria-required="true" で必須とマークすることができ、値とは別個のアクセス可能な名前を付けることができます。 したがって、支援技術のユーザーがコンボボックスまたはリストボックスのいずれかをデフォルトの状態でフォーカスすると、ウィジェットの名前と値の両方を認識できます。 しかし、メニューボタンは必須とマークすることはできず、アクセス可能な名前はありますが、値がないため、折りたたまれた状態でユーザーの選択を伝えるには適していません。
+
+---Note
+---注意
+
+---The options for a combobox to popup a grid, tree, or dialog were introduced in ARIA 1.1. Changes made in the ARIA 1.1 specification also add support for a code pattern that enables assistive technologies to present the textbox and popup as separately perceivable elements. both ARIA 1.0 and 1.1 patterns are described in the following sections. While using the ARIA 1.1 pattern is recommended as soon as assistive technology support is sufficient, there are no plans to deprecate the ARIA 1.0 pattern.
+---グリッド、ツリー、またはダイアログをポップアップするコンボボックスのオプションは、ARIA 1.1 で導入されました。 ARIA 1.1 仕様で行われた変更により、支援技術がテキストボックスとポップアップを別々に認識可能な要素として提示できるようにするコードパターンのサポートも追加されます。 次のセクションでは、ARIA 1.0 と 1.1 の両方のパターンについて説明します。 支援技術のサポートが十分になったらすぐに ARIA 1.1 パターンを使用することをお勧めしますが、ARIA 1.0 パターンを廃止する予定はありません。
 
 
 
@@ -1588,20 +1799,32 @@ The options for a combobox to popup a grid, tree, or dialog were introduced in A
 Examples
 例
 
-    Examples of ARIA 1.1 Combobox with Listbox Popup: Comboboxes that demonstrate the various forms of autocomplete behavior using a listbox popup and use the ARIA 1.1 implementation pattern.
-    リストボックスポップアップを備えた ARIA 1.1 コンボボックスの例：リストボックスポップアップを使用してさまざまな形式の自動補完の振る舞いを示し、ARIA 1.1 実装パターンを使用するコンボボックス。
+---    Examples of ARIA 1.1 Combobox with Listbox Popup: Comboboxes that demonstrate the various forms of autocomplete behavior using a listbox popup and use the ARIA 1.1 implementation pattern.
+---    リストボックスポップアップを備えた ARIA 1.1 コンボボックスの例：リストボックスポップアップを使用してさまざまな形式の自動補完の振る舞いを示し、ARIA 1.1 実装パターンを使用するコンボボックス。
 
-    Example of ARIA 1.1 Combobox with Grid Popup: A combobox that presents suggestions in a grid, enabling users to navigate descriptive information about each suggestion.
-    グリッドポップアップを備えた ARIA 1.1 コンボボックスの例：ユーザーが各提案に関する説明情報をナビゲートできるように、グリッドに提案を提示するコンボボックス。
+---    Example of ARIA 1.1 Combobox with Grid Popup: A combobox that presents suggestions in a grid, enabling users to navigate descriptive information about each suggestion.
+---    グリッドポップアップを備えた ARIA 1.1 コンボボックスの例：ユーザーが各提案に関する説明情報をナビゲートできるように、グリッドに提案を提示するコンボボックス。
 
-    ARIA 1.0 Combobox with Both List and Inline Autocomplete: A combobox that demonstrates the autocomplete behavior known as "list with inline autocomplete" and uses the ARIA 1.0 implementation pattern.
-    リストとインライン自動補完の両方を備えた ARIA 1.0 コンボボックス：「インライン自動補完を備えたリスト」と呼ばれる自動補完の振る舞いを示し、ARIA 1.0 の実装パターンを使用するコンボボックス。
+---    ARIA 1.0 Combobox with Both List and Inline Autocomplete: A combobox that demonstrates the autocomplete behavior known as "list with inline autocomplete" and uses the ARIA 1.0 implementation pattern.
+---    リストとインライン自動補完の両方を備えた ARIA 1.0 コンボボックス：「インライン自動補完を備えたリスト」と呼ばれる自動補完の振る舞いを示し、ARIA 1.0 の実装パターンを使用するコンボボックス。
 
-    ARIA 1.0 Combobox with List Autocomplete: A combobox that demonstrates the autocomplete behavior known as "list with manual selection" and uses the ARIA 1.0 implementation pattern.
-    リスト自動補完を備えた ARIA 1.0 コンボボックス：「手動選択を備えたリスト」と呼ばれる自動補完の振る舞いを示し、ARIA 1.0 の実装パターンを使用するコンボボックス。
+    Editable Combobox with Both List and Inline Autocomplete: An editable combobox that demonstrates the autocomplete behavior known as "list with inline autocomplete".
+    リストとインライン自動補完の両方を備えた編集可能なコンボボックス：「インライン自動補完を備えたリスト」と呼ばれる自動補完の振る舞いを示す編集可能なコンボボックス。
 
-    ARIA 1.0 Combobox Without Autocomplete: A combo box that demonstrates the behavior associated with aria-autocomplete=none and uses the ARIA 1.0 implementation pattern.
-    自動補完なしの ARIA 1.0 コンボボックス：aria-autocomplete=none に関連付けられた振る舞いを示し、ARIA 1.0 実装パターンを使用するコンボボックス。
+---    ARIA 1.0 Combobox with List Autocomplete: A combobox that demonstrates the autocomplete behavior known as "list with manual selection" and uses the ARIA 1.0 implementation pattern.
+---    リスト自動補完を備えた ARIA 1.0 コンボボックス：「手動選択を備えたリスト」と呼ばれる自動補完の振る舞いを示し、ARIA 1.0 の実装パターンを使用するコンボボックス。
+
+    Editable Combobox with List Autocomplete: An editable combobox that demonstrates the autocomplete behavior known as "list with manual selection".
+     リスト自動補完を備えた編集可能なコンボボックス：「手動選択を備えたリスト」と呼ばれる自動補完の振る舞いを示す編集可能なコンボボックス。
+
+---    ARIA 1.0 Combobox Without Autocomplete: A combo box that demonstrates the behavior associated with aria-autocomplete=none and uses the ARIA 1.0 implementation pattern.
+---    自動補完なしの ARIA 1.0 コンボボックス：aria-autocomplete=none に関連付けられた振る舞いを示し、ARIA 1.0 実装パターンを使用するコンボボックス。
+
+    Editable Combobox Without Autocomplete: An editable combobox that demonstrates the behavior associated with aria-autocomplete=none.
+     自動補完なしの編集可能なコンボボックス：aria-autocomplete=none に関連付けられた振る舞いを示す編集可能なコンボボックス。
+
+    Editable Combobox with Grid Popup: An editable combobox that presents suggestions in a grid, enabling users to navigate descriptive information about each suggestion.
+     グリッドポップアップを備えた編集可能なコンボボックス：グリッドに提案を示す編集可能なコンボボックス。 ユーザーは各提案に関する説明情報をナビゲートできます。 
 
 
 
@@ -1610,8 +1833,11 @@ Examples
 Keyboard Interaction
 キーボードの相互作用
 
-    Tab: The textbox is in the page Tab sequence.
-    Tab：テキストボックスはページのタブシーケンスにあります。
+---    Tab: The textbox is in the page Tab sequence.
+---    Tab：テキストボックスはページのタブシーケンスにあります。
+
+    Tab: The combobox is in the page Tab sequence.
+    Tab：コンボボックスはページのタブシーケンスにあります。
 
     Note: The popup indicator icon or button (if present), the popup, and the popup descendants are excluded from the page Tab sequence.
     注：ポップアップインジケーターのアイコンまたはボタン（存在する場合）、ポップアップ、およびポップアップの子孫は、ページのタブシーケンスから除外されます。
@@ -1620,11 +1846,17 @@ Keyboard Interaction
 
 
 
-Textbox Keyboard Interaction
-テキストボックスでのキーボードの相互作用
+---Textbox Keyboard Interaction
+---テキストボックスでのキーボードの相互作用
 
-When focus is in the textbox:
-フォーカスがテキストボックスにある場合：
+Combobox Keyboard Interaction
+コンボボックスでのキーボードの相互作用
+
+---When focus is in the textbox:
+---フォーカスがテキストボックスにある場合：
+
+When focus is in the combobox:
+フォーカスがコンボボックスにある場合：
 
     Down Arrow: If the popup is available, moves focus into the popup:
     下矢印：ポップアップが使用可能な場合、次のようにフォーカスをポップアップに移動します。
@@ -1638,17 +1870,35 @@ When focus is in the textbox:
     Up Arrow (Optional): If the popup is available, places focus on the last focusable element in the popup.
     上矢印（任意）：ポップアップが使用可能な場合、フォーカスをポップアップ内の最後のフォーカス可能な要素に置きます。
 
-    Escape: Dismisses the popup if it is visible. Optionally, clears the textbox.
-    Escape：ポップアップが可視の場合は閉じます。 任意で、テキストボックスをクリアします。
+---    Escape: Dismisses the popup if it is visible. Optionally, clears the textbox.
+---    Escape：ポップアップが可視の場合は閉じます。 任意で、テキストボックスをクリアします。
 
-    Enter: If an autocomplete suggestion is automatically selected, accepts the suggestion either by placing the input cursor at the end of the accepted value in the textbox or by performing a default action on the value. For example, in a messaging application, the default action may be to add the accepted value to a list of message recipients and then clear the textbox so the user can add another recipient.
-    Enter：自動補完の提案が自動的に選択されている場合、テキストボックスの受け入れられた値の最後に入力カーソルを置くか、値に対してデフォルトのアクションを実行することにより、提案を受け入れます。 例えば、メッセージングアプリケーションでは、デフォルトのアクションは、受け入れられた値をメッセージ受信者のリストに追加してから、テキストボックスをクリアして、ユーザーが別の受信者を追加できるようにすることです。
+    Escape: Dismisses the popup if it is visible. Optionally, if the popup is hidden before Escape is pressed, clears the combobox.
+    Escape：ポップアップが可視の場合は閉じます。 任意で、Escape が押される前にポップアップが非表示になっている場合は、コンボボックスをクリアします。
 
-    Printable Characters: Type characters in the textbox. Note that some implementations may regard certain characters as invalid and prevent their input.
-    印刷可能な文字：テキストボックスに文字をタイプ入力します。 一部の実装では、特定の文字を無効と見なし、入力を妨げる場合があることに注意してください。
+---    Enter: If an autocomplete suggestion is automatically selected, accepts the suggestion either by placing the input cursor at the end of the accepted value in the textbox or by performing a default action on the value. For example, in a messaging application, the default action may be to add the accepted value to a list of message recipients and then clear the textbox so the user can add another recipient.
+---    Enter：自動補完の提案が自動的に選択されている場合、テキストボックスの受け入れられた値の最後に入力カーソルを置くか、値に対してデフォルトのアクションを実行することにより、提案を受け入れます。 例えば、メッセージングアプリケーションでは、デフォルトのアクションは、受け入れられた値をメッセージ受信者のリストに追加してから、テキストボックスをクリアして、ユーザーが別の受信者を追加できるようにすることです。
 
-    Standard single line text editing keys appropriate for the device platform (see note below).
-    デバイスプラットフォームに適した標準の単一行テキスト編集キー（下記の注を参照）。
+    Enter: If the combobox is editable and an autocomplete suggestion is selected in the popup, accepts the suggestion either by placing the input cursor at the end of the accepted value in the combobox or by performing a default action on the value. For example, in a messaging application, the default action may be to add the accepted value to a list of message recipients and then clear the combobox so the user can add another recipient.
+    Enter：コンボボックスが編集可能で、ポップアップで自動補完の提案が選択されている場合、コンボボックスで受け入れられた値の最後に入力カーソルを置くか、値に対してデフォルトのアクションを実行することにより、提案を受け入れます。 例えば、メッセージングアプリケーションでは、デフォルトのアクションは、受け入れられた値をメッセージ受信者のリストに追加してから、コンボボックスをクリアして、ユーザーが別の受信者を追加できるようにすることです。
+
+---    Printable Characters: Type characters in the textbox. Note that some implementations may regard certain characters as invalid and prevent their input.
+---    印刷可能な文字：テキストボックスに文字をタイプ入力します。 一部の実装では、特定の文字を無効と見なし、入力を妨げる場合があることに注意してください。
+
+    Printable Characters:
+    印刷可能な文字：
+
+        If the combobox is editable, type characters in the combobox. Note that some implementations may regard certain characters as invalid and prevent their input.
+        コンボボックスが編集可能な場合は、コンボボックスに文字をタイプ入力します。 一部の実装では、特定の文字を無効と見なし、入力を妨げる場合があることに注意してください。
+
+        If the combobox is not editable, optionally moves focus to a value that starts with the typed characters.
+        コンボボックスが編集不可能な場合は、任意で、タイプ入力した文字で始まる値にフォーカスを移動します。 
+
+---    Standard single line text editing keys appropriate for the device platform (see note below).
+---    デバイスプラットフォームに適した標準の単一行テキスト編集キー（下記の注を参照）。
+
+    If the combobox is editable, it supports standard single line text editing keys appropriate for the device platform (see note below).
+    コンボボックスが編集可能な場合、デバイスプラットフォームに適した標準の単一行テキスト編集キーをサポートします（下記の注を参照）。
 
     Alt + Down Arrow (Optional): If the popup is available but not displayed, displays the popup without moving focus.
     Alt + 下矢印（任意）：ポップアップは使用可能であるが表示されていない場合、フォーカスを移動せずにポップアップを表示します。
@@ -1656,8 +1906,12 @@ When focus is in the textbox:
     Alt + Up Arrow (Optional): If the popup is displayed:
     Alt + 上矢印（任意）：ポップアップが表示されている場合：
 
-        If the popup contains focus, returns focus to the textbox.
-        1. ポップアップにフォーカスが含まれている場合は、フォーカスをテキストボックスに戻します。
+---        If the popup contains focus, returns focus to the textbox.
+---        1. ポップアップにフォーカスが含まれている場合は、フォーカスをテキストボックスに戻します。
+
+        If the popup contains focus, returns focus to the combobox.
+        1. ポップアップにフォーカスが含まれている場合は、フォーカスをに戻します。
+
 
         Closes the popup.
         2. ポップアップを閉じます。
@@ -1677,9 +1931,11 @@ Standard single line text editing keys appropriate for the device platform:
     The most robust approach for providing text editing functions is to rely on browsers, which supply them for HTML inputs with type text and for elements with the contenteditable HTML attribute.
     3. テキスト編集機能を提供するための最も堅牢なアプローチは、ブラウザーに依存することであり、ブラウザーは、タイプ入力テキストによる HTML 入力と、contenteditable HTML 属性を持つ要素に対してそれらを提供します。
 
-    IMPORTANT: Be sure that JavaScript does not interfere with browser-provided text editing functions by capturing key events for the keys used to perform them.
-    4. 重要：JavaScript は、ブラウザーが提供するテキスト編集機能の実行に使用されるキーのキーイベントをキャプチャすることにより、ブラウザーが提供するテキスト編集機能に干渉しないようにしてください。
+---    IMPORTANT: Be sure that JavaScript does not interfere with browser-provided text editing functions by capturing key events for the keys used to perform them.
+---    4. 重要：JavaScript は、ブラウザーが提供するテキスト編集機能の実行に使用されるキーのキーイベントをキャプチャすることにより、ブラウザーが提供するテキスト編集機能に干渉しないようにしてください。
 
+    IMPORTANT: Ensure JavaScript does not interfere with browser-provided text editing functions by capturing key events for the keys used to perform them.
+    4. 重要：JavaScriptは、ブラウザーが提供するテキスト編集機能の実行に使用されるキーのキーイベントをキャプチャすることにより、ブラウザーが提供するテキスト編集機能に干渉しないようにします。
 
 
 
@@ -1690,48 +1946,94 @@ Listbox Popup Keyboard Interaction
 When focus is in a listbox popup:
 フォーカスがリストボックスポップアップにある場合：
 
-    Enter: Accepts the focused option in the listbox by closing the popup and placing the accepted value in the textbox with the input cursor at the end of the value.
-    Enter：ポップアップを閉じて、リストボックスでフォーカスされたオプションを受け入れ、入力カーソルを値の最後に置いてテキストボックスに受け入れた値を配置します。
+---    Enter: Accepts the focused option in the listbox by closing the popup and placing the accepted value in the textbox with the input cursor at the end of the value.
+---    Enter：ポップアップを閉じて、リストボックスでフォーカスされたオプションを受け入れ、入力カーソルを値の最後に置いてテキストボックスに受け入れた値を配置します。
 
 
-    Escape: Closes the popup and returns focus to the textbox. Optionally, clears the contents of the textbox.
-    Escape：ポップアップを閉じて、フォーカスをテキストボックスに戻します。 任意で、テキストボックスの内容をクリアします。
+    Enter: Accepts the focused option in the listbox by closing the popup, placing the accepted value in the combobox, and if the combobox is editable, placing the input cursor at the end of the value.
+    Enter：ポップアップを閉じ、受け入れた値をコンボボックスに配置し、コンボボックスが編集可能な場合は、値の最後に入力カーソルを置くことにより、リストボックスでフォーカスされたオプションを受け入れます。
 
-    Right Arrow: Returns focus to the textbox without closing the popup and moves the input cursor one character to the right. If the input cursor is on the right-most character, the cursor does not move.
-    右矢印：ポップアップを閉じずにフォーカスをテキストボックスに戻し、入力カーソルを1文字右に移動します。 入力カーソルが右端の文字にある場合、カーソルは移動しません。
+---    Escape: Closes the popup and returns focus to the textbox. Optionally, clears the contents of the textbox.
+---    Escape：ポップアップを閉じて、フォーカスをテキストボックスに戻します。 任意で、テキストボックスの内容をクリアします。
 
-    Left Arrow: Returns focus to the textbox without closing the popup and moves the input cursor one character to the left. If the input cursor is on the left-most character, the cursor does not move.
-    左矢印：ポップアップを閉じずにフォーカスをテキストボックスに戻し、入力カーソルを1文字左に移動します。 入力カーソルが左端の文字にある場合、カーソルは移動しません。
+    Escape: Closes the popup and returns focus to the combobox. Optionally, if the combobox is editable, clears the contents of the combobox.
+    Escape：ポップアップを閉じて、フォーカスをコンボボックスに戻します。 任意で、コンボボックスが編集可能な場合は、コンボボックスの内容をクリアします。
 
-    Any printable character: Returns the focus to the textbox without closing the popup and types the character.
-    印刷可能な文字：ポップアップを閉じずにフォーカスをテキストボックスに戻し、文字をタイプ入力します。
+    Down Arrow: Moves focus to and selects the next option. If focus is on the last option, either returns focus to the combobox or does nothing.
+    下矢印：フォーカスを次のオプションに移動して選択します。  フォーカスが最後のオプションにある場合、フォーカスをコンボボックスに戻すか、何もしません。
 
-    Backspace (Optional): Returns focus to the textbox and deletes the character prior to the cursor.
-    Backspace（任意）：フォーカスをテキストボックスに戻し、カーソルの前の文字を削除します。
+    Up Arrow: Moves focus to and selects the previous option. If focus is on the first option, either returns focus to the combobox or does nothing.
+    上矢印：フォーカスを前のオプションに移動して選択します。 フォーカスが最初のオプションにある場合、フォーカスをコンボボックスに戻すか、何もしません。
 
-    Delete (Optional): Returns focus to the textbox, removes the selected state if a suggestion was selected, and removes the inline autocomplete string if present.
-    Delete（任意）：フォーカスをテキストボックスに戻し、提案が選択されている場合は選択状態を削除し、存在する場合はインライン自動補完文字列を削除します。
+---    Right Arrow: Returns focus to the textbox without closing the popup and moves the input cursor one character to the right. If the input cursor is on the right-most character, the cursor does not move.
+---    右矢印：ポップアップを閉じずにフォーカスをテキストボックスに戻し、入力カーソルを1文字右に移動します。 入力カーソルが右端の文字にある場合、カーソルは移動しません。
 
-    Down Arrow: Moves focus to and selects the next option. If focus is on the last option, either returns focus to the textbox or does nothing.
-    下矢印：フォーカスを次のオプションに移動して選択します。  フォーカスが最後のオプションにある場合、フォーカスをテキストボックスに戻すか、何もしません。
+    Right Arrow: If the combobox is editable, returns focus to the combobox without closing the popup and moves the input cursor one character to the right. If the input cursor is on the right-most character, the cursor does not move.
+    右矢印：コンボボックスが編集可能な場合、ポップアップを閉じずにフォーカスをコンボボックスに戻し、入力カーソルを1文字右に移動します。 入力カーソルが右端の文字にある場合、カーソルは移動しません。
 
-    Up Arrow: Moves focus to and selects the previous option. If focus is on the first option, either returns focus to the textbox or does nothing.
-    上矢印：フォーカスを前のオプションに移動して選択します。 フォーカスが最初のオプションにある場合、フォーカスをテキストボックスに戻すか、何もしません。
+---    Left Arrow: Returns focus to the textbox without closing the popup and moves the input cursor one character to the left. If the input cursor is on the left-most character, the cursor does not move.
+---    左矢印：ポップアップを閉じずにフォーカスをテキストボックスに戻し、入力カーソルを1文字左に移動します。 入力カーソルが左端の文字にある場合、カーソルは移動しません。
 
-    Home (Optional): Either moves focus to and selects the first option or returns focus to the textbox and places the cursor on the first character.
-    Home（任意）：フォーカスを最初のオプションに移動して選択するか、フォーカスをテキストボックスに戻してカーソルを最初の文字に置きます。
+    Left Arrow: If the combobox is editable, returns focus to the combobox without closing the popup and moves the input cursor one character to the left. If the input cursor is on the left-most character, the cursor does not move.
+    左矢印：コンボボックスが編集可能な場合、ポップアップを閉じずにフォーカスをコンボボックスに戻し、入力カーソルを1文字左に移動します。 入力カーソルが左端の文字にある場合、カーソルは移動しません。
 
-    End (Optional): Either moves focus to the last option or returns focus to the textbox and places the cursor after the last character.
-    End（任意）：フォーカスを最後のオプションに移動するか、フォーカスをテキストボックスに戻し、カーソルを最後の文字の後に置きます。
+    Home (Optional): Either moves focus to and selects the first option or, if the combobox is editable, returns focus to the combobox and places the cursor on the first character.
+    Home（任意）：フォーカスを最初のオプションに移動して選択するか、コンボボックスが編集可能な場合は、フォーカスをコンボボックスに戻し、カーソルを最初の文字に置きます。
+
+    End (Optional): Either moves focus to the last option or, if the combobox is editable, returns focus to the combobox and places the cursor after the last character.
+    End（任意）：フォーカスを最後のオプションに移動するか、コンボボックスが編集可能な場合は、フォーカスをコンボボックスに戻し、カーソルを最後の文字の後に置きます。
+
+---    Any printable character: Returns the focus to the textbox without closing the popup and types the character.
+---    印刷可能な文字：ポップアップを閉じずにフォーカスをテキストボックスに戻し、文字をタイプ入力します。
+
+    Any printable character:
+    印刷可能な文字：
+
+        If the combobox is editable, returns the focus to the combobox without closing the popup and types the character.
+        コンボボックスが編集可能な場合は、ポップアップを閉じずにフォーカスをコンボボックスに戻し、文字をタイプ入力します。
+
+        Otherwise, moves focus to the next option with a name that starts with the characters typed.
+        それ以外の場合は、フォーカスをタイプ入力した文字で始まる名前の次のオプションに移動します。
+
+---    Backspace (Optional): Returns focus to the textbox and deletes the character prior to the cursor.
+---    Backspace（任意）：フォーカスをテキストボックスに戻し、カーソルの前の文字を削除します。
+
+    Backspace (Optional): If the combobox is editable, returns focus to the combobox and deletes the character prior to the cursor.
+    Backspace（任意）：コンボボックスが編集可能な場合、フォーカスをコンボボックスに戻し、カーソルの前の文字を削除します。
+
+---    Delete (Optional): Returns focus to the textbox, removes the selected state if a suggestion was selected, and removes the inline autocomplete string if present.
+---    Delete（任意）：フォーカスをテキストボックスに戻し、提案が選択されている場合は選択状態を削除し、存在する場合はインライン自動補完文字列を削除します。
+
+    Delete (Optional): If the combobox is editable, returns focus to the combobox, removes the selected state if a suggestion was selected, and removes the inline autocomplete string if present.
+    Delete（任意）：コンボボックスが編集可能な場合、フォーカスをコンボボックスに戻し、提案が選択されている場合は選択状態を削除し、存在する場合はインライン自動補完文字列を削除します。
+
+---    Down Arrow: Moves focus to and selects the next option. If focus is on the last option, either returns focus to the textbox or does nothing.
+---    下矢印：フォーカスを次のオプションに移動して選択します。 フォーカスが最後のオプションにある場合、フォーカスをテキストボックスに戻すか、何もしません。
+
+---    Up Arrow: Moves focus to and selects the previous option. If focus is on the first option, either returns focus to the textbox or does nothing.
+---    上矢印：フォーカスを前のオプションに移動して選択します。 フォーカスが最初のオプションにある場合、フォーカスをテキストボックスに戻すか、何もしません。
+
+---    Home (Optional): Either moves focus to and selects the first option or returns focus to the textbox and places the cursor on the first character.
+---    Home（任意）：フォーカスを最初のオプションに移動して選択するか、フォーカスをテキストボックスに戻してカーソルを最初の文字に置きます。
+
+---    End (Optional): Either moves focus to the last option or returns focus to the textbox and places the cursor after the last character.
+---    End（任意）：フォーカスを最後のオプションに移動するか、フォーカスをテキストボックスに戻し、カーソルを最後の文字の後に置きます。
 
 Note
 注
 
-    DOM Focus is maintained on the combobox textbox and the assistive technology focus is moved within the listbox using aria-activedescendant as described in Managing Focus in Composites Using aria-activedescendant.
-    1. DOM のフォーカスは、コンボボックスのテキストボックスで維持され、支援技術のフォーカスは、aria-activedescendant を使用した複合ウィジェットでのフォーカスの管理で説明されているように、aria-activedescendant を使用してリストボックス内で移動されます。
+---    DOM Focus is maintained on the combobox textbox and the assistive technology focus is moved within the listbox using aria-activedescendant as described in Managing Focus in Composites Using aria-activedescendant.
+---    1. DOM のフォーカスは、コンボボックスのテキストボックスで維持され、支援技術のフォーカスは、aria-activedescendant を使用した複合ウィジェットでのフォーカスの管理で説明されているように、aria-activedescendant を使用してリストボックス内で移動されます。
 
-    Selection follows focus in the listbox; the listbox allows only one suggested value to be selected at a time for the textbox value.
-    2. 選択はリストボックスのフォーカスに従います。 リストボックスでは、テキストボックスの値に対して一度に1つの提案値のみを選択できます。
+    DOM Focus is maintained on the combobox and the assistive technology focus is moved within the listbox using aria-activedescendant as described in Managing Focus in Composites Using aria-activedescendant.
+    1. DOM のフォーカスは、コンボボックスで維持され、支援技術のフォーカスは、aria-activedescendant を使用した複合ウィジェットでのフォーカスの管理で説明されているように、aria-activedescendant を使用してリストボックス内で移動されます。
+
+---    Selection follows focus in the listbox; the listbox allows only one suggested value to be selected at a time for the textbox value.
+---    2. 選択はリストボックスのフォーカスに従います。 リストボックスでは、テキストボックスの値に対して一度に1つの提案値のみを選択できます。
+
+    Selection follows focus in the listbox; the listbox allows only one suggested value to be selected at a time for the combobox value.
+    2. 選択はリストボックスのフォーカスに従います。 リストボックスでは、コンボボックスの値に対して一度に1つの提案値のみを選択できます。
+
 
 
 
@@ -1743,32 +2045,50 @@ Grid Popup Keyboard Interaction
 In a grid popup, each suggested value may be represented by either a single cell or an entire row. See notes below for how this aspect of grid design effects the keyboard interaction design and the way that selection moves in response to focus movements.
 グリッドポップアップでは、各提案値は、単一セルまたは行全体のいずれかで表すことができます。 グリッドデザインのこの側面がキーボードの相互作用のデザインにどのように影響するか、およびフォーカスの動きに応じて選択がどのように動くかについては、以下の注を参照してください。
 
-    Enter: Accepts the currently selected suggested value by closing the popup and placing the selected value in the textbox with the input cursor at the end of the value.
-    Enter：ポップアップを閉じて、選択されている値をテキストボックスに配置し、値の最後に入力カーソルを置くことで、現在選択されている提案値を受け入れます。
+---    Enter: Accepts the currently selected suggested value by closing the popup and placing the selected value in the textbox with the input cursor at the end of the value.
+---    Enter：ポップアップを閉じて、選択されている値をテキストボックスに配置し、値の最後に入力カーソルを置くことで、現在選択されている提案値を受け入れます。
 
-    Escape: Closes the popup and returns focus to the textbox. Optionally, clears the contents of the textbox.
-    Escape：ポップアップを閉じて、フォーカスをテキストボックスに戻します。 任意で、テキストボックスの内容をクリアします。
+    Enter: Accepts the currently selected suggested value by closing the popup, placing the selected value in the combobox, and if the combobox is editable, placing the input cursor at the end of the value.
+    Enter：ポップアップを閉じ、選択されている値をコンボボックスに配置し、コンボボックスが編集可能な場合は、値の最後に入力カーソルを置くことにより、現在選択されている提案値を受け入れます。
 
-    Any printable character: Returns the focus to the textbox without closing the popup and types the character.
-    印刷可能な文字：ポップアップを閉じずにフォーカスをテキストボックスに戻し、文字をタイプ入力します。
+---    Escape: Closes the popup and returns focus to the textbox. Optionally, clears the contents of the textbox.
+---    Escape：ポップアップを閉じて、フォーカスをテキストボックスに戻します。 任意で、テキストボックスの内容をクリアします。
 
-    Backspace (Optional): Returns focus to the textbox and deletes the character prior to the cursor.
-    Backspace（任意）：フォーカスをテキストボックスに戻し、カーソルの前の文字を削除します。
+    Escape: Closes the popup and returns focus to the combobox. Optionally, if the combobox is editable, clears the contents of the combobox.
+    Escape：ポップアップを閉じて、フォーカスをコンボボックスに戻します。 任意で、コンボボックスが編集可能な場合は、コンボボックスの内容をクリアします。
 
-    Delete (Optional): Returns focus to the textbox, removes the selected state if a suggestion was selected, and removes the inline autocomplete string if present.
-    Delete（任意）：フォーカスをテキストボックスに戻し、提案が選択されている場合は選択状態を削除し、存在する場合はインライン自動補完文字列を削除します。
+---    Any printable character: Returns the focus to the textbox without closing the popup and types the character.
+---    印刷可能な文字：ポップアップを閉じずにフォーカスをテキストボックスに戻し、文字をタイプ入力します。
 
-    Right Arrow: Moves focus one cell to the right. Optionally, if focus is on the right-most cell in the row, focus may move to the first cell in the following row. If focus is on the last cell in the grid, either does nothing or returns focus to the textbox.
-    右矢印：フォーカスを1セル右に移動します。 任意で、フォーカスが行の右端のセルにある場合、フォーカスは次の行の最初のセルに移動してもよい。 フォーカスがグリッドの最後のセルにある場合、何もしないか、フォーカスをテキストボックスに戻します。
+---    Backspace (Optional): Returns focus to the textbox and deletes the character prior to the cursor.
+---    Backspace（任意）：フォーカスをテキストボックスに戻し、カーソルの前の文字を削除します。
 
-    Left Arrow: Moves focus one cell to the left. Optionally, if focus is on the left-most cell in the row, focus may move to the last cell in the previous row. If focus is on the first cell in the grid, either does nothing or returns focus to the textbox.
-    左矢印：フォーカスを1セル左に移動します。 任意で、フォーカスが行の左端のセルにある場合、フォーカスは前の行の最後のセルに移動してもよい。 フォーカスがグリッドの最初のセルにある場合、何もしないか、フォーカスをテキストボックスに戻します。
+---    Delete (Optional): Returns focus to the textbox, removes the selected state if a suggestion was selected, and removes the inline autocomplete string if present.
+---    Delete（任意）：フォーカスをテキストボックスに戻し、提案が選択されている場合は選択状態を削除し、存在する場合はインライン自動補完文字列を削除します。
 
-    Down Arrow: Moves focus one cell down. If focus is in the last row of the grid, either does nothing or returns focus to the textbox.
-    下矢印：フォーカスを1セル下に移動します。 フォーカスがグリッドの最後の行にある場合、何もしないか、フォーカスをテキストボックスに戻します。
+---    Right Arrow: Moves focus one cell to the right. Optionally, if focus is on the right-most cell in the row, focus may move to the first cell in the following row. If focus is on the last cell in the grid, either does nothing or returns focus to the textbox.
+---    右矢印：フォーカスを1セル右に移動します。 任意で、フォーカスが行の右端のセルにある場合、フォーカスは次の行の最初のセルに移動してもよい。 フォーカスがグリッドの最後のセルにある場合、何もしないか、フォーカスをテキストボックスに戻します。
 
-    Up Arrow: Moves focus one cell up. If focus is in the first row of the grid, either does nothing or returns focus to the textbox.
-    上矢印：フォーカスを1セル上に移動します。 フォーカスがグリッドの最初の行にある場合、何もしないか、フォーカスをテキストボックスに戻します。
+    Right Arrow: Moves focus one cell to the right. Optionally, if focus is on the right-most cell in the row, focus may move to the first cell in the following row. If focus is on the last cell in the grid, either does nothing or returns focus to the combobox.
+    右矢印：フォーカスを1セル右に移動します。 任意で、フォーカスが行の右端のセルにある場合、フォーカスは次の行の最初のセルに移動してもよい。 フォーカスがグリッドの最後のセルにある場合、何もしないか、フォーカスをコンボボックスに戻します。
+
+---    Left Arrow: Moves focus one cell to the left. Optionally, if focus is on the left-most cell in the row, focus may move to the last cell in the previous row. If focus is on the first cell in the grid, either does nothing or returns focus to the textbox.
+---    左矢印：フォーカスを1セル左に移動します。 任意で、フォーカスが行の左端のセルにある場合、フォーカスは前の行の最後のセルに移動してもよい。 フォーカスがグリッドの最初のセルにある場合、何もしないか、フォーカスをテキストボックスに戻します。
+
+    Left Arrow: Moves focus one cell to the left. Optionally, if focus is on the left-most cell in the row, focus may move to the last cell in the previous row. If focus is on the first cell in the grid, either does nothing or returns focus to the combobox.
+    左矢印：フォーカスを1セル左に移動します。 任意で、フォーカスが行の左端のセルにある場合、フォーカスは前の行の最後のセルに移動してもよい。 フォーカスがグリッドの最初のセルにある場合、何もしないか、フォーカスをコンボボックスに戻します。
+
+---    Down Arrow: Moves focus one cell down. If focus is in the last row of the grid, either does nothing or returns focus to the textbox.
+---    下矢印：フォーカスを1セル下に移動します。 フォーカスがグリッドの最後の行にある場合、何もしないか、フォーカスをテキストボックスに戻します。
+
+    Down Arrow: Moves focus one cell down. If focus is in the last row of the grid, either does nothing or returns focus to the combobox.
+    下矢印：フォーカスを1セル下に移動します。 フォーカスがグリッドの最後の行にある場合、何もしないか、フォーカスをコンボボックスに戻します。
+
+---    Up Arrow: Moves focus one cell up. If focus is in the first row of the grid, either does nothing or returns focus to the textbox.
+---    上矢印：フォーカスを1セル上に移動します。 フォーカスがグリッドの最初の行にある場合、何もしないか、フォーカスをテキストボックスに戻します。
+
+    Up Arrow: Moves focus one cell up. If focus is in the first row of the grid, either does nothing or returns focus to the combobox.
+    上矢印：フォーカスを1セル上に移動します。 フォーカスがグリッドの最初の行にある場合、何もしないか、フォーカスをコンボボックスに戻します。
 
     Page Down (Optional): Moves focus down an author-determined number of rows, typically scrolling so the bottom row in the currently visible set of rows becomes one of the first visible rows. If focus is in the last row of the grid, focus does not move.
     Page Down（任意）：フォーカスを作成者が決定した行数だけ下に移動します。 通常はスクロールして、現在可視の行のセットの一番下の行が最初の可視行の1つになります。 フォーカスがグリッドの最後の行にある場合、フォーカスは移動しません。
@@ -1782,8 +2102,11 @@ In a grid popup, each suggested value may be represented by either a single cell
         Moves focus to the first cell in the row that contains focus. Or, if the grid has fewer than three cells per row or multiple suggested values per row, focus may move to the first cell in the grid.
         フォーカスをフォーカスを含む行の最初のセルに移動します。 あるいは、グリッドのセルが1行あたり3つ未満、または1行あたりの提案値が複数ある場合、フォーカスはグリッドの最初のセルに移動する可能性があります。
 
-        Returns focus to the textbox and places the cursor on the first character.
-        フォーカスをテキストボックスに戻し、カーソルを最初の文字に置きます。
+---        Returns focus to the textbox and places the cursor on the first character.
+---        フォーカスをテキストボックスに戻し、カーソルを最初の文字に置きます。
+
+        If the combobox is editable, returns focus to the combobox and places the cursor on the first character.
+        コンボボックスが編集可能な場合、フォーカスをコンボボックスに戻し、カーソルを最初の文字に置きます。
 
     End (Optional): Either:
     End（任意）：次のいずれか：
@@ -1791,8 +2114,11 @@ In a grid popup, each suggested value may be represented by either a single cell
         Moves focus to the last cell in the row that contains focus. Or, if the grid has fewer than three cells per row or multiple suggested values per row, focus may move to the last cell in the grid.
         フォーカスをフォーカスを含む行の最後のセルに移動します。 あるいは、グリッドのセルが1行あたり3つ未満、または1行あたりの提案値が複数ある場合、フォーカスはグリッドの最後のセルに移動する可能性があります。
 
-        Returns focus to the textbox and places the cursor after the last character.
-        フォーカスをテキストボックスに戻し、カーソルを最後の文字の後に置きます。
+---        Returns focus to the textbox and places the cursor after the last character.
+---        フォーカスをテキストボックスに戻し、カーソルを最後の文字の後に置きます。
+
+        If the combobox is editable, returns focus to the combobox and places the cursor after the last character.
+        コンボボックスが編集可能な場合、フォーカスをコンボボックスに戻し、カーソルを最後の文字の後に置きます。
 
     Control + Home (optional): moves focus to the first row.
     Control + Home（任意）：フォーカスを最初の行に移動します。
@@ -1800,14 +2126,29 @@ In a grid popup, each suggested value may be represented by either a single cell
     Control + End (Optional): moves focus to the last row.
     Control + End（任意）：フォーカスを最後の行に移動します。
 
+    Any printable character: If the combobox is editable, returns the focus to the combobox without closing the popup and types the character.
+    印刷可能な文字：コンボボックスが編集可能な場合、ポップアップを閉じずにフォーカスをコンボボックスに戻し、文字をタイプ入力します。
+
+    Backspace (Optional): If the combobox is editable, returns focus to the combobox and deletes the character prior to the cursor.
+    Backspace（任意）：コンボボックスが編集可能な場合、フォーカスをコンボボックスに戻し、カーソルの前の文字を削除します。
+
+    Delete (Optional): If the combobox is editable, returns focus to the combobox, removes the selected state if a suggestion was selected, and removes the inline autocomplete string if present.
+    Delete（任意）：コンボボックスが編集可能な場合、フォーカスをコンボボックスに戻し、提案が選択されている場合は選択状態を削除し、存在する場合はインライン自動補完文字列を削除します。
+
 Note
 注
 
-    DOM Focus is maintained on the combobox textbox and the assistive technology focus is moved within the grid using aria-activedescendant as described in Managing Focus in Composites Using aria-activedescendant.
-    1. DOM のフォーカスはコンボボックスのテキストボックスで維持され、支援技術のフォーカスは、aria-activedescendant を使用した複合ウィジェットでのフォーカスの管理で説明されているように、aria-activedescendant を使用してグリッド内で移動されます。
+---    DOM Focus is maintained on the combobox textbox and the assistive technology focus is moved within the grid using aria-activedescendant as described in Managing Focus in Composites Using aria-activedescendant.
+---    1. DOM のフォーカスはコンボボックスのテキストボックスで維持され、支援技術のフォーカスは、aria-activedescendant を使用した複合ウィジェットでのフォーカスの管理で説明されているように、aria-activedescendant を使用してグリッド内で移動されます。
 
-    The grid allows only one suggested value to be selected at a time for the textbox value.
-    2. グリッドでは、テキストボックスの値に対して一度に1つの提案値のみを選択できます。
+    DOM Focus is maintained on the combobox and the assistive technology focus is moved within the grid using aria-activedescendant as described in Managing Focus in Composites Using aria-activedescendant.
+    1. DOM のフォーカスはコンボボックスで維持され、支援技術のフォーカスは、aria-activedescendant を使用した複合ウィジェットでのフォーカスの管理で説明されているように、aria-activedescendant を使用してグリッド内で移動されます。
+
+---    The grid allows only one suggested value to be selected at a time for the textbox value.
+---    2. グリッドでは、テキストボックスの値に対して一度に1つの提案値のみを選択できます。
+
+    The grid allows only one suggested value to be selected at a time for the combobox value.
+    2. グリッドでは、コンボボックスの値に対して一度に1つの提案値のみを選択できます。
 
     In a grid popup, each suggested value may be represented by either a single cell or an entire row. This aspect of design effects focus and selection movement:
     3. グリッドポップアップでは、各提案値は、単一セルまたは行全体のいずれかで表すことができます。 デザインのこの側面は、次のようにフォーカスと選択の動きに影響します。
@@ -1849,14 +2190,21 @@ In some implementations of tree popups, some or all parent nodes may serve as su
 When focus is in a vertically oriented tree popup:
 フォーカスが垂直方向のツリーポップアップにある場合：
 
-    Enter: Accepts the currently selected suggested value by closing the popup and placing the selected value in the textbox with the input cursor at the end of the value.
-    Enter：ポップアップを閉じて、選択されている値をテキストボックスに配置し、値の最後に入力カーソルを置くことで、現在選択されている提案値を受け入れます。
+---    Enter: Accepts the currently selected suggested value by closing the popup and placing the selected value in the textbox with the input cursor at the end of the value.
+---    Enter：ポップアップを閉じて、選択されている値をテキストボックスに配置し、値の最後に入力カーソルを置くことで、現在選択されている提案値を受け入れます。
 
-    Escape: Closes the popup and returns focus to the textbox. Optionally, clears the contents of the textbox.
-    Escape：ポップアップを閉じて、フォーカスをテキストボックスに戻します。 任意で、テキストボックスの内容をクリアします。
+    Enter: Accepts the currently selected suggested value by closing the popup, placing the selected value in the combobox, and if the combobox is editable, placing the input cursor at the end of the value.
+    Enter：ポップアップを閉じ、選択されている値をコンボボックスに配置し、コンボボックスが編集可能な場合、値の最後に入力カーソルを置くことにより、現在選択されている提案値を受け入れます。
 
-    Any printable character: Returns the focus to the textbox without closing the popup and types the character.
-    印刷可能な文字：ポップアップを閉じずにフォーカスをテキストボックスに戻し、文字をタイプ入力します。
+---    Escape: Closes the popup and returns focus to the textbox. Optionally, clears the contents of the textbox.
+---    Escape：ポップアップを閉じて、フォーカスをテキストボックスに戻します。 任意で、テキストボックスの内容をクリアします。
+
+    Escape: Closes the popup and returns focus to the combobox. Optionally, clears the contents of the combobox.
+    Escape：ポップアップを閉じて、フォーカスをコンボボックスに戻します。 任意で、コンボボックスの内容をクリアします。
+
+
+---    Any printable character: Returns the focus to the textbox without closing the popup and types the character.
+---    印刷可能な文字：ポップアップを閉じずにフォーカスをテキストボックスに戻し、文字をタイプ入力します。
 
     Right arrow:
     右矢印：
@@ -1888,20 +2236,41 @@ When focus is in a vertically oriented tree popup:
     Up Arrow: Moves focus to the previous node that is focusable without opening or closing a node and selects it if it is selectable.
     上矢印：ノードを開いたり閉じたりせずにフォーカスをフォーカス可能な前のノードに移動し、選択可能な場合はそれを選択します。
 
-    Home: Moves focus to the first node in the tree without opening or closing a node and selects it if it is selectable.
-    Home：ノードを開いたり閉じたりせずにフォーカスをツリーの最初のノードに移動し、選択可能な場合はそれを選択します。
+---    Home: Moves focus to the first node in the tree without opening or closing a node and selects it if it is selectable.
+---    Home：ノードを開いたり閉じたりせずにフォーカスをツリーの最初のノードに移動し、選択可能な場合はそれを選択します。
 
-    End: Moves focus to the last node in the tree that is focusable without opening a node and selects it if it is selectable.
-    End：ノードを開かずにフォーカスをフォーカス可能なツリー内の最後のノードに移動し、選択可能な場合はそれを選択します。
+    Home: Moves focus to the first focusable node in the tree without opening or closing a node and selects it if it is selectable.
+    Home：ノードを開いたり閉じたりせずに、フォーカスをツリー内の最初のフォーカス可能なノードに移動し、選択可能な場合はそれを選択します。
+
+---    End: Moves focus to the last node in the tree that is focusable without opening a node and selects it if it is selectable.
+---    End：ノードを開かずにフォーカスをフォーカス可能なツリー内の最後のノードに移動し、選択可能な場合はそれを選択します。
+
+    End: Moves focus to the last focusable node in the tree without opening or closing a node and selects it if it is selectable.
+    End：ノードを開いたり閉じたりせずに、フォーカスをツリー内の最後のフォーカス可能なノードに移動し、選択可能な場合はそれを選択します。
+
+    Any printable character:
+    印刷可能な文字：
+
+        If the combobox is editable, returns the focus to the combobox without closing the popup and types the character.
+        コンボボックスが編集可能な場合、ポップアップを閉じずにフォーカスをコンボボックスに戻し、文字をタイプ入力します。
+
+        Otherwise, moves focus to the next suggested value with a name that starts with the characters typed.
+        それ以外の場合、フォーカスをタイプ入力した文字で始まる名前の次の提案値に移動します。 
 
 Note
 注
 
-    DOM Focus is maintained on the combobox textbox and the assistive technology focus is moved within the tree using aria-activedescendant as described in Managing Focus in Composites Using aria-activedescendant.
-    1. DOM のフォーカスはコンボボックスのテキストボックスで維持され、支援技術のフォーカスは、aria-activedescendant を使用した複合ウィジェットでのフォーカスの管理で説明されているように、aria-activedescendant を使用してツリー内で移動されます。
+---    DOM Focus is maintained on the combobox textbox and the assistive technology focus is moved within the tree using aria-activedescendant as described in Managing Focus in Composites Using aria-activedescendant.
+---    1. DOM のフォーカスはコンボボックスのテキストボックスで維持され、支援技術のフォーカスは、aria-activedescendant を使用した複合ウィジェットでのフォーカスの管理で説明されているように、aria-activedescendant を使用してツリー内で移動されます。
 
-    The tree allows only one suggested value to be selected at a time for the textbox value.
-    2. ツリーでは、テキストボックスの値として一度に1つの提案値のみを選択できます。
+    DOM Focus is maintained on the combobox and the assistive technology focus is moved within the tree using aria-activedescendant as described in Managing Focus in Composites Using aria-activedescendant.
+    1. DOM のフォーカスはコンボボックスで維持され、支援技術のフォーカスは、aria-activedescendant を使用した複合ウィジェットでのフォーカスの管理で説明されているように、aria-activedescendant を使用してツリー内で移動されます。
+
+---    The tree allows only one suggested value to be selected at a time for the textbox value.
+---    2. ツリーでは、テキストボックスの値として一度に1つの提案値のみを選択できます。
+
+    The tree allows only one suggested value to be selected at a time for the combobox value.
+    2. ツリーでは、コンボボックスの値として一度に1つの提案値のみを選択できます。
 
     In a tree popup, some or all parent nodes may not be selectable values; they may serve as category labels for suggested values. If focus moves to a node that is not a selectable value, either:
     3. ツリーポップアップでは、一部またはすべての親ノードが選択可能な値ではない場合があります。 それらは、提案値のカテゴリーラベルとして機能する場合があります。 フォーカスが選択可能な値ではないノードに移動した場合は、次のいずれかです。
@@ -1915,8 +2284,11 @@ Note
         In either case, focus is visually distinct from selection so users can readily see if a value is selected or not.
         いずれの場合も、フォーカスは選択と視覚的に区別されるため、ユーザーは値が選択されているかどうかを簡単に確認できます。
 
-    If the nodes in a tree are arranged horizontally:
-    4. ツリー内のノードが水平に配置されている場合：
+---    If the nodes in a tree are arranged horizontally:
+---    4. ツリー内のノードが水平に配置されている場合：
+
+    If nodes in the tree are arranged horizontally (aria-orientation is set to horizontal):
+    4. ツリー内のノードが水平に配置されている場合（aria-orientation が horizontal に設定されている場合）：
 
         Down Arrow performs as Right Arrow is described above, and vice versa.
         1. 下矢印は、上記の右矢印と同様に機能し、その逆も同様です。
@@ -1934,14 +2306,24 @@ Dialog Popup Keyboard Interaction
 When focus is in a dialog popup:
 ダイアログポップアップにフォーカスがある場合：
 
-    There are two ways to close the popup and return focus to the textbox:
-    ポップアップを閉じてフォーカスをテキストボックスに戻すには、次の2つの方法があります。
+---    There are two ways to close the popup and return focus to the textbox:
+---    ポップアップを閉じてフォーカスをテキストボックスに戻すには、次の2つの方法があります。
 
-        Perform an action in the dialog, such as activate a button, that specifies a value for the textbox.
-        テキストボックスの値を指定するボタンのアクティブ化などのアクションをダイアログで実行します。
+    There are two ways to close the popup and return focus to the combobox:
+    ポップアップを閉じてフォーカスをコンボボックスに戻すには、次の2つの方法があります。
 
-        Cancel out of the dialog, e.g., press Escape or activate the cancel button in the dialog. Canceling either returns focus to the text box without changing the textbox value or returns focus to the textbox and clears the textbox.
-        ダイアログからキャンセルします。 例えば、Escape を押すか、ダイアログのキャンセルボタンをアクティブ化します。 キャンセルすると、テキストボックスの値を変更せずにテキストボックスにフォーカスが戻るか、テキストボックスにフォーカスが戻ってテキストボックスがクリアされます。
+---        Perform an action in the dialog, such as activate a button, that specifies a value for the textbox.
+---        テキストボックスの値を指定するボタンのアクティブ化などのアクションをダイアログで実行します。
+
+        Perform an action in the dialog, such as activate a button, that specifies a value for the combobox.
+        コンボボックスの値を指定するボタンのアクティブ化などのアクションをダイアログで実行します。
+
+---        Cancel out of the dialog, e.g., press Escape or activate the cancel button in the dialog. Canceling either returns focus to the text box without changing the textbox value or returns focus to the textbox and clears the textbox.
+---        ダイアログからキャンセルします。 例えば、Escape を押すか、ダイアログのキャンセルボタンをアクティブ化します。 キャンセルすると、テキストボックスの値を変更せずにテキストボックスにフォーカスが戻るか、テキストボックスにフォーカスが戻ってテキストボックスがクリアされます。
+
+        Cancel out of the dialog, e.g., press Escape or activate the cancel button in the dialog. Canceling either returns focus to the text box without changing the combobox value or returns focus to the combobox and clears the combobox.
+        ダイアログからキャンセルします。 例えば、Escape を押すか、ダイアログのキャンセルボタンをアクティブ化します。 キャンセルすると、コンボボックスの値を変更せずにコンボボックスにフォーカスが戻るか、コンボボックスにフォーカスが戻ってコンボボックスがクリアされます。
+
 
     The dialog implements the keyboard interaction defined in the modal dialog pattern.
     ダイアログは、モーダルダイアログのパターンで定義されたキーボードの相互作用を実装します。
@@ -1949,8 +2331,11 @@ When focus is in a dialog popup:
 Note
 注
 
-Unlike other combobox popups, dialogs do not support aria-activedescendant so DOM focus moves into the dialog from the textbox.
-他のコンボボックスのポップアップとは異なり、ダイアログは aria-activedescendant をサポートしていないため、DOM のフォーカスはテキストボックスからダイアログに移動します。
+---Unlike other combobox popups, dialogs do not support aria-activedescendant so DOM focus moves into the dialog from the textbox.
+---他のコンボボックスのポップアップとは異なり、ダイアログは aria-activedescendant をサポートしていないため、DOM のフォーカスはテキストボックスからダイアログに移動します。
+
+Unlike other combobox popups, dialogs do not support aria-activedescendant so DOM focus moves into the dialog from the combobox.
+他のコンボボックスのポップアップとは異なり、ダイアログは aria-activedescendant をサポートしていないため、DOM のフォーカスはコンボボックスからダイアログに移動します。
 
 
 
@@ -1958,74 +2343,117 @@ Unlike other combobox popups, dialogs do not support aria-activedescendant so DO
 WAI-ARIA Roles, States, and Properties
 WAI-ARIA のロール、状態、およびプロパティ
 
-The role, state, and property guidance where the ARIA 1.1 and ARIA 1.0 patterns differ is listed first. The subsequent guidance applies to both patterns.
-ARIA 1.1 と ARIA 1.0 のパターンで異なるロール、状態、およびプロパティのガイダンスが最初にリストされています。 後続のガイダンスは、両方のパターンに適用されます。
+---The role, state, and property guidance where the ARIA 1.1 and ARIA 1.0 patterns differ is listed first. The subsequent guidance applies to both patterns.
+---ARIA 1.1 と ARIA 1.0 のパターンで異なるロール、状態、およびプロパティのガイダンスが最初にリストされています。 後続のガイダンスは、両方のパターンに適用されます。
 
-    In a combobox implementing the ARIA 1.1 pattern:
-    ARIA 1.1 パターンを実装するコンボボックスの場合：
+---    In a combobox implementing the ARIA 1.1 pattern:
+---    ARIA 1.1 パターンを実装するコンボボックスの場合：
 
-        The element that serves as the combobox container has role combobox.
-        コンボボックスコンテナーとして機能する要素には、コンボボックス（combobox）ロールがあります。
+---        The element that serves as the combobox container has role combobox.
+---        コンボボックスコンテナーとして機能する要素には、コンボボックス（combobox）ロールがあります。
 
-        The element with role combobox contains or owns a textbox element that has either role textbox or role searchbox.
-        コンボボックスロールを持つ要素には、テキストボックス（textbox）ロールまたは検索ボックス（searchbox）ロールのいずれかを持つテキストボックス要素が含まれているか、所有されています。
+    The element that serves as an input and displays the combobox value has role combobox.
+    入力として機能し、コンボボックス値を表示する要素には、コンボボックス（combobox）ロールがあります。
 
-        When the combobox popup is visible, the combobox element contains or owns an element that has role listbox, tree, grid, or dialog.
-        コンボボックスのポップアップが可視の場合、コンボボックス要素には、リストボックス（listbox）、ツリー（tree）、グリッド（grid）、またはダイアログ（dialog）のロールを持つ要素が含まれているか、所有されています。
+    The combobox element has aria-controls set to a value that refers to the element that serves as the popup. Note that aria-controls only needs to be set when the popup is visible. However, it is valid to reference an element that is not visible.
+    コンボボックス要素には aria-controls があり、ポップアップとして機能する要素を参照する値に設定されます。 aria-controls は、ポップアップが可視の場合にのみ設定する必要があることに注意してください。 ただし、不可視の要素を参照することは有効です。
 
-        If the combobox popup has a role other than listbox, the element with role combobox has aria-haspopup set to a value that corresponds to the popup type. That is, aria-haspopup is set to grid, tree, or dialog. Note that elements with role combobox have an implicit aria-haspopup value of listbox.
-        コンボボックスのポップアップにリストボックス以外のロールがある場合、コンボボックスロールを持つ要素には、ポップアップタイプに対応する値に設定された aria-haspopup があります。 つまり、aria-haspopup はグリッド（grid）、ツリー（tree）、またはダイアログ（dialog）に設定されます。 コンボボックスロールを持つ要素には、リストボックス（listbox）の暗黙的な aria-haspopup 値があることに注意してください。
+---        The element with role combobox contains or owns a textbox element that has either role textbox or role searchbox.
+---        コンボボックスロールを持つ要素には、テキストボックス（textbox）ロールまたは検索ボックス（searchbox）ロールのいずれかを持つテキストボックス要素が含まれているか、所有されています。
 
-        When the combobox popup is visible, the textbox element has aria-controls set to a value that refers to the combobox popup element.
-        コンボボックスのポップアップが可視の場合、テキストボックス要素の aria-controls は、コンボボックスのポップアップ要素を参照する値に設定されています。
+---        When the combobox popup is visible, the combobox element contains or owns an element that has role listbox, tree, grid, or dialog.
+---        コンボボックスのポップアップが可視の場合、コンボボックス要素には、リストボックス（listbox）、ツリー（tree）、グリッド（grid）、またはダイアログ（dialog）のロールを持つ要素が含まれているか、所有されています。
 
-    In a combobox implementing the ARIA 1.0 pattern:
-    ARIA 1.0 パターンを実装するコンボボックスの場合：
+    The popup is an element that has role listbox, tree, grid, or dialog.
+    ポップアップは、リストボックス、ツリー、グリッド、またはダイアログのロールを持つ要素です。
 
-        The element that serves as the textbox has role combobox.
-        テキストボックスとして機能する要素には、コンボボックス（combobox）ロールがあります。
+---        If the combobox popup has a role other than listbox, the element with role combobox has aria-haspopup set to a value that corresponds to the popup type. That is, aria-haspopup is set to grid, tree, or dialog. Note that elements with role combobox have an implicit aria-haspopup value of listbox.
+---        コンボボックスのポップアップにリストボックス以外のロールがある場合、コンボボックスロールを持つ要素には、ポップアップタイプに対応する値に設定された aria-haspopup があります。 つまり、aria-haspopup はグリッド（grid）、ツリー（tree）、またはダイアログ（dialog）に設定されます。 コンボボックスロールを持つ要素には、リストボックス（listbox）の暗黙的な aria-haspopup 値があることに注意してください。
 
-        When the combobox popup is visible, the element with role combobox has aria-owns set to a value that refers to an element with role listbox.
-        コンボボックスのポップアップが可視の場合、コンボボックスロールを持つ要素には、リストボックス（listbox）ロールを持つ要素を参照する値に設定された aria-owns があります。
+    If the popup has a role other than listbox, the element with role combobox has aria-haspopup set to a value that corresponds to the popup type. That is, aria-haspopup is set to grid, tree, or dialog. Note that elements with role combobox have an implicit aria-haspopup value of listbox.
+    ポップアップにリストボックス以外のロールがある場合、コンボボックスロールを持つ要素には aria-haspopup があり、ポップアップタイプに対応する値に設定されます。 つまり、aria-haspopup はグリッド（grid）、ツリー（tree）、またはダイアログ（dialog）に設定されます。 コンボボックスロールを持つ要素には、リストボックス（listbox）の暗黙的な aria-haspopup 値があることに注意してください。 
 
-        the element with role combobox has a value for aria-haspopup of listbox. Note that elements with role combobox have an implicit aria-haspopup value of listbox.
-        コンボボックスロールを持つ要素には、listbox の aria-haspopup の値があります。 コンボボックスロールを持つ要素には、listbox の暗黙的な aria-haspopup 値があることに注意してください。
+---        When the combobox popup is visible, the textbox element has aria-controls set to a value that refers to the combobox popup element.
+---        コンボボックスのポップアップが可視の場合、テキストボックス要素の aria-controls は、コンボボックスのポップアップ要素を参照する値に設定されています。
 
-    The textbox element has a value for aria-multiline of false. Note that the default value of aria-multiline is false.
-    テキストボックス要素には、false の aria-multiline の値があります。 aria-multiline のデフォルト値は false であることに注意してください。
+---    In a combobox implementing the ARIA 1.0 pattern:
+---    ARIA 1.0 パターンを実装するコンボボックスの場合：
+
+---        The element that serves as the textbox has role combobox.
+---        テキストボックスとして機能する要素には、コンボボックス（combobox）ロールがあります。
+
+---        When the combobox popup is visible, the element with role combobox has aria-owns set to a value that refers to an element with role listbox.
+---        コンボボックスのポップアップが可視の場合、コンボボックスロールを持つ要素には、リストボックス（listbox）ロールを持つ要素を参照する値に設定された aria-owns があります。
+
+---        the element with role combobox has a value for aria-haspopup of listbox. Note that elements with role combobox have an implicit aria-haspopup value of listbox.
+---        コンボボックスロールを持つ要素には、listbox の aria-haspopup の値があります。 コンボボックスロールを持つ要素には、listbox の暗黙的な aria-haspopup 値があることに注意してください。
+
+---    The textbox element has a value for aria-multiline of false. Note that the default value of aria-multiline is false.
+---    テキストボックス要素には、false の aria-multiline の値があります。 aria-multiline のデフォルト値は false であることに注意してください。
 
     When the combobox popup is not visible, the element with role combobox has aria-expanded set to false. When the popup element is visible, aria-expanded is set to true. Note that elements with role combobox have a default value for aria-expanded of false.
     コンボボックスのポップアップが可視でない場合、コンボボックスロールを持つ要素の aria-expanded は false に設定されます。 ポップアップ要素が可視の場合、aria-expanded は true に設定されます。 コンボボックスロールを持つ要素は、aria-expanded のデフォルト値が false であることに注意してください。
 
-    When a combobox receives focus, DOM focus is placed on the textbox element.
-    コンボボックスがフォーカスを受け取ると、DOM のフォーカスがテキストボックス要素に配置されます。
+---    When a combobox receives focus, DOM focus is placed on the textbox element.
+---    コンボボックスがフォーカスを受け取ると、DOM のフォーカスがテキストボックス要素に配置されます。
 
-    When a descendant of a listbox, grid, or tree popup is focused, DOM focus remains on the textbox and the textbox has aria-activedescendant set to a value that refers to the focused element within the popup.
-    リストボックス、グリッド、またはツリーのポップアップの子孫にフォーカスがある場合、DOM のフォーカスはテキストボックスに残り、テキストボックスには、ポップアップ内のフォーカスされた要素を参照する値に設定された aria-activedescendant があります。
+    When a combobox receives focus, DOM focus is placed on the combobox element.
+    コンボボックスがフォーカスを受け取ると、DOM のフォーカスがコンボボックス要素に配置されます。
 
-    In a combobox with a listbox, grid, or tree popup, when a suggested value is visually indicated as the currently selected value, the option, gridcell, row, or treeitem containing that value has aria-selected set to true.
-    リストボックス、グリッド、またはツリーのポップアップのあるコンボボックスで、提案値が現在選択されている値として視覚的に示される場合、その値を含むオプション（option）、グリッドセル（gridcell）、行（row）、またはツリー項目（treeitem）では、aria-selected が true に設定されます。
+---    When a descendant of a listbox, grid, or tree popup is focused, DOM focus remains on the textbox and the textbox has aria-activedescendant set to a value that refers to the focused element within the popup.
+---    リストボックス、グリッド、またはツリーのポップアップの子孫にフォーカスがある場合、DOM のフォーカスはテキストボックスに残り、テキストボックスには、ポップアップ内のフォーカスされた要素を参照する値に設定された aria-activedescendant があります。
 
-    If the combobox has a visible label, the element with role combobox has aria-labelledby set to a value that refers to the labelling element. Otherwise, the combobox element has a label provided by aria-label.
-    コンボボックスに可視ラベルがある場合、コンボボックスロールを持つ要素には、ラベル付け要素を参照する値に設定された aria-labelledby があります。 それ以外の場合、コンボボックス要素には aria-label によって提供されるラベルがあります。
+    When a descendant of a listbox, grid, or tree popup is focused, DOM focus remains on the combobox and the combobox has aria-activedescendant set to a value that refers to the focused element within the popup.
+    リストボックス、グリッド、またはツリーのポップアップの子孫にフォーカスがある場合、DOM のフォーカスはコンボボックスに残り、コンボボックスには aria-activedescendant があり、ポップアップ内のフォーカスされた要素を参照する値に設定されます。
 
-    The textbox element has aria-autocomplete set to a value that corresponds to its autocomplete behavior:
-    テキストボックス要素には、次の自動補完の振る舞いに対応する値に設定された aria-autocomplete があります。
+---    In a combobox with a listbox, grid, or tree popup, when a suggested value is visually indicated as the currently selected value, the option, gridcell, row, or treeitem containing that value has aria-selected set to true.
+---    リストボックス、グリッド、またはツリーのポップアップのあるコンボボックスで、提案値が現在選択されている値として視覚的に示される場合、その値を含むオプション（option）、グリッドセル（gridcell）、行（row）、またはツリー項目（treeitem）では、aria-selected が true に設定されます。
 
-        none: When the popup is displayed, the suggested values it contains are the same regardless of the characters typed in the textbox.
-        none：ポップアップが表示されるとき、ポップアップに含まれる提案値は、テキストボックスにタイプ入力された文字に関係なく同じです。
+    For a combobox that controls a listbox, grid, or tree popup, when a suggested value is visually indicated as the currently selected value, the option, gridcell, row, or treeitem containing that value has aria-selected set to true.
+    リストボックス、グリッド、またはツリーのポップアップを制御するコンボボックスでは、提案値が現在選択されている値として視覚的に示されている場合、その値を含むオプション（option）、グリッドセル（gridcell）、行（row）、またはツリー項目（treeitem）の aria-selected が true に設定されます。
 
-        list: When the popup is triggered, it presents suggested values that complete or logically correspond to the characters typed in the textbox.
-        list：ポップアップがトリガーされると、テキストボックスにタイプ入力された文字に完全に対応する、または論理的に対応する提案値が示されます。
+---    If the combobox has a visible label, the element with role combobox has aria-labelledby set to a value that refers to the labelling element. Otherwise, the combobox element has a label provided by aria-label.
+---    コンボボックスに可視ラベルがある場合、コンボボックスロールを持つ要素には、ラベル付け要素を参照する値に設定された aria-labelledby があります。 それ以外の場合、コンボボックス要素には aria-label によって提供されるラベルがあります。
 
-        both: When the popup is triggered, it presents suggested values that complete or logically correspond to the characters typed in the textbox. In addition, the portion of the selected suggestion that has not been typed by the user, known as the "completion string", appears inline after the input cursor in the textbox. The inline completion string is visually highlighted and has a selected state.
-        both：ポップアップがトリガーされると、テキストボックスにタイプ入力された文字に完全に対応する、または論理的に対応する提案値が示されます。 さらに、選択された提案のうち、ユーザーがタイプ入力していない部分（「補完文字列」と呼ばれる）は、テキストボックスの入力カーソルの後にインラインで現れます。 インライン補完文字列は視覚的に強調表示され、選択状態になっています。
+    If the combobox has a visible label and the combobox element is an HTML element that can be labelled using the HTML label element (e.g., the input element), it is labeled using the label element. Otherwise, if it has a visible label, the combobox element has aria-labelledby set to a value that refers to the labelling element. Otherwise, the combobox element has a label provided by aria-label.
+    コンボボックスに可視ラベルがあり、コンボボックス要素が HTML ラベル要素を使用してラベル付けできる HTML 要素（入力要素など）である場合、ラベル要素を使用してラベル付けされます。 それ以外の場合、可視ラベルがある場合、コンボボックス要素には aria-labelledby があり、ラベル付け要素を参照する値に設定されます。 それ以外の場合、コンボボックス要素には aria-label によって提供されるラベルがあります。
+
+---    The textbox element has aria-autocomplete set to a value that corresponds to its autocomplete behavior:
+---    テキストボックス要素には、次の自動補完の振る舞いに対応する値に設定された aria-autocomplete があります。
+
+    The combobox element has aria-autocomplete set to a value that corresponds to its autocomplete behavior:
+    コンボボックス要素には aria-autocomplete があり、次の自動補完の振る舞いに対応する値に設定されます。
+
+---        none: When the popup is displayed, the suggested values it contains are the same regardless of the characters typed in the textbox.
+---        none：ポップアップが表示されるとき、ポップアップに含まれる提案値は、テキストボックスにタイプ入力された文字に関係なく同じです。
+
+        none: When the popup is displayed, the suggested values it contains are the same regardless of the characters typed in the combobox.
+        none：ポップアップが表示されたとき、ポップアップに含まれる提案値は、コンボボックスに入力された文字に関係なく同じです。
+
+---        list: When the popup is triggered, it presents suggested values that complete or logically correspond to the characters typed in the textbox.
+---        list：ポップアップがトリガーされると、テキストボックスにタイプ入力された文字に完全に対応する、または論理的に対応する提案値が示されます。
+
+        list: When the popup is triggered, it presents suggested values. If the combobox is editable, the values complete or logically correspond to the characters typed in the combobox.
+        list：ポップアップがトリガーされると、提案値が示されます。 コンボボックスが編集可能である場合、値はコンボボックスにタイプ入力された文字と、完全に対応するか論理的に対応します。
+
+---        both: When the popup is triggered, it presents suggested values that complete or logically correspond to the characters typed in the textbox. In addition, the portion of the selected suggestion that has not been typed by the user, known as the "completion string", appears inline after the input cursor in the textbox. The inline completion string is visually highlighted and has a selected state.
+---        both：ポップアップがトリガーされると、テキストボックスにタイプ入力された文字に完全に対応する、または論理的に対応する提案値が示されます。 さらに、選択された提案のうち、ユーザーがタイプ入力していない部分（「補完文字列」と呼ばれる）は、テキストボックスの入力カーソルの後にインラインで現れます。 インライン補完文字列は視覚的に強調表示され、選択状態になっています。
+
+        both: When the popup is triggered, it presents suggested values that complete or logically correspond to the characters typed in the combobox. In addition, the portion of the selected suggestion that has not been typed by the user, known as the "completion string", appears inline after the input cursor in the combobox. The inline completion string is visually highlighted and has a selected state.
+        both：ポップアップがトリガーされると、コンボボックスにタイプ入力された文字に完全に対応する、または論理的に対応する提案値が示されます。 さらに、選択された提案のうち、「補完文字列」と呼ばれる、ユーザーがタイプ入力していない部分は、コンボボックスの入力カーソルの後にインラインで現れます。 インライン補完文字列は視覚的に強調表示され、選択状態になります。
 
 Note
 注
 
-    When referring to the roles, states, and properties documentation for the below list of patterns used for popups, keep in mind that a combobox is a single-select widget where selection always follows focus in the popup.
-    1. 以下のポップアップに使用されるパターンのリストについて、ロール、状態、およびプロパティの文書を参照する場合、コンボボックスは単一選択ウィジェットであり、選択は常にポップアップのフォーカスに従うことに注意してください。
+    In ARIA 1.0, the combobox referenced its popup with aria-owns instead of aria-controls. While user agents might support comboboxes with aria-owns for backwards compatibility with legacy content, it is strongly recommended that authors use aria-controls.
+    ARIA 1.0 では、コンボボックスは、aria-controls ではなく aria-owns を使用してポップアップを参照していました。 ユーザーエージェントは、レガシーコンテンツとの下位互換性のために、aria-owns を使用したコンボボックスをサポートする場合がありますが、作成者は aria-controls を使用することを強くお勧めします。
+
+
+---    When referring to the roles, states, and properties documentation for the below list of patterns used for popups, keep in mind that a combobox is a single-select widget where selection always follows focus in the popup.
+---    1. 以下のポップアップに使用されるパターンのリストについて、ロール、状態、およびプロパティの文書を参照する場合、コンボボックスは単一選択ウィジェットであり、選択は常にポップアップのフォーカスに従うことに注意してください。
+
+    When referring to the roles, states, and properties documentation for the below list of patterns used for popups, keep in mind that a combobox is a single-select widget where selection follows focus in the popup.
+    1. 以下のポップアップに使用されるパターンのリストについて、ロール、状態、およびプロパティの文書を参照する場合、コンボボックスは単一選択ウィジェットであり、選択はポップアップのフォーカスに従うことに注意してください。 
 
     The roles, states, and properties for popup elements are defined in their respective design patterns:
     2. ポップアップ要素のロール、状態、およびプロパティは、それぞれのデザインパターンで定義されています。
@@ -3028,8 +3456,11 @@ WAI-ARIA のロール、状態、およびプロパティ
 3.15 Menu or Menu bar
 3.15 メニューやメニューバー
 
-A menu is a widget that offers a list of choices to the user, such as a set of actions or functions. A menu is usually opened, or made visible, by activating a menu button, choosing an item in a menu that opens a sub menu, or by invoking a command, such as Shift + F10 in Windows, that opens a context specific menu. When a user activates a choice in a menu, the menu usually closes unless the choice opened a submenu.
-メニュー（menu）は、一連のアクションや機能など、選択肢のリストをユーザーに提供するウィジェットです。 メニューは通常、メニューボタンをアクティブ化するか、サブメニュー（submenu）を開くメニューの項目を選択するか、Windows の Shift + F10 などのコマンドを呼び出してコンテキスト固有のメニューを開くことにより、開かれるか、可視になります。 ユーザーがメニューの選択肢をアクティブ化すると、選択肢がサブメニューを開かない限り、メニューは通常閉じます。
+---A menu is a widget that offers a list of choices to the user, such as a set of actions or functions. A menu is usually opened, or made visible, by activating a menu button, choosing an item in a menu that opens a sub menu, or by invoking a command, such as Shift + F10 in Windows, that opens a context specific menu. When a user activates a choice in a menu, the menu usually closes unless the choice opened a submenu.
+---メニュー（menu）は、一連のアクションや機能など、選択肢のリストをユーザーに提供するウィジェットです。 メニューは通常、メニューボタンをアクティブ化するか、サブメニュー（submenu）を開くメニューの項目を選択するか、Windows の Shift + F10 などのコマンドを呼び出してコンテキスト固有のメニューを開くことにより、開かれるか、可視になります。 ユーザーがメニューの選択肢をアクティブ化すると、選択肢がサブメニューを開かない限り、メニューは通常閉じます。
+
+A menu is a widget that offers a list of choices to the user, such as a set of actions or functions. Menu widgets behave like native operating system menus, such as the menus that pull down from the menubars commonly found at the top of many desktop application windows. A menu is usually opened, or made visible, by activating a menu button, choosing an item in a menu that opens a sub menu, or by invoking a command, such as Shift + F10 in Windows, that opens a context specific menu. When a user activates a choice in a menu, the menu usually closes unless the choice opened a submenu.
+メニュー（menu）は、一連のアクションや機能など、選択肢のリストをユーザーに提供するウィジェットです。 メニューウィジェットは、多くのデスクトップアプリケーションウィンドウの上部に一般的にあるメニューバーからプルダウンするメニューなど、オペレーティングシステムのネイティブなメニューのように振る舞います。 メニューは通常、メニューボタンをアクティブ化するか、サブメニュー（submenu）を開くメニューの項目を選択するか、Windows の Shift + F10 などのコマンドを呼び出してコンテキスト固有のメニューを開くことにより、開かれるか、可視になります。 ユーザーがメニューの選択肢をアクティブ化すると、選択肢がサブメニューを開かない限り、メニューは通常閉じます。
 
 A menu that is visually persistent is a menubar. A menubar is typically horizontal and is often used to create a menu bar similar to those found near the top of the window in many desktop applications, offering the user quick access to a consistent set of commands.
 視覚的に永続的なメニューはメニューバー（menubar）です。 メニューバーは通常水平であり、多くのデスクトップアプリケーションでウィンドウの上部にあるものと同様のメニューバーを作成するためによく使用され、ユーザーが一貫したコマンドセットにすばやくアクセスできるようにします。
@@ -3077,7 +3508,10 @@ When reading the following descriptions, also keep in mind that:
     If a behavior applies to only certain types of items, e.g., menuitem elements, the specific role name is used.
     2. 振る舞いが特定のタイプの項目（メニュー項目要素など）にのみ適用される場合、特定のロール名が使用されます。
 
-    Submenus, also known as pop-up menus, are elements with role menu.
+---    Submenus, also known as pop-up menus, are elements with role menu.
+---    3. ポップアップメニューとも呼ばれるサブメニューは、メニュー（menu）ロールを持つ要素です。
+
+    Submenus, also known as popup menus, are elements with role menu.
     3. ポップアップメニューとも呼ばれるサブメニューは、メニュー（menu）ロールを持つ要素です。
 
     Except where noted, menus opened from a menubutton behave the same as menus opened from a menubar.
@@ -3375,9 +3809,74 @@ WAI-ARIA のロール、状態、およびプロパティ
 
 
 
+3.17 Meter
+3.17 メーター
 
-3.17 Radio Group
-3.17 ラジオグループ
+A meter is a graphical display of a numeric value that varies within a defined range. For example, a meter could be used to depict a device's current battery percentage or a car's fuel level.
+メーター（meter）は、定義された範囲内で変化する数値のグラフィック表示です。 例えば、メーターを使用して、デバイスの現在のバッテリーの割合や車の燃料レベルを表すことができます。
+
+Note
+注
+
+    A meter should not be used to represent a value like the current world population since it does not have a meaningful maximum limit.
+     メーターには意味のある上限がないため、現在の世界人口のような値を表すためにメーターを使用しないでください。
+
+    The meter should not be used to indicate progress, such as loading or percent completion of a task. To communicate progress, use the progressbar role instead.
+     メーターは、読み込みやタスクの完了率などの進行状況を示すために使用しないでください。 進行状況を伝えるには、代わりにプログレスバーロールを使用します。 
+
+
+
+
+Example
+例
+
+Meter Example
+メーターの例 
+
+
+
+
+Keyboard Interaction
+キーボードの相互作用
+
+Not applicable.
+該当しません。
+
+
+
+
+WAI-ARIA Roles, States, and Properties
+WAI-ARIA のロール、状態、およびプロパティ
+
+    The element serving as the meter has a role of meter.
+    メーターとして機能する要素には、メーター（meter）ロールがあります。
+
+    The meter has aria-valuenow set to a decimal value between aria-valuemin and aria-valuemax representing the current value of the meter.
+    メーターにはメーターの現在の値を表す aria-valuenow があり、aria-valuemin と aria-valuemax の間の10進値に設定されています。
+
+    The meter has aria-valuemin set to a decimal value less than aria-valuemax.
+    メーターには aria-valuemin があり、aria-valuemax よりも小さい10進値に設定されています。
+
+    The meter has aria-valuemax set to a decimal value greater than aria-valuemin.
+    メーターには aria-valuemax があり、aria-valuemin よりも大きい10進値に設定されています。
+
+    Assistive technologies often present aria-valuenow as a percentage. If conveying the value of the meter only in terms of a percentage would not be user friendly, the aria-valuetext property is set to a string that makes the meter value understandable. For example, a battery meter value might be conveyed as aria-valuetext="50% (6 hours) remaining".
+    支援技術は、多くの場合、aria-valuenow をパーセントで表します。 メーターの値をパーセントでのみ伝えることがユーザーフレンドリーでない場合は、aria-valuetext プロパティを、メーターの値を理解できるようにする文字列に設定します。 例えば、バッテリーメーターの値は、aria-valuetext="残り 50%（6時間）" として伝えられる場合があります。
+
+    If the meter has a visible label, it is referenced by aria-labelledby on the element with role meter. Otherwise, the element with role meter has a label provided by aria-label.
+    メーターに可視ラベルがある場合、メーターロールのある要素の aria-labelledby によって参照されます。 それ以外の場合、メーターロールのある要素には、aria-label によって提供されるラベルがあります。 
+
+
+
+
+
+
+
+---3.17 Radio Group
+---3.17 ラジオグループ
+
+3.18 Radio Group
+3.18 ラジオグループ
 
 A radio group is a set of checkable buttons, known as radio buttons, where no more than one of the buttons can be checked at a time. Some implementations may initialize the set with all buttons in the unchecked state in order to force the user to check one of the buttons before moving past a certain point in the workflow.
 ラジオグループ（radio group）は、ラジオボタン（radio buttons）と呼ばれるチェック可能なボタンのセットであり、一度にチェックできるボタンは1つだけです。 一部の実装では、ワークフローの特定のポイントを通過する前にユーザーにボタンの1つをチェックさせるために、すべてのボタンがチェックされていない状態でセットを初期化する場合があります。
@@ -3513,9 +4012,11 @@ WAI-ARIA のロール、状態、およびプロパティ
 
 
 
-3.18 Slider
-3.18 スライダー
+---3.18 Slider
+---3.18 スライダー
 
+3.19 Slider
+3.19 スライダー
 
 A slider is an input where the user selects a value from within a given range. Sliders typically have a slider thumb that can be moved along a bar or track to change the value of the slider.
 スライダー（slider）は、ユーザーが指定された範囲内から値を選択する入力です。 スライダーには通常、スライダーの値を変更するためにバーやトラックに沿って移動できるスライダーつまみ（slider thumb）があります。
@@ -3601,9 +4102,11 @@ WAI-ARIA のロール、状態、およびプロパティ
 
 
 
-3.19 Slider (Multi-Thumb)
-3.19 スライダー（複数つまみ）
+---3.19 Slider (Multi-Thumb)
+---3.19 スライダー（複数つまみ）
 
+3.20 Slider (Multi-Thumb)
+3.20 スライダー（複数つまみ）
 
 A multi-thumb slider is a slider with two or more thumbs that each set a value in a group of related values. For example, in a product search, a two-thumb slider could be used to enable users to set the minimum and maximum price limits for the search. In many two-thumb sliders, the thumbs are not allowed to pass one another, such as when the slider sets the minimum and maximum values for a range. For example, in a price range selector, the maximum value of the thumb that sets the lower end of the range is limited by the current value of the thumb that sets the upper end of the range. Conversely, the minimum value of the upper end thumb is limited by the current value of the lower end thumb. However, in some multi-thumb sliders, each thumb sets a value that does not depend on the other thumb values.
 複数つまみスライダー（multi-thumb slider）は、2つ以上のつまみがあり、それぞれが関連する値のグループに値を設定するスライダーです。 例えば、商品検索では、2つのつまみスライダーを使用して、ユーザーが検索の最小価格制限と最大価格制限を設定できるようにすることができます。 多くの2つつまみスライダーでは、スライダーが範囲の最小値と最大値を設定する場合など、つまみが互いにすれ違うことは許可されていません。 例えば、価格範囲セレクターでは、範囲の下限を設定するつまみの最大値は、範囲の上限を設定するつまみの現在の値によって制限されます。 逆に、上限のつまみの最小値は、下限のつまみの現在の値によって制限されます。 ただし、一部の複数つまみスライダーでは、各つまみが他のつまみ値に依存しない値を設定します。
@@ -3664,8 +4167,11 @@ WAI-ARIA のロール、状態、およびプロパティ
 
 
 
-3.20 Spinbutton
-3.20 スピンボタン
+---3.20 Spinbutton
+---3.20 スピンボタン
+
+3.21 Spinbutton
+3.21 スピンボタン
 
 A spinbutton is an input widget that restricts its value to a set or range of discrete values. For example, in a widget that enables users to set an alarm, a spinbutton could allow users to select a number from 0 to 59 for the minute of an hour.
 スピンボタン（spinbutton）は、その値を離散値のセットまたは範囲に制限する入力ウィジェットです。 例えば、ユーザーがアラームを設定できるウィジェットでは、スピンボタンを使用して、ユーザーが1時間の分に0から59までの数値を選択できるようにすることができます。
@@ -3682,9 +4188,11 @@ If the range is large, a spinbutton may support changing the value in both small
 Example
 例
 
-Date Picker Spin Button Example: Illustrates a date picker made from thre spin buttons for day, month, and year.
-日付ピッカーのスピンボタンの例：日、月、年のスピンボタンから作成された日付ピッカーを示しています。
+---Date Picker Spin Button Example: Illustrates a date picker made from thre spin buttons for day, month, and year.
+---日付ピッカーのスピンボタンの例：日、月、年のスピンボタンから作成された日付ピッカーを示しています。
 
+Date Picker Spin Button Example: Illustrates a date picker made from three spin buttons for day, month, and year.
+日付ピッカーのスピンボタンの例：日、月、年の3つのスピンボタンから作成された日付ピッカーを示しています。
 
 
 
@@ -3771,8 +4279,11 @@ WAI-ARIA のロール、状態、およびプロパティ
 
 
 
-3.21 Table
-3.21 テーブル
+---3.21 Table
+---3.21 テーブル
+
+3.22 Table
+3.22 テーブル
 
 Like an HTML table element, a WAI-ARIA table is a static tabular structure containing one or more rows that each contain one or more cells; it is not an interactive widget. Thus, its cells are not focusable or selectable. The grid pattern is used to make an interactive widget that has a tabular structure.
 WAI-ARIA テーブル（table）は、HTML テーブル要素と同様に、それぞれが1つ以上のセルを含む1つ以上の行を含む静的な表形式の構造であり、インタラクティブなウィジェットではありません。 したがって、そのセルはフォーカス可能または選択可能ではありません。 グリッドのパターンは、表形式の構造を持つインタラクティブなウィジェットを作成するために使用されます。
@@ -3858,8 +4369,11 @@ If rows or cells are included in a table via aria-owns, they will be presented t
 
 
 
-3.22 Tabs
-3.22 タブ
+---3.22 Tabs
+---3.22 タブ
+
+3.23 Tabs
+3.23 タブ
 
 Tabs are a set of layered sections of content, known as tab panels, that display one panel of content at a time. Each tab panel has an associated tab element, that when activated, displays the panel. The list of tab elements is arranged along one edge of the currently displayed panel, most commonly the top edge.
 タブ（tabs）は、タブパネル（tab panels）と呼ばれるコンテンツの階層化されたセクションのセットであり、一度に1つのコンテンツのパネルを表示します。 各タブパネルには関連するタブ要素があり、アクティブ化するとパネルが表示されます。 タブ要素のリストは、現在表示されているパネルの1つの端、最も一般的には上端に沿って配置されます。
@@ -3940,8 +4454,12 @@ For the tab list:
         End (Optional): Moves focus to the last tab. Optionally, activates the newly focused tab (See note below).
         End（任意）：フォーカスを最後のタブに移動します。 任意で、新しくフォーカスされたタブをアクティブ化します（以下の注を参照）。
 
-        Shift + F10: If the tab has an associated pop-up menu, opens the menu.
+---        Shift + F10: If the tab has an associated pop-up menu, opens the menu.
+---        Shift + F10：タブに関連するポップアップメニューがある場合は、メニューを開きます。
+
+        Shift + F10: If the tab has an associated popup menu, opens the menu.
         Shift + F10：タブに関連するポップアップメニューがある場合は、メニューを開きます。
+
 
         Delete (Optional): If deletion is allowed, deletes (closes) the current tab element and its associated tab panel, sets focus on the tab following the tab that was closed, and optionally activates the newly focused tab. If there is not a tab that followed the tab that was deleted, e.g., the deleted tab was the right-most tab in a left-to-right horizontal tab list, sets focus on and optionally activates the tab that preceded the deleted tab. If the application allows all tabs to be deleted, and the user deletes the last remaining tab in the tab list, the application moves focus to another element that provides a logical work flow. As an alternative to Delete, or in addition to supporting Delete, the delete function is available in a context menu.
         Delete（任意）：削除が許可されている場合、現在のタブ要素とそれに関連するタブパネルを削除（閉じ）、フォーカスを閉じられたタブに続くタブに設定し、任意で新しくフォーカスされたタブをアクティブ化します。 削除されたタブの後に続くタブがない場合（例えば、削除されたタブが左から右の水平タブリストの右端のタブであった場合）、削除されたタブの前のタブにフォーカスを設定し、任意でそのタブをアクティブ化します。 アプリケーションがすべてのタブの削除を許可し、ユーザーがタブリストの最後に残っているタブを削除した場合、アプリケーションは論理ワークフローを提供する別の要素にフォーカスを移動します。 Delete の代わりに、または Delete のサポートに加えて、削除機能をコンテキストメニューで使用できます。
@@ -3952,8 +4470,11 @@ Note
     It is recommended that tabs activate automatically when they receive focus as long as their associated tab panels are displayed without noticeable latency. This typically requires tab panel content to be preloaded. Otherwise, automatic activation slows focus movement, which significantly hampers users' ability to navigate efficiently across the tab list. For additional guidance, see § 6.4 Deciding When to Make Selection Automatically Follow Focus.
     1. 関連するタブパネルが目立った待ち時間なしで表示されている限り、タブがフォーカスを受け取ると自動的にアクティブ化することをお勧めします。 これには通常、タブパネルのコンテンツを先読みする必要があります。 そうしないと、自動アクティブ化によってフォーカスの移動が遅くなり、タブリスト間を効率的にナビゲートするユーザーの能力が大幅に妨げられます。 追加のガイダンスについては、§6.4 フォーカスに従って自動的に選択を行うかの決定を参照してください。
 
-    If the tabs in a tab list are arranged vertically:
-    2. タブリストのタブが垂直に配置されている場合：
+---    If the tabs in a tab list are arranged vertically:
+---    2. タブリストのタブが垂直に配置されている場合：
+
+    When a tab list has its aria-orientation set to vertical:
+    2. タブリストの aria-orientation が垂直（vertical）に設定されている場合：
 
         Down Arrow performs as Right Arrow is described above.
         1. 下矢印は、上記の右矢印と同様に機能します。
@@ -3992,7 +4513,10 @@ WAI-ARIA のロール、状態、およびプロパティ
     Each element with role tabpanel has the property aria-labelledby referring to its associated tab element.
     タブパネルロールを持つ各要素には、関連付けられたタブ要素を参照する aria-labelledby プロパティがあります。
 
-    If a tab element has a pop-up menu, it has the property aria-haspopup set to either menu or true.
+---    If a tab element has a pop-up menu, it has the property aria-haspopup set to either menu or true.
+---    タブ要素にポップアップメニューがある場合、aria-haspopup プロパティが menu または true に設定されています。
+
+    If a tab element has a popup menu, it has the property aria-haspopup set to either menu or true.
     タブ要素にポップアップメニューがある場合、aria-haspopup プロパティが menu または true に設定されています。
 
     If the tablist element is vertically oriented, it has the property aria-orientation set to vertical. The default value of aria-orientation for a tablist element is horizontal.
@@ -4002,8 +4526,11 @@ WAI-ARIA のロール、状態、およびプロパティ
 
 
 
-3.23 Toolbar
-3.23 ツールバー
+---3.23 Toolbar
+---3.23 ツールバー
+
+3.24 Toolbar
+3.24 ツールバー
 
 A toolbar is a container for grouping a set of controls, such as buttons, menubuttons, or checkboxes.
 ツールバー（toolbar）は、ボタン、メニューボタン、チェックボックスなどの一連のコントロールをグループ化するためのコンテナーです。
@@ -4110,8 +4637,11 @@ WAI-ARIA のロール、状態、およびプロパティ
 
 
 
-3.24 Tooltip Widget
-3.24 ツールチップウィジェット
+---3.24 Tooltip Widget
+---3.24 ツールチップウィジェット
+
+3.25 Tooltip Widget
+3.25 ツールチップウィジェット
 
 NOTE: This design pattern is work in progress; it does not yet have task force consensus. Progress and discussions are captured in issue 128.
 注：このデザインパターンは進行中のものであり、タスクフォースのコンセンサスはまだありません。 進捗状況と議論は issue 128 に記載されています。
@@ -4166,8 +4696,11 @@ WAI-ARIA のロール、状態、およびプロパティ
 
 
 
-3.25 Tree View
-3.25 ツリービュー
+---3.25 Tree View
+---3.25 ツリービュー
+
+3.26 Tree View
+3.26 ツリービュー
 
 A tree view widget presents a hierarchical list. Any item in the hierarchy may have child items, and items that have children may be expanded or collapsed to show or hide the children. For example, in a file system navigator that uses a tree view to display folders and files, an item representing a folder can be expanded to reveal the contents of the folder, which may be files, folders, or both.
 ツリービュー（tree view）ウィジェットは、階層リストを提示します。 階層内のすべての項目に子項目を含めることができ、子を持つ項目を展開または折りたたんで、子を表示または非表示にすることができます。 例えば、ツリービューを使用してフォルダーとファイルを表示するファイルシステムナビゲーターでは、フォルダーを表す項目を展開して、フォルダーの内容（ファイル、フォルダー、またはその両方）を表示できます。
@@ -4459,8 +4992,11 @@ If aria-owns is set on the tree container to include elements that are not DOM c
 
 
 
-3.26 Treegrid
-3.26 ツリーグリッド
+---3.26 Treegrid
+---3.26 ツリーグリッド
+
+3.27 Treegrid
+3.27 ツリーグリッド
 
 A treegrid widget presents a hierarchical data grid consisting of tabular information that is editable or interactive. Any row in the hierarchy may have child rows, and rows with children may be expanded or collapsed to show or hide the children. For example, in a treegrid used to display messages and message responses for a e-mail discussion list, messages with responses would be in rows that can be expanded to reveal the response messages.
 ツリーグリッド（treegrid）ウィジェットは、編集可能またはインタラクティブな表形式の情報で構成される階層データグリッドを提示します。 階層内のどの行も子行を持つことができ、子のある行は、子を表示または非表示にするために展開または折りたたむことができます。 例えば、電子メールディスカッションリストのメッセージとメッセージの応答を表示するために使用されるツリーグリッドでは、応答のあるメッセージは、応答メッセージを表示するために展開できる行になります。
@@ -4758,8 +5294,11 @@ Note
 
 
 
-3.27 Window Splitter
-3.27 ウィンドウスプリッター
+---3.27 Window Splitter
+---3.27 ウィンドウスプリッター
+
+3.28 Window Splitter
+3.28 ウィンドウスプリッター
 
 NOTE: ARIA 1.1 introduced changes to the separator role so it behaves as a widget when focusable. While this pattern has been revised to match the ARIA 1.1 specification, the task force will not complete its review until a functional example that matches the ARIA 1.1 specification is complete. Progress on this pattern is tracked by issue 129.
 注：ARIA 1.1 では、区切り（separator、セパレーター）ロールに変更が加えられたため、フォーカス可能な場合はウィジェットとして振る舞います。 このパターンは ARIA 1.1 仕様に一致するように改訂されていますが、タスクフォースは ARIA 1.1 仕様に一致する機能例が完了するまでレビューを完了しません。 このパターンの進捗状況は、issue 129 によって追跡されます。
@@ -4990,8 +5529,11 @@ HTML の手法
     The HTML header element defines a banner landmark when its context is the body element.
     HTML ヘッダー（header）要素は、コンテキストがボディ要素である場合にバナーランドマークを定義します。
 
-    The HTML header element is not considered a banner landmark when it is descendant of any of following elements (see HTML Accessibility Mappings [HTML-AAM]):
-    HTML ヘッダー要素は、次の要素のいずれかの子孫である場合、バナーランドマークとは見なされません（HTML アクセシビリティマッピング [HTML-AAM] を参照）。 
+---    The HTML header element is not considered a banner landmark when it is descendant of any of following elements (see HTML Accessibility Mappings [HTML-AAM]):
+---    HTML ヘッダー要素は、次の要素のいずれかの子孫である場合、バナーランドマークとは見なされません（HTML アクセシビリティマッピング [HTML-AAM] を参照）。 
+
+    The HTML header element is not considered a banner landmark when it is descendant of any of following elements (see HTML Accessibility Mappings [HTML-AAM-1.0]):
+    HTML ヘッダー要素は、次の要素のいずれかの子孫である場合、バナーランドマークとは見なされません（HTML アクセシビリティマッピング [HTML-AAM-1.0] を参照）。 
 
         article
         記事（article）
@@ -5101,8 +5643,11 @@ HTML の手法
     The HTML footer element defines a contentinfo landmark when its context is the body element.
     HTML フッター（footer）要素は、コンテキストがボディ要素である場合にコンテンツ情報ランドマークを定義します。
 
-    The HTML footer element is not considered a contentinfo landmark when it is descendant of any of following elements (see HTML Accessibility Mappings [HTML-AAM]):
-    HTML フッター要素は、次の要素のいずれかの子孫である場合、コンテンツ情報ランドマークとは見なされません（HTML アクセシビリティマッピング [HTML-AAM] を参照）。 
+---    The HTML footer element is not considered a contentinfo landmark when it is descendant of any of following elements (see HTML Accessibility Mappings [HTML-AAM]):
+---    HTML フッター要素は、次の要素のいずれかの子孫である場合、コンテンツ情報ランドマークとは見なされません（HTML アクセシビリティマッピング [HTML-AAM] を参照）。 
+
+    The HTML footer element is not considered a contentinfo landmark when it is descendant of any of following elements (see HTML Accessibility Mappings [HTML-AAM-1.0]):
+    HTML フッター要素は、次の要素のいずれかの子孫である場合、コンテンツ情報ランドマークとは見なされません（HTML アクセシビリティマッピング [HTML-AAM-1.0] を参照）。 
 
         article
         記事（article）
@@ -6027,8 +6572,11 @@ Necessity of Naming
         Required Only If Content Insufficient: An element with this role is named by its descendant content. If aria-label or aria-labelledby is applied, content contained in the element and its descendants is hidden from assistive technology users unless it is also referenced by aria-labelledby. Avoid hiding descendant content except in the rare circumstances where doing so benefits assistive technology users.
         コンテンツが不十分な場合にのみ必要：このロールを持つ要素は、その子孫コンテンツによって名前が付けられます。 aria-label または aria-labelledby が適用される場合、要素とその子孫に含まれるコンテンツは、aria-labelledby によっても参照されない限り、支援技術のユーザーから隠されます。 支援技術のユーザーに利益をもたらすまれな状況を除いて、子孫コンテンツを非表示にしないでください。
 
-        Required: The ARIA specification requires authors to provide a name; a missing name triggers accessibility validators to flag a violation.
-        必須：ARIA 仕様では、作成者が名前を指定する必要があります。 名前が欠落していると、アクセシビリティのバリデーターがトリガーされて違反にフラグが付けられます。
+---        Required: The ARIA specification requires authors to provide a name; a missing name triggers accessibility validators to flag a violation.
+---        必須：ARIA 仕様では、作成者が名前を指定する必要があります。 名前が欠落していると、アクセシビリティのバリデーターがトリガーされて違反にフラグが付けられます。
+
+        Required: The ARIA specification requires authors to provide a name; a missing name causes accessibility validators to report an error.
+        必須：ARIA 仕様では、作成者が名前を指定する必要があります。 名前が欠落していると、アクセシビリティのバリデーターがエラーを報告します。
 
         Recommended: Providing a name is strongly recommended.
         推奨：名前を指定することを強くお勧めします。
@@ -6038,6 +6586,9 @@ Necessity of Naming
 
         Do Not Name: Naming is strongly discouraged even if it is technically permitted; often assistive technologies do not render a name even if provided.
         名前を付けないでください：技術的に許可されている場合でも、命名することは強くお勧めしません。 多くの場合、支援技術は提供されても名前をレンダリングしません。
+
+        Prohibited: The ARIA specification does not permit the element to be named; If a name is specified, accessibility validators will report an error.
+        禁止：ARIA 仕様では、要素に名前を付けることは許可されていません。 名前が指定されている場合、アクセシビリティのバリデーターはエラーを報告します。
 
 
 Guidance:
@@ -6085,6 +6636,9 @@ banner 	Discretionary
     See the Banner Landmark section.
     バナーランドマークのセクションを参照してください。
 
+blockquote 	Discretionary 	If a visible label is present, associating it with the blockquote by using aria-labelledby could benefit some assistive technology users.
+ブロック引用（blockquote） 	任意 	可視ラベルが存在する場合、aria-labelledby を使用してそれをブロック引用に関連付けると、一部の支援技術ユーザーにメリットがあります。
+
 
 button 	Required Only If Content Insufficient 	
 ボタン（button） 	コンテンツが不十分な場合にのみ必要
@@ -6094,6 +6648,10 @@ button 	Required Only If Content Insufficient
 
     Ideally named by visible, descendant content.
     理想的には、可視の子孫コンテンツによって名前を付けます。
+
+
+caption 	Prohibited 	
+キャプション（caption） 	禁止
 
 
 cell 	Required Only If Content Insufficient 	
@@ -6123,6 +6681,10 @@ checkbox 	Required Only If Content Insufficient
 
     Otherwise, reference visible content via aria-labelledby.
     それ以外の場合、aria-labelledby を介して可視コンテンツを参照してください。
+
+
+code 	Prohibited 	
+コード（code） 	禁止
 
 
 columnheader 	Required Only If Content Insufficient 	
@@ -6181,6 +6743,10 @@ definition 	Recommended 	Reference the term being defined with role="term", usin
 定義（definition） 	推奨 	aria-labelledby を使用して、role="term" で定義されている用語を参照します。
 
 
+deletion 	Prohibited 	
+削除部分（deletion） 	禁止
+
+
 dialog 	Required 	Use aria-labelledby if a visible label is present, otherwise use aria-label.
 ダイアログ（dialog） 	必須 	可視ラベルが存在する場合は aria-labelledby を使用し、それ以外の場合は aria-label を使用します。
 
@@ -6197,6 +6763,10 @@ directory 	Discretionary
 
 document 	Discretionary 	Elements with the document role are contained within an element with the application role, which is required to have a name. Typically, the name of the application element will provide sufficient context and identity for the document element. Because the application element is used only to create unusual, custom widgets, careful assessment is necessary to determine whether or not adding an accessible name is beneficial.
 文書（document） 	裁量 	文書ロールを持つ要素は、アプリケーションロールを持つ要素内に含まれています。 アプリケーションロールには名前が必要です。 通常、アプリケーション要素の名前は、文書要素に十分なコンテキストと身元を提供します。 アプリケーション要素は通常とは異なるカスタムウィジェットを作成するためにのみ使用されるため、アクセス可能な名前を追加することが有益かどうかを判断するには、慎重な評価が必要です。
+
+
+emphasis 	Prohibited 	
+強調（emphasis） 	禁止
 
 
 feed 	Recommended 	
@@ -6236,6 +6806,10 @@ form 	Recommended
 
     See the Form Landmark section.
     フォームランドマークのセクションを参照してください。
+
+
+generic 	Prohibited 	
+一般的（generic） 	禁止
 
 
 grid 	Required 	
@@ -6290,6 +6864,10 @@ heading 	Required Only If Content Insufficient
     理想的には、可視の子孫コンテンツによって名前を付けます。
 
 
+insertion 	Prohibited 	
+挿入部分（insertion） 	禁止
+
+
 img 	Required 	For the HTML img element, use the alt attribute. For other elements with the img role, use aria-labelledby or aria-label.
 画像（img） 	必須 	HTML 画像要素には、alt 属性を使用します。 画像ロールを持つ他の要素については、aria-labelledby または aria-label を使用してください。
 
@@ -6333,12 +6911,18 @@ listbox 	Required
     リストボックスのデザインパターンを参照してください。
 
 
-listitem 	Do Not Name 	Not supported by assistive technologies; it is necessary to include relevant content within the list item.
-リスト項目（listitem） 	名前を付けないでください 	支援技術ではサポートされていません。 リスト項目に関連するコンテンツを含める必要があります。
+---listitem 	Do Not Name 	Not supported by assistive technologies; it is necessary to include relevant content within the list item.
+---リスト項目（listitem） 	名前を付けないでください 	支援技術ではサポートされていません。 リスト項目に関連するコンテンツを含める必要があります。
+
+listitem 	Do Not Name 	Naming is not supported by assistive technologies; it is necessary to include relevant content within the list item.
+リスト項目（listitem） 	名前を付けないでください 	命名は支援技術ではサポートされていません。 リスト項目に関連するコンテンツを含める必要があります。
 
 
-log 	Required 	Use aria-labelledby if a visible label is present, otherwise use aria-label.
-ログ（log） 	必須 	可視ラベルが存在する場合は aria-labelledby を使用し、それ以外の場合は aria-label を使用します。
+---log 	Required 	Use aria-labelledby if a visible label is present, otherwise use aria-label.
+---ログ（log） 	必須 	可視ラベルが存在する場合は aria-labelledby を使用し、それ以外の場合は aria-label を使用します。
+
+log 	Discretionary 	Some screen readers announce the name of a log element before announcing the content of the log element. Thus, aria-label provides a method for prefacing the visible content of a log element with text that is not displayed as part of the log element. Using aria-label is functionally equivalent to providing off-screen text in the contents of the log element, except off-screen text would be announced by screen readers that do not support aria-label on log elements.
+ログ（log） 	裁量 	一部のスクリーンリーダーは、ログ要素のコンテンツをアナウンスする前に、ログ要素の名前をアナウンスします。 したがって、aria-label は、ログ要素の可視コンテンツの前に、ログ要素の一部として表示されないテキストを表示する方法を提供します。 aria-label の使用は、ログ要素の aria-label をサポートしないスクリーンリーダーによってオフスクリーンテキストがアナウンスされることを除いて、ログ要素のコンテンツにオフスクリーンテキストを提供することと機能的に同等です。
 
 
 main 	Discretionary 	
@@ -6439,6 +7023,20 @@ menuitemradio 	Required Only If Content Insufficient
     メニューまたはメニューバーのデザインパターンを参照してください。 
 
 
+meter 	Required 	
+メーター（meter） 	必須
+
+    If based on an HTML meter element, can be named with an HTML label element.
+    HTML メーター要素に基づく場合は、HTML ラベル要素を使用して名前を付けることができます。
+
+    Otherwise use aria-labelledby if a visible label is present.
+    それ以外の場合、可視ラベルが存在する場合は aria-labelledby を使用します。
+
+    Use aria-label if a visible label is not present.
+    可視ラベルが存在しない場合は、aria-label を使用してください。 
+
+
+
 navigation 	Recommended 	
 ナビゲーション（navigation） 	推奨
 
@@ -6452,8 +7050,12 @@ navigation 	Recommended
     ナビゲーションランドマークのセクションを参照してください。
 
 
-none 	Do Not Name 	An element with role="none" is not part of the accessibility tree (except in error cases). Do not use aria-labelledby or aria-label.
-none 	名前を付けないでください 	role="none" の要素は、アクセシビリティツリーの一部ではありません（エラーの場合を除く）。 aria-labelledby または aria-label は使用しないでください。
+---none 	Do Not Name 	An element with role="none" is not part of the accessibility tree (except in error cases). Do not use aria-labelledby or aria-label.
+---none 	名前を付けないでください 	role="none" の要素は、アクセシビリティツリーの一部ではありません（エラーの場合を除く）。 aria-labelledby または aria-label は使用しないでください。
+
+
+none 	Prohibited 	An element with role="none" is not part of the accessibility tree (except in error cases). Do not use aria-labelledby or aria-label.
+none 	禁止 	role="none" の要素は、アクセシビリティツリーの一部ではありません（エラーの場合を除く）。 aria-labelledby または aria-label は使用しないでください。
 
 
 note 	Discretionary 	
@@ -6475,12 +7077,22 @@ option 	Required Only If Content Insufficient
     Ideally named by visible, descendant content.
     理想的には、可視の子孫コンテンツによって名前を付けます。
 
-    See the Combo Box Design Pattern.
+---    See the Combo Box Design Pattern.
+---    コンボボックスのデザインパターンを参照してください。
+
+    See the Combobox Design Pattern.
     コンボボックスのデザインパターンを参照してください。
 
 
-presentation 	Do Not Name 	An element with role="presentation" is not part of the accessibility tree (except in error cases). Do not use aria-labelledby or aria-label.
-プレゼンテーション（presentation） 	名前を付けないでください 	role="presentation" の要素は、アクセシビリティツリーの一部ではありません（エラーの場合を除く）。 aria-labelledby または aria-label は使用しないでください。
+paragraph 	Prohibited 	
+段落（paragraph） 	禁止
+
+
+---presentation 	Do Not Name 	An element with role="presentation" is not part of the accessibility tree (except in error cases). Do not use aria-labelledby or aria-label.
+---プレゼンテーション（presentation） 	名前を付けないでください 	role="presentation" の要素は、アクセシビリティツリーの一部ではありません（エラーの場合を除く）。 aria-labelledby または aria-label は使用しないでください。
+
+presentation 	Prohibited 	An element with role="presentation" is not part of the accessibility tree (except in error cases). Do not use aria-labelledby or aria-label.
+プレゼンテーション（presentation） 	禁止 	role="presentation" の要素は、アクセシビリティツリーの一部ではありません（エラーの場合を除く）。 aria-labelledby または aria-label は使用しないでください。
 
 
 progressbar 	Required 	
@@ -6539,8 +7151,11 @@ row 	Required Only If Content Insufficient AND descendant of a treegrid AND the 
 行（row） 	コンテンツが不十分で、ツリーグリッドの子孫であり、行がフォーカス可能である場合にのみ必要 	行要素がツリーグリッドでフォーカス可能である場合、スクリーンリーダーは、行ごとにナビゲートするときに行の内容全体をアナウンスします。 これは通常、最も適切な振る舞いです。 ただし、状況によっては、aria-labelledby を使用してアナウンスするセルを指定することにより、セルがアナウンスされる順序を変更したり、特定のセルのアナウンスを除外したりすることが有益な場合があります。
 
 
-rowgroup 	Do Not Name 	Not supported by assistive technologies.
-行グループ（rowgroup） 	名前を付けないでください 	支援技術ではサポートされていません。
+---rowgroup 	Do Not Name 	Not supported by assistive technologies.
+---行グループ（rowgroup） 	名前を付けないでください 	支援技術ではサポートされていません。
+
+rowgroup 	Do Not Name 	Naming is not supported by assistive technologies.
+行グループ（rowgroup） 	名前を付けないでください 	命名は支援技術ではサポートされていません。
 
 
 rowheader 	Required Only If Content Insufficient 	
@@ -6641,6 +7256,18 @@ status 	Discretionary 	Some screen readers announce the name of a status element
 ステータス（status） 	裁量 	一部のスクリーンリーダーは、ステータス要素の内容をアナウンスする前に、ステータス要素の名前をアナウンスします。 したがって、aria-label は、ステータス要素の可視コンテンツの前に、ステータス要素の一部として表示されないテキストを表示する方法を提供します。 aria-label を使用することは、ステータス要素のコンテンツにオフスクリーンテキストを提供することと機能的に同等です。 ただし、オフスクリーンテキストは、ステータス要素で aria-label をサポートしないスクリーンリーダーによってアナウンスされます。
 
 
+strong 	Prohibited 	
+強い重要性（strong） 	禁止
+
+
+subscript 	Prohibited 	
+下付き文字（subscript） 	禁止
+
+
+superscript 	Prohibited 	
+上付き文字（superscript） 	禁止 
+
+
 switch 	Required Only If Content Insufficient 	
 スイッチ（switch） 	コンテンツが不十分な場合にのみ必要
 
@@ -6720,8 +7347,15 @@ textbox 	Required
     可視ラベルが存在しない場合は、aria-label を使用してください。
 
 
-timer 	Required 	Use aria-labelledby if a visible label is present, otherwise use aria-label.
-タイマー（timer） 	必須 	可視ラベルが存在する場合は aria-labelledby を使用し、それ以外の場合は aria-label を使用します。
+time 	Do Not Name 	Naming is not supported by assistive technologies.
+時刻（time） 	名前を付けないでください 	命名は支援技術ではサポートされていません。 
+
+
+---timer 	Required 	Use aria-labelledby if a visible label is present, otherwise use aria-label.
+---タイマー（timer） 	必須 	可視ラベルが存在する場合は aria-labelledby を使用し、それ以外の場合は aria-label を使用します。
+
+timer 	Discretionary 	Some screen readers announce the name of a timer element before announcing the content of the timer element. Thus, aria-label provides a method for prefacing the visible content of a timer element with text that is not displayed as part of the timer element. Using aria-label is functionally equivalent to providing off-screen text in the contents of the timer element, except off-screen text would be announced by screen readers that do not support aria-label on timer elements.
+タイマー（timer） 	裁量 	一部のスクリーンリーダーは、タイマー要素のコンテンツをアナウンスする前に、タイマー要素の名前をアナウンスします。 したがって、aria-label は、タイマー要素の可視コンテンツの前に、タイマー要素の一部として表示されないテキストを表示する方法を提供します。 aria-label を使用することは、タイマー要素のコンテンツにオフスクリーンテキストを提供することと機能的に同等です。 ただし、オフスクリーンテキストは、タイマー要素で aria-label をサポートしないスクリーンリーダーによってアナウンスされます。
 
 
 toolbar 	Recommended 	
@@ -8882,8 +9516,11 @@ The roles that require all children to be presentational are:
     img
     画像（img）
 
-    math
-    数学（math）
+---    math
+---    数学（math）
+
+    meter
+    メーター（meter）
 
     menuitemcheckbox
     メニュー項目チェックボックス（menuitemcheckbox）
@@ -8938,6 +9575,155 @@ See the section about role presentation for a detailed explanation of what it do
 
 
 
+
+10. Structural Roles
+10. 構造的なロール
+
+ARIA provides a set of roles that convey the accessibility semantics of structures on a page. These roles express the meaning that is conveyed by the layout and appearance of elements that organize and structure content, such as headings, lists, and tables.
+ARIA は、ページ上の構造のアクセシビリティの意味論を伝える一連のロールを提供します。 これらのロールは、見出し、リスト、テーブルなど、コンテンツを整理して構造化する要素のレイアウトと外観によって伝えられる意味を表します。
+
+some host languages, such as HTML, include elements that express the same semantics as an ARIA role. For instance, the HTML <p> element is mapped to accessibility APIs in exactly the same way as <div role="paragraph">. The ARIA and HTML specifications refer to this mapping of HTML elements to ARIA attributes as implied semantics, i.e., the implied ARIA role of the HTML <p> element is paragraph.
+HTML などの一部のホスト言語には、ARIA ロールと同じ意味論を表す要素が含まれています。 例えば、HTML の <p> 要素は、<div role="paragraph"> とまったく同じ方法でアクセシビリティ API にマップされます。 ARIA 仕様および HTML 仕様では、この HTML 要素の ARIA 属性へのマッピングを暗黙の意味論として参照しています。 つまり、HTML <p> 要素の暗黙の ARIA ロールは段落（paragraph）です。
+
+When developing HTML, it is important to use native HTML elements where ever possible. Do not use an ARIA role or property if it is possible to use an HTML element that has equivalent semantics. Circumstances where it is appropriate to use ARIA attributes instead of equivalent HTML are:
+HTML で開発するときは、可能な限りネイティブな HTML 要素を使用することが重要です。 同等の意味論を持つ HTML 要素を使用できる場合は、ARIA のロールやプロパティを使用しないでください。 同等の HTML の代わりに ARIA 属性を使用することが適切な状況は次のとおりです。
+
+    When the HTML element cannot be styled in a way that meets visual design requirements.
+    HTML 要素を視覚的なデザイン要件を満たすようにスタイル設定できない場合。
+
+    When testing reveals that browsers or assistive technologies +++not +++provide better support for the ARIA equivalent.
+    テストの結果、ブラウザーまたは支援技術が ARIA と同等のサポートを提供していないことが明らかになった場合。
+
+    When remediating or retrofitting legacy content and altering the underlying DOM to use the HTML would be cost prohibitive.
+    レガシーコンテンツを修正または改良し、HTML を使用するように基盤となる DOM を変更すると、法外なコストがかかる場合。
+
+    When building a web component to compose a custom element and the element being extended does not convey the appropriate or sufficient accessibility semantics.
+    カスタム要素を構成するウェブコンポーネントを構築し、拡張される要素が適切または十分なアクセシビリティの意味論を伝えない場合。
+
+The following table lists all structural roles defined in ARIA 1.2.
+次の表に、ARIA 1.2 で定義されているすべての構造的なロールを示します。
+
+
+ARIA structural roles ARIA Role 	HTML Equivalent
+ARIA の構造的なロール ARIA ロール 	同等な HTML
+
+application	No equivalent element
+アプリケーション（application）	同等の要素はありません
+
+article	article
+記事（article）	article
+
+blockquote	blockquote
+ブロック引用（blockquote）	blockquote
+
+caption	caption
+キャプション（caption）	caption
+
+cell	td
+セル（cell）	テーブルデータセル（td）
+
+code	code
+コード（code）	code
+
+columnheader	th
+列ヘッダー（columnheader）	テーブルヘッダーセル（th）
+
+definition	dd
+定義（definition）	説明の詳細（dd）
+
+deletion	del
+削除部分（deletion）	del
+
+directory	No equivalent element
+ディレクトリー（directory）	同等の要素はありません
+
+document	No equivalent element
+文書（document）	同等の要素はありません
+
+emphasis	em
+強調（emphasis）	em
+
+feed	No equivalent element
+フィード（feed）	同等の要素はありません
+
+figure	figure
+図（figure）	figure
+
+generic	div, span
+一般的（generic）	div、span
+
+group	No equivalent element
+グループ（group）	同等の要素はありません
+
+heading with aria-level="N" where N is 1, 2, 3, 4, 5, or 6	h1, h2, h3, h4, h5, h6
+見出し（heading。 aria-level="N" を含み、N が 1、2、3、4、5、6）	h1、h2、h3、h4、h5、h6
+
+insertion	ins
+挿入部分（insertion）	ins
+
+img	img
+画像（img）	img
+
+list	ul, ol
+リスト（list）	順序なしリスト（ul）、順序付きリスト（ol）
+
+listitem	li
+リスト項目（listitem）	li
+
+math	No equivalent element
+数学（math）	同等の要素はありません
+
+none	No equivalent element
+none	同等の要素はありません
+
+note	No equivalent element
+メモ（note）	同等の要素はありません
+
+presentation	No equivalent element
+プレゼンテーション（presentation）	同等の要素はありません
+
+paragraph	p
+段落（paragraph）	p
+
+row	tr
+行（row）	テーブル行（tr）
+
+rowgroup	tbody, thead, tfoot
+行グループ（rowgroup）	テーブルボディ（tbody）、テーブルヘッダー（thead）、テーブルフッター（tfoot）
+
+rowheader	th
+行ヘッダー（rowheader）	テーブルヘッダーセル（th）
+
+separator (when not focusable)	hr
+区切り（separator。 フォーカス不可能のとき）	主題分割（hr）
+
+strong	strong
+強い重要性（strong）	strong
+
+subscript	sub
+下付き文字（subscript）	sub
+
+superscript	sup
+上付き文字（superscript）	sup
+
+table	table
+テーブル（table）	table
+
+term	dfn
+用語（term）	定義（dfn）
+
+time	time
+時刻（time）	time
+
+toolbar	No equivalent element
+ツールバー（toolbar）	同等の要素はありません
+
+tooltip	No equivalent element
+ツールチップ（tooltip）	同等の要素はありません
+
+
+
+
 A. Indexes
 A. インデックス
 
@@ -8956,8 +9742,79 @@ B. 変更履歴
 
 
 
-B.1 Changes in July 2019 Publication of Note Release 4
-B.1 2019年7月のノートリリース4の発行における変更
+
+B.1 Changes in November 2019 publication of the 3rd working draft of version 1.2
+B.1 バージョン1.2の3番目のワーキングドラフトの2019年11月の公開における変更
+
+APG 1.1 supported ARIA 1.1, and this version, APG 1.2, supports ARIA 1.2. The following changes have been made to APG 1.1 in order to make this draft of APG 1.2.
+APG 1.1 は ARIA 1.1 をサポートし、このバージョンの APG 1.2 は ARIA 1.2 をサポートします。 この APG 1.2 のドラフトを作成するために、APG 1.1 に次の変更が加えられました。
+
+    Added section to provide guidance related to 38 document structure roles, 18 of which are new in ARIA 1.2.
+    38 の文書構造ロールに関連するガイダンスを提供するセクションを追加しました。 そのうち 18 は ARIA 1.2 の新機能です。
+
+    Revised guidance for roles where naming requirements changed in ARIA 1.2. ARIA 1.2 prohibits names on some roles. ARIA 1.2 removed naming requirements from some other roles.
+    ARIA 1.2 で命名要件が変更されたロールのガイダンスを改訂。 ARIA 1.2 は、一部のロールの命名を禁止しています。 ARIA 1.2 は、他のいくつかのロールから命名要件を削除しました。
+
+    Added naming guidance for 18 roles that are new in ARIA 1.2.
+    ARIA 1.2 で新しく追加された 18 のロールの命名ガイダンスを追加しました。
+
+    Revised the combobox pattern and 4 combobox examples to reflect changes made in ARIA 1.2.
+    ARIA 1.2 で行われた変更を反映するために、コンボボックスパターンと4つのコンボボックスの例を改訂しました。
+
+    Added a design pattern and example implementation of the new meter role.
+    新しいメーターロールのデザインパターンと実装例を追加しました。
+
+    Added a new listbox example that illustrates new ARIA 1.2 support for named groups of options in a listbox.
+    リストボックス内のオプションの名前付きグループに対する新しい ARIA 1.2 サポートを示す新しいリストボックスの例を追加しました。
+
+    Revised the editor menubar example to illustrate new ARIA 1.2 support for named groups of items in a menu.
+    メニュー内の項目の名前付きグループに対する新しい ARIA 1.2 のサポートを示すために、エディターのメニューバーの例を改訂しました。
+
+    Added a button example that illustrates use of the new ARIA 1.2 IDL interface.
+    新しい ARIA 1.2 IDL インターフェイスの使用法を示すボタンの例を追加しました。
+
+    Due to change in ARIA 1.2, removed Math role from list of roles that have presentational children.
+    ARIA 1.2 での変更により、プレゼンテーション化した子を持つロールのリストから数学ロールが削除されました。
+
+    In response to feedback, revise description of Escape behavior in the combobox Pattern.
+    フィードバックに応じて、コンボボックスのパターンの Escape の振る舞いの説明を修正しました。
+
+    Corrected color contrast in accordion and date picker examples.
+    アコーディオンの例と日付ピッカーの例の色のコントラストを修正しました。
+
+    Fixed 4 bugs in the date picker dialog example.
+    日付ピッカーダイアログの例の4つのバグを修正しました。
+
+    Fixed 2 bugs in the spin button date picker example related to incrementing past limits.
+    過去の制限の増分に関連するスピンボタンの日付ピッカーの例の2つのバグを修正しました。
+
+    Changed all Examples with buttons to add button type to non-submit buttons.
+    ボタンのあるすべての例を変更して、非送信ボタンにボタンタイプを追加しました。
+
+    Changed tabs examples to hide panels with display: none instead of the hidden attribute.
+    タブの例で、パネルを hidden 属性ではなく display: none で非表示にするように変更しました。
+
+
+For more detail, see:
+詳細については、以下を参照してください。
+
+    APG 1.2 Working Draft 3 Milestone: Github issues closed in the third working draft of APG 1.2 published in November 2019.
+    APG 1.2 ワーキングドラフト3マイルストーン：Github issues は、2019年11月に公開された APG 1.2 の3番目のワーキングドラフトでクローズされました。
+
+    APG 1.2 Working Draft 1 milestone: GitHub issues closed in the first working draft of APG 1.2 published on July 17, 2018.
+    APG 1.2 ワーキングドラフト1マイルストーン：GitHub issues は、2018年7月17日に公開された APG 1.2 の最初のワーキングドラフトでクローズされました。
+
+    Detailed change log with links to all commits in the November 2019 publication of APG 1.2 that are not in the August 14, 2019 publication of APG 1.1 release 4.
+    APG 1.1 リリース4の2019年8月14日発行にはない APG 1.2 の2019年11月発行のすべてのコミットへのリンクを含む詳細な変更ログ。
+
+
+
+
+---B.1 Changes in July 2019 Publication of Note Release 4
+---B.1 2019年7月のノートリリース4の発行における変更
+
+B.2 Changes in July 2019 Publication of APG 1.1 Release 4
+B.2 2019年7月の APG 1.1 リリース4の発行における変更
 
     Major additions and revisions:
     主な追加と改訂：
@@ -9002,8 +9859,11 @@ Also see:
 
 
 
-B.2 Changes in January 2019 Publication of Note Release 3
-B.2 2019年1月のノートリリース3の発行における変更
+---B.2 Changes in January 2019 Publication of Note Release 3
+---B.2 2019年1月のノートリリース3の発行における変更
+
+B.3 Changes in January 2019 Publication of APG 1.1 Release 3
+B.3 2019年1月の APG 1.1 リリース3の発行における変更
 
     Major additions and revisions:
     主な追加と改訂：
@@ -9072,8 +9932,11 @@ Also see:
 
 
 
-B.3 Changes in July 2018 Publication of Note Release 2
-B.3 2018年7月のノートリリース2の発行における変更
+---B.3 Changes in July 2018 Publication of Note Release 2
+---B.3 2018年7月のノートリリース2の発行における変更
+
+B.4 Changes in July 2018 Publication of APG 1.1 Release 2
+B.4 2018年7月の APG 1.1 リリース2の発行における変更
 
     Added the following:
     以下を追加しました：
@@ -9145,8 +10008,12 @@ Also see:
 
 
 
-B.4 Changes in December 2017 Publication as Note
-B.4 2017年12月のノートとしての発行における変更
+---B.4 Changes in December 2017 Publication as Note
+---B.4 2017年12月のノートとしての発行における変更
+
+B.5 Changes in December 2017 Publication of APG 1.1 Release 1
+B.5 2017年12月の APG 1.1 リリース1の発行おける変更
+
 
     Added the following:
     以下を追加しました：
@@ -9251,8 +10118,11 @@ Also see:
 
 
 
-B.5 Changes in June 2017 Working Draft
-B.5 2017年6月のワーキングドラフトにおける変更
+---B.5 Changes in June 2017 Working Draft
+---B.5 2017年6月のワーキングドラフトにおける変更
+
+B.6 Changes in June 2017 APG 1.1 Working Draft
+B.6 2017年6月の APG 1.1 ワーキングドラフトにおける変更
 
     Added the following:
     以下を追加しました：
@@ -9378,10 +10248,11 @@ WAI-ARIA の著作の実践 1.1 は、著作の実践のタスクフォース全
     Valerie Young of Bocoup and her sponsor, Facebook, for development of the example test framework and regressions tests for more than 50 examples.
     Bocoup の Valerie Young と彼女のスポンサーである Facebook は、50を超える例のテストフレームワークと回帰テストの例を開発してくれました。
 
-    Simon Pieters of Bocoup and his sponsor, Facebook, for authoring of significant guidance sections, including comprehensive treatement of the topic of accessible names and descriptions.
+---    Simon Pieters of Bocoup and his sponsor, Facebook, for authoring of significant guidance sections, including comprehensive treatement of the topic of accessible names and descriptions.
+---    Bocoup の Simon Pieters と彼のスポンサーである Facebook は、アクセス可能な名前と説明のトピックの包括的な取り扱いを含む、重要なガイダンスのセクションを作成してくれました。
+
+    Simon Pieters of Bocoup and his sponsor, Facebook, for authoring of significant guidance sections, including comprehensive treatment of the topic of accessible names and descriptions.
     Bocoup の Simon Pieters と彼のスポンサーである Facebook は、アクセス可能な名前と説明のトピックの包括的な取り扱いを含む、重要なガイダンスのセクションを作成してくれました。
-
-
 
 
 
@@ -9516,7 +10387,9 @@ D.1 参考資料
 
     HTML Standard. Anne van Kesteren; Domenic Denicola; Ian Hickson; Philip Jägenstedt; Simon Pieters. WHATWG. Living Standard. URL: https://html.spec.whatwg.org/multipage/
 
-[HTML-AAM]
+---[HTML-AAM]
+
+[HTML-AAM-1.0]
 
     HTML Accessibility API Mappings 1.0. Steve Faulkner; Alexander Surkov; Scott O'Hara; Bogdan Brinza; Jason Kiss; Cynthia Shelly. W3C. 10 July 2019. W3C Working Draft. URL: https://www.w3.org/TR/html-aam-1.0/
 
@@ -9530,6 +10403,12 @@ D.1 参考資料
 
 [WAI-ARIA]
 
-    Accessible Rich Internet Applications (WAI-ARIA) 1.1. Joanmarie Diggs; Shane McCarron; Michael Cooper; Richard Schwerdtfeger; James Craig. W3C. 14 December 2017. W3C Recommendation. URL: https://www.w3.org/TR/wai-aria-1.1/
+---    Accessible Rich Internet Applications (WAI-ARIA) 1.1. Joanmarie Diggs; Shane McCarron; Michael Cooper; Richard Schwerdtfeger; James Craig. W3C. 14 December 2017. W3C Recommendation. URL: https://www.w3.org/TR/wai-aria-1.1/
+
+    Accessible Rich Internet Applications (WAI-ARIA) 1.0. James Craig; Michael Cooper et al. W3C. 20 March 2014. W3C Recommendation. URL: https://www.w3.org/TR/wai-aria/
+
+[WAI-ARIA-1.2]
+
+    Accessible Rich Internet Applications (WAI-ARIA) 1.2. Joanmarie Diggs; Shane McCarron; James Nurthen; Michael Cooper; Richard Schwerdtfeger; James Craig. W3C. 18 December 2018. W3C Working Draft. URL: https://www.w3.org/TR/wai-aria-1.2/
 
 ↑
