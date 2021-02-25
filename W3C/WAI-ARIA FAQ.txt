@@ -1,0 +1,255 @@
+https://www.w3.org/WAI/ARIA/faq
+
+WAI-ARIA FAQ
+
+Here are answers to some frequently asked questions (FAQ) about WAI-ARIA, the Accessible Rich Internet Applications Suite. When we add significant information to this page, we'll send an e-mail to the WAI IG list and an update to the WAI Highlights RSS feed to let you know. ~Shawn Henry, W3C WAI, updated 20 March 2014
+アクセス可能なリッチインターネットアプリケーション（Accessible Rich Internet Applications）のスイートである WAI-ARIA に関するよくある質問（FAQ）への回答を以下に示します。 このページに重要な情報を追加すると、WAI IG リストに電子メールを送信し、WAI ハイライト RSS フィードを更新してお知らせします。 〜Shawn Henry、W3C WAI、2014年3月20日更新
+
+    Where can I learn about WAI-ARIA?
+    WAI-ARIA についてどこで学ぶことができますか？
+
+    What is the current status of WAI-ARIA development?
+    WAI-ARIA 開発の現状は？
+
+    Is WAI-ARIA supported in browsers, assistive technologies, and other user agents?
+    WAI-ARIA は、ブラウザー、支援技術、およびその他のユーザーエージェントでサポートされていますか？
+
+    What happens in older browsers when WAI-ARIA is implemented?
+    WAI-ARIA を実装すると、古いブラウザーではどうなりますか？
+
+    Are there JavaScript toolkits that provide built-in WAI-ARIA support?
+    組み込みの WAI-ARIA サポートを提供する JavaScript ツールキットはありますか？
+
+    As a Web content developer, what should I do with WAI-ARIA now?
+    ウェブコンテンツ開発者として、WAI-ARIA を今どうしたらいいですか？
+
+    Does WAI-ARIA significantly increase the amount of code?
+    WAI-ARIA はコードの量を大幅に増やしますか？
+
+    Do WAI-ARIA methods increase the complexity of the development process?
+    WAI-ARIA の方法は開発プロセスの複雑さを増しますか？
+
+    Is the "ARIA" that is mentioned by other organizations the same as WAI-ARIA?
+    他の団体が言及している「ARIA」は WAI-ARIA と同じですか？
+
+    Where can I ask more questions about WAI-ARIA?
+    WAI-ARIA について他に質問できる場所はどこですか？ 
+
+
+
+
+
+Where can I learn about WAI-ARIA?
+WAI-ARIA についてどこで学ぶことができますか？
+
+The best place to start learning about WAI-ARIA and to get updated information about the WAI-ARIA documents is the WAI-ARIA Overview, which:
+WAI-ARIA について学び始め、WAI-ARIA 文書に関する最新情報を入手するのに最適な場所は、WAI-ARIA Overview（WAI-ARIA の概要）です。
+
+    introduces how WAI-ARIA defines a way to make Web content and Web applications more accessible to people with disabilities, especially dynamic content and advanced user interface controls developed with Ajax (also known as AJAX), HTML, JavaScript, and related technologies
+    WAI-ARIA が、障害を持つ人々がウェブコンテンツとウェブアプリケーションにアクセスしやすくする方法、特に Ajax（AJAX とも呼ばれる）、HTML、JavaScript、および関連テクノロジーで開発された動的コンテンツと高度なユーザーインターフェイスのコントロールを定義する方法を紹介します。
+
+    provides examples of accessibility problems with Ajax, DHTML, and related technologies, which WAI-ARIA addresses
+    WAI-ARIA が対処する Ajax、DHTML、および関連テクノロジーのアクセシビリティの問題の例を提供します
+
+    provides examples of the types of attributes that WAI-ARIA provides
+    WAI-ARIA が提供する属性のタイプの例を提供します
+
+    introduces the different documents in the WAI-ARIA Suite
+    WAI-ARIA スイートのさまざまな文書を紹介します 
+
+[top of page]
+
+
+
+
+What is the current status of WAI-ARIA development?
+WAI-ARIA 開発の現状は？
+
+March 2014 Update
+2014年3月の更新
+
+WAI-ARIA 1.0 is a completed W3C Recommendation.
+WAI-ARIA 1.0 は、完成した W3C 勧告です。
+
+WAI-ARIA 1.1 is expected to include only a few changes from 1.0. Most potential changes will be considered for WAI-ARIA 2.0. WAI-ARIA 1.1 was published as a First Public Working Draft on 26 September 2013. The primary change in this Draft is the addition of aria-describedat. The in-progress Editors' Draft of WAI-ARIA 1.1 is the latest unpublished draft — it might include early ideas that are not yet well developed, vetted, or approved.
+WAI-ARIA 1.1 には、1.0 からのいくつかの変更のみが含まれると予想されます。 WAI-ARIA 2.0 では、潜在的な変更のほとんどが考慮されます。 WAI-ARIA 1.1 は、2013年9月26日に最初の公開ワーキングドラフトとして公開されました。 このドラフトの主な変更点は、aria-describedat の追加です。 進行中の WAI-ARIA 1.1 の編集者ドラフトは、最新の未公開ドラフトです。 これには、まだ十分に開発、精査、または承認されていない初期のアイデアが含まれている可能性があります。
+
+When updated WAI-ARIA versions will be finalized depends on many factors, such as if additional comments come in, how long it takes to gather implementations, and how long is needed for the remaining stages of the W3C Process.
+更新された WAI-ARIA バージョンがいつ完成するかは、追加のコメントが入ってくるかどうか、実装の収集にかかる時間、W3C プロセスの残りの段階に必要な時間などの多くの要因によって異なります。
+
+WAI-ARIA is developed under the W3C Process introduced in How WAI Develops Accessibility Guidelines through the W3C Process. The W3C Process helps ensure that WAI-ARIA reflects the diverse needs of a broad community, including industry, disability organizations, accessibility researchers, government, and others interested in Web accessibility.
+WAI-ARIA は、WAI が W3C プロセスを通じてアクセシビリティガイドラインを開発する方法で紹介された W3C プロセスの下で開発されています。 W3C プロセスは、WAI-ARIA が、業界、障害者団体、アクセシビリティ研究者、政府、およびウェブアクセシビリティに関心のあるその他の人々を含む幅広いコミュニティの多様なニーズを確実に反映するのに役立ちます。
+
+You are invited to comment on WAI-ARIA drafts. Calls for Review and document stages are announced via:
+WAI-ARIA ドラフトにコメントしてください。 レビューの呼びかけと文書化の段階は、次の方法で発表されます。
+
+    WAI IG mailing list,
+    WAI IG メーリングリスト、
+
+    Twitter, identi.ca,
+    Twitter、identi.ca、
+
+    WAI home page Highlights, and
+    WAI ホームページのハイライト、および
+
+    WAI Highlights RSS feed.
+    WAI ハイライト RSS フィード。
+
+[top of page]
+
+
+
+
+Is WAI-ARIA supported in browsers, assistive technologies, and other user agents?
+WAI-ARIA は、ブラウザー、支援技術、およびその他のユーザーエージェントでサポートされていますか？
+
+
+Yes, WAI-ARIA is already supported in several browsers and assistive technologies (even though it is not finalized yet). Once WAI-ARIA is stable, WAI will collect and publish a list of WAI-ARIA implementations, that is, what supports WAI-ARIA. Some information on WAI-ARIA support is already available on other Web sites.
+はい、WAI-ARIA はすでにいくつかのブラウザと支援技術でサポートされています（まだ完成していませんが）。 WAI-ARIA が安定すると、WAI は WAI-ARIA 実装のリスト、つまり WAI-ARIA をサポートするものを収集して公開します。 WAI-ARIA のサポートに関する情報の一部は、他のウェブサイトですでに入手できます。 
+
+[top of page]
+
+
+
+
+What happens in older browsers when WAI-ARIA is implemented?
+WAI-ARIA を実装すると、古いブラウザーではどうなりますか？
+
+Nothing; WAI-ARIA coding methods have no effect on how Web content renders in older browsers. In browsers that do not support WAI-ARIA, Web content that adds WAI-ARIA attributes will simply continue to work as it currently does in those browsers.
+何もありません。 WAI-ARIA のコーディング方法は、古いブラウザーでのウェブコンテンツのレンダリング方法には影響しません。 WAI-ARIA をサポートしていないブラウザーでは、WAI-ARIA 属性を追加するウェブコンテンツは、それらのブラウザーで現在機能しているのと同じように機能し続けます。 
+
+[top of page]
+
+
+
+
+Are there JavaScript toolkits that provide built-in WAI-ARIA support?
+組み込みの WAI-ARIA サポートを提供する JavaScript ツールキットはありますか？
+
+Yes, some JavaScript toolkits already have WAI-ARIA support built in, and others are adding it. We encourage you to ask your favorite toolkits and application generators to support WAI-ARIA.
+はい、一部の JavaScript ツールキットにはすでに WAI-ARIA サポートが組み込まれており、他のツールキットはそれを追加しています。 お気に入りのツールキットやアプリケーションジェネレーターに WAI-ARIA のサポートをお願いすることをお勧めします。
+
+WAI will be collecting and publishing a list of WAI-ARIA implementations in the coming months as WAI-ARIA progresses through W3C document stages.
+WAI は、WAI-ARIA が W3C 文書化の段階を進むにつれて、今後数か月以内に WAI-ARIA 実装のリストを収集して公開する予定です。 
+
+[top of page]
+
+
+
+
+As a Web content developer, what should I do with WAI-ARIA now?
+ウェブコンテンツ開発者として、WAI-ARIA を今どうしたらいいですか？
+
+There are several benefits to starting to implement WAI-ARIA now, including:
+今すぐ WAI-ARIA の実装を開始することには、次のようないくつかの利点があります。
+
+    The WAI-ARIA Primer and WAI-ARIA Authoring Practices provide detailed advice and examples for developers.
+    WAI-ARIA Primer（WAI-ARIA 入門）と WAI-ARIA Authoring Practices（WAI-ARIA オーサリングプラクティス）は、開発者に詳細なアドバイスと例を提供します。
+
+    （訳注：WAI-ARIA Primer は、WAI-ARIA Authoring Practices にまとめられました。）
+
+    WAI-ARIA is already being supported in some browsers, assistive technologies, and other user agents; as well as JavaScript toolkits, as mentioned above.
+    WAI-ARIA は、一部のブラウザー、支援技術、およびその他のユーザーエージェントですでにサポートされています。 上記のように、JavaScript ツールキットも同様です。
+
+    If you have questions or suggestions for changes to the WAI-ARIA documents, now is the best time to get them addressed, while the documents are still in development.
+    WAI-ARIA 文書の変更について質問や提案がある場合は、文書がまだ開発中である間に、今がそれらに対処するのに最適な時期です。
+
+Note that while the Working Drafts of WAI-ARIA documents are complete, some aspects of WAI-ARIA may change based on comments received at each review stage. (You can also see the latest in-progress "Editors' Drafts", with any changes since Working Draft publication, from the Protocols and Formats Working Group (PFWG) Public Page.)
+WAI-ARIA 文書のワーキングドラフトは完成していますが、WAI-ARIA の一部の側面は、各レビュー段階で受け取ったコメントに基づいて変更される場合があることに注意してください。 （Protocols and Formats Working Group（プロトコルとフォーマットのワーキンググループ、PFWG）のパブリックページから、ワーキングドラフトの発行以降に変更が加えられた、最新の進行中の「エディターズドラフト」も確認できます。）
+
+（訳注：「プロトコルとフォーマットのワーキンググループは終了しました。」となっています。）
+
+Some organizations have already started implementing WAI-ARIA in their Web content. Much of WAI-ARIA focuses on advanced Web applications. WAI-ARIA also helps improve accessibility in simple sites using only basic HTML.
+一部の組織は、すでにウェブコンテンツに WAI-ARIA を実装し始めています。 WAI-ARIA の多くは、高度なウェブアプリケーションに重点を置いています。 WAI-ARIA は、基本的な HTML のみを使用する単純なサイトでのアクセシビリティの向上にも役立ちます。
+
+Web developers can implement WAI-ARIA in two ways:
+ウェブ開発者は、次の2つの方法で WAI-ARIA を実装できます。
+
+    Use existing toolkits that incorporate WAI-ARIA techniques. In this case, you don't need to understand much about WAI-ARIA since it's already built in.
+    WAI-ARIA 手法を組み込んだ既存のツールキットを使用します。 この場合、WAI-ARIA はすでに組み込まれているため、あまり理解する必要はありません。
+
+    Include WAI-ARIA techniques in your custom widgets. When developing custom widgets, add WAI-ARIA properties to provide basic type (role), state and change information. Documentation and examples are available in the WAI-ARIA Best Practices. You should test the results using screen readers, other assistive technologies, and testing tools, some of which are available for free. If you need help, you can sign up for the wai-xtech mailing list and ask questions there.
+    カスタムウィジェットに WAI-ARIA 手法を含めます。 カスタムウィジェットを開発するときは、WAI-ARIA プロパティを追加して、基本的なタイプ（ロール）、状態、および変更情報を提供します。 文書と例は、 WAI-ARIA Authoring Practices（WAI-ARIA オーサリングプラクティス）で入手できます。 スクリーンリーダー、その他の支援技術、およびテストツールを使用して結果をテストする必要があります。 これらの一部は無料で利用できます。 ヘルプが必要な場合は、wai-xtech メーリングリストにサインアップして、そこで質問することができます。
+
+（訳注：WAI-XTech メーリングリストはアーカイブとなっています。）
+
+[top of page]
+
+
+
+
+Does WAI-ARIA significantly increase the amount of code?
+WAI-ARIA はコードの量を大幅に増やしますか？
+
+No, the amount of additional code required in Web content and in browsers, assistive technologies, and other user agents is minimal. For Web content, generally only a few additional attributes are needed.
+いいえ、ウェブコンテンツ、ブラウザー、支援技術、およびその他のユーザーエージェントに必要な追加コードの量は最小限です。 ウェブコンテンツの場合、通常、必要な追加属性はわずかです。
+
+For browsers, WAI-ARIA requires that descriptions are added only to the module that implements accessibility, not to the core browser. The accessibility module then passes information about role, state, and changes in state through mechanisms that are already supported. WAI-ARIA therefore integrates well with existing accessibility interfaces and does not require generation of significantly more code.
+ブラウザーの場合、WAI-ARIA では、アクセシビリティを実装するモジュールにのみ記述を追加する必要があり、コアブラウザーには追加しません。 次に、アクセシビリティモジュールは、すでにサポートされているメカニズムを介して、ロール、状態、および状態変化に関する情報を渡します。 したがって、WAI-ARIA は既存のアクセシビリティのインターフェイスとうまく統合され、大幅に多くのコードを生成する必要はありません。 
+
+[top of page]
+
+
+
+
+Do WAI-ARIA methods increase the complexity of the development process?
+WAI-ARIA の方法は開発プロセスの複雑さを増しますか？
+
+Including WAI-ARIA support does require a little extra effort, yet it is not significantly more than usual development. For those developing static Web pages or using libraries with WAI-ARIA built in, implementing WAI-ARIA is fairly straightforward. Developing custom, cross-browser JavaScript widgets is more complex, and implementing WAI-ARIA in these is proportionally more complex.
+WAI-ARIA のサポートを含めるには、少し余分な労力が必要ですが、通常の開発よりも大幅に多くはありません。 静的ウェブページを開発したり、WAI-ARIA が組み込まれたライブラリを使用したりする場合、WAI-ARIA の実装はかなり簡単です。 カスタムのクロスブラウザー JavaScript ウィジェットの開発はより複雑であり、これらに WAI-ARIA を実装することは比例してより複雑です。 
+
+[top of page]
+
+
+
+
+Is the "ARIA" that is mentioned by other organizations the same as WAI-ARIA?
+他の団体が言及している「ARIA」は WAI-ARIA と同じですか？
+
+As far as we know, all of the documents and references to "ARIA" that are related to making Web sites accessible are actually references to WAI-ARIA.
+私たちの知る限り、ウェブサイトをアクセス可能にすることに関連するすべての文書と「ARIA」への参照は、実際には WAI-ARIA への参照です。
+
+"WAI-ARIA" is the abbreviation for the Accessible Rich Internet Applications documents. In order to avoid confusion, please use "WAI-ARIA" (instead of just "ARIA"), at least in titles, headings, and on first reference in documentation.
+「WAI-ARIA」は、アクセス可能なリッチインターネットアプリケーション（Accessible Rich Internet Applications）文書の略語です。 混乱を避けるために、少なくともタイトル、見出し、および文書の最初の参照では、（「ARIA」だけでなく）「WAI-ARIA」を使用してください。 
+
+[top of page]
+
+
+
+
+Where can I ask more questions about WAI-ARIA?
+WAI-ARIA について他に質問できる場所はどこですか？
+
+The WAI-XTech list is available for anyone to discuss technical issues on WAI-ARIA.
+WAI-XTech リストは、WAI-ARIA の技術的な問題について誰でも議論できるようになっています。
+
+（訳注：WAI-XTech メーリングリストはアーカイブとなっています。）
+
+To subscribe to the WAI-XTech list, please follow the instructions under Follow work on mailing lists in the Participation in the Protocols and Formats Working Group page.
+WAI-XTech リストに登録するには、Participation in the Protocols and Formats Working Group（プロトコルとフォーマットのワーキンググループへの参加）ページの Follow work on mailing lists（メーリングリストでの作業をフォローする）の手順に従ってください。 
+
+（訳注：「プロトコルとフォーマットのワーキンググループは終了しました。」となっています。）
+
+[top of page]
+
+
+
+
+
+
+
+
+Back to Top
+
+W3C Web Accessibility Initiative (WAI)
+
+Strategies, standards, and supporting resources to make the Web accessible to people with disabilities.
+
+Copyright © 2018 W3C ® (MIT, ERCIM, Keio, Beihang) Usage policies apply.
+
+    Contact WAI
+    Site Map
+    News
+    Archive
+    Resources for Roles
+
