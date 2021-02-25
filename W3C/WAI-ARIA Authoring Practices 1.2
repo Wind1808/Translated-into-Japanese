@@ -1028,7 +1028,7 @@ This section demonstrates how to make common rich internet application patterns 
 3.1 アコーディオン（表示/非表示機能のあるセクション）
 
 An accordion is a vertically stacked set of interactive headings that each contain a title, content snippet, or thumbnail representing a section of content. The headings function as controls that enable users to reveal or hide their associated sections of content. Accordions are commonly used to reduce the need to scroll when presenting multiple sections of content on a single page.
-アコーディオン（accordion）は、垂直方向に積み重ねられたインタラクティブな見出しのセットであり、それぞれにコンテンツのセクションを表すタイトル、コンテンツスニペット、またはサムネイルが含まれています。 見出しは、ユーザーがコンテンツの関連セクションを表示または非表示にできるようにするコントロールとして機能します。 アコーディオンは通常、コンテンツの複数のセクションを1つのページに提示するときにスクロールする必要性を減らすために使用されます。
+アコーディオン（accordion）は、垂直方向に積み重ねられた一連のインタラクティブな見出しであり、それぞれにコンテンツのセクションを表すタイトル、コンテンツスニペット、またはサムネイルが含まれています。 見出しは、ユーザーがコンテンツの関連セクションを表示または非表示にできるようにするコントロールとして機能します。 アコーディオンは通常、コンテンツの複数のセクションを1つのページに提示するときにスクロールする必要性を減らすために使用されます。
 
 Terms for understanding accordions include:
 アコーディオンを理解するための用語は次のとおりです。
@@ -1137,7 +1137,7 @@ An alert is an element that displays a brief, important message in a way that at
 アラート（alert）は、ユーザーのタスクを中断することなく、ユーザーの注意を引く方法で簡潔で重要なメッセージを表示する要素です。 動的にレンダリングされたアラートは、ほとんどのスクリーンリーダーによって自動的にアナウンスされ、一部のオペレーティングシステムでは、アラート音が鳴る場合があります。 現時点では、ページの読み込みが完了する前にページに存在するアラートをスクリーンリーダーがユーザーに通知しないことに注意してください。
 
 Because alerts are intended to provide important and potentially time-sensitive information without interfering with the user's ability to continue working, it is crucial they do not affect keyboard focus. The alert dialog is designed for situations where interrupting work flow is necessary.
-アラートは、ユーザーが作業を継続する能力を妨げることなく、重要で時間に敏感な可能性のある情報を提供することを目的としているため、キーボードのフォーカスに影響を与えないことが重要です。 アラートダイアログは、ワークフローの中断が必要な状況向けに設計されています。
+アラートは、ユーザーが作業を継続する能力を妨げることなく、重要で時間に敏感な可能性のある情報を提供することを目的としているため、キーボードのフォーカスに影響を与えないことが重要です。 アラートダイアログは、作業の流れ（work flow、ワークフロー）の中断が必要な状況向けに設計されています。
 
 It is also important to avoid designing alerts that disappear automatically. An alert that disappears too quickly can lead to failure to meet WCAG 2.0 success criterion 2.2.3. Another critical design consideration is the frequency of interruption caused by alerts. Frequent interruptions inhibit usability for people with visual and cognitive disabilities, which makes meeting the requirements of WCAG 2.0 success criterion 2.2.4 more difficult.
 自動的に消えるアラートを設計しないようにすることも重要です。 アラートがすぐに消えると、WCAG 2.0 の達成基準 2.2.3 を満たさなくなる可能性があります。 もう1つの重要な設計上の考慮事項は、アラートによって引き起こされる中断の頻度です。 頻繁な中断は、視覚障害および認知障害を持つ人々のユーザビリティを阻害し、WCAG 2.0 の達成基準 2.2.4 の要件を満たすことをより困難にします。
@@ -1179,7 +1179,7 @@ The widget has a role of alert.
 3.3 アラートとメッセージのダイアログ
 
 An alert dialog is a modal dialog that interrupts the user's workflow to communicate an important message and acquire a response. Examples include action confirmation prompts and error message confirmations. The alertdialog role enables assistive technologies and browsers to distinguish alert dialogs from other dialogs so they have the option of giving alert dialogs special treatment, such as playing a system alert sound.
-アラートダイアログ（alert dialog）は、ユーザーのワークフローを中断して重要なメッセージを伝達し、応答を取得するモーダルダイアログです。 例には、アクション確認プロンプトやエラーメッセージ確認が含まれます。 アラートダイアログ（alertdialog）ロールにより、支援技術とブラウザーはアラートダイアログを他のダイアログと区別できるため、システムアラートサウンドの再生など、アラートダイアログに特別な処理を与えることができます。
+アラートダイアログ（alert dialog）は、ユーザーの作業の流れを中断して重要なメッセージを伝達し、応答を取得するモーダルダイアログです。 例には、アクション確認プロンプトやエラーメッセージ確認が含まれます。 アラートダイアログ（alertdialog）ロールにより、支援技術とブラウザーはアラートダイアログを他のダイアログと区別できるため、システムアラートサウンドの再生など、アラートダイアログに特別な処理を与えることができます。
 
 
 
@@ -1364,7 +1364,7 @@ WAI-ARIA のロール、状態、およびプロパティ
 3.6 カルーセル（スライドショーまたはイメージローテーター）
 
 A carousel presents a set of items, referred to as slides, by sequentially displaying a subset of one or more slides. Typically, one slide is displayed at a time, and users can activate a next or previous slide control that hides the current slide and "rotates" the next or previous slide into view. In some implementations, rotation automatically starts when the page loads, and it may also automatically stop once all the slides have been displayed. While a slide may contain any type of content, image carousels where each slide contains nothing more than a single image are common.
-カルーセル（carousel、回転木馬）は、1つまたは複数のスライドのサブセットを順番に表示することにより、スライドと呼ばれる項目のセットを提示します。 通常、一度に1つのスライドが表示され、ユーザーは次または前のスライドコントロールをアクティブ化して、現在のスライドを非表示にし、次または前のスライドを「回転」して表示することができます。 一部の実装では、ページが読み込まれると回転が自動的に開始され、すべてのスライドが表示されると自動的に停止する場合もあります。 スライドには任意のタイプのコンテンツを含めることができますが、各スライドに1つの画像しか含まれていない画像カルーセルが一般的です。
+カルーセル（carousel、回転木馬）は、1つまたは複数のスライドのサブセットを順番に表示することにより、スライドと呼ばれる一連の項目を提示します。 通常、一度に1つのスライドが表示され、ユーザーは次または前のスライドコントロールをアクティブ化して、現在のスライドを非表示にし、次または前のスライドを「回転」して表示することができます。 一部の実装では、ページが読み込まれると回転が自動的に開始され、すべてのスライドが表示されると自動的に停止する場合もあります。 スライドには任意のタイプのコンテンツを含めることができますが、各スライドに1つの画像しか含まれていない画像カルーセルが一般的です。
 
 Ensuring all users can easily control and are not adversely effected by slide rotation is an essential aspect of making carousels accessible. For instance, the screen reader experience can be confusing and disorienting if slides that are not visible on screen are incorrectly hidden, e.g., displayed off-screen. Similarly, if slides rotate automatically and a screen reader user is not aware of the rotation, the user may read an element on slide one, execute the screen reader command for next element, and, instead of hearing the next element on slide one, hear an element from slide 2 without any knowledge that the element just announced is from an entirely new context.
 すべてのユーザーが簡単に制御でき、スライドの回転による悪影響を受けないようにすることは、カルーセルにアクセスできるようにするための重要な側面です。 例えば、画面に可視でないスライドが誤って隠されている場合、例えば画面外に表示されている場合、スクリーンリーダーのエクスペリエンスは混乱し、混乱を招く可能性があります。 同様に、スライドが自動的に回転し、スクリーンリーダーのユーザーが回転に気付いていない場合、ユーザーはスライド1の要素を読み、次の要素のためのスクリーンリーダーコマンドを実行し、スライド1の次の要素を聞く代わりに、アナウンスされたばかりの要素がまったく新しいコンテキストからのものであるという知識なしで、スライド2の要素を聞くことになる可能性があります。
@@ -1413,7 +1413,7 @@ Slide
 スライド（Slide）
 
     A single content container within a set of content containers that hold the content to be presented by the carousel.
-    カルーセルによって提示されるコンテンツを保持するコンテンツコンテナーのセット内の単一コンテンツコンテナー。
+    カルーセルによって提示されるコンテンツを保持する一連のコンテンツコンテナーの内の単一コンテンツコンテナー。
 
 Rotation Control
 回転コントロール（Rotation Control）
@@ -1521,7 +1521,7 @@ Basic carousel elements
         aria-roledescription が "slide" に設定されているため、ラベルに「スライド」という単語が含まれていないことに注意してください。
 
     Optionally, an element wrapping the set of slide elements has aria-atomic set to false and aria-live set to:
-    任意で、スライド要素のセットをラップする要素の aria-atomic が false に設定され、aria-live が次のように設定されます。
+    任意で、一連のスライド要素をラップする要素の aria-atomic が false に設定され、aria-live が次のように設定されます。
 
         off: if the carousel is automatically rotating.
         off：カルーセルが自動的に回転している場合。
@@ -1551,7 +1551,7 @@ The structure of a tabbed carousel is the same as a basic carousel except that:
         各タブのアクセス可能な名前は、スライドの名前または番号を含めることで、どのスライドを表示するかを示します（例：「スライド3」）。 各スライドに一意の名前がある場合は、スライド名をお勧めします。
 
         The set of controls is grouped in a tablist element with an accessible name provided by the value of aria-label that identifies the purpose of the tabs, e.g., "Choose slide to display."
-        コントロールのセットは、タブの目的を識別する aria-label の値によって提供されるアクセス可能な名前を持つタブリスト（tablist）要素にグループ化されます（例：「表示するスライドを選択してください」）。
+        一連のコントロールは、タブの目的を識別する aria-label の値によって提供されるアクセス可能な名前を持つタブリスト（tablist）要素にグループ化されます（例：「表示するスライドを選択してください」）。
 
         The tab, tablist, and tabpanel implement the properties specified in the tabs pattern.
         タブ、タブリスト、およびタブパネルは、タブのパターンで指定されたプロパティを実装します。
@@ -1567,7 +1567,7 @@ A grouped carousel has the same structure as a basic carousel, but it also inclu
 グループ化されたカルーセルは、基本的なカルーセルと同じ構造ですが、スライドピッカーコントロールも含まれています。
 
     The set of slide picker controls is contained in an element with role group.
-    スライドピッカーコントロールのセットは、グループロールを持つ要素に含まれています。
+    一連のスライドピッカーコントロールは、グループロールを持つ要素に含まれています。
 
     The group containing the picker controls has an accessible label provided by the value of aria-label that identifies the purpose of the controls, e.g., "Choose slide to display."
     ピッカーコントロールを含むグループには、コントロールの目的を識別する aria-label の値によって提供されるアクセス可能なラベルがあります（例：「表示するスライドを選択してください」）。
@@ -1675,7 +1675,7 @@ WAI-ARIA のロール、状態、およびプロパティ
     部分的にチェックすると、aria-checked 状態が mixed に設定されます。
 
     If a set of checkboxes is presented as a logical group with a visible label, the checkboxes are included in an element with role group that has the property aria-labelledby set to the ID of the element containing the label.
-    チェックボックスのセットが可視ラベルを持つ論理グループとして提示される場合、チェックボックスは、ラベルを含む要素の ID に設定された aria-labelledby プロパティを持つグループロールを持つ要素に含まれます。
+    一連のチェックボックスが可視ラベルを持つ論理グループとして提示される場合、チェックボックスは、ラベルを含む要素の ID に設定された aria-labelledby プロパティを持つグループロールを持つ要素に含まれます。
 
     If the presentation includes additional descriptive static text relevant to a checkbox or checkbox group, the checkbox or checkbox group has the property aria-describedby set to the ID of the element containing the description.
     表現にチェックボックスまたはチェックボックスグループに関連する追加の説明の静的テキストが含まれている場合、チェックボックスまたはチェックボックスグループの aria-describedby プロパティは、説明を含む要素の ID に設定されます。
@@ -1697,7 +1697,7 @@ A combobox is an input widget with an associated popup that enables users to sel
 コンボボックス（combobox）は、ユーザーが可能な値のコレクションからコンボボックスの値を選択できるようにするポップアップが関連付けられた入力ウィジェットです。 一部の実装では、ポップアップに許可された値が示されますが、他の実装では、ポップアップに提案値が示され、ユーザーは提案の1つを選択するか、値をタイプ入力できます。 ポップアップは、リストボックス、グリッド、ツリー、またはダイアログの場合があります。 多くの実装には、3番目の任意要素（コンボボックスの横にあるグラフィカルな「開く」ボタン）も含まれています。 これは、ポップアップが利用可能であることを示します。 「開く」ボタンをアクティブ化すると、提案が利用可能な場合にポップアップが表示されます。
 
 The combobox pattern supports several optional behaviors. The one that most shapes interaction is text input. Some comboboxes allow users to type and edit text in the combobox and others do not. If a combobox does not support text input, it is referred to as select-only, meaning the only way users can set a value is by selecting a value in the popup. For example, in some browsers, an HTML select element with size="1" is presented to assistive technologies as a combobox. Alternatively, if a combobox supports text input, it is referred to as editable. An editable combobox may either allow users to input any arbitrary value, or it may restrict its value to a discrete set of allowed values, in which case typing input serves to filter suggestions presented in the popup.
-コンボボックスのパターンは、いくつかの任意の振る舞いをサポートしています。 相互作用を最も形作るのはテキスト入力です。 一部のコンボボックスでは、ユーザーがコンボボックスにテキストをタイプ入力および編集できますが、そうでないものもあります。 コンボボックスがテキスト入力をサポートしていない場合、それは選択専用と呼ばれます。 つまり、ユーザーが値を設定できる唯一の方法は、ポップアップで値を選択することです。 例えば、一部のブラウザーでは、size="1" の HTML 選択要素が支援技術にコンボボックスとして示されます。 あるいは、コンボボックスがテキスト入力をサポートしている場合、それは編集可能と呼ばれます。 編集可能なコンボボックスは、ユーザーが任意の値を入力できるようにするか、その値を許可された値の個別のセットに制限する場合があります。 その場合、タイプ入力で入力すると、ポップアップに示される提案をフィルタリングできます。
+コンボボックスのパターンは、いくつかの任意の振る舞いをサポートしています。 相互作用を最も形作るのはテキスト入力です。 一部のコンボボックスでは、ユーザーがコンボボックスにテキストをタイプ入力および編集できますが、そうでないものもあります。 コンボボックスがテキスト入力をサポートしていない場合、それは選択専用と呼ばれます。 つまり、ユーザーが値を設定できる唯一の方法は、ポップアップで値を選択することです。 例えば、一部のブラウザーでは、size="1" の HTML 選択要素が支援技術にコンボボックスとして示されます。 あるいは、コンボボックスがテキスト入力をサポートしている場合、それは編集可能と呼ばれます。 編集可能なコンボボックスは、ユーザーが任意の値を入力できるようにするか、その値を許可された値の離散的なセットに制限する場合があります。 その場合、タイプ入力で入力すると、ポップアップに示される提案をフィルタリングできます。
 
 ---The popup is hidden by default, and the conditions that trigger its display are specific to each implementation. Some possible popup display conditions include:
 ---ポップアップはデフォルトで非表示になっており、その表示をトリガーする条件は各実装に固有です。 考えられるポップアップ表示条件には、次のものがあります。
@@ -1733,10 +1733,10 @@ Combobox widgets are useful for acquiring user input in either of two scenarios:
 コンボボックスウィジェットは、次の2つのシナリオのいずれかでユーザー入力を取得するのに役立ちます。
 
 ---    The value for the textbox must be chosen from a predefined set of allowed values, e.g., a location field must contain a valid location name. Note that the listbox and menu button patterns are also useful in this scenario; differences between combobox and alternative patterns are described below.
----    1. テキストボックスの値は、事前定義された許可された値のセットから選択する必要があります。 例えば、場所フィールドには有効な場所名が含まれている必要があります。 このシナリオでは、リストボックスとメニューボタンのパターンも役立つことに注意してください。 コンボボックスと代替パターンの違いを以下に説明します。
+---    1. テキストボックスの値は、事前定義された一連の許可された値から選択する必要があります。 例えば、場所フィールドには有効な場所名が含まれている必要があります。 このシナリオでは、リストボックスとメニューボタンのパターンも役立つことに注意してください。 コンボボックスと代替パターンの違いを以下に説明します。
 
     The value must be one of a predefined set of allowed values, e.g., a location field must contain a valid location name. Note that the listbox and menu button patterns are also useful in this scenario; differences between combobox and alternative patterns are described below.
-    1. 値は、事前定義された許可された値のセットの1つである必要があります。 例えば、場所フィールドには有効な場所名が含まれている必要があります。 このシナリオでは、リストボックスとメニューボタンのパターンも役立つことに注意してください。 コンボボックスと代替パターンの違いを以下に説明します。
+    1. 値は、事前定義された一連の許可された値の1つである必要があります。 例えば、場所フィールドには有効な場所名が含まれている必要があります。 このシナリオでは、リストボックスとメニューボタンのパターンも役立つことに注意してください。 コンボボックスと代替パターンの違いを以下に説明します。
 
 ---    The textbox may contain any arbitrary value, but it is advantageous to suggest possible values to the user, e.g., a search field may suggest similar or previous searches to save the user time.
 ---    2. テキストボックスには任意の値を含めることができますが、ユーザーに可能な値を提案することは有利です。 例えば、検索フィールドは、ユーザーの時間を節約するために類似または以前の検索を提案する場合があります。
@@ -1751,10 +1751,10 @@ The nature of possible values presented by a popup and the way they are presente
 ポップアップによって示される可能性のある値の性質とそれらが示される方法は、自動補完（autocomplete、オートコンプリート）の振る舞いと呼ばれます。 コンボボックスには、次の自動補完の4つの形式のいずれかを含めることができます。
 
 ---    No autocomplete: When the popup is triggered, the suggested values it contains are the same regardless of the characters typed in the textbox. For example, the popup suggests a set of recently entered values, and the suggestions do not change as the user types.
----    1. 自動補完なし：ポップアップがトリガーされると、ポップアップに含まれる提案値は、テキストボックスにタイプ入力された文字に関係なく同じです。 例えば、ポップアップは最近入力された値のセットを提案し、ユーザーがタイプ入力しても提案は変更されません。
+---    1. 自動補完なし：ポップアップがトリガーされると、ポップアップに含まれる提案値は、テキストボックスにタイプ入力された文字に関係なく同じです。 例えば、ポップアップは一連の最近入力された値を提案し、ユーザーがタイプ入力しても提案は変更されません。
 
     No autocomplete: The combobox is editable, and when the popup is triggered, the suggested values it contains are the same regardless of the characters typed in the combobox. For example, the popup suggests a set of recently entered values, and the suggestions do not change as the user types.
-    1. 自動補完なし：コンボボックスは編集可能であり、ポップアップがトリガーされると、コンボボックスにタイプ入力された文字に関係なく、ポップアップに含まれる提案値は同じになります。 例えば、ポップアップは最近入力された値のセットを提案し、ユーザーがタイプ入力しても提案は変更されません。
+    1. 自動補完なし：コンボボックスは編集可能であり、ポップアップがトリガーされると、コンボボックスにタイプ入力された文字に関係なく、ポップアップに含まれる提案値は同じになります。 例えば、ポップアップは一連の最近入力された値を提案し、ユーザーがタイプ入力しても提案は変更されません。
 
 ---    List autocomplete with manual selection: When the popup is triggered, it presents suggested values that complete or logically correspond to the characters typed in the textbox. The character string the user has typed will become the value of the textbox unless the user selects a value in the popup.
 ---    2. 手動選択によるリストの自動補完：ポップアップがトリガーされると、テキストボックスにタイプ入力された文字に完全または論理的に対応する提案値が示されます。 ユーザーがポップアップで値を選択しない限り、ユーザーがタイプ入力した文字列がテキストボックスの値になります。
@@ -1781,10 +1781,10 @@ If a combobox is editable and has any form of list autocomplete, the popup may a
 コンボボックスが編集可能で、リストの自動補完の形式がある場合、ユーザーがタイプ入力するとポップアップが表示されたり消えたりすることがあります。 例えば、ユーザーが5つの提案を表示するトリガーとなる2文字の文字列をタイプ入力した後、一致する提案がない文字列を形成する3番目の文字をタイプ入力すると、ポップアップが閉じ、インライン補完文字列が消える場合があります。
 
 ---When constructing a widget that is both visually compact and enables users to choose one value from a set of discrete values, often either a listbox or menu button is simpler to implement and use. One feature of combobox that distinguishes it from both listbox and menu button is that the value of the combobox is presented in an edit field. Thus, the combobox gives users one function that both listbox and menu button lack, namely the ability to select some or all of the value for copying to the clipboard. One feature that distinguishes both combobox and menu button widgets from listbox widgets is their ability to provide an undo mechanism. In many implementations, users can navigate the set of allowed values in a combobox or menu and then decide to revert to the value the widget had before navigating by pressing escape. In contrast, navigating a listbox immediately changes its value, and escape does not provide an undo mechanism.
----視覚的にコンパクトで、ユーザーが離散値のセットから1つの値を選択できるウィジェットを構築する場合、多くの場合、リストボックスまたはメニューボタンのいずれかを実装して使用する方が簡単です。 リストボックスとメニューボタンの両方と区別するコンボボックスの機能の1つは、コンボボックスの値が編集フィールドに提示されることです。 このように、コンボボックスは、リストボックスとメニューボタンの両方に欠けている1つの機能、つまりクリップボードにコピーする値の一部またはすべてを選択する機能をユーザーに提供します。 コンボボックスウィジェットとメニューボタンウィジェットの両方をリストボックスウィジェットと区別する1つの機能は、元に戻すメカニズムを提供する機能です。 多くの実装では、ユーザーはコンボボックスまたはメニューで許可された値のセットをナビゲートし、Escape を押してナビゲートする前にウィジェットが持っていた値に戻すことを決定できます。 対照的に、リストボックスをナビゲートするとその値がすぐに変更され、Escape は元に戻すメカニズムを提供しません。
+---視覚的にコンパクトで、ユーザーが一連の離散値から1つの値を選択できるウィジェットを構築する場合、多くの場合、リストボックスまたはメニューボタンのいずれかを実装して使用する方が簡単です。 リストボックスとメニューボタンの両方と区別するコンボボックスの機能の1つは、コンボボックスの値が編集フィールドに提示されることです。 このように、コンボボックスは、リストボックスとメニューボタンの両方に欠けている1つの機能、つまりクリップボードにコピーする値の一部またはすべてを選択する機能をユーザーに提供します。 コンボボックスウィジェットとメニューボタンウィジェットの両方をリストボックスウィジェットと区別する1つの機能は、元に戻すメカニズムを提供する機能です。 多くの実装では、ユーザーはコンボボックスまたはメニューで一連の許可された値をナビゲートし、Escape を押してナビゲートする前にウィジェットが持っていた値に戻すことを決定できます。 対照的に、リストボックスをナビゲートするとその値がすぐに変更され、Escape は元に戻すメカニズムを提供しません。
 
 Two other widgets that are also visually compact and enable users to make a single choice from a set of discrete choices are listbox and menu button. One feature that distinguishes combobox from both listbox and menu button is that the user's choice can be presented as a value in an editable field, which gives users the ability to select some or all of the value for copying to the clipboard. Comboboxes and menu buttons can be implemented so users can explore the set of allowed choices without losing a previously made choice. That is, users can navigate the set of available choices in a combobox popup or menu and then press escape, which closes the popup or menu without changing previous input. In contrast, navigating among options in a single-select listbox immediately changes its value, and Escape does not provide an undo mechanism. Comboboxes and listboxes can be marked as required with aria-required="true", and they have an accessible name that is distinct from their value. Thus, when assistive technology users focus either a combobox or listbox in its default state, they can perceive both a name and value for the widget. However, a menu button cannot be marked required, and while it has an accessible name, it does not have a value so is not suitable for conveying the user's choice in its collapsed state.
-視覚的にコンパクトで、ユーザーが個別の選択肢のセットから1つの選択肢を選択できるようにする、他の2つのウィジェットは、リストボックスとメニューボタンです。 コンボボックスをリストボックスとメニューボタンの両方と区別する1つの機能は、ユーザーの選択を編集可能なフィールドの値として示せることです。 これにより、ユーザーはクリップボードにコピーする値の一部またはすべてを選択できます。 コンボボックスとメニューボタンを実装することで、ユーザーは以前に行った選択を失うことなく、許可された選択肢のセットを探索できます。 つまり、ユーザーはコンボボックスのポップアップまたはメニューで使用可能な選択肢のセットをナビゲートしてから Escape キーを押すと、前の入力を変更せずにポップアップまたはメニューを閉じることができます。 対照的に、単一選択リストボックス内のオプション間をナビゲートすると、その値がすぐに変更され、Escape キーは元に戻すメカニズムを提供しません。 コンボボックスとリストボックスは、aria-required="true" で必須とマークすることができ、値とは別個のアクセス可能な名前を付けることができます。 したがって、支援技術のユーザーがコンボボックスまたはリストボックスのいずれかをデフォルトの状態でフォーカスすると、ウィジェットの名前と値の両方を認識できます。 しかし、メニューボタンは必須とマークすることはできず、アクセス可能な名前はありますが、値がないため、折りたたまれた状態でユーザーの選択を伝えるには適していません。
+視覚的にコンパクトで、ユーザーが離散的な選択肢のセットから1つの選択肢を選択できるようにする、他の2つのウィジェットは、リストボックスとメニューボタンです。 コンボボックスをリストボックスとメニューボタンの両方と区別する1つの機能は、ユーザーの選択を編集可能なフィールドの値として示せることです。 これにより、ユーザーはクリップボードにコピーする値の一部またはすべてを選択できます。 コンボボックスとメニューボタンを実装することで、ユーザーは以前に行った選択を失うことなく、許可された一連の選択肢を探索できます。 つまり、ユーザーはコンボボックスのポップアップまたはメニューで一連の使用可能な選択肢をナビゲートしてから Escape キーを押すと、前の入力を変更せずにポップアップまたはメニューを閉じることができます。 対照的に、単一選択リストボックス内のオプション間をナビゲートすると、その値がすぐに変更され、Escape キーは元に戻すメカニズムを提供しません。 コンボボックスとリストボックスは、aria-required="true" で必須とマークすることができ、値とは別個のアクセス可能な名前を付けることができます。 したがって、支援技術のユーザーがコンボボックスまたはリストボックスのいずれかをデフォルトの状態でフォーカスすると、ウィジェットの名前と値の両方を認識できます。 しかし、メニューボタンは必須とマークすることはできず、アクセス可能な名前はありますが、値がないため、折りたたまれた状態でユーザーの選択を伝えるには適していません。
 
 ---Note
 ---注意
@@ -2091,10 +2091,10 @@ In a grid popup, each suggested value may be represented by either a single cell
     上矢印：フォーカスを1セル上に移動します。 フォーカスがグリッドの最初の行にある場合、何もしないか、フォーカスをコンボボックスに戻します。
 
     Page Down (Optional): Moves focus down an author-determined number of rows, typically scrolling so the bottom row in the currently visible set of rows becomes one of the first visible rows. If focus is in the last row of the grid, focus does not move.
-    Page Down（任意）：フォーカスを作成者が決定した行数だけ下に移動します。 通常はスクロールして、現在可視の行のセットの一番下の行が最初の可視行の1つになります。 フォーカスがグリッドの最後の行にある場合、フォーカスは移動しません。
+    Page Down（任意）：フォーカスを作成者が決定した行数だけ下に移動します。 通常はスクロールして、現在可視の一連の行の一番下の行が最初の可視行の1つになります。 フォーカスがグリッドの最後の行にある場合、フォーカスは移動しません。
 
     Page Up (Optional): Moves focus up an author-determined number of rows, typically scrolling so the top row in the currently visible set of rows becomes one of the last visible rows. If focus is in the first row of the grid, focus does not move.
-    Page Up（任意）：フォーカスを作成者が決定した行数だけ上に移動します。 通常はスクロールして、現在可視の行のセットの一番上の行が最後の可視行の1つになります。 フォーカスがグリッドの最初の行にある場合、フォーカスは移動しません。
+    Page Up（任意）：フォーカスを作成者が決定した行数だけ上に移動します。 通常はスクロールして、現在可視の一連の行の一番上の行が最後の可視行の1つになります。 フォーカスがグリッドの最初の行にある場合、フォーカスは移動しません。
 
     Home (Optional): Either:
     Home（任意）：次のいずれか：
@@ -2555,16 +2555,16 @@ Note
     2. ダイアログが閉じると、次のいずれかを除いて、フォーカスはダイアログを呼び出した要素に戻ります。
 
         The invoking element no longer exists. Then, focus is set on another element that provides logical work flow.
-        呼び出し元の要素はもう存在しません。 次に、論理的なワークフローを提供する別の要素にフォーカスを当てます。
+        呼び出し元の要素はもう存在しません。 次に、論理的な作業の流れを提供する別の要素にフォーカスを当てます。
 
         The work flow design includes the following conditions that can occasionally make focusing a different element a more logical choice:
-        ワークフローの設計には、次の条件が含まれており、時として異なる要素にフォーカスを当てることがより論理的な選択になる場合があります。
+        作業の流れの設計には、次の条件が含まれており、時として異なる要素にフォーカスを当てることがより論理的な選択になる場合があります。
 
             It is very unlikely users need to immediately re-invoke the dialog.
             1. ユーザーがすぐにダイアログを再度呼び出す必要はほとんどありません。
 
             The task completed in the dialog is directly related to a subsequent step in the work flow.
-            2. ダイアログで完了したタスクは、ワークフローの後続のステップに直接関連しています。
+            2. ダイアログで完了したタスクは、作業の流れの後続のステップに直接関連しています。
 
         For example, a grid has an associated toolbar with a button for adding rows. the Add Rows button opens a dialog that prompts for the number of rows. After the dialog closes, focus is placed in the first cell of the first new row.
         例えば、グリッドには、行を追加するためのボタンが関連付けられたツールバーがあります。 行の追加ボタンをクリックすると、行数の入力を求めるダイアログが開きます。 ダイアログが閉じた後、フォーカスは最初の新しい行の最初のセルに配置されます。
@@ -2786,7 +2786,7 @@ WAI-ARIA Roles, States, and Properties
 WAI-ARIA のロール、状態、およびプロパティ
 
     The element that contains the set of feed articles has role feed.
-    フィード記事のセットを含む要素には、フィード（feed）ロールがあります。
+    一連のフィード記事を含む要素には、フィード（feed）ロールがあります。
 
     If the feed has a visible label, the feed element has aria-labelledby referring to the element containing the title. Otherwise, the feed element has a label specified with aria-label.
     フィードに可視ラベルがある場合、フィード要素には、タイトルを含む要素を参照することによって aria-labelled が付けられます。 それ以外の場合、フィード要素には aria-label で指定されたラベルがあります。
@@ -2847,7 +2847,7 @@ Examples
 例
 
     Layout Grid Examples: Three example implementations of grids that are used to lay out widgets, including a collection of navigation links, a message recipients list, and a set of search results.
-     レイアウトグリッドの例：ナビゲーションリンクのコレクション、メッセージ受信者リスト、検索結果のセットなど、ウィジェットのレイアウトに使用されるグリッドの3つの実装例。
+     レイアウトグリッドの例：ナビゲーションリンクのコレクション、メッセージ受信者リスト、一連の検索結果など、ウィジェットのレイアウトに使用されるグリッドの3つの実装例。
 
     Data Grid Examples: Three example implementations of grid that include features relevant to presenting tabular information, such as content editing, sort, and column hiding.
      データグリッドの例：コンテンツの編集、並べ替え、列の非表示など、表形式の情報の提示に関連する機能を含むグリッドの3つの実装例。
@@ -2890,10 +2890,10 @@ The following keys provide grid navigation by moving focus among cells of the gr
     上矢印：フォーカスを1セル上に移動します。 フォーカスが列の一番上のセルにある場合、フォーカスは移動しません。
 
     Page Down: Moves focus down an author-determined number of rows, typically scrolling so the bottom row in the currently visible set of rows becomes one of the first visible rows. If focus is in the last row of the grid, focus does not move.
-    Page Down：フォーカスを作成者が決定した行数だけ下に移動します。 通常はスクロールして、現在可視の行のセットの一番下の行が最初の可視行の1つになります。 フォーカスがグリッドの最後の行にある場合、フォーカスは移動しません。
+    Page Down：フォーカスを作成者が決定した行数だけ下に移動します。 通常はスクロールして、現在可視の一連の行の一番下の行が最初の可視行の1つになります。 フォーカスがグリッドの最後の行にある場合、フォーカスは移動しません。
 
     Page Up: Moves focus up an author-determined number of rows, typically scrolling so the top row in the currently visible set of rows becomes one of the last visible rows. If focus is in the first row of the grid, focus does not move.
-    Page Up：フォーカスを作成者が決定した行数だけ上に移動します。 通常はスクロールして、現在可視の行のセットの一番上の行が最後の可視行の1つになります。 フォーカスがグリッドの最初の行にある場合、フォーカスは移動しません。
+    Page Up：フォーカスを作成者が決定した行数だけ上に移動します。 通常はスクロールして、現在可視の一連の行の一番上の行が最後の可視行の1つになります。 フォーカスがグリッドの最初の行にある場合、フォーカスは移動しません。
 
     Home: moves focus to the first cell in the row that contains focus.
     Home：フォーカスをフォーカスを含む行の最初のセルに移動します。
@@ -2956,10 +2956,10 @@ Layout Grids for Grouping Widgets
 ウィジェットをグループ化するためのレイアウトグリッド
 
 The grid pattern can be used to group a set of interactive elements, such as links, buttons, or checkboxes. Since only one element in the entire grid is included in the tab sequence, grouping with a grid can dramatically reduce the number of tab stops on a page. This is especially valuable if scrolling through a list of elements dynamically loads more of those elements from a large data set, such as in a continuous list of suggested products on a shopping site. If elements in a list like this were in the tab sequence, keyboard users are effectively trapped in the list. If any elements in the group also have associated elements that appear on hover, the grid pattern is also useful for providing keyboard access to those contextual elements of the user interface.
-グリッドのパターンを使用して、リンク、ボタン、チェックボックスなどのインタラクティブな要素のセットをグループ化できます。 グリッド全体で1つの要素のみがタブシーケンスに含まれるため、グリッドでグループ化すると、ページ上のタブストップの数を大幅に減らすことができます。 これは、要素のリストをスクロールしていくことで、ショッピングサイトで提案された製品の連続リストなど、大きなデータセットからそれらの要素を動的に読み込む場合に特に役立ちます。 このようなリストの要素がタブシーケンスに含まれている場合、キーボードユーザーは事実上リストに閉じ込められます。 グループ内のいずれかの要素に、ホバーに表示される関連要素もある場合、グリッドのパターンは、ユーザーインターフェイスのそれらのコンテキスト要素へのキーボードアクセスを提供するのにも役立ちます。
+グリッドのパターンを使用して、リンク、ボタン、チェックボックスなどの一連のインタラクティブな要素をグループ化できます。 グリッド全体で1つの要素のみがタブシーケンスに含まれるため、グリッドでグループ化すると、ページ上のタブストップの数を大幅に減らすことができます。 これは、要素のリストをスクロールしていくことで、ショッピングサイトで提案された製品の連続リストなど、大きなデータセットからそれらの要素を動的に読み込む場合に特に役立ちます。 このようなリストの要素がタブシーケンスに含まれている場合、キーボードユーザーは事実上リストに閉じ込められます。 グループ内のいずれかの要素に、ホバーに表示される関連要素もある場合、グリッドのパターンは、ユーザーインターフェイスのそれらのコンテキスト要素へのキーボードアクセスを提供するのにも役立ちます。
 
 Unlike grids used to present data, A grid used for layout does not necessarily have header cells for labelling rows or columns and might contain only a single row or a single column. Even if it has multiple rows and columns, it may present a single, logically homogenous set of elements. For example, a list of recipients for a message may be a grid where each cell contains a link that represents a recipient. The grid may initially have a single row but then wrap into multiple rows as recipients are added. In such circumstances, grid navigation keys may also wrap so the user can read the list from beginning to end by pressing either Right Arrow or Down Arrow. While This type of focus movement wrapping can be very helpful in a layout grid, it would be disorienting if used in a data grid, especially for users of assistive technologies.
-データの提示に使用されるグリッドとは異なり、レイアウトに使用されるグリッドには、必ずしも行または列にラベルを付けるためのヘッダーセルがなく、単一行または単一列のみが含まれる場合があります。 複数の行と列がある場合でも、論理的に同種の単一の要素セットが提示される場合があります。 例えば、メッセージの受信者のリストは、各セルに受信者を表すリンクが含まれているグリッドである場合があります。 グリッドには最初は1つの行がありますが、受信者が追加されると複数の行に折り返されます。 このような状況では、グリッドナビゲーションキーも折り返される可能性があるため、ユーザーは右矢印または下矢印を押してリストを最初から最後まで読むことができます。 このタイプのフォーカス移動の折り返しは、レイアウトグリッドでは非常に役立ちますが、データグリッドで使用すると、特に支援技術のユーザーにとっては混乱を招くことになります。
+データの提示に使用されるグリッドとは異なり、レイアウトに使用されるグリッドには、必ずしも行または列にラベルを付けるためのヘッダーセルがなく、単一行または単一列のみが含まれる場合があります。 複数の行と列がある場合でも、論理的に同種で単一の一連の要素が提示される場合があります。 例えば、メッセージの受信者のリストは、各セルに受信者を表すリンクが含まれているグリッドである場合があります。 グリッドには最初は1つの行がありますが、受信者が追加されると複数の行に折り返されます。 このような状況では、グリッドナビゲーションキーも折り返される可能性があるため、ユーザーは右矢印または下矢印を押してリストを最初から最後まで読むことができます。 このタイプのフォーカス移動の折り返しは、レイアウトグリッドでは非常に役立ちますが、データグリッドで使用すると、特に支援技術のユーザーにとっては混乱を招くことになります。
 
 Because arrow keys are used to move focus inside of a grid, a grid is both easier to build and use if the components it contains do not require the arrow keys to operate. If a cell contains an element like a listbox, then an extra key command to focus and activate the listbox is needed as well as a command for restoring the grid navigation functionality. Approaches to supporting this need are described in the section on Editing and Navigating Inside a Cell.
 矢印キーはグリッド内でフォーカスを移動するために使用されるため、グリッドに含まれるコンポーネントが操作するために矢印キーを必要としない場合、グリッドの構築と使用の両方が簡単になります。 セルにリストボックスなどの要素が含まれている場合は、リストボックスにフォーカスしてアクティブ化するための追加のキーコマンドと、グリッドナビゲーション機能を復元するためのコマンドが必要です。 このニーズをサポートするためのアプローチは、セル内の編集とナビゲートのセクションで説明されています。
@@ -2986,10 +2986,10 @@ The following keys provide grid navigation by moving focus among cells of the gr
     上矢印：フォーカスを1セル上に移動します。 任意で、フォーカスが列の一番上のセルにある場合、フォーカスは前の列の一番下のセルに移動する場合があります。 フォーカスがグリッドの最初のセルにある場合、フォーカスは移動しません。
 
     Page Down (Optional): Moves focus down an author-determined number of rows, typically scrolling so the bottom row in the currently visible set of rows becomes one of the first visible rows. If focus is in the last row of the grid, focus does not move.
-    Page Down（任意）：フォーカスを作成者が決定した行数だけ下に移動します。 通常はスクロールして、現在可視の行のセットの一番下の行が最初の可視行の1つになります。 フォーカスがグリッドの最後の行にある場合、フォーカスは移動しません。
+    Page Down（任意）：フォーカスを作成者が決定した行数だけ下に移動します。 通常はスクロールして、現在可視の一連の行の一番下の行が最初の可視行の1つになります。 フォーカスがグリッドの最後の行にある場合、フォーカスは移動しません。
 
     Page Up (Optional): Moves focus up an author-determined number of rows, typically scrolling so the top row in the currently visible set of rows becomes one of the last visible rows. If focus is in the first row of the grid, focus does not move.
-    Page Up（任意）：フォーカスを作成者が決定した行数だけ上に移動します。 通常はスクロールして、現在可視の行のセットの一番上の行が最後の可視行の1つになります。 フォーカスがグリッドの最初の行にある場合、フォーカスは移動しません。
+    Page Up（任意）：フォーカスを作成者が決定した行数だけ上に移動します。 通常はスクロールして、現在可視の一連の行の一番上の行が最後の可視行の1つになります。 フォーカスがグリッドの最初の行にある場合、フォーカスは移動しません。
 
     Home: moves focus to the first cell in the row that contains focus. Optionally, if the grid has a single column or fewer than three cells per row, focus may instead move to the first cell in the grid.
     Home：フォーカスをフォーカスを含む行の最初のセルに移動します。 任意で、グリッドの列が1つであるか、行ごとにセルが3つ未満の場合、代わりにフォーカスがグリッドの最初のセルに移動することがあります。
@@ -3265,7 +3265,7 @@ Avoiding very long option names facilitates understandability and perceivability
 非常に長いオプション名を避けることで、スクリーンリーダーユーザーの理解と認識が容易になります。 オプションの名前全体は、オプションが読み取られるときに単一の音声単位として話されます。 キーを1回押すだけで多くの情報が話されると、理解しにくくなります。 長い名前は、ユーザーが通常オプション全体を読み直す必要があるため、中断された音声の影響を増大させることによって知覚を阻害します。 また、ユーザーが何を話しているのか理解できない場合、リストボックスウィジェットのコンテキストでは、多くのスクリーンリーダーユーザーにとって、文字、単語、またはフレーズで名前を読み取るのは難しい操作になる可能性があります。
 
 Sets of options where each option name starts with the same word or phrase can also significantly degrade usability for keyboard and screen reader users. Scrolling through the list to find a specific option becomes inordinately time consuming for a screen reader user who must listen to that word or phrase repeated before hearing what is unique about each option. For example, if a listbox for choosing a city were to contain options where each city name were preceded by a country name, and if many cities were listed for each country, a screen reader user would have to listen to the country name before hearing each city name. In such a scenario, it would be better to have 2 list boxes, one for country and one for city.
-各オプション名が同じ単語またはフレーズで始まるオプションのセットも、キーボードおよびスクリーンリーダーのユーザーの使いやすさを大幅に低下させる可能性があります。 リストをスクロールしていくことで特定のオプションを見つけることは、各オプションの独自部分を聞く前にその単語やフレーズを繰り返し聞く必要があるスクリーンリーダーユーザーにとっては非常に時間がかかります。 例えば、都市を選択するためのリストボックスに、各都市名の前に国名が付いたオプションが含まれている場合、および国ごとに多くの都市がリストされている場合、スクリーンリーダーのユーザーは各都市名を聞く前に国名を聞く必要があります。 このようなシナリオでは、国用と都市用の2つのリストボックスを用意することをお勧めします。
+各オプション名が同じ単語またはフレーズで始まる一連のオプションも、キーボードおよびスクリーンリーダーのユーザーの使いやすさを大幅に低下させる可能性があります。 リストをスクロールしていくことで特定のオプションを見つけることは、各オプションの独自部分を聞く前にその単語やフレーズを繰り返し聞く必要があるスクリーンリーダーユーザーにとっては非常に時間がかかります。 例えば、都市を選択するためのリストボックスに、各都市名の前に国名が付いたオプションが含まれている場合、および国ごとに多くの都市がリストされている場合、スクリーンリーダーのユーザーは各都市名を聞く前に国名を聞く必要があります。 このようなシナリオでは、国用と都市用の2つのリストボックスを用意することをお勧めします。
 
 
 
@@ -3701,7 +3701,7 @@ WAI-ARIA のロール、状態、およびプロパティ
     メニュー項目が無効化されている場合、aria-disabled は true に設定されます。
 
     Items in a menu may be divided into groups by placing an element with a role of separator between groups. For example, this technique should be used when a menu contains a set of menuitemradio items.
-    メニュー内の項目は、グループ間に区切り（separator、セパレーター）ロールを持つ要素を配置することにより、グループに分割できます。 例えば、この手法は、メニューにメニュー項目ラジオボタンの項目のセットが含まれている場合に使用する必要があります。
+    メニュー内の項目は、グループ間に区切り（separator、セパレーター）ロールを持つ要素を配置することにより、グループに分割できます。 例えば、この手法は、メニューに一連のメニュー項目ラジオボタンの項目が含まれている場合に使用する必要があります。
 
     All separators should have aria-orientation consistent with the separator's orientation.
     すべての区切りは、区切りの方向と一致する aria-orientation を持っている必要があります。
@@ -3879,7 +3879,7 @@ WAI-ARIA のロール、状態、およびプロパティ
 3.18 ラジオグループ
 
 A radio group is a set of checkable buttons, known as radio buttons, where no more than one of the buttons can be checked at a time. Some implementations may initialize the set with all buttons in the unchecked state in order to force the user to check one of the buttons before moving past a certain point in the workflow.
-ラジオグループ（radio group）は、ラジオボタン（radio buttons）と呼ばれるチェック可能なボタンのセットであり、一度にチェックできるボタンは1つだけです。 一部の実装では、ワークフローの特定のポイントを通過する前にユーザーにボタンの1つをチェックさせるために、すべてのボタンがチェックされていない状態でセットを初期化する場合があります。
+ラジオグループ（radio group）は、ラジオボタン（radio buttons）と呼ばれるチェック可能なボタンのセットであり、一度にチェックできるボタンは1つだけです。 一部の実装では、作業の流れの特定のポイントを通過する前にユーザーにボタンの1つをチェックさせるために、すべてのボタンがチェックされていない状態でセットを初期化する場合があります。
 
 
 
@@ -4385,13 +4385,13 @@ Tabs or Tabbed Interface
 タブ（Tabs）またはタブ付きインターフェイス（Tabbed Interface）
 
     A set of tab elements and their associated tab panels.
-    タブ要素のセットとそれに関連するタブパネル。
+    一連のタブ要素とそれに関連するタブパネル。
 
 Tab List
 タブリスト（Tab List）
 
     A set of tab elements contained in a tablist element.
-    タブリスト要素に含まれるタブ要素のセット。
+    タブリスト要素に含まれる一連のタブ要素。
 
 tab
 タブ（tab）
@@ -4462,7 +4462,7 @@ For the tab list:
 
 
         Delete (Optional): If deletion is allowed, deletes (closes) the current tab element and its associated tab panel, sets focus on the tab following the tab that was closed, and optionally activates the newly focused tab. If there is not a tab that followed the tab that was deleted, e.g., the deleted tab was the right-most tab in a left-to-right horizontal tab list, sets focus on and optionally activates the tab that preceded the deleted tab. If the application allows all tabs to be deleted, and the user deletes the last remaining tab in the tab list, the application moves focus to another element that provides a logical work flow. As an alternative to Delete, or in addition to supporting Delete, the delete function is available in a context menu.
-        Delete（任意）：削除が許可されている場合、現在のタブ要素とそれに関連するタブパネルを削除（閉じ）、フォーカスを閉じられたタブに続くタブに設定し、任意で新しくフォーカスされたタブをアクティブ化します。 削除されたタブの後に続くタブがない場合（例えば、削除されたタブが左から右の水平タブリストの右端のタブであった場合）、削除されたタブの前のタブにフォーカスを設定し、任意でそのタブをアクティブ化します。 アプリケーションがすべてのタブの削除を許可し、ユーザーがタブリストの最後に残っているタブを削除した場合、アプリケーションは論理ワークフローを提供する別の要素にフォーカスを移動します。 Delete の代わりに、または Delete のサポートに加えて、削除機能をコンテキストメニューで使用できます。
+        Delete（任意）：削除が許可されている場合、現在のタブ要素とそれに関連するタブパネルを削除（閉じ）、フォーカスを閉じられたタブに続くタブに設定し、任意で新しくフォーカスされたタブをアクティブ化します。 削除されたタブの後に続くタブがない場合（例えば、削除されたタブが左から右の水平タブリストの右端のタブであった場合）、削除されたタブの前のタブにフォーカスを設定し、任意でそのタブをアクティブ化します。 アプリケーションがすべてのタブの削除を許可し、ユーザーがタブリストの最後に残っているタブを削除した場合、アプリケーションは論理的な作業の流れを提供する別の要素にフォーカスを移動します。 Delete の代わりに、または Delete のサポートに加えて、削除機能をコンテキストメニューで使用できます。
 
 Note
 注
@@ -4493,7 +4493,7 @@ WAI-ARIA Roles, States, and Properties
 WAI-ARIA のロール、状態、およびプロパティ
 
     The element that serves as the container for the set of tabs has role tablist.
-    タブのセットのコンテナーとして機能する要素には、タブリスト（tablist）ロールがあります。
+    一連のタブのコンテナーとして機能する要素には、タブリスト（tablist）ロールがあります。
 
     Each element that serves as a tab has role tab and is contained within the element with role tablist.
     タブとして機能する各要素には、タブ（tab）ロールがあり、タブリストロールを持つ要素内に含まれています。
@@ -4536,7 +4536,7 @@ A toolbar is a container for grouping a set of controls, such as buttons, menubu
 ツールバー（toolbar）は、ボタン、メニューボタン、チェックボックスなどの一連のコントロールをグループ化するためのコンテナーです。
 
 When a set of controls is visually presented as a group, the toolbar role can be used to communicate the presence and purpose of the grouping to screen reader users. Grouping controls into toolbars can also be an effective way of reducing the number of tab stops in the keyboard interface.
-コントロールのセットがグループとして視覚的に提示される場合、ツールバーロールを使用して、グループ化の存在と目的をスクリーンリーダーのユーザーに伝えることができます。 コントロールをツールバーにグループ化することも、キーボードインターフェイスのタブストップの数を減らす効果的な方法です。
+一連のコントロールがグループとして視覚的に提示される場合、ツールバーロールを使用して、グループ化の存在と目的をスクリーンリーダーのユーザーに伝えることができます。 コントロールをツールバーにグループ化することも、キーボードインターフェイスのタブストップの数を減らす効果的な方法です。
 
 To optimize the benefit of toolbar widgets:
 ツールバーウィジェットの利点を最適化するには：
@@ -5087,19 +5087,19 @@ The following keys provide treegrid navigation by moving focus among rows and ce
     Page Down：
 
         If focus is on a row, moves focus down an author-determined number of rows, typically scrolling so the bottom row in the currently visible set of rows becomes one of the first visible rows. If focus is in the last row, focus does not move.
-        フォーカスが行にある場合、フォーカスを作成者が決定した行数だけ下に移動します。 通常はスクロールして、現在可視の行のセットの一番下の行が最初の可視行の1つになります。 フォーカスが最後の行にある場合、フォーカスは移動しません。
+        フォーカスが行にある場合、フォーカスを作成者が決定した行数だけ下に移動します。 通常はスクロールして、現在可視の一連の行の一番下の行が最初の可視行の1つになります。 フォーカスが最後の行にある場合、フォーカスは移動しません。
 
         If focus is on a cell, moves focus down an author-determined number of cells, typically scrolling so the bottom row in the currently visible set of rows becomes one of the first visible rows. If focus is in the last row, focus does not move.
-        フォーカスがセルにある場合は、フォーカスを作成者が決定したセル数だけ下に移動します。 通常はスクロールして、現在可視の行のセットの一番下の行が最初の可視行の1つになります。 フォーカスが最後の行にある場合、フォーカスは移動しません。
+        フォーカスがセルにある場合、フォーカスを作成者が決定したセル数だけ下に移動します。 通常はスクロールして、現在可視の一連の行の一番下の行が最初の可視行の1つになります。 フォーカスが最後の行にある場合、フォーカスは移動しません。
 
     Page Up:
     Page Up：
 
         If focus is on a row, moves focus up an author-determined number of rows, typically scrolling so the top row in the currently visible set of rows becomes one of the last visible rows. If focus is in the first row, focus does not move.
-        フォーカスが行にある場合、フォーカスを作成者が決定した行数だけ上に移動します。 通常はスクロールして、現在可視の行のセットの一番上の行が最後の可視行の1つになります。 フォーカスが最初の行にある場合、フォーカスは移動しません。
+        フォーカスが行にある場合、フォーカスを作成者が決定した行数だけ上に移動します。 通常はスクロールして、現在可視の一連の行の一番上の行が最後の可視行の1つになります。 フォーカスが最初の行にある場合、フォーカスは移動しません。
 
         If focus is on a cell, moves focus up an author-determined number of cells, typically scrolling so the top row in the currently visible set of rows becomes one of the last visible rows. If focus is in the first row, focus does not move.
-        フォーカスがセルにある場合、フォーカスを作成者が決定したセル数だけ上に移動します。 通常はスクロールして、現在可視の行のセットの一番上の行が最後の可視行の1つになります。 フォーカスが最初の行にある場合、フォーカスは移動しません。
+        フォーカスがセルにある場合、フォーカスを作成者が決定したセル数だけ上に移動します。 通常はスクロールして、現在可視の一連の行の一番上の行が最後の可視行の1つになります。 フォーカスが最初の行にある場合、フォーカスは移動しません。
 
     Home:
     Home：
@@ -5240,7 +5240,7 @@ WAI-ARIA のロール、状態、およびプロパティ
         セルに列または行のヘッダー情報が含まれていない場合は、グリッドセル（gridcell）。
 
     A row that can be expanded or collapsed to show or hide a set of child rows is a parent row. Each parent row has the aria-expanded state set on either the row element or on a cell contained in therow. The aria-expanded state is set to false when the child rows are not displayed and set to true when the child rows are displayed. Rows that do not control display of child rows do not have the aria-expanded attribute because, if they were to have it, they would be incorrectly described to assistive technologies as parent rows.
-    子行のセットを表示または非表示にするために展開または折りたたむことができる行は、親行です。 各親行には、行要素または行に含まれるセルのいずれかに設定された aria-expanded 状態があります。 aria-expanded 状態は、子行が表示されていない場合は false に設定され、子行が表示されている場合は true に設定されます。 子行の表示を制御しない行には、aria-expanded 属性がありません。 これは、子行がある場合、支援技術に対して親行として誤って説明されるためです。
+    一連の子行を表示または非表示にするために展開または折りたたむことができる行は、親行です。 各親行には、行要素または行に含まれるセルのいずれかに設定された aria-expanded 状態があります。 aria-expanded 状態は、子行が表示されていない場合は false に設定され、子行が表示されている場合は true に設定されます。 子行の表示を制御しない行には、aria-expanded 属性がありません。 これは、子行がある場合、支援技術に対して親行として誤って説明されるためです。
 
     If the treegrid supports selection of more than one row or cell, it is a multi-select treegrid and the element with role treegrid has aria-multiselectable set to true. Otherwise, it is a single-select treegrid, and aria-multiselectable is either set to false or the default value of false is implied.
     ツリーグリッドが複数の行またはセルの選択をサポートしている場合、それは複数選択ツリーグリッドであり、ツリーグリッドロールを持つ要素の aria-multiselectable が true に設定されています。 それ以外の場合、単一選択ツリーグリッドであり、aria-multiselectable が false に設定されているか、デフォルト値の false が暗黙指定されています。
@@ -5477,7 +5477,7 @@ Step 3: Label areas
 ステップ3：エリアにラベルを付ける
 
     If a specific landmark role is used more than once on a page, provide each instance of that landmark with a unique label. There is one rare circumstance where providing the same label to multiple instances of a landmark can be beneficial: the content and purpose of each instance is identical. For example, a large search results table has two sets of identical pagination controls -- one above and one below the table, so each set is in a navigation region labelled "Search Results". In this case, adding extra information to the label that distinguishes the two instances may be more distracting than helpful.
-    特定のランドマークロールがページで複数回使用されている場合は、そのランドマークの各インスタンスに一意のラベルを付けます。 ランドマークの複数のインスタンスに同じラベルを提供することが有益なまれな状況が1つあります。 それは、各インスタンスのコンテンツと目的が同じであるということです。 例えば、大きな検索結果テーブルには、テーブルの上と下に同じページ付けコントロールの2つのセットがあり、それぞれのセットは「検索結果」というラベルの付いたナビゲーションリージョンにあります。 この場合、2つのインスタンスを区別する追加情報をラベルに追加すると、役立つというよりも気が散る可能性があります。
+    特定のランドマークロールがページで複数回使用されている場合は、そのランドマークの各インスタンスに一意のラベルを付けます。 ランドマークの複数のインスタンスに同じラベルを提供することが有益なまれな状況が1つあります。 それは、各インスタンスのコンテンツと目的が同じであるということです。 例えば、大きな検索結果テーブルには、テーブルの上と下に同じページ付けコントロールのセットが2つあり、それぞれのセットは「検索結果」というラベルの付いたナビゲーションリージョンにあります。 この場合、2つのインスタンスを区別する追加情報をラベルに追加すると、役立つというよりも気が散る可能性があります。
 
     If a landmark is only used once on the page it may not require a label. See Landmark Roles section below.
     ランドマークがページ上で1回だけ使用される場合、ラベルは必要ない場合があります。 以下のランドマークロールのセクションを参照してください。
@@ -8859,7 +8859,7 @@ When all the cells in a row have column index numbers that are consecutive integ
 行のすべてのセルに連続する整数の列インデックス番号がある場合、aria-colindex は、セットの最初の列インデックス番号と等しい値で行要素に設定できます。 次に、ブラウザーは行の各セルの列番号を計算します。
 
 The following code shows a grid with 16 columns, of which columns 2 through 5 are displayed to the user. Because the set of columns is contiguous, aria-colindex can be placed on each row.
-次のコードは、16 列のグリッドを示しており、そのうち列 2 から列 5 がユーザーに表示されます。 列のセットは連続しているため、aria-colindex を各行に配置できます。 
+次のコードは、16 列のグリッドを示しており、そのうち列 2 から列 5 がユーザーに表示されます。 一連の列は連続しているため、aria-colindex を各行に配置できます。 
 
         
 
