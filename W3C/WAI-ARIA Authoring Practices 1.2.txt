@@ -842,7 +842,7 @@ Table of Contents
         C.4
 
         Enabling funders
-        資金提供者の有効化
+        可能にする資金提供者
 
     D.
 
