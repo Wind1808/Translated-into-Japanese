@@ -1,4 +1,4 @@
-https://hacks.mozilla.org/2020/12/welcome-yari-mdn-web-docs-has-a-new-platform/
+https://hacks.mozilla.org/welcome-yari-mdn-web-docs-has-a-new-platform/
 
 Welcome Yari: MDN Web Docs has a new platform
 ようこそ Yari：MDN Web Docs には新しいプラットフォームがあります

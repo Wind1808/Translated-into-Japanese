@@ -1,4 +1,4 @@
-https://hacks.mozilla.org/2020/12/an-update-on-mdn-web-docs-localization-strategy/
+https://hacks.mozilla.org/an-update-on-mdn-web-docs-localization-strategy/
 
 An update on MDN Web Docs’ localization strategy
 MDN Web Docs のローカリゼーション戦略に関する最新情報
