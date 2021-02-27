@@ -1,0 +1,326 @@
+https://hacks.mozilla.org/mdn-localization-update-february-2021/
+
+MDN localization update, February 2021
+MDN ローカリゼーションの最新情報、2021年2月
+
+By Chris Mills
+
+Posted on February 11, 2021 in Featured Article, Localization, and MDN
+2021年2月11日に特集記事、ローカリゼーション、および MDN に投稿されました
+
+In our previous post, An update on MDN Web Docs’ localization strategy, we explained our broad strategy for moving forward with allowing translation edits on MDN again. The MDN localization communities are waiting for news of our progress on unfreezing the top-tier locales, and here we are. In this post we’ll look at where we’ve got to so far in 2021, and what you can expect moving forward.
+前回の投稿、MDN Web Docs のローカリゼーション戦略に関する最新情報では、MDN での翻訳編集を再び許可することで前進するための幅広い戦略について説明しました。 MDN ローカリゼーションコミュニティは、トップティアロケールのフリーズ解除の進捗状況に関するニュースを待っています。 この投稿では、2021年にこれまでに到達した場所と、今後期待できることについて説明します。 
+
+
+
+
+Normalizing slugs between locales
+ロケール間のスラッグの正規化
+
+Previously on MDN, we allowed translators to localize document URL slugs as well as the document title and body content. This sounds good in principle, but has created a bunch of problems. It has resulted in situations where it is very difficult to keep document structures consistent.
+以前の MDN では、翻訳者がドキュメントの URL スラッグ、およびドキュメントのタイトルと本文のコンテンツをローカライズできるようにしました。これは原則的には良いように聞こえますが、多くの問題を引き起こしています。 その結果、ドキュメント構造の一貫性を保つことが非常に困難な状況になっています。
+
+If you want to change the structure or location of a set of documentation, it can be nearly impossible to verify that you’ve moved all of the localized versions along with the en-US versions — some of them will be under differently-named slugs both in the original and new locations, meaning that you’d have to spend time tracking them down, and time creating new parent pages with the correct slugs, etc.
+一連のドキュメントの構造や場所を変更する場合、ローカライズされたすべてのバージョンを en-US バージョンと一緒に移動したことを確認することはほぼ不可能です。 それらの一部は、元の場所と新しい場所の両方で異なる名前のスラッグの下にあります。 つまり、それらを追跡したり、正しいスラッグを使用して新しい親ページを作成したりするのに時間を費やす必要があります。
+
+As a knock-on effect, this has also resulted in a number of localized pages being orphaned (not being attached to any parent en-US pages), and a number of en-US pages being translated more than once (e.g. localized once under the existing en-US slug, and then again under a localized slug).
+ドミノ効果として、これにより、多くのローカライズされたページが孤立し（親の en-US ページに付属していない）、多くの en-US ページが複数回翻訳されました（例えば、既存の en-US スラッグの下で、そしてローカライズされたスラッグの下で再び）。
+
+For example, the following table shows the top-level directories in the en-US locale as of Feb 1, 2021, compared to that of the fr locale.
+例えば、次の表は、2021年2月1日現在の en-US ロケールの最上位ディレクトリを fr ロケールのものと比較したものです。
+
+
+en-US 	fr
+
+games
+
+glossary
+
+learn
+
+mdn
+
+mozilla
+
+plugins
+
+related
+
+tools
+
+web
+
+webassembly 	accessibilité
+
+adaptation_des_applications_xul_pour_firefox_1.5
+
+améliorations_dom_dans_firefox_3
+
+améliorations_svg_dans_firefox_3
+
+améliorations_xul_dans_firefox_3
+
+apprendre
+
+astuces_css
+
+bugs_importants_corrigés_dans_firefox_3
+
+changements_dans_gecko_1.9_affectant_les_sites_web
+
+chrome
+
+comment_créer_un_arbre_dom
+
+compilation_et_installation
+
+contrôles_dhtml_personnalisés_navigables_au_clavier
+
+css
+
+dhtml
+
+dom
+
+développement_web
+
+explorer_un_tableau_html_avec_des_interfaces_dom_et_javascript
+
+faq_sur_les_transformations_xsl_dans_mozilla
+
+fuel
+
+games
+
+glossaire
+
+glossary
+
+html
+
+inset-block-end
+
+inset-block-start
+
+inset-inline-end
+
+inset-inline-start
+
+inspecteur_dom
+
+introduction_(alternative)
+
+introduction_à_la_cryptographie_à_clef_publique
+
+javascript
+
+jeux
+
+la_sécurité_dans_firefox_2
+
+learn
+
+localization
+
+mdn
+
+mdn_a_dix_ans
+
+mise_à_jour_des_applications_web_pour_firefox_3
+
+mise_à_jour_des_extensions_pour_firefox_2
+
+mise_à_jour_des_extensions_pour_firefox_3
+
+mozilla
+
+navigatorusermedia.getusermedia
+
+npapi
+
+outils
+
+référence_dom_gecko
+
+sgml
+
+svg_dans_firefox
+
+tosource
+
+tostring
+
+type_mime_incorrect_pour_les_fichiers_css
+
+un_raycaster_basique_avec_canvas
+
+utilisation_de_xpath
+
+utilisation_du_cache_de_firefox_1.5
+
+web
+
+webapi
+
+webassembly
+
+webrtc
+
+xhtml
+
+xmlserializer
+
+xpcom
+
+xslt_dans_gecko
+
+xsltprocessor
+
+zoom_pleine_page
+
+à_propos_du_document_object_model
+
+
+To make the non-en-US locales consistent and manageable, we are going to move to having en-US slugs only — all localized pages will be moved under their equivalent location in the en-US tree. In cases where that location cannot be reliably determined — e.g. where the documents are orphans or duplicates — we will put those documents into a specific storage directory, give them an appropriate prefix, and ask the maintenance communities for each unfrozen locale to sort out what to do with them.
+en-US 以外のロケールの一貫性と管理性を高めるために、en-US スラッグのみを使用するように移行します。 ローカライズされたすべてのページは、en-US ツリー内の同等の場所に移動されます。 その場所を確実に特定できない場合（例：ドキュメントが孤立または重複している場合）これらのドキュメントを特定の保管ディレクトリに配置し、適切なプレフィックスを付けて、凍結されていない各ロケールのメンテナンスコミュニティに、それらをどうするかを整理するように依頼します。
+
+    Every localized document will be kept in a separate repo to the en-US content, but will have a corresponding en-US document with the same slug (folder path).
+    ローカライズされたすべてのドキュメントは、en-US コンテンツとは別のリポジトリに保持されますが、同じスラッグ（フォルダーパス）を持つ対応する en-US ドキュメントがあります。
+
+    At first this will be enforced during deployment — we will move all the localized documents so that their locations are synchronized with their en-US equivalents. Every document that does not have a corresponding en-US document will be prefixed with orphaned during deployment. We plan to further automate this to check whenever a PR is created against the repo. We will also funnel back changes from the main en-US content repo, i.e. if an en-US page is moved, the localized equivalents will be automatically moved too.
+    最初は、これは展開中に適用されます。 ローカライズされたすべてのドキュメントを移動して、それらの場所が en-US 内の同等のドキュメントと同期されるようにします。 対応する en-US ドキュメントがないすべてのドキュメントには、展開中に孤立している（orphaned）というプレフィックスが付けられます。 これをさらに自動化して、リポジトリに対してプルリクエスト（PR）が作成されるたびにチェックする予定です。 また、メインの en-US コンテンツリポジトリからの変更をファネルバックます。 つまり、en-US ページが移動されると、ローカライズされた同等のページも自動的に移動されます。
+
+    All locales will be migrated, unfortunately, some documents will be marked as orphaned and some others will be marked as conflicting (as in adding a prefix conflicting to their slug). Conflicting documents have a corresponding en-US document with multiple translations in the same locale.
+    すべてのロケールが移行されますが、残念ながら、一部のドキュメントは孤立（orphaned）としてマークされ、その他のドキュメントは競合（conflicting）としてマークされます（スラッグに競合するプレフィックスを追加する場合など）。 競合するドキュメントには、同じロケール内に1つの en-US ドキュメントに対応する複数の翻訳があります。
+
+    We plan to delete, archive, or move out orphaned/conflicting content.
+    孤立した/競合するコンテンツを削除、アーカイブ、または移動する予定です。
+
+    Nothing will be lost since everything is in a git repo (even if something is deleted, it can still be recovered from the git history).
+    すべてが git リポジトリにあるため、何も失われません（何かが削除された場合でも、git 履歴から復元できます）。
+
+
+
+
+
+Processes for identifying unmaintained content
+メンテナンスされていないコンテンツを識別するためのプロセス
+
+The other problem we have been wrestling with is how to identify what localized content is worth keeping, and what isn’t. Since many locales have been largely unmaintained for a long time, they contain a lot of content that is very out-of-date and getting further out-of-date as time goes on. Many of these documents are either not relevant any more at all, incomplete, or simply too much work to bring up to date (it would be better to just start from nothing).
+私たちが取り組んできたもう1つの問題は、ローカライズされたコンテンツを維持する価値があるものとそうでないものをどのように特定するかです。 多くのロケールは長い間ほとんど保守されていないため、非常に古く、時間が経つにつれてさらに古くなるコンテンツがたくさん含まれています。 これらのドキュメントの多くは、まったく関連性がないか、不完全であるか、または単に最新の状態にするには作業が多すぎるかのいずれかです（何もないところから始める方がよいでしょう）。
+
+It would be better for everyone involved to just delete this unmaintained content, so we can concentrate on higher-value content.
+関係者全員が、このメンテナンスされていないコンテンツを削除するだけで、より価値の高いコンテンツに集中できるようになります。
+
+The criteria we have identified so far to indicate unmaintained content is as follows:
+メンテナンスされていないコンテンツを示すためにこれまでに特定した基準は次のとおりです。
+
+    Pages that should have compat tables, which are missing them.
+    互換性テーブルが必要なページで、それらが欠落しています。
+
+    Pages that should have interactive examples and/or embedded examples, which are missing them.
+    インタラクティブな例や埋め込まれた例が必要なページで、それらが欠落しています。
+
+    Pages that should have a sidebar, but don’t.
+    サイドバーがあるはずなのに、ないページ。
+
+    Pages where the KumaScript is breaking so much that it’s not really renderable in a usable way.
+    KumaScript が壊れすぎているため、実際には使用可能な方法でレンダリングできないページ。
+
+These criteria are largely measurable; we ran some scripts on the translated pages to calculate which ones could be marked as unmaintained (they match one or more of the above). The results are as follows:
+これらの基準は主に測定可能です。 翻訳されたページでいくつかのスクリプトを実行して、メンテナンスされていないものとしてマークできるかを計算しました（上記の1つ以上に一致します）。 結果は次のとおりです。
+
+If you look for compat, interactive examples, live samples, orphans, and all sidebars:
+互換性テーブル、インタラクティブな例、ライブサンプル、孤立したもの、およびすべてのサイドバーを探す場合：
+
+    Unmaintained: 30.3%
+    メンテナンスされていない：30.3％
+
+    Disconnected (orphaned): 3.1%
+    切断（孤立）：3.1％
+
+If you look for compat, interactive examples, live samples, orphans, but not sidebars:
+互換性テーブル、インタラクティブな例、ライブサンプル、孤立したものを探しているが、サイドバーは探していない場合：
+
+    Unmaintained: 27.5%
+    メンテナンスされていない：27.5％
+
+    Disconnected (orphaned):  3.1%
+    切断（孤立）：3.1％
+
+This would allow us to get rid of a large number of low-quality pages, and make dealing with localizations easier.
+これにより、低品質のページを多数取り除くことができ、ローカリゼーションの処理が容易になります。
+
+We created a spreadsheet that lists all the pages that would be put in the unmaintained category under the above rules, in case you were interested in checking them out.
+上記のルールの下でメンテナンスされていないカテゴリに分類されるすべてのページを一覧表示するスプレッドシートを作成しましたので、興味のある方はチェックしてみてください。
+
+
+
+
+Stopping the display of non-tier 1 locales
+ティア 1 でないロケールの表示の停止
+
+After we have unfrozen the “tier 1” locales (fr, ja, zh-CN, zh-TW), we are planning to stop displaying other locales. If no-one has the time to maintain a locale, and it is getting more out-of-date all the time, it is better to just not show it rather than have potentially harmful unmaintained content available to mislead people.
+「ティア 1」ロケール（fr、ja、zh-CN、zh-TW）の凍結を解除した後、他のロケールの表示を停止する予定です。 ロケールを維持する時間がなく、常に古くなっている場合は、潜在的に有害な維持されていないコンテンツで人々に誤解させるよりも、表示しない方がよいでしょう。
+
+This makes sense considering how the system currently works. If someone has their browser language set to say fr, we will automatically serve them the fr version of a page, if it exists, rather than the en-US version — even if the fr version is old and really out-of-date, and the en-US version is high-quality and up-to-date.
+これは、システムが現在どのように機能しているかを考えると理にかなっています。 ブラウザーの言語が fr と設定されている場合、fr バージョンが古くて実際に古くなっていても、en-US バージョンではなく、fr バージョンのページが存在する場合は自動的に提供されます。 また、en-US バージョンは高品質で最新です。
+
+Going forward, we will show en-US and the tier 1 locales that have active maintenance communities, but we will not display the other locales. To get a locale displayed again, we require an active community to step up and agree to have responsibility for maintaining that locale (which means reviewing pull requests, fixing issues filed against that locale, and doing a reasonable job of keeping the content up to date as new content is added to the en-US docs).
+今後は、アクティブなメンテナンスコミュニティを持つ en-US およびティア 1 ロケールを表示しますが、他のロケールは表示しません。 ロケールを再度表示するには、アクティブなコミュニティがステップアップして、そのロケールを維持する責任があることに同意する必要があります（つまり、プルリクエストを確認し、そのロケールに対して提出された問題を修正し、新しいコンテンツが en-US ドキュメントに追加されたとき、コンテンツを最新の状態に保つための合理的な仕事をします）。
+
+If you are interested in maintaining an unmaintained locale, we are more than happy to talk to you. We just need a plan. Please get in touch!
+メンテナンスされていないロケールの維持に関心がある場合は、喜んでご相談させていただきます。 計画が必要です。 連絡してください！
+
+Note: Not showing the non-tier 1 locales doesn’t mean that we will delete all the content. We are intending to keep it available in our archived-content repo in case anyone needs to access it.
+注：ティア 1 以外のロケールを表示しないからといって、すべてのコンテンツが削除されるわけではありません。 誰かがアクセスする必要がある場合に備えて、アーカイブされたコンテンツリポジトリで利用できるようにする予定です。
+
+
+
+
+Next steps
+次のステップ
+
+The immediate next step is to get the tier 1 locales unfrozen, so we can start to get those communities active again and make that content better. We are hoping to get this done by the start of March. The normalizing slugs work will happen as part of this.
+次のステップは、ティア 1 ロケールをフリーズ解除することです。 これにより、これらのコミュニティを再びアクティブにして、コンテンツを改善することができます。 これは3月の初めまでに完了することを望んでいます。 スラッグの正規化作業は、この一環として行われます。
+
+After that we will start to look at stopping the display of non-tier 1 localized content — that will follow soon after.
+その後、ティア 1 以外のローカライズされたコンテンツの表示を停止する方法を検討し始めます。 これはすぐ後に続きます。
+
+Identifying and removing unmaintained content will be a longer game to play — we want to involve our active localization communities in this work for the tier 1 locales, so this will be done after the other two items.
+メンテナンスされていないコンテンツを特定して削除することは、長丁場になります。 ティア 1 ロケールのこの作業にアクティブなローカリゼーションコミュニティを関与させたいので、これは他の2つの項目の後に行われます。 
+
+
+
+
+About Chris Mills
+
+Chris Mills is a senior tech writer at Mozilla, where he writes docs and demos about open web apps, HTML/CSS/JavaScript, A11y, WebAssembly, and more. He loves tinkering around with web technologies, and gives occasional tech talks at conferences and universities. He used to work for Opera and W3C, and enjoys playing heavy metal drums and drinking good beer. He lives near Manchester, UK, with his good lady and three beautiful children.
+
+More articles by Chris Mills…
+
+Discover great resources for web development
+
+Sign up for the Mozilla Developer Newsletter:
+
+E-mail
+
+I'm okay with Mozilla handling my info as explained in this Privacy Policy.
+
+No comments yet
+コメントはまだありません
+
+Post Your Comment
+
+Your name *
+
+Your e-mail *
+
+Spam robots, please fill in this field. Humans should leave it blank.
+スパムロボット、このフィールドに入力してください。 人間はそれを空白のままにする必要があります。
+
+Your comment
+
+Except where otherwise noted, content on this site is licensed under the Creative Commons Attribution Share-Alike License v3.0 or any later version.
+
+the Mozilla dino logo
