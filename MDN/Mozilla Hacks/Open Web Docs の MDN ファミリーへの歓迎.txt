@@ -1,0 +1,177 @@
+https://hacks.mozilla.org/welcoming-open-web-docs-to-the-mdn-family/
+
+Welcoming Open Web Docs to the MDN family
+Open Web Docs の MDN ファミリーへの歓迎
+
+By Chris Mills
+
+Posted on January 25, 2021 in Featured Article and MDN
+2021年1月25日に特集記事と MDN に投稿されました
+
+Collaborating with the community has always been at the heart of MDN Web Docs content work — individual community members constantly make small (and not so small) fixes to help incrementally improve the content, and our partner orgs regularly come on board to help with strategy and documenting web platform features that they have an interest in.
+コミュニティとのコラボレーションは、常に MDN Web Docs コンテンツ作業の中心です。 個々のコミュニティメンバーは、コンテンツを段階的に改善するために常に小さな（そしてそれほど小さくはない）修正を行い、パートナー組織は戦略と 彼らが興味を持っているウェブプラットフォームの機能を文書化します。
+
+At the end of the 2020, we launched our new Yari platform, which exposes our content in a GitHub repo and therefore opens up many more valuable contribution opportunities than before.
+2020年の終わりに、新しい Yari プラットフォームをリリースしました。 これにより、コンテンツが GitHub リポジトリに公開されるため、以前よりもはるかに価値のある貢献の機会が開かれます。
+
+And today, we wanted to spread the word about another fantastic event for enabling more collaboration on MDN — the launch of the Open Web Docs organization.
+そして今日、私たちは MDN でのコラボレーションをさらに可能にするためのもう1つの素晴らしいイベントである Open Web Docs 組織の立ち上げについて広めたいと思いました。 
+
+
+
+
+Open Web Docs
+
+Open Web Docs (OWD) is an open collective, created in collaboration between several key MDN partner organizations to ensure the long-term health of open web platform documentation on de facto standard resources like MDN Web Docs, independently of any single vendor or organization. It will do this by collecting funding to finance writing staff and helping manage the communities and processes that will deliver on present and future documentation needs.
+Open Web Docs（OWD）は、単一のベンダーや組織に関係なく、MDN Web Docs などのデファクトスタンダードの資源に関するオープンなウェブプラットフォームのドキュメントの長期的な健全性を確保するために、いくつかの主要な MDN パートナー組織間で共同で作成されたオープンコレクティブです。 これは、執筆スタッフに資金を提供するための資金を集め、現在および将来のドキュメントのニーズに対応するコミュニティとプロセスの管理を支援することで実現します。
+
+You will hear more about OWD, MDN, and opportunities to collaborate on web standards documentation very soon — a future post will outline exactly how the MDN collaborative content process will work going forward.
+OWD、MDN、およびウェブ標準ドキュメントでコラボレーションする機会については、間もなく詳しく説明します。 今後の投稿では、MDN コラボレーションコンテンツプロセスが今後どのように機能するかを正確に説明します。
+
+Until then, we are proud to join our partners in welcoming OWD into the world.
+それまで、私たちはパートナーと協力して OWD を世界に歓迎することを誇りに思っています。 
+
+
+
+
+See also
+関連情報
+
+    Introducing Open Web Docs
+    Open Web Docs の紹介
+
+    OWD open source collective page
+    OWD の Open Source Collective のページ
+
+    OWD GitHub repo
+    OWD GitHub リポジトリ 
+
+
+
+
+
+About Chris Mills
+
+Chris Mills is a senior tech writer at Mozilla, where he writes docs and demos about open web apps, HTML/CSS/JavaScript, A11y, WebAssembly, and more. He loves tinkering around with web technologies, and gives occasional tech talks at conferences and universities. He used to work for Opera and W3C, and enjoys playing heavy metal drums and drinking good beer. He lives near Manchester, UK, with his good lady and three beautiful children.
+
+More articles by Chris Mills…
+
+
+
+
+Discover great resources for web development
+
+Sign up for the Mozilla Developer Newsletter:
+
+E-mail
+
+I'm okay with Mozilla handling my info as explained in this Privacy Policy.
+
+
+
+
+9 comments
+
+    Konstantin
+
+        Don’t I miss anything:
+        何も見逃さないでください：
+
+        August 2020: Mozilla fires entire MDN staff.
+        2020年8月：Mozilla は MDN スタッフ全員を解雇します。
+
+        January 2021: Mozilla launches OWD to support MDN.
+        2021年1月：Mozilla は MDN をサポートするために OWD を起動します。
+
+        Is everything OK with your business decisions logic?
+        あなたのビジネス上の意思決定ロジックですべて問題ありませんか？
+
+    January 25th, 2021 at 18:34
+
+        Chris Mills
+
+            1. Mozilla didn’t fire the entire MDN staff. The number let go was under 50%, but included the majority of the writer’s team.
+            1. Mozilla は MDN スタッフ全員を解雇しませんでした。 手放した数は 50% 未満でしたが、作家のチームの大多数が含まれていました。
+
+
+            2. Mozilla hasn’t launched OWD. It is an independent entity, launched to support open documentation projects, like MDN, supported by a number of industry backers, like Google, MS, Coil, etc. In effect, OWD will be providing more tech writers to help make up the shortfall caused by 1. We are involved in OWD, but we didn’t create it.
+            2. Mozilla は OWD を立ち上げていません。 それは独立したエンティティであり、MDN のようなオープンドキュメンテーションプロジェクトをサポートするために立ち上げられ、Google、MS、Coil などのような多くの業界支援者によってサポートされています。 事実上、OWD は 1. によって引き起こされた不足分を補うために、より多くのテクニカルライターを提供することになります。 私たちは OWD に関わっていますが、OWD を作ったのは私たちではありません。
+
+        January 25th, 2021 at 23:53
+
+            Benyamin Limanto
+
+                TBH… I hate what Mitchel Backer paid with, and they let go a lot of staff when the whole governing board still god hugh sum of compensation. The result? Many of Moz Engineer hired by Google, does Moz think normally? I quite doubt it. I like firefox, but I hate the business decision that Moz done for past year… Look, even firefox now struggle to bring down brave, even struggle to bring down Edge…
+                正直に言うと… 私はミッチェルバッカーが支払ったものが嫌いです、そして彼らは理事会全体がまだ神のような報酬の合計を管理しているときに、多くのスタッフを手放しました。 結果？ Google に雇われた Mozilla 技術者の多くについて、Mozilla は普通に考えていますか？ 私はそれをかなり疑っています。 私は Firefox が好きですが、Mozilla が過去1年間に行ったビジネス上の決定は嫌いです… ほら、Firefox でさえ、今では勇敢な人を倒すのに苦労し、Edge を倒すのにも苦労しています…
+
+                Anyway please keep MDN open and become standard. Everywhere google and M$ come, there will always be trouble… EEE, Embrace, Extends, Extinguish.
+                とにかく、MDN をオープンにしたままにして、標準になってください。 Google とM$ が来るところはどこでも、常に問題があります… EEE、Embrace, extend and extinguish （取り込み、拡張し、抹殺する）。
+
+                Google – 1999 : “Don’t do evil”
+                Google – 1999：「悪をしないでください」
+
+                Google – 2021 : “I do a lot of Evil, and I love it!”
+                Google – 2021：「私は多くの悪を行い、それが大好きです！」
+
+                Moz – 2021 : Struggling paying employee, “FIRE THE TEAM”
+                Mozilla – 2021：苦労している有給の従業員、「FIRE THE TEAM（チームを解雇）」
+
+                Google – 2021: “Ha! Idiots!”, Hire them.
+                Google – 2021：「ハ！ ばかか！」、彼らを雇う。
+
+                *It’s just a very wild opinion, so I hope it doesn’t offend someone, because it’s how the community think about Moz now.
+                *これは非常に野蛮な意見です。 コミュニティが現在 Mozilla についてどのように考えているかという理由で、誰かを怒らせないことを願っています。 
+
+            January 26th, 2021 at 07:19
+
+    skierpage
+
+        Sounds good, but what happened to WebPlatform.org? How is this different?
+        良さそうに聞こえますが、WebPlatform.org はどうなりましたか？ これとはどう違うのですか？
+
+    January 25th, 2021 at 19:08
+
+        Chris Mills
+
+            Web Platform Docs was a separate documentation site, aimed at competing with MDN. It failed because MDN is too well established, and there was no point really just building up a site that tried to do exactly the same thing as MDN.
+            Web Platform Docs は、MDN との競合を目的とした別のドキュメントサイトでした。 MDN が十分に確立されているために失敗し、MDN とまったく同じことを行おうとするサイトを構築するだけでは意味がありませんでした。
+
+
+            Open Web Docs is an organization that provides resources to support existing web documentation sites, like MDN. It strengthens what’s already there, rather than competing.
+            Open Web Docs は、MDN などの既存のウェブドキュメントのサイトをサポートするための資源を提供する組織です。 競合するのではなく、すでに存在するものを強化します。 
+
+        January 25th, 2021 at 23:56
+
+    John C
+
+        That’s nice. Now can you make Firefox stop phoning home to Mozilla every time I launch the browser even after I’ve disabled all telemetry and reporting so I don’t have to block Mozilla’s domains?
+        それはすばらしい。 すべてのテレメトリーとレポートを無効にした後でも、ブラウザーを起動するたびに Firefox が Mozilla に電話をかけるのを停止して、Mozilla のドメインをブロックする必要がないようにできますか？
+
+    January 25th, 2021 at 22:41
+
+        Chris Mills
+
+            This has nothing to do with the subject of this blog post. If you want support on this, I’d suggest you try one of the many Firefox/Mozilla support mechanisms that are available.
+            これは、このブログ投稿の主題とは何の関係もありません。 これに関するサポートが必要な場合は、利用可能な多くの Firefox / Mozilla サポートメカニズムの1つを試すことをお勧めします。
+
+        January 25th, 2021 at 23:57
+
+    al
+
+        Very interesting. Glad to see that there is backing. Open Web Docs has a nice ring to it, but I do hope you keep MDN as the branding of this platform as IMHO it is important for Mozilla and in extend for Firefox (products).
+        とても興味深い。 裏付けがあるのを見てうれしい。 Open Web Docs には素晴らしいリングがありますが、MDN をこのプラットフォームのブランドとして維持してください。これは Mozilla にとって重要であり、Firefox（製品）にとっても重要です。
+
+    January 27th, 2021 at 04:55
+
+        Chris Mills
+
+            Agreed, and yes, the MDN branding will not change. OWD is a separate entity that sits alongside MDN (and potentially other documentation sites in the future) and provides support to it.
+            同意します。 はい、MDN のブランドは変更されません。 OWD は、MDN（および将来的には他のドキュメントサイト）と並んで配置され、MDN をサポートする独立したエンティティです。
+
+        January 27th, 2021 at 05:03
+
+Comments are closed for this article.
+
+Except where otherwise noted, content on this site is licensed under the Creative Commons Attribution Share-Alike License v3.0 or any later version.
+
+the Mozilla dino logo
