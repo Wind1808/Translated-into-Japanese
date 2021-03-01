@@ -1,0 +1,380 @@
+https://hacks.mozilla.org/2021/02/introducing-state-partitioning/
+
+Introducing State Partitioning
+ステートパーティショニングの紹介
+
+By Johann Hofmann, Tim Huang
+
+Posted on February 23, 2021 in Featured Article and Firefox
+2021年2月23日に特集記事と Firefox に投稿されました
+
+State Partitioning is the technical term for a new privacy feature in Firefox called Total Cookie Protection, which will be available in ETP Strict Mode in Firefox 86. This article shows how State Partitioning works inside of Firefox and explains what developers of third-party integrations can do to stay compatible with the latest changes.
+ステートパーティショニング（State Partitioning、状態の分割）は、Firefox 86 の ETP 厳密モードで使用できるトータルクッキープロテクション（Total Cookie Protection）と呼ばれる Firefox の新しいプライバシー機能の専門用語です。 この記事では、ステートパーティショニングが Firefox 内でどのように機能するかを示し、サードパーティ統合（third-party integrations）の開発者が最新の変更に対応するために何ができるかを説明しています。
+
+Web sites utilize a variety of different APIs to store data in the browser. Most famous are cookies, which are commonly used to build login sessions and provide a customized user experience. We call these stateful APIs, because they are able to establish state that will persist through reloads, navigations and browser restarts. While these APIs allow developers to enrich a user’s web experience, they also enable nefarious web tracking which jeopardizes user privacy. To fight abuse of these APIs Mozilla is introducing State Partitioning in Firefox 86.
+ウェブサイトは、さまざまな API を利用してデータをブラウザーに保存します。 最も有名なのはクッキーです。 これは、ログインセッションを構築し、カスタマイズされたユーザーエクスペリエンスを提供するために一般的に使用されます。 これらを状態をもつ API（stateful APIs）と呼びます。 なぜなら、リロード、ナビゲーション、そしてブラウザーの再起動を通じて持続する状態を確立できるためです。 これらの API を使用すると、開発者はユーザーのウェブエクスペリエンスを充実させることができますが、ユーザーのプライバシーを危険にさらす不正なウェブ追跡も可能になります。 これらの API の乱用と戦うために、Mozilla は Firefox 86 にステートパーティショニングを導入しています。
+
+Stateful Web APIs in Firefox are:
+Firefox 内の状態をもつウェブ API は次のとおりです。
+
+    Storage: Cookies, Local Storage, Session Storage, Cache Storage, and IndexedDB
+    ストレージ：クッキー、ローカルストレージ、セッションストレージ、キャッシュストレージ、IndexedDB
+
+    Workers: SharedWorkers and ServiceWorkers
+    ワーカー：共有ワーカー および サービスワーカー
+
+    Communication channel: Broadcast channel
+    通信チャンネル：放送チャンネル
+
+To fight against web tracking, Firefox currently relies on Enhanced Tracking Protection (ETP) which blocks cookies and other shared state from known trackers, based on the Disconnect list. This form of cookie blocking is an effective approach to stop tracking, but it has its limitations. ETP protects users from the 3000 most common and pervasive identified trackers, but its protection relies on the fact that the list is complete and always up-to-date. Ensuring completeness is difficult, and trackers can try to circumvent the list by registering new domain names. Additionally, identifying trackers is a time-consuming task and commonly adds a delay on a scale of months before a new tracking domain is added to the list.
+Firefox は現在、ウェブ追跡と戦うために、切断リスト（Disconnect list）に基づいて、既知の追跡者からのクッキーやその他の共有状態をブロックする ETP（Enhanced Tracking Protection、強化された追跡保護）に依存しています。 この形式のクッキーのブロッキングは、追跡を停止するための効果的なアプローチですが、制限があります。 ETP は、3000 の最も一般的で普及している識別された追跡者からユーザーを保護しますが、その保護は、リストが完全で常に最新であるという事実に依存しています。 完全性を確保することは困難であり、追跡者は新しいドメイン名を登録することでリストを回避しようとする可能性があります。 さらに、追跡者の特定は時間のかかる作業であり、通常、新しい追跡ドメインがリストに追加されるまでに数か月の遅延が追加されます。
+
+To address the limitations of ETP and provide comprehensive protection against trackers, we introduce a technique called State Partitioning, which will prevent cookie-based tracking universally, without the need for a list.
+ETP の制限に対処し、追跡者に対する包括的な保護を提供するために、ステートパーティショニングと呼ばれる手法を導入します。 これにより、リストを必要とせずに、クッキーベースの追跡を普遍的に防ぐことができます。
+
+State Partitioning is complemented by our efforts to eliminate the usage of non-traditional storage mechanisms (“supercookies”) as a tracking vector, for example through the partitioning of network state, which was recently rolled out in Firefox 85.
+ステートパーティショニングは、例えば Firefox 85 で最近展開されたネットワーク状態のパーティショニングを通じて、追跡ベクトル（tracking vector）としての非従来型のストレージメカニズム（「スーパークッキー（supercookies）」）の使用を排除する取り組みによって補完されます。
+
+
+
+
+State Partitioning – How it works in Firefox
+ステートパーティショニング – Firefox での仕組み
+
+To explain State Partitioning, we should first take a look at how stateful Web APIs enable tracking on the Web.  While these APIs were not designed for tracking, their state is shared with a website regardless of whether it is loaded as a first-party or embedded as a third-party, for example in an iframe or as a simple image (“tracking pixel”). This shared state allows trackers embedded in other websites to track you across the Web, most commonly by setting cookies.
+ステートパーティショニングについて説明するには、まず状態をもつウェブ API がウェブでの追跡を可能にする方法を確認する必要があります。 これらの API は追跡用に設計されていませんが、その状態は、ファーストパーティとして読み込まれるか、サードパーティとして埋め込まれるかに関係なく、ウェブサイトで共有されます（例えば、iframe や単純な画像（「追跡ピクセル（tracking pixel）」）として）。 この共有状態により、他のウェブサイトに埋め込まれた追跡者は、最も一般的にはクッキーを設定することにより、ウェブ全体でユーザーを追跡できます。
+
+For example, a cookie of www.tracker.com will be shared on foo.com and bar.com if they both embed www.tracker.com as a third-party. So, www.tracker.com can connect your activities on both sites by using the cookie as an identifier.
+例えば、www.tracker.com のクッキーは、foo.com と bar.com がサードパーティとして www.tracker.com を埋め込んでいる場合、その両方で共有されます。 したがって、www.tracker.com は、クッキーを識別子として使用することにより、両方のサイトでのユーザーの活動を結びつけることができます。
+
+ETP will prevent this by simply blocking access to shared state for embedded instances of www.tracker.com. Without the ability to set cookies, the tracker can not easily re-identify you.
+ETP は、www.tracker.com の埋め込まれたインスタンスの共有状態へのアクセスをブロックするだけで、これを防ぎます。 クッキーを設定する能力がないと、追跡者は簡単にユーザーを再識別することはできません。 
+
+
+Cookie-based tracking without protections, both instances of www.tracker.com share the same cookie.
+保護のないクッキーベースの追跡。 www.tracker.com の両方のインスタンスが同じクッキーを共有します。
+
+
+In comparison, State Partitioning will also prevent shared third-party state, but it does so without blocking cookie access entirely. With State Partitioning, shared state such as cookies, localStorage, etc. will be partitioned (isolated) by the top-level website you’re visiting. In other words, every first party and its embedded third-party contexts will be put into a self-contained bucket.
+比較すると、ステートパーティショニングは共有サードパーティ状態（shared third-party state）も防止しますが、クッキーアクセスを完全にブロックすることはありません。 ステートパーティショニングでは、クッキー、ローカルストレージなどの共有状態は、訪問している最上位のウェブサイトによってパーティショニング（分離）されます。 言い換えれば、すべてのファーストパーティとそれに埋め込まれたサードパーティのコンテキストは、自己完結型のバケツに入れられます。
+
+Firefox is using double-keying to implement State Partitioning, which will add an additional key to the origin of the website that is accessing these states. We use the scheme and registrable domain (also known as eTLD+1) of the top-level site as the additional key. Following the above example, cookies for www.tracker.com will be keyed differently under foo.com and bar.com. Instead of looking up the cookie jar for www.tracker.com, Storage partitioning will use www.tracker.com^http://foo.com and www.tracker.com^http://bar.com respectively.
+Firefox は、ダブルキーイング（double-keying）を使用してステートパーティショニングを実装しています。 これにより、これらの状態にアクセスしているウェブサイトのオリジンに追加のキーが追加されます。 追加のキーとして、トップレベルサイトのスキームと登録可能なドメイン（eTLD+1 とも呼ばれます）を使用します。 上記の例に従うと、www.tracker.com のクッキーは、foo.com と bar.com で異なるキーが付けられます。 www.tracker.com のクッキージャーを検索する代わりに、ストレージパーティショニングはそれぞれ www.tracker.com^http://foo.com と www.tracker.com^http://bar.com を使用します。
+
+
+Cookie-based tracking prevented by State Partitioning, by double-keying both instances of www.tracker.com.
+www.tracker.com の両方のインスタンスをダブルキーイングすることにより、ステートパーティショニングによって防止されるクッキーベースの追跡。
+
+
+Thus, there will be two distinct cookie jars for www.tracker.com under these two top-level websites.
+したがって、これら2つのトップレベルのウェブサイトの下に www.tracker.com 用の2つの異なるクッキージャーがあります。
+
+This takes away the tracker’s ability to use cookies and other previously shared state to identify individuals across sites. Now the state is separate (“partitioned”) instead of shared across different first-party domains.
+これにより、クッキーやその他の以前では共有された状態を使用して、サイト全体で個人を識別する追跡者の能力が失われます。 現在、状態は、異なるファーストパーティのドメイン間で共有されるのではなく、分離（「パーティショニング（partitioned）」）されています。
+
+It is important to understand that State Partitioning will apply to every embedded third-party resource, regardless of whether it is a tracker or not.
+ステートパーティショニングは、追跡者であるかどうかに関係なく、すべての埋め込まれたサードパーティのリソースに適用されることを理解することが重要です。
+
+This brings great benefits for privacy allowing us to extend protections beyond the Disconnect list and it allows embedded websites to continue to use their cookies and storage as they normally would, as long as they don’t need cross-site access. In the next section we will examine what embedded websites can do if they have a legitimate need for cross-site shared state.
+これにより、プライバシーに大きなメリットがもたらされ、切断リストを超えて保護を拡張できます。 また、埋め込まれたウェブサイトは、クロスサイト（cross-site、サイトをまたがった）アクセスを必要としない限り、通常どおりにクッキーとストレージを使用できます。 次のセクションでは、クロスサイト共有状態が正当に必要な場合に、埋め込まれたウェブサイトで何ができるかを調べます。 
+
+
+
+
+State Partitioning – Web Compatibility
+ステートパーティショニング –  ウェブの互換性
+
+Given that State Partitioning brings a fundamental change to Firefox, ensuring web compatibility and an unbroken user and developer experience is a top concern. Inevitably, State Partitioning will break websites by preventing legitimate uses of third-party state. For example, Single Sign-On (SSO) services rely on third-party cookies to sign in users across multiple websites. State Partitioning will break SSO because the SSO provider will not be able to access its first-party state when embedded in another top-level website so that it is unable to recognize a logged-in user.
+ステートパーティショニングが Firefox に根本的な変更をもたらすことを考えると、ウェブの互換性と、途切れることのないユーザーおよび開発者のエクスペリエンスを確保することが最大の関心事です。 必然的に、ステートパーティショニングは、サードパーティの状態の合法的な使用を妨げることによってウェブサイトを破壊します。 例えば、SSO（Single Sign-On、シングルサインオン）サービスは、サードパーティのクッキーに依存して複数のウェブサイトのユーザーにサインインします。 SSO プロバイダーは、別のトップレベルのウェブサイトに埋め込まれている場合、ファーストパーティの状態にアクセスできず、ログインしているユーザーを認識できないため、ステートパーティショニングによって SSO が中断されます。
+
+
+Third-party SSO cookies partitioned by State Partitioning, the SSO iframe cannot get the first-party cookie access.
+ステートパーティショニングによってパーティショニングされたサードパーティの SSO クッキー。 SSO の iframe はファーストパーティのクッキーアクセスを取得できません。 
+ 
+
+In order to resolve these compatibility issues of State Partitioning, we allow the state to be unpartitioned in certain cases. When unpartitioning is taking effect, we will stop using double-keying and revert the ordinary (first-party) key.
+ステートパーティショニングのこれらの互換性の問題を解決するために、特定の場合に状態のパーティショニングを解除することを許可します。 パーティショニングの解除（unpartitioning）が有効になると、ダブルキーイングの使用を停止し、通常の（ファーストパーティの）キーに戻します。
+
+Given the above example, after unpartitioning, the top-level SSO site and the embedded SSO service’s iframe will start to use the same storage key, meaning that they will both access the same cookie jar. So, the iframe can get the login credentials via a third-party cookie.
+上記の例で考えると、パーティショニングを解除した後、トップレベルの SSO サイトと組み込まれた SSO サービスの iframe が同じストレージキーの使用を開始します。 つまり、両方が同じクッキージャーにアクセスします。 そのため、iframe はサードパーティのクッキーを介してログイン資格情報を取得できます。
+
+
+The SSO site has been unpartitioned, the SSO iframe gets the first-party cookie access.
+SSO サイトはパーティショニングが解除されており、SSO の iframe はファーストパーティのクッキーアクセスを取得します。 
+
+
+
+
+
+State Partitioning – Getting Cross-Site Cookie Access
+ステートパーティショニング – クロスサイトクッキーアクセスの取得
+
+There are two scenarios in which Firefox might unpartition states for websites to allow for access to first-party (cross-site) cookies and other state:
+Firefox がウェブサイトの状態のパーティショニングを解除して、ファーストパーティ（クロスサイト）クッキーとその他の状態へのアクセスを許可する次の2つのシナリオがあります。
+
+    When an embedded iframe calls the Storage Access API.
+    組み込まれた iframe がストレージアクセス API を呼び出すとき。
+
+    Based on a set of automated heuristics.
+    自動化された一連のヒューリスティック（heuristics）に基づいて。 
+
+
+
+
+Storage Access API
+ストレージアクセス API
+
+The Storage Access API is a newly proposed JavaScript API to handle legitimate exceptions from privacy protections in modern browsers, such as ETP in Firefox or Intelligent Tracking Prevention in Safari. It allows the restricted third-party context to request first-party storage access (access to cookies and other shared state) for itself. In some cases, browsers will show a permission prompt to decide whether they trust the third party enough to allow this access.
+ストレージアクセス API（Storage Access API）は、Firefox の ETP や Safari の Intelligent Tracking Prevention など、最新のブラウザーのプライバシー保護からの正当な例外を処理するために新しく提案された JavaScript API です。 これにより、制限されたサードパーティのコンテキストが、それ自体のファーストパーティのストレージアクセス（クッキーおよびその他の共有状態へのアクセス）を要求できるようになります。 場合によっては、ブラウザーは、このアクセスを許可するのに十分なほどサードパーティを信頼しているかどうかを判断するための承認プロンプトを表示します。
+
+
+The Firefox user prompt of the Storage Access API.
+ストレージアクセス API の Firefox ユーザープロンプト。 
+
+ 
+A partitioned third-party context can use the Storage Access API to gain a storage permission which grants unpartitioned access to its first-party state.
+パーティショニングされたサードパーティのコンテキストは、ストレージアクセス API を使用して、ファーストパーティの状態へのパーティショニングが解除されたアクセスを許可するストレージ権限を取得できます。
+
+This functionality is expressed through the document.requestStorageAccess method. Another method, document.hasStorageAccess, can be used to find out whether your current browsing context has access to its first party storage. As outlined on MDN, document.requestStorage is subject to a number of restrictions, standardized as well as browser-specific, that protect users from abuse. Developers should make note of these and adjust their site’s user experience accordingly.
+この機能は、document.requestStorageAccess メソッドを介して表現されます。 別のメソッド document.hasStorageAccess を使用して、現在のブラウジングコンテキストがファーストパーティのストレージにアクセスできるかどうかを確認できます。 MDN で概説されているように、document.requestStorage には、ユーザーを悪用から保護するために、標準化されたブラウザー固有の制限がいくつかあります。 開発者はこれらをメモし、それに応じてサイトのユーザーエクスペリエンスを調整する必要があります。
+
+As an example, Zendesk will show a message with a call-to-action element to handle the standard requirement of transient user activation (e.g. a button click). In Safari, it will also spawn a popup that the user has to activate to ensure that the browser-specific requirements of Webkit are satisfied.
+例として、Zendesk は、一時的なユーザーアクティベーション（ボタンのクリックなど）の標準要件を処理するための行動を促すフレーズを含むメッセージを表示します。 Safari では、Webkit のブラウザー固有の要件が満たされていることを確認するために、ユーザーがアクティブ化する必要のあるポップアップも生成されます。
+
+
+Zendesk notification to allow the user to trigger the request for storage access.
+ユーザーがストレージアクセスの要求をトリガーできるようにする Zendesk の通知。
+
+
+After the user has granted access, Firefox will remember the storage permission for 30 days.
+ユーザーがアクセスを許可した後、Firefox はストレージ許可を30日間記憶します。
+
+Note that the third-party context will only be unpartitioned under the top-level domain for which the storage access has been requested. For other top-level domains, the third-party context will still be partitioned. Let’s say there is a cross-origin iframe example.com which is embedded in foo.com. And example.com uses the Storage Access API to request first-party access on foo.com and the user allows it. In this case, example.com will have unpartitioned access to its own first-party cookies on foo.com. Later, the user loads another page bar.com which also embeds example.com. But, this time, the example.com will remain partitioned under bar.com because there is no storage permission here.
+サードパーティのコンテキストは、ストレージアクセスが要求されたトップレベルドメインの下でのみパーティショニングが解除されることに注意してください。 他のトップレベルドメインの場合、サードパーティのコンテキストは引き続きパーティショニングされます。 foo.com に埋め込まれているクロスオリジンの iframe example.com があるとしましょう。 そして、example.com はストレージアクセス API を使用して foo.com へのファーストパーティアクセスを要求し、ユーザーはそれを許可します。 この場合、example.com は、foo.com 上の独自のファーストパーティのクッキーへのパーティショニングが解除されたアクセスができます。 その後、ユーザーは別のページ bar.com をロードしますが、ここにも example.com が埋め込まれています。 ただし、今回は、ここにストレージ権限がないため、example.com は bar.com の下でパーティショニングされたままになります。 
+
+
+document.hasStorageAccess().then(hasAccess => {
+
+if (!hasAccess) {
+
+return document.requestStorageAccess();
+
+}
+
+}).then(_ => {
+
+// Now we have unpartitioned storage access for the next 30 days!
+// これで、次の30日間、パーティショニングが解除されたストレージにアクセスできるようになりました。
+
+//
+
+// …
+
+}).catch(_ => {
+
+// error obtaining storage access.
+//　ストレージアクセスの取得中にエラーが発生しました。
+
+});
+
+
+Javascript example of using the Storage Access API to get the storage access from users.
+ストレージアクセス API を使用してユーザーからストレージアクセスを取得する Javascript の例。
+
+Currently, the Storage Access API is supported by Safari, Edge, Firefox. It is behind a feature flag in Chrome.
+現在、ストレージアクセス API は、Safari、Edge、Firefox でサポートされています。 Chrome の機能フラグの背後にあります。 
+
+
+
+
+Automatic unpartitioning through heuristics
+ヒューリスティックによる自動的なパーティショニングの解除
+
+In the Firefox storage access policy, we have defined several heuristics to address Web compatibility issues. The heuristics are designed to catch the most common scenarios of using third-party storage on the web (outside of tracking) and allow storage access in order to make websites continue normally. For example, in Single-Sign-On flows it is common to open a popup that allows the user to sign in, and transmit that sign-in information back to the website that opened the popup. Firefox will detect this case and automatically grant storage access.
+Firefox のストレージアクセスポリシーでは、ウェブの互換性の問題に対処するためにいくつかのヒューリスティックを定義しました。 ヒューリスティックは、ウェブ上でサードパーティのストレージを使用する最も一般的なシナリオ（追跡外）をキャッチし、ウェブサイトを正常に継続させるためにストレージアクセスを許可するように設計されています。 例えば、シングルサインオンの流れでは、ユーザーがサインインできるポップアップを開き、そのサインイン情報をポップアップを開いたウェブサイトに送信するのが一般的です。 Firefox はこのケースを検出し、ストレージアクセスを自動的に許可します。
+
+Note that these heuristics are not designed for the long term. Using the Storage Access API is the recommended solution for websites that need unpartitioned access. We will continually evaluate the necessity of the restrictions and remove them as appropriate. Therefore, developers should not rely on them now or in the future.
+これらのヒューリスティックは長期的に設計されていないことに注意してください。 ストレージアクセス API の使用は、パーティショニングが解除されたアクセスを必要とするウェブサイトに推奨されるソリューションです。 制限の必要性を継続的に評価し、必要に応じて削除します。 したがって、開発者は現在または将来それらに依存するべきではありません。 
+
+
+
+
+State Partitioning – User controls for Cross-Site Cookie Access
+ステートパーティショニング – クロスサイトクッキーアクセスのためのユーザーコントロール
+
+We have introduced a new UI for State Partitioning which allows users to be aware of which third parties have acquired unpartitioned storage and provides fine-grain control of storage access. Firefox will show the unpartitioned domains in the permission section of the site identity panel. The “Cross-site Cookies” permission indicates the unpartitioned domain, and users can delete the permission from the UI directly by clicking the cancel button alongside the permission entries.
+ステートパーティショニング用の新しい UI を導入しました。 これにより、ユーザーは、パーティショニングが解除されたストレージを取得したサードパーティを認識し、ストレージアクセスをきめ細かく制御できます。 Firefox は、サイト身元パネルの権限セクションにパーティショニングが解除されたドメインを表示します。 「クロスサイトクッキー（Cross-site Cookies）」権限は、パーティショニングが解除されたドメインを示します。 ユーザーは、権限エントリの横にあるキャンセルボタンをクリックして、UI から権限を直接削除できます。
+
+
+
+
+
+About Johann Hofmann
+
+Firefox Security & Privacy Engineer
+Firefox のセキュリティとプライバシーのエンジニア
+
+    johannh.me
+
+    @johannh
+
+More articles by Johann Hofmann…
+
+
+
+
+About Tim Huang
+
+Firefox Privacy Engineer
+Firefox のプライバシーのエンジニア
+
+    @artines1
+
+More articles by Tim Huang…
+
+
+
+
+Discover great resources for web development
+
+Sign up for the Mozilla Developer Newsletter:
+
+E-mail
+
+I'm okay with Mozilla handling my info as explained in this Privacy Policy.
+
+10 comments
+
+    Fazal Majid
+
+        What about other forms of state, like caches (fonts and favicons), HSTS, Etags and other stateful mechanisms that can be abused for tracking?
+        キャッシュ（フォントとファビコン）、HSTS、Etags、および追跡に悪用される可能性のあるその他の状態をもつメカニズムなど、他の形式の状態についてはどうでしょうか。
+
+    February 23rd, 2021 at 07:18
+
+    Reply
+
+    Graham Perrin
+
+        Consistency: https://developer.mozilla.org/en-US/docs/Mozilla/Firefox/Privacy/State_Partitioning#dynamic_state_partitioning leads to ‘Dynamic Partitioning’.
+        一貫性：https://developer.mozilla.org/en-US/docs/Mozilla/Firefox/Privacy/State_Partitioning#dynamic_state_partitioning は「動的パーティショニング」につながります。
+
+        Should it not lead to ‘Dynamic State Partitioning’?
+        「動的ステートパーティショニング」につながるべきではありませんか？ 
+
+    February 23rd, 2021 at 11:58
+
+    Reply
+
+    voracity
+
+        This looks quite good, but doesn’t a 30 day expiry make SSO in practice unworkable? Or perhaps there is some way around this that I’ve missed, like unpartitioned data being copied to both partitions on expiry (seems unlikely), or an ability to specify whether a cookie/state goes into the unpartitioned or partitioned space when granted unpartitioned access, so that the key cookies are unaffected when The Great Partitioning occurs?
+        これは非常に良さそうに見えますが、30日間の有効期限により、実際には SSO が機能しなくなりませんか？ あるいは、私が見落としていたこの問題を回避する方法があるかもしれません。 例えば、パーティショニングが解除されたデータが期限切れ時に両方のパーティションにコピーされる（可能性は低いと思われる）か、パーティショニングが解除されたアクセスが許可されたときにクッキー / 状態がパーティショニングが解除されたスペースに入るのかパーティショニングされたスペースに入るのかを指定する能力です。 そうすれば、グレートパーティショニングが発生したときにキークッキーが影響を受けないのでしょうか？
+
+    February 24th, 2021 at 04:21
+
+    Reply
+
+    Bill Wadley
+
+        As always, Firefox is ahead of the curve in keeping the Net safe.
+        いつものように、Firefox はネットを安全に保つという点で時代を先取りしています。
+
+        Thank you!
+        ありがとうございました！ 
+
+    February 24th, 2021 at 10:26
+
+    Reply
+
+    Ronald Scott
+
+        Will this break sending cookies on cross-domain form POST actions, thereby breaking every federated SAML implementation in the entire world?
+        これにより、クロスドメインフォームの POST アクションでのクッキーの送信が中断され、それによって全世界のすべてのフェデレーション化 SAML 実装が中断されますか？
+
+    February 24th, 2021 at 10:49
+
+    Reply
+
+    gwarser
+
+        Any way to disable “Web Compatibility Heuristics” right now?
+        「ウェブ互換性ヒューリスティック」を今すぐ無効にする方法はありますか？
+
+    February 25th, 2021 at 14:31
+
+    Reply
+
+    antistress
+
+        Hi, Thanks for the article. Could you please explain the difference between latest Total Cookie Protection and former First-Party Isolation ?
+       こんにちは、記事をありがとう。 最新のトータルクッキープロテクションと以前の First-Party Isolation の違いについて説明してください。
+
+    February 25th, 2021 at 15:01
+
+    Reply
+
+    Helle Vaanzinn
+
+        Thank you both for explaining this new privacy feature. Not being an expert in these matters, merely an interested Firefox user, I came across https://blog.lukaszolejnik.com/large-scale-analysis-of-dns-based-tracking-evasion-broad-data-leaks-included/. For the non-tech-savvy user this is all rather confusing, so it would be very enlightening if someone could elaborate. Does ‘state partitioning’ offer any protection against these CNAME-based tracking attempts?
+        この新しいプライバシー機能について説明していただき、ありがとうございます。 これらの問題の専門家ではなく、単に興味のある Firefox ユーザーであるため、https://blog.lukaszolejnik.com/large-scale-analysis-of-dns-based-tracking-evasion-broad-data-leaks-included/ に出くわしました。 技術に精通していないユーザーにとって、これはすべてかなり混乱しているので、誰かが詳しく説明できれば非常に啓発的です。 「ステートパーティショニング」は、これらの CNAME ベースの追跡試行に対する保護を提供しますか？
+
+        By abusings DNS records to erase the distinction between first-party and third-party contexts the author seems to suggest that third-party cookie blocking is rendered ineffective. That much I (think) I understand. Quoting the author:
+        DNS レコードを悪用して、ファーストパーティとサードパーティのコンテキストの区別を消去することにより、著者はサードパーティのクッキーのブロッキングが無効になることを示唆しているようです。 そこまでは理解している（と思う）。 著者の引用：
+
+        “As of today, from the major web browser vendors only Firefox offers technical capabilities enabling defenses by extensions, Safari has partial mitigations (cookie leaks still exist), and Brave browser offers defences based on blocking of CNAME leaks. Since uBlock version 1.25 under Firefox, the extension dynamically resolves hosts and sanitises such requests if a match is found.”
+        「現在、主要なウェブブラウザーベンダーからは、Firefox のみが拡張機能による防御を可能にする技術機能を提供し、Safari は部分的な緩和策を備えており（クッキーリークはまだ存在します）、Brave ブラウザーは CNAME リークのブロックに基づく防御を提供します。 Firefox の uBlock バージョン 1.25 以降、拡張機能はホストを動的に解決し、一致するものが見つかった場合にそのような要求をサニタイズします。」
+
+        That being very good news for Firefox users, it still assumes being knowledgeable enough to install uBlock Origin, which seems far from ideal. Are there any plans to incorporate the technique(s) used by this very fine addon into the web browser itself?
+        これは Firefox ユーザーにとって非常に良いニュースですが、それでも uBlock Origin をインストールするのに十分な知識があることを前提としています。 これは理想からはほど遠いようです。 この非常に優れたアドオンで使用されている手法をウェブブラウザー自体に組み込む計画はありますか？
+
+        Regards
+        よろしく
+
+    February 25th, 2021 at 23:36
+
+    Reply
+
+    Thanks!
+    ありがとう！
+
+        In Strict Mode “privacy.annotate_channels.strict_list.enabled” is set to “true”. This setting is not changed when switching to the custom mode. This is independent of the settings one chooses in custom mode. Therefore, it is not possible to know the state of “privacy.annotate_channels.strict_list.enabled” by checking the custom mode settings.
+        厳密モードでは、“privacy.annotate_channels.strict_list.enabled”は“true”に設定されます。 カスタムモードに切り替えても、この設定は変更されません。 これは、カスタムモードで選択する設定とは無関係です。 そのため、カスタムモードの設定を確認しても“privacy.annotate_channels.strict_list.enabled”の状態を知ることはできません。
+
+    February 26th, 2021 at 00:43
+
+    Reply
+
+    Thanks!
+    ありがとう！
+
+        Fantastic that Mozilla has introduced State Partitioning in Firefox! Many thanks! Let’s hope that it will not foster browser fingerprinting!
+        Mozilla が Firefox にステートパーティショニングを導入したのは素晴らしいことです！ どうもありがとう！ ブラウザーのフィンガープリントが促進されないことを期待しましょう。
+
+        Selecting “ETP Strict Mode” sets five preferences in prefs.js: browser.contentblocking.category = strict, network.cookie.cookieBehavior = 5, privacy.annotate_channels.strict_list.enabled = true, privacy.trackingprotection.enabled = true, privacy.trackingprotection.socialtracking.enabled = true.
+        「ETP 厳密モード」を選択すると、prefs.js に5つの設定が設定されます：browser.contentblocking.category = strict, network.cookie.cookieBehavior = 5, privacy.annotate_channels.strict_list.enabled = true, privacy.trackingprotection.enabled = true, privacy.trackingprotection.socialtracking.enabled = true。
+
+        Is it enough to set “network.cookie.cookieBehavior = 5” to only activate State Partitioning (without enabling tracking protection based on the Disconnect blocking list) ?
+        “network.cookie.cookieBehavior = 5”を設定して、ステートパーティショニングのみをアクティブ化するだけで十分ですか（切断ブロッキングリストに基づく追跡保護を有効にしないで）？ 
+
+    February 26th, 2021 at 00:46
+
+    Reply
+
+
+
+
+
+Post Your Comment
+
+Your name *
+
+Your e-mail *
+
+Spam robots, please fill in this field. Humans should leave it blank.
+
+Your comment
+
+Except where otherwise noted, content on this site is licensed under the Creative Commons Attribution Share-Alike License v3.0 or any later version.
+
+the Mozilla dino logo
