@@ -1,0 +1,69 @@
+https://blog.mozilla.org/security/2021/01/26/supercookie-protections/
+
+Firefox 85 Cracks Down on Supercookies
+Firefox 85 がスーパークッキーを取り締まる
+
+Steven Englehardt and Arthur Edelstein January 26, 2021
+スティーブン・イングルハートとアーサー・エーデルスタイン 2021年1月26日 
+
+Trackers and adtech companies have long abused browser features to follow people around the web. Since 2018, we have been dedicated to reducing the number of ways our users can be tracked. As a first line of defense, we’ve blocked cookies from known trackers and scripts from known fingerprinting companies.
+追跡者やアドテック企業は、ウェブ上の人々につきまとうためにブラウザー機能を長い間悪用してきました。 2018年以来、私たちはユーザーを追跡できる方法の数を減らすことに専念してきました。 防御の第一線として、私たちは既知の追跡者からのクッキーと既知のフィンガープリンティング会社からのスクリプトをブロックしました。
+
+In Firefox 85, we’re introducing a fundamental change in the browser’s network architecture to make all of our users safer: we now partition network connections and caches by the website being visited. Trackers can abuse caches to create supercookies and can use connection identifiers to track users. But by isolating caches and network connections to the website they were created on, we make them useless for cross-site tracking.
+Firefox 85 では、すべてのユーザーをより安全にするために、現在、訪問しているウェブサイトごとにネットワーク接続とキャッシュを分割するという、ブラウザーのネットワークアーキテクチャーに根本的な変更を導入しています。 追跡者はキャッシュを悪用してスーパークッキーを作成し、接続識別子を使用してユーザーを追跡できます。 ただし、キャッシュとそれらが作成されたウェブサイトへのネットワーク接続を分離することにより、クロスサイト（cross-site、サイトをまたがった）トラッキング（tracking、追跡）には使用できなくなります。 
+
+
+
+
+What are supercookies?
+スーパークッキーとは何ですか？
+
+In short, supercookies can be used in place of ordinary cookies to store user identifiers, but  they are much more difficult to delete and block. This makes it nearly impossible for users to protect their privacy as they browse the web. Over the years, trackers have been found storing user identifiers as supercookies in increasingly obscure parts of the browser, including in Flash storage, ETags, and HSTS flags.
+要するに、通常のクッキーの代わりにスーパークッキーを使用してユーザー識別子を保存できますが、削除してブロックするのははるかに困難です。 これにより、ユーザーがウェブを閲覧するときにプライバシーを保護することはほぼ不可能になります。 何年にもわたって、追跡者は、フラッシュストレージ、ETag、HSTS フラグなど、ブラウザーのますます不明瞭な部分にユーザー識別子をスーパークッキーとして保存することがわかっています。
+
+The changes we’re making in Firefox 85 greatly reduce the effectiveness of cache-based supercookies by eliminating a tracker’s ability to use them across websites.
+Firefox 85 で行っている変更により、追跡者がウェブサイト全体でスーパークッキーを使用する機能がなくなるため、キャッシュベースのスーパークッキーの効果が大幅に低下します。 
+
+
+
+
+How does partitioning network state prevent cross-site tracking?
+ネットワーク状態を分割すると、クロスサイトトラッキングがどのように防止されますか？
+
+Like all web browsers, Firefox shares some internal resources between websites to reduce overhead. Firefox’s image cache is a good example: if the same image is embedded on multiple websites, Firefox will load the image from the network during a visit to the first website and on subsequent websites would traditionally load the image from the browser’s local image cache (rather than reloading from the network). Similarly, Firefox would reuse a single network connection when loading resources from the same party embedded on multiple websites. These techniques are intended to save a user bandwidth and time.
+すべてのウェブブラウザーと同様に、Firefox はオーバーヘッドを削減するためにウェブサイト間でいくつかの内部リソースを共有します。 Firefox の画像キャッシュは良い例です。 同じ画像が複数のウェブサイトに埋め込まれている場合、Firefox は最初のウェブサイトへの訪問中にネットワークから画像を読み込み、後続のウェブサイトでは従来はブラウザーのローカル画像キャッシュから画像を読み込みます（ネットワークからリロードするのではなく）。 同様に、Firefox は、複数のウェブサイトに埋め込まれている同じパーティからリソースを読み込むときに、単一のネットワーク接続を再利用します。 これらの手法は、ユーザーの帯域幅と時間を節約することを目的としています。
+
+Unfortunately, some trackers have found ways to abuse these shared resources to follow users around the web. In the case of Firefox’s image cache, a tracker can create a supercookie by  “encoding” an identifier for the user in a cached image on one website, and then “retrieving” that identifier on a different website by embedding the same image. To prevent this possibility, Firefox 85 uses a different image cache for every website a user visits. That means we still load cached images when a user revisits the same site, but we don’t share those caches across sites.
+残念ながら、一部の追跡者は、これらの共有リソースを悪用してウェブ上のユーザーにつきまとう方法を見つけました。 Firefox の画像キャッシュの場合、追跡者は、あるウェブサイトのキャッシュされた画像にユーザーの識別子を「エンコード」し、同じ画像を埋め込むことで別のウェブサイトでその識別子を「取得」することでスーパークッキーを作成できます。 この可能性を防ぐために、Firefox 85 はユーザーが訪問したウェブサイトごとに異なる画像キャッシュを使用します。 つまり、ユーザーが同じサイトに再度訪問したときにキャッシュされた画像を読み込みますが、サイト間でそれらのキャッシュを共有することはありません。
+
+In fact, there are many different caches trackers can abuse to build supercookies. Firefox 85 partitions all of the following caches by the top-level site being visited: HTTP cache, image cache, favicon cache, HSTS cache, OCSP cache, style sheet cache, font cache, DNS cache, HTTP Authentication cache, Alt-Svc cache, and TLS certificate cache.
+実際、追跡者がスーパークッキーを構築するために悪用できるさまざまなキャッシュがあります。 Firefox 85 は、訪問しているトップレベルサイトごとに、次のすべてのキャッシュを分割します：HTTP キャッシュ、画像キャッシュ、ファビコンキャッシュ、HSTS キャッシュ、OCSP キャッシュ、スタイルシートキャッシュ、フォントキャッシュ、DNS キャッシュ、HTTP 認証キャッシュ、Alt-Svc キャッシュ、および TLS 証明書キャッシュ。
+
+To further protect users from connection-based tracking, Firefox 85 also partitions pooled connections, prefetch connections, preconnect connections, speculative connections, and TLS session identifiers.
+ユーザーを接続ベースの追跡からさらに保護するために、Firefox 85 は、プールされた接続、プリフェッチ接続、プリコネクト接続、投機的接続、および TLS セッション識別子も分割します。
+
+This partitioning applies to all third-party resources embedded on a website, regardless of whether Firefox considers that resource to have loaded from a tracking domain. Our metrics show a very modest impact on page load time: between a 0.09% and 0.75% increase at the 80th percentile and below, and a maximum increase of 1.32% at the 85th percentile. These impacts are similar to those reported by the Chrome team for similar cache protections they are planning to roll out.
+この分割は、Firefox がそのリソースが追跡ドメインから読み込まれたと見なすかどうかに関係なく、ウェブサイトに埋め込まれたすべてのサードパーティリソースに適用されます。 私たちの指標は、ページの読み込み時間にごくわずかな影響を示しています。 第 80 百分位点以下で 0.09% から 0.75% の増加、第 85 百分位点で最大 1.32% の増加です。 これらの影響は、Chrome チームが展開を計画している同様のキャッシュ保護について報告したものと同様です。
+
+Systematic network partitioning makes it harder for trackers to circumvent Firefox’s anti-tracking features, but we still have more work to do to continue to strengthen our protections. Stay tuned for more privacy protections in the coming months!
+体系的なネットワーク分割により、追跡者が Firefox のアンチトラッキング機能を回避することが難しくなりますが、保護を強化し続けるためにやるべきことはまだたくさんあります。 今後数か月のプライバシー保護にご期待ください。
+
+
+
+
+Thank you
+ありがとう
+
+Re-architecting how Firefox handles network connections and caches was no small task, and would not have been possible without the tireless work of our engineering team: Andrea Marchesini, Tim Huang, Gary Chen, Johann Hofmann, Tanvi Vyas, Anne van Kesteren, Ethan Tseng, Prangya Basu, Wennie Leung, Ehsan Akhgari, and Dimi Lee.
+Firefox がネットワーク接続とキャッシュを処理する方法を再構築することは簡単な作業ではなく、エンジニアリングチーム（アンドレア・マルケジーニ、ティム・ファン、ゲイリー・チェン、ヨハン・ホフマン、タンヴィ・ヴヤス、アン・ヴァン・ケステレン、イーサン・ツェン、プランギャ・バス、ウェニー・レオン、エサン・アクガリ、ディミ・リー）のたゆまぬ努力なしには不可能でした。
+
+We wish to express our gratitude to the many Mozillians who contributed to and supported this work, including: Selena Deckelmann, Mikal Lewis, Tom Ritter, Eric Rescorla, Olli Pettay, Kim Moir, Gregory Mierzwinski, Doug Thayer, and Vicky Chin.
+セレナ・デッケルマン、ミカル・ルイス、トム・リッター、エリック・レスコーラ、オリ・ペタイ、キム・モア、グレゴリー・ミエルズウィンスキー、ダグ・セイヤー、ヴィッキー・チンなど、この作品に貢献し、支援してくれた多くのモジリアンに感謝の意を表します。
+
+We also want to acknowledge past and ongoing efforts carried out by colleagues in the Brave, Chrome, Safari and Tor Browser teams to combat supercookies in their own browsers.
+また、Brave、Chrome、Safari、Tor Browser の各チームの同僚が、自分のブラウザーでスーパークッキーと戦うために行った過去および現在の取り組みにも感謝します。 
+
+
+
+
+Tags: anti-tracking
