@@ -1,0 +1,57 @@
+https://blog.mozilla.org/security/2021/02/23/total-cookie-protection/
+
+Firefox 86 Introduces Total Cookie Protection
+Firefox 86 はトータルクッキープロテクションを導入します
+
+Tim Huang, Johann Hofmann and Arthur Edelstein February 23, 2021
+ティム・ファン、ヨハン・ホフマン、アーサー・エーデルスタイン 2021年2月23日 
+
+Today we are pleased to announce Total Cookie Protection, a major privacy advance in Firefox built into ETP Strict Mode. Total Cookie Protection confines cookies to the site where they were created, which prevents tracking companies from using these cookies to track your browsing from site to site.
+本日、ETP 厳密モードに組み込まれた Firefox の主要なプライバシー保護であるトータルクッキープロテクション（Total Cookie Protection、総合的なクッキーの保護）を発表できることを嬉しく思います。 トータルクッキープロテクションは、クッキーをそれが作成されたサイトに限定します。 これにより、追跡企業がこれらのクッキーを使用してサイト間での閲覧を追跡することを防ぎます。
+
+Cookies, those well-known morsels of data that web browsers store on a website’s behalf, are a useful technology, but also a serious privacy vulnerability. That’s because the prevailing behavior of web browsers allows cookies to be shared between websites, thereby enabling those who would spy on you to “tag” your browser and track you as you browse. This type of cookie-based tracking has long been the most prevalent method for gathering intelligence on users. It’s a key component of the mass commercial tracking that allows advertising companies to quietly build a detailed personal profile of you.
+クッキーは、ウェブブラウザーがウェブサイトに代わって保存するよく知られたデータの断片であり、有用な技術ですが、深刻なプライバシーの脆弱性でもあります。 これは、ウェブブラウザーの一般的な振る舞いにより、ウェブサイト間でクッキーを共有できるため、あなたをスパイする人がブラウザーに「タグ付け」して、閲覧中にあなたを追跡できるようになるためです。 このタイプのクッキーベースの追跡は、ユーザーに関するインテリジェンスを収集するための最も一般的な方法でした。 これは、広告会社があなたの詳細な個人プロフィールを静かに作成できるようにする、マスコマーシャルトラッキングの重要なコンポーネントです。
+
+In 2019, Firefox introduced Enhanced Tracking Protection by default, blocking cookies from companies that have been identified as trackers by our partners at Disconnect. But we wanted to take protections to the next level and create even more comprehensive protections against cookie-based tracking to ensure that no cookies can be used to track you from site to site as you browse the web.
+2019年、Firefox はデフォルトで ETP（Enhanced Tracking Protection）を導入し、Disconnect のパートナーによって追跡者として識別された企業からのクッキーをブロックしました。 しかし、保護を次のレベルに引き上げ、クッキーベースの追跡に対してさらに包括的な保護を作成して、ウェブを閲覧するときにサイト間でクッキーを使用して追跡できないようにしたいと考えました。
+
+Our new feature, Total Cookie Protection, works by maintaining a separate “cookie jar” for each website you visit. Any time a website, or third-party content embedded in a website, deposits a cookie in your browser, that cookie is confined to the cookie jar assigned to that website, such that it is not allowed to be shared with any other website.
+私たちの新機能であるトータルクッキープロテクションは、訪問するウェブサイトごとに個別の「クッキージャー（cookie jar）」を維持することで機能します。 ウェブサイトまたはウェブサイトに埋め込まれたサードパーティのコンテンツがブラウザーにクッキーを保存するときはいつでも、そのクッキーはそのウェブサイトに割り当てられたクッキージャーに限定されるため、他のウェブサイトと共有することはできません。
+
+
+Total Cookie Protection creates a separate cookie jar for each website you visit. (Illustration: Meghan Newell)
+トータルクッキープロテクションは、訪問するウェブサイトごとに個別のクッキージャーを作成します。 （イラスト：メーガン・ニューウェル）
+
+
+In addition, Total Cookie Protection makes a limited exception for cross-site cookies when they are needed for non-tracking purposes, such as those used by popular third-party login providers. Only when Total Cookie Protection detects that you intend to use a provider, will it give that provider permission to use a cross-site cookie specifically for the site you’re currently visiting. Such momentary exceptions allow for strong privacy protection without affecting your browsing experience.
+さらに、トータルクッキープロテクションは、人気のあるサードパーティのログインプロバイダーで使用されているものなど、追跡以外の目的で必要なクロスサイトクッキーに対して限定的な例外を設けています。 トータルクッキープロテクションは、プロバイダーを使用する意図があることを検出した場合にのみ、そのプロバイダーに、現在訪問しているサイト専用のクロスサイトクッキーを使用する許可を与えます。 このような一時的な例外により、閲覧体験に影響を与えることなく、強力なプライバシー保護が可能になります。
+
+In combination with the Supercookie Protections we announced last month, Total Cookie Protection provides comprehensive partitioning of cookies and other site data between websites in Firefox. Together these features prevent websites from being able to “tag” your browser,  thereby eliminating the most pervasive cross-site tracking technique.
+トータルクッキープロテクションは、先月発表したスーパークッキープロテクション（Supercookie Protections）と組み合わせて、Firefox 内のウェブサイト間でクッキーやその他のサイトデータを包括的に分割します。 これらの機能を組み合わせることで、ウェブサイトがブラウザーに「タグ付け」することができなくなり、最も普及しているクロスサイトトラッキング技術が排除されます。
+
+To learn more technical details about how Total Cookie Protection works under the hood, you can read the MDN page on State Partitioning and our blog post on Mozilla Hacks.
+トータルクッキープロテクションが内部でどのように機能するかについての技術的な詳細については、ステートパーティショニング（State Partitioning、状態の分割）の MDN ページと Mozilla Hacks のブログ投稿をご覧ください。
+
+
+
+
+Thank you
+ありがとう
+
+Total Cookie Protection touches many parts of Firefox, and was the work of many members of our engineering team: Andrea Marchesini, Gary Chen, Nihanth Subramanya, Paul Zühlcke, Steven Englehardt, Tanvi Vyas, Anne van Kesteren, Ethan Tseng, Prangya Basu, Wennie Leung, Ehsan Akhgari, and Dimi Lee.
+トータルクッキープロテクションは Firefox の多くの部分に影響を与え、エンジニアリングチームの多くのメンバー（アンドレア・マルケジーニ、ゲイリー・チェン、Nihanth Subramanya、Paul Zühlcke、スティーブン・イングルハート、タンヴィ・ヴヤス、アン・ヴァン・ケステレン、イーサン・ツェン、プランギャ・バス、ウェニー・レオン、エサン・アクガリ、ディミ・リー）の仕事でした。
+
+We wish to express our gratitude to the many Mozillians who contributed to and supported this work, including: Selena Deckelmann, Mikal Lewis, Tom Ritter, Eric Rescorla, Olli Pettay, Kim Moir, Gregory Mierzwinski, Doug Thayer, and Vicky Chin.
+セレナ・デッケルマン、ミカル・ルイス、トム・リッター、エリック・レスコーラ、オリ・ペタイ、キム・モア、グレゴリー・ミエルズウィンスキー、ダグ・セイヤー、ヴィッキー・チンなど、この作品に貢献し、支援してくれた多くのモジリアンに感謝の意を表します。
+
+Total Cookie Protection is an evolution of the First-Party-Isolation feature, a privacy protection that is shipped in Tor Browser. We are thankful to the Tor Project for that close collaboration.
+トータルクッキープロテクションは、Tor Browser に同梱されているプライバシー保護である First-Party-Isolation 機能を進化させたものです。 その緊密な協力に対して Tor プロジェクトに感謝します。
+
+We also want to acknowledge past and ongoing work by colleagues in the Brave, Chrome, and Safari teams to develop state partitioning in their own browsers.
+また、Brave、Chrome、Safari チームの同僚が、それぞれのブラウザーでステートパーティショニングを開発するための過去および現在進行中の作業にも感謝します。 
+
+
+
+
+
+Tags: anti-tracking
