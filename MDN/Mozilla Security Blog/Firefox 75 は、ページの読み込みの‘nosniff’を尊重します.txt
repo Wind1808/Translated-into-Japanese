@@ -1,0 +1,27 @@
+https://blog.mozilla.org/security/2020/04/07/firefox-75-will-respect-nosniff-for-page-loads/
+
+Firefox 75 will respect ‘nosniff’ for Page Loads
+Firefox 75 は、ページの読み込みの‘nosniff’を尊重します
+
+Sebastian Streich and Christoph Kerschbaumer April 7, 2020
+Sebastian Streich と Christoph Kerschbaumer 2020年4月7日 
+
+Prior to being able to display a web page within a browser the rendering engine checks and verifies the MIME type of the document being loaded. In case of an html page, for example, the rendering engine expects a MIME type of ‘text/html’. Unfortunately, time and time again, misconfigured web servers  incorrectly use a MIME type which does not match the actual type of the resource. If strictly enforced, this mismatch in types would downgrade a users experience. More precisely, the rendering engine within a browser will try to interpret the resource based on the ruleset for the provided MIME type and at some point simply would have to give up trying to display the resource. To compensate, Firefox implements a MIME type sniffing algorithm – amongst other techniques Firefox inspects the initial bytes of a file and searches for ‘Magic-Numbers’ which allows it to determine the MIME type of a file independently of the one set by the server.
+ブラウザー内でウェブページを表示できるようになる前に、レンダリングエンジンは、読み込まれている文書の MIME タイプをチェックおよび検証します。 たとえば、HTML ページの場合、レンダリングエンジンは‘text/html’の MIME タイプを想定しています。 残念ながら、誤って構成されたウェブサーバーは、リソースの実際のタイプと一致しない MIME タイプを誤って使用することがたびたびあります。 厳密に適用すると、このタイプの不一致により、ユーザーエクスペリエンスが低下します。 より正確には、ブラウザー内のレンダリングエンジンは、提供された MIME タイプのルールセットに基づいてリソースを解釈しようとし、ある時点でリソースの表示をあきらめる必要があります。 これを補うために、Firefox は他の手法の中でも特に MIME タイプスニッフィングアルゴリズムを実装しています。 Firefox はファイルの最初のバイトを検査し、サーバーによって設定されたものとは関係なくファイルの MIME タイプを判別できる「マジックナンバー」を検索します。
+
+Whilst sniffing of the MIME type of a document improves the browsing experience for the majority of users, it also enables so-called MIME confusion attacks. In more detail, imagine an application which allows hosting of  images. Let’s further assume the application allows users to upload ‘.jpg’ files but fails to correctly verify that users of that application actually upload only valid .jpg files. An attacker could craft an ‘evil.jpg’ file containing valid html and upload that through the application. The innocent victim of that application solely expects images to be displayed. Within the browser, however, the MIME sniffer steps in and determines that the file contains valid html and overrides the MIME type to load the file like any other page within the application. Additionally, embedded JavaScript fragments within that page will be treated as same-origin and hence be granted the same permissions as the host application. In turn, the granted permissions allow the attacker to gain access to confidential user information.
+文書の MIME タイプをスニッフィングする（sniffing、嗅ぎ取る）と、大多数のユーザーの閲覧体験が向上しますが、いわゆる MIME 混乱攻撃も可能になります。 より詳細には、画像のホスティングを可能にするアプリケーションを想像してみてください。 さらに、アプリケーションがユーザーに‘.jpg’ファイルのアップロードを許可しているが、そのアプリケーションのユーザーが実際に有効な .jpg ファイルのみをアップロードしていることを正しく確認できないと仮定します。 攻撃者は、有効な HTML を含む‘evil.jpg’ファイルを作成し、それをアプリケーションを介してアップロードする可能性があります。 そのアプリケーションの罪のない犠牲者は、画像が表示されることだけを期待しています。 ただし、ブラウザー内では、MIME スニッファーが介入して、ファイルに有効な HTML が含まれていると判断し、MIME タイプを上書きして、アプリケーション内の他のページと同じようにファイルを読み込みます。 さらに、そのページ内に埋め込まれた JavaScript フラグメントは同一オリジンとして扱われるため、ホストアプリケーションと同じ権限が付与されます。 次に、付与されたアクセス許可により、攻撃者は機密のユーザー情報にアクセスできます。
+
+To mitigate such MIME confusion attacks Firefox expands support of the header ‘X-Content-Type-Options: nosniff’ to page loads (view specification). Firefox has been supporting ‘XCTO: nosniff’ for JavaScript and CSS resources since Firefox 50 and starting with Firefox 75 will use the provided MIME type for page loads even if incorrect.
+このような MIME 混乱攻撃を軽減するために、Firefox は‘X-Content-Type-Options: nosniff’ヘッダーのサポートをページの読み込みに拡張します（仕様を見る）。 Firefox は Firefox 50 以降、JavaScript および CSS リソースの‘XCTO: nosniff’をサポートしており、Firefox 75 以降では、MIME タイプが正しくない場合でもページの読み込みには提供された MIME タイプが使用されます。
+
+
+Left: Firefox 74 ignoring XCTO, sniffing HTML, and executing script.
+左：Firefox 74 は XCTO を無視し、HTML をスニッフィングし、スクリプトを実行しています。
+
+Right: Firefox 75 respecting XCTO, and defaulting to plaintext.
+右：Firefox 75 は XCTO を尊重し、デフォルトはプレーンテキストです。 
+
+
+If the provided MIME type does not match the content, Firefox will not sniff the MIME type but will show an error to the user instead. As illustrated above, if no MIME type was provided at all, Firefox will try to use plaintext or prompt a download . Showing the user an error in the case of a detected MIME type mismatch instead of trying to sniff and render a potentially malicious page allows Firefox to mitigate such MIME confusion attacks.
+指定された MIME タイプがコンテンツと一致しない場合、Firefox は MIME タイプをスニッフィングしませんが、代わりにユーザーにエラーを表示します。 上に示したように、MIME タイプがまったく提供されていない場合、Firefox はプレーンテキストを使用するか、ダウンロードを促します。 悪意のある可能性のあるページをスニッフィングしてレンダリングしようとするのではなく、MIME タイプの不一致が検出された場合にユーザーにエラーを表示することで、Firefox はそのような MIME 混乱攻撃を軽減できます。
