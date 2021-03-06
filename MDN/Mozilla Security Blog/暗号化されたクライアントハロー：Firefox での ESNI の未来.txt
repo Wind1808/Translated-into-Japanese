@@ -1,0 +1,51 @@
+https://blog.mozilla.org/security/2021/01/07/encrypted-client-hello-the-future-of-esni-in-firefox/
+
+Encrypted Client Hello: the future of ESNI in Firefox
+暗号化されたクライアントハロー：Firefox での ESNI の未来
+
+Kevin Jacobs January 7, 2021
+ケビン・ジェイコブス 2021年1月7日 
+
+
+
+
+Background
+背景
+
+Two years ago, we announced experimental support for the privacy-protecting Encrypted Server Name Indication (ESNI) extension in Firefox Nightly. The Server Name Indication (SNI) TLS extension enables server and certificate selection by transmitting a cleartext copy of the server hostname in the TLS Client Hello message. This represents a privacy leak similar to that of DNS, and just as DNS-over-HTTPS prevents DNS queries from exposing the hostname to on-path observers, ESNI attempts to prevent hostname leaks from the TLS handshake itself.
+2年前、Firefox Nightly においてプライバシー保護のための暗号化サーバー名表示（Encrypted Server Name Indication、ESNI）拡張機能の実験的サポートを発表しました。 サーバー名表示（Server Name Indication、SNI）TLS 拡張機能は、TLS クライアントハロー（Client Hello）メッセージでサーバーホスト名のクリアテキスト（暗号化されていないテキスト）のコピーを送信することにより、サーバーと証明書の選択を可能にします。 これは DNS と同様のプライバシー漏洩を表しており、DNS over HTTPS（DNS を HTTPS を通して使う）が DNS 照会がホスト名をパス上の観察者に公開しないようにするのと同様に、ESNI は TLS ハンドシェイク自体からのホスト名漏洩を防止しようとします。
+
+Since publication of the ESNI draft specification at the IETF, analysis has shown that encrypting only the SNI extension provides incomplete protection. As just one example: during session resumption, the Pre-Shared Key extension could, legally, contain a cleartext copy of exactly the same server name that is encrypted by ESNI. The ESNI approach would require an encrypted variant of every extension with potential privacy implications, and even that exposes the set of extensions advertised. Lastly, real-world use of ESNI has exposed interoperability and deployment challenges that prevented it from being enabled at a wider scale.
+IETF で ESNI ドラフト仕様が公開されて以来、分析によると、SNI 拡張機能のみを暗号化すると保護が不完全になることがわかっています。 ほんの一例として、セッションの再開中に、事前共有キー（Pre-Shared Key、PSK）拡張機能には、合法的に、ESNI によって暗号化されたものとまったく同じサーバー名のクリアテキストのコピーを含めることができます。 ESNI のアプローチでは、プライバシーに影響を与える可能性のあるすべての拡張機能に暗号化された変種が必要であり、それでもアドバタイズされた拡張機能のセットが公開されます。 最後に、ESNI を実際に使用すると、相互運用性と展開の課題が明らかになり、ESNI をより広範囲に有効にすることができなくなりました。
+
+
+
+
+Enter Encrypted Client Hello (ECH)
+暗号化されたクライアントハロー（ECH）の参加
+
+To address the shortcomings of ESNI, recent versions of the specification no longer encrypt only the SNI extension and instead encrypt an entire Client Hello message (thus the name change from “ESNI” to “ECH”). Any extensions with privacy implications can now be relegated to an encrypted “ClientHelloInner”, which is itself advertised as an extension to an unencrypted “ClientHelloOuter”. Should a server support ECH and successfully decrypt, the “Inner” Client Hello is then used as the basis for the TLS connection. This is explained in more detail in Cloudflare’s excellent blog post on ECH.
+ESNI の欠点に対処するために、仕様の最近のバージョンでは、SNI 拡張機能のみが暗号化されず、代わりにクライアントハローメッセージ全体が暗号化されます（したがって、名前が「ESNI」から「ECH」に変更されます）。 プライバシーに影響を与える拡張機能は、暗号化された「ClientHelloInner」に追いやることができるようになりました。 これ自体は、暗号化されていない「ClientHelloOuter」の拡張機能としてアドバタイズされます。 サーバーが ECH をサポートし、正常に復号化した場合、「内部」クライアントハローが TLS 接続の基礎として使用されます。 これについては、Cloudflare の ECH に関する優れたブログ投稿で詳しく説明されています。
+
+ECH also changes the key distribution and encryption stories: A TLS server supporting ECH now advertises its public key via an HTTPSSVC DNS record, whereas ESNI used TXT records for this purpose. Key derivation and encryption are made more robust, as ECH employs the Hybrid Public Key Encryption specification rather than defining its own scheme. Importantly, ECH also adds a retry mechanism to increase reliability with respect to server key rotation and DNS caching. Where ESNI may currently fail after receiving stale keys from DNS, ECH can securely recover, as the client receives updated keys directly from the server.
+ECH は、キーの配布と暗号化のストーリーも変更します。 ECH をサポートする TLS サーバーは、HTTPSSVC DNS レコードを介して公開キーをアドバタイズするようになりましたが、ESNI はこの目的で TXT レコードを使用しました。 ECH は独自のスキームを定義するのではなく、ハイブリッド公開鍵暗号化仕様を採用しているため、鍵の導出と暗号化がより堅牢になります。 重要なことに、ECH は、サーバーキーローテーションと DNS キャッシングに関する信頼性を高めるための再試行メカニズムも追加します。 DNS から古いキーを受信した後に ESNI が現在失敗する可能性がある場合、クライアントはサーバーから直接更新されたキーを受信するため、ECH は安全に回復できます。
+
+
+
+
+ECH in Firefox 85
+Firefox 85 の ECH
+
+In keeping with our mission of protecting your privacy online, Mozilla is actively working with Cloudflare and others on standardizing the Encrypted Client Hello specification at the IETF. Firefox 85 replaces ESNI with ECH draft-08, and another update to draft-09 (which is targeted for wider interoperability testing and deployment) is forthcoming.
+オンラインでのプライバシーを保護するという私たちの使命に沿って、Mozilla は Cloudflare やその他の人々と積極的に協力して、IETF での暗号化クライアントハロー仕様の標準化に取り組んでいます。 Firefox 85 は ESNI を ECH draft-08 に置き換え、別の draft-09（より広範な相互運用性のテストと展開を対象としています）への更新が間もなく開始されます。
+
+Users that have previously enabled ESNI in Firefox may notice that the about:config option for ESNI is no longer present. Though we recommend that users wait for ECH to be enabled by default, some may want to enable this functionality earlier. This can be done in about:config by setting network.dns.echconfig.enabled and network.dns.use_https_rr_as_altsvc to true, which will allow Firefox to use ECH with servers that support it. While ECH is under active development, its availability may be intermittent as it requires both the client and server to support the same version. As always, settings exposed only under about:config are considered experimental and subject to change. For now, Firefox ESR will continue to support the previous ESNI functionality.
+以前に Firefox で ESNI を有効にしたユーザーは、ESNI の about:config オプションが存在しなくなったことに気付くかもしれません。 デフォルトで ECH が有効になるのを待つことをお勧めしますが、この機能をもっと早く有効にしたい場合もあります。 これは、about:config で network.dns.echconfig.enabled と network.dns.use_https_rr_as_altsvc を true に設定することで実行できます。 これにより、Firefox はそれをサポートするサーバーで ECH を使用できるようになります。 ECH は活発に開発されていますが、クライアントとサーバーの両方が同じバージョンをサポートする必要があるため、その可用性は断続的になる可能性があります。 いつものように、about:config でのみ公開される設定は実験的なものと見なされ、変更される可能性があります。 今のところ、Firefox ESR は以前の ESNI 機能を引き続きサポートします。
+
+In conclusion, ECH is an exciting and robust evolution of ESNI, and support for the protocol is coming to Firefox. We’re working hard to make sure that it is interoperable and deployable at scale, and we’re eager for users to realize the privacy benefits of this feature.
+結論として、ECH は ESNI のエキサイティングで堅牢な進化であり、プロトコルのサポートが Firefox にもたらされます。 大規模な相互運用性と展開性を確保するために懸命に取り組んでおり、ユーザーがこの機能のプライバシー上のメリットを実感できるように努めています。
+
+
+
+
+Tags: NSS, Security, TLS
