@@ -1,0 +1,54 @@
+https://blog.mozilla.org/security/2020/11/17/measuring-middlebox-interference-with-dns-records/
+
+Measuring Middlebox Interference with DNS Records
+DNS レコードとのミドルボックス干渉の測定
+
+Austin Hounsel November 17, 2020
+オースティン・ハウンセル 2020年11月17日 
+
+
+
+
+Overview
+概要
+
+The Domain Name System (DNS) is often referred to as the “phonebook of the Internet.” It is responsible for translating human readable domain names–such as mozilla.org–into IP addresses, which are necessary for nearly all communication on the Internet. At a high level, clients typically resolve a name by sending a query to a recursive resolver, which is responsible for answering queries on behalf of a client. The recursive resolver answers the query by traversing the DNS hierarchy, starting from a root server, a top-level domain server (e.g. for .com), and finally the authoritative server for the domain name. Once the recursive resolver receives the answer for the query, it caches the answer and sends it back to the client.
+ドメインネームシステム（Domain Name System、DNS）は、「インターネットの電話帳」と呼ばれることがよくあります。 これは、mozilla.org などの人間が読めるドメイン名を IP アドレスに変換する役割を果たします。 これは、インターネット上のほぼすべての通信に必要です。 大まかに言うと、クライアントは通常、クライアントに代わって照会に回答する責任がある再帰リゾルバーに照会を送信することで名前を解決します。 再帰リゾルバーは、ルートサーバーから始まり、トップレベルドメインサーバー（.com など）、最後にドメイン名の権限サーバーからなる DNS 階層をトラバースする（渡り歩く）ことで照会に回答します。 再帰リゾルバーは、照会の回答を受信すると、回答をキャッシュしてクライアントに送り返します。
+
+Unfortunately, DNS was not originally designed with security in mind, leaving users vulnerable to attacks. For example, previous work has shown that recursive resolvers are susceptible to cache poisoning attacks, in which on-path attackers impersonate authoritative nameservers and send incorrect answers for queries to recursive resolvers. These incorrect answers then get cached at the recursive resolver, which may cause clients that later query the same domain names to visit malicious websites. This attack is successful because the DNS protocol typically does not provide any notion of correctness for DNS responses. When a recursive resolver receives an answer for a query, it assumes that the answer is correct.
+残念ながら、DNS は元々セキュリティを念頭に置いて設計されていなかったため、ユーザーは攻撃に対して脆弱なままでした。 たとえば、以前の作業では、再帰的リゾルバーはキャッシュポイズニング攻撃（cache poisoning attacks）の影響を受けやすいことが示されています。 この攻撃では、パス上の攻撃者が権限のあるネームサーバーになりすまして、照会に対して正しくない回答を再帰的リゾルバーに送信します。 これらの正しくない回答は再帰リゾルバーにキャッシュされ、後で同じドメイン名を照会するクライアントが悪意のあるウェブサイトを訪問することになる可能性があります。 DNS プロトコルは通常、DNS 応答の正確性の概念を提供しないため、この攻撃は成功します。 再帰リゾルバーは、照会に対する回答を受信すると、その回答が正しいと見なします。
+
+DNSSEC is able to prevent such attacks by enabling domain name owners to provide cryptographic signatures for their DNS records. It also establishes a chain of trust between servers in the DNS hierarchy, enabling clients to validate that they received the correct answer.
+DNSSEC は、ドメイン名の所有者が DNS レコードに暗号化署名を提供できるようにすることで、このような攻撃を防ぐことができます。 また、DNS 階層内のサーバー間に信頼のチェーンを確立し、クライアントが正しい回答を受け取ったことを検証できるようにします。
+
+Unfortunately, DNSSEC deployment has been comparatively slow: measurements show, as of November 2020, only about 1.8% of .com records are signed, and about 25% of clients worldwide use DNSSEC-validating recursive resolvers. Even worse, essentially no clients validate DNSSEC themselves, which means that they have to trust their recursive resolvers.
+残念ながら、DNSSEC の展開は比較的遅いです。 測定によると、2020年11月の時点で、.com レコードの約 1.8% のみが署名されており、世界中のクライアントの約 25% が DNSSEC 検証再帰リゾルバーを使用しています。 さらに悪いことに、本質的に DNSSEC を自身で検証するクライアントはないので、再帰リゾルバーを信頼する必要があります。
+
+One potential obstacle to client-side validation is network middleboxes. Measurements have shown that some middleboxes do not properly pass all DNS records. If a middlebox were to block the RRSIG records that carry DNSSEC signatures, clients would not be able to distinguish this from an attack, making DNSSEC deployment problematic. Unfortunately, these measurements were taken long ago and were not specifically targeted at DNSSEC. To get to the bottom of things, we decided to run an experiment.
+クライアント側の検証に対する潜在的な障害の1つは、ネットワークミドルボックス（network middleboxes）です。 測定により、一部のミドルボックスがすべての DNS レコードを適切に渡さないことが示されています。 ミドルボックスが DNSSEC 署名を運ぶ RRSIG レコードをブロックした場合、クライアントはこれを攻撃と区別できず、DNSSEC の展開に問題が生じます。 残念ながら、これらの測定はずっと前に行われたものであり、DNSSEC を特に対象としていませんでした。 物事の根底に到達するために、私たちは実験を実行することにしました。
+
+
+
+
+Measurement Description
+測定の説明
+
+There are two main questions we want to answer:
+私たちが答えたい次の2つの主な質問があります。
+
+    At what rate do network middleboxes between clients and recursive resolvers interfere with DNSSEC records (e.g., DNSKEY and RRSIG)?
+    クライアントと再帰リゾルバー間のネットワークミドルボックスは、DNSSEC レコード（DNSKEY や RRSIG など）にどの程度の割合で干渉しますか？
+
+    How does the rate of DNSSEC interference compare to interference with other relatively new record types (e.g., SMIMEA and HTTPSSVC)?
+    DNSSEC 干渉の割合は、他の比較的新しいレコードタイプ（SMIMEA や HTTPSSVC など）との干渉と比較してどうですか？
+
+
+At a high level, in collaboration with Cloudflare we will first serve the above record types from domain names that we control. We will then deploy an add-on experiment to Firefox Beta desktop clients which requests each record type for our domain names. Finally, we will check whether we got the expected responses (or any response at all). As always, users who have opted out of sending telemetry or participating in studies will not receive the add-on.
+大まかに言えば、Cloudflare と協力して、最初に、私たちが管理するドメイン名から上記のレコードタイプを提供します。 次に、私たちのドメイン名の各レコードタイプを要求するアドオン実験を Firefox Beta デスクトップクライアントに展開します。 最後に、予想される応答（あるいは何の応答もない）が得られたかどうかを確認します。 いつものように、遠隔測定の送信または調査への参加を辞退したユーザーは、アドオンを受け取りません。
+
+To analyze the rate of network middlebox interference with DNSSEC records, we will send DNS responses to our telemetry system, rather than performing any analysis locally within the client’s browser. This will enable us to see the different ways that DNS responses are interfered with without relying on whatever analysis logic we bake into our experiment’s add-on. In order to protect user privacy, we will only send information for the domain names in the experiment that we control—not for any other domain names for which a client issues requests when browsing the web. Furthermore, we are not collecting UDP, TCP, or IP headers. We are only collecting the payload of the DNS response, for which we know the expected format. The data we are interested in should not include identifying information about a client, unless middleboxes inject such information when they interfere with DNS requests/responses.
+DNSSEC レコードに対するネットワークミドルボックスの干渉率を分析するために、クライアントのブラウザー内でローカルに分析を実行するのではなく、DNS 応答を遠隔測定システムに送信します。 これにより、実験のアドオンに組み込む分析ロジックに依存することなく、DNS 応答が干渉されるさまざまな方法を確認できます。 ユーザーのプライバシーを保護するために、私たちが管理する実験のドメイン名の情報のみを送信します。 クライアントがウェブを閲覧するときにリクエストを発行する他のドメイン名の情報は送信しません。 さらに、UDP、TCP、または IP ヘッダーは収集していません。 予想される形式がわかっている DNS 応答のペイロードのみを収集しています。 関心のあるデータには、クライアントに関する識別情報を含めるべきではありません。 ただし、ミドルボックスが DNS 要求/応答に干渉するときにそのような情報を挿入する場合を除きます。
+
+We are launching the experiment today to 1% of Firefox Beta desktop clients and expect to publish our initial results around the end of the year.
+本日、Firefox Beta デスクトップクライアントの 1% に対して実験を開始し、年末頃に最初の結果を公開する予定です。
+
