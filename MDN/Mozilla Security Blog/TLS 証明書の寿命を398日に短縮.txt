@@ -1,0 +1,70 @@
+https://blog.mozilla.org/security/2020/07/09/reducing-tls-certificate-lifespans-to-398-days/
+
+Reducing TLS Certificate Lifespans to 398 Days
+TLS 証明書の寿命を398日に短縮
+
+Ben Wilson July 9, 2020
+ベン ウィルソン 2020年7月9日
+
+ 
+
+
+We intend to update Mozilla’s Root Store Policy to reduce the maximum lifetime of TLS certificates from 825 days to 398 days, with the aim of protecting our user’s HTTPS connections. Many reasons for reducing the lifetime of certificates have been provided and summarized in the CA/Browser Forum’s Ballot SC22. Here are Mozilla’s top three reasons for supporting this change.
+ユーザーの HTTPS 接続を保護する目的で、Mozilla のルートストアポリシーを更新して、TLS 証明書の最大有効期間を825日から398日に短縮する予定です。 証明書の有効期間を短縮する多くの理由が、CA / ブラウザーフォーラムの投票 SC22 で提供および要約されています。 この変更を支持する Mozilla の上位3つの理由は次のとおりです。 
+
+
+
+
+
+1. Agility
+1. 敏捷性
+
+Certificates with lifetimes longer than 398 days delay responding to major incidents and upgrading to more secure technology. Certificate revocation is highly disruptive and difficult to plan for. Certificate expiration and renewal is the least disruptive way to replace an obsolete certificate, because it happens at a pre-scheduled time, whereas revocation suddenly causes a site to stop working. Certificates with lifetimes of no more than 398 days help mitigate the threat across the entire ecosystem when a major incident requires certificate or key replacements. Additionally, phasing out certificates with MD5-based signatures took five years, because TLS certificates were valid for up to five years. Phasing out certificates with SHA-1-based signatures took three years, because the maximum lifetime of TLS certificates was three years. Weakness in hash algorithms can lead to situations in which attackers can forge certificates, so users were at risk for years after collision attacks against these algorithms were proven feasible.
+有効期間が398日を超える証明書は、重大なインシデントへの対応と、より安全な技術へのアップグレードを遅らせます。 証明書の失効は非常に混乱を招き、計画を立てるのが困難です。 証明書の期限切れと刷新 は、廃れた証明書を置き換えるための最も中断の少ない方法です。 これは、予定時刻に行われるのに対し、失効するとサイトが突然機能しなくなるためです。 有効期間が398日以下の証明書は、重大なインシデントで証明書またはキーの交換が必要な場合に、エコシステム全体の脅威を軽減するのに役立ちます。 さらに、MD5 ベースの署名を使用した証明書の段階的廃止には、TLS 証明書は最大5年間有効であったため、5年かかりました。 SHA-1 ベースの署名を使用した証明書の段階的廃止には、TLS 証明書の最大有効期間は3年であったため、3年かかりました。 ハッシュアルゴリズムの弱点は、攻撃者が証明書を偽造できる状況につながる可能性があるため、これらのアルゴリズムに対する衝突攻撃（collision attacks）が実行可能であることが証明された後、ユーザーは何年もの間リスクにさらされていました。
+
+
+
+
+
+2. Limit exposure to compromise
+2. 侵害への露出を制限する
+
+Keys valid for longer than one year have greater exposure to compromise, and a compromised key could enable an attacker to intercept secure communications and/or impersonate a website until the TLS certificate expires. A good security practice is to change key pairs frequently, which should happen when you obtain a new certificate. Thus, one-year certificates will lead to more frequent generation of new keys.
+1年以上有効なキーは侵害にさらされる可能性が高く、侵害されたキーにより、攻撃者は TLS 証明書の有効期限が切れるまで、安全な通信を傍受したり、ウェブサイトになりすましたりする可能性があります。 セキュリティ対策として、キーペアを頻繁に変更することをお勧めします。 これは、新しい証明書を取得したときに発生するはずです。 したがって、1年間の証明書は、新しいキーのより頻繁な生成につながります。 
+
+
+
+
+
+3. TLS Certificates Outliving Domain Ownership
+3. ドメインの所有権より長生きする TLS 証明書
+
+TLS certificates provide authentication, meaning that you can be sure that you are sending information to the correct server and not to an imposter trying to steal your information. If the owner of the domain changes or the cloud service provider changes, the holder of the TLS certificate’s private key (e.g. the previous owner of the domain or the previous cloud service provider) can impersonate the website until that TLS certificate expires. The Insecure Design Demo site describes two problems with TLS certificates outliving their domain ownership:
+TLS 証明書は認証を提供します。 つまり、情報を盗もうとする詐欺師ではなく、正しいサーバーに情報を送信していることを確認できます。 ドメインの所有者が変更された場合、またはクラウドサービスプロバイダーが変更された場合、TLS 証明書の秘密鍵の所有者（たとえば、ドメインの以前の所有者または以前のクラウドサービスプロバイダー）は、その TLS 証明書の有効期限が切れるまでウェブサイトになりすますことができます。 安全でない設計のデモ（Insecure Design Demo）のサイトでは、TLS 証明書がドメインの所有権より長生きしている場合の2つの問題について説明しています。
+
+    “If a company acquires a previously owned domain, the previous owner could still have a valid certificate, which could allow them to MitM the SSL connection with their prior certificate.”
+    「企業が以前に所有されていたドメインを取得した場合でも、以前の所有者は有効な証明書を持っている可能性があります。 これにより、以前の証明書を使用して SSL 接続を MitM することができます。」
+
+    “If a certificate has a subject alt-name for a domain no longer owned by the certificate user, it is possible to revoke the certificate that has both the vulnerable alt-name and other domains. You can DoS the service if the shared certificate is still in use!”
+    「証明書に、証明書ユーザーが所有しなくなったドメインのサブジェクト代替名（Subject Alternative Names、SAN）がある場合、脆弱な代替名と他のドメインの両方を持つ証明書を失効することができます。 共有証明書がまだ使用されている場合は、サービスを DoS できます！」
+
+The change to reduce the maximum validity period of TLS certificates to 398 days is being discussed in the CA/Browser Forum’s Ballot SC31 and can have two possible outcomes:
+TLS 証明書の最大有効期間を398日に短縮する変更は、CA / ブラウザーフォーラムの投票 SC31 で議論されており、次の2つの結果が考えられます。
+
+     a) If that ballot passes, then the requirement will automatically apply to Mozilla’s Root Store Policy by reference.
+     a）その投票が通過した場合、要件は参照により Mozilla のルートストアポリシーに自動的に適用されます。
+
+     b) If that ballot does not pass, then we intend to proceed with our regular process for updating Mozilla’s Root Store Policy, which will involve discussion in mozilla.dev.security.policy.
+     b）その投票が通過しない場合は、Mozilla のルートストアポリシーを更新するための通常のプロセスを続行する予定です。 これには、mozilla.dev.security.policy での議論が含まれます。
+
+In preparation for updating our root store policy, we surveyed all of the certificate authorities (CAs) in our program and found that they all intend to limit TLS certificate validity periods to 398 days or less by September 1, 2020.
+ルートストアポリシーの更新に備えて、私たちのプログラム内のすべての認証局（CA）を調査したところ、2020年9月1日までに TLS 証明書の有効期間を398日以下に制限する予定であることがわかりました。
+
+We believe that the best approach to safeguarding secure browsing is to work with CAs as partners, to foster open and frank communication, and to be diligent in looking for ways to keep our users safe.
+安全な閲覧を保護するための最善のアプローチは、パートナーとして CA と協力し、オープンで率直なコミュニケーションを促進し、ユーザーを安全に保つ方法を探すことに熱心に取り組むことであると信じています。
+
+
+
+
+
+Tags: certificate authority, Certificates, https, TLS
