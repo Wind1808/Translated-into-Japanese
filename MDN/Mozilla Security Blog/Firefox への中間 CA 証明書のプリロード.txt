@@ -1,0 +1,49 @@
+https://blog.mozilla.org/security/2020/11/13/preloading-intermediate-ca-certificates-into-firefox/
+
+Preloading Intermediate CA Certificates into Firefox
+Firefox への中間 CA 証明書のプリロード
+
+Dana Keeler November 13, 2020
+ダナ キーラー 2020年11月13日 
+
+
+
+
+
+Throughout 2020, Firefox users have been seeing fewer secure connection errors while browsing the Web. We’ve been improving connection errors overall for some time, and a new feature called Intermediate Certificate Authority (CA) Preloading is our latest innovation. This technique reduces connection errors that users encounter when web servers forget to properly configure their TLS security.
+2020年を通して、Firefox ユーザーはウェブの閲覧中における安全な接続エラーが少なくなりました。 以前から、接続エラーを全体的に改善してきましたが、中間 CA プリロード（Intermediate Certificate Authority (CA) Preloading、中間認証局プリロード）と呼ばれる新機能が私たちの最新のイノベーションです。 この手法により、ウェブサーバーが TLS セキュリティを適切に構成し忘れたときにユーザーが遭遇する接続エラーが減少します。
+
+In essence, Firefox pre-downloads all trusted Web Public Key Infrastructure (PKI) intermediate CA certificates into Firefox via Mozilla’s Remote Settings infrastructure. This way, Firefox users avoid seeing an error page for one of the most common server configuration problems: not specifying proper intermediate CA certificates.
+基本的に、Firefox は、Mozilla のリモート設定インフラストラクチャーを介して、信頼できるすべてのウェブ公開鍵インフラストラクチャー（PKI）の中間 CA 証明書を Firefox に事前にダウンロードします。 このようにして、Firefox ユーザーは、最も一般的なサーバー構成の問題の1つである適切な中間 CA 証明書を指定していないというエラーページが表示されないようにします。
+
+For Intermediate CA Preloading to work, we need to be able to enumerate every intermediate CA certificate that is part of the trusted Web PKI. As a result of Mozilla’s leadership in the CA community, each CA in Mozilla’s Root Store Policy is required to disclose these intermediate CA certificates to the multi-browser Common CA Database (CCADB). Consequently, all of the relevant intermediate CA certificates are available via the CCADB reporting mechanisms. Given this information, we periodically synthesize a list of these intermediate CA certificates and place them into Remote Settings. Currently the list contains over two thousand entries.
+中間 CA プリロードを機能させるには、信頼できる Web PKI の一部であるすべての中間 CA 証明書を列挙できる必要があります。 CA コミュニティにおける Mozilla のリーダーシップの結果として、Mozilla のルートストアポリシー内の各 CA は、これらの中間 CA 証明書をマルチブラウザーの共通 CA データベース（Common CA Database、CCADB）に開示する必要があります。 したがって、関連するすべての中間 CA 証明書は、CCADB 報告メカニズムを介して利用できます。 この情報を基に、これらの中間 CA 証明書のリストを定期的に合成し、リモート設定に配置します。 現在、リストには2,000を超えるエントリが含まれています。
+
+When Firefox receives the list for the first time (or later receives updates to the list), it enumerates the entries in batches and downloads the corresponding intermediate CA certificates in the background. The list changes slowly, so once a copy of Firefox has completed the initial downloads, it’s easy to keep it up-to-date. The list can be examined directly using your favorite JSON tooling at this URL: https://firefox.settings.services.mozilla.com/v1/buckets/security-state/collections/intermediates/records
+Firefox が初めてリストを受信するとき（または後でリストの更新を受信するとき）、Firefox はエントリをバッチで列挙し、対応する中間 CA 証明書をバックグラウンドでダウンロードします。 リストはゆっくりと変化するため、Firefox のコピーが最初のダウンロードを完了すると、最新の状態に保つのは簡単です。 このリストは、次の URL でお気に入りの JSON ツールを使用して直接調べることができます：https://firefox.settings.services.mozilla.com/v1/buckets/security-state/collections/intermediates/records
+
+For details on processing the records, see the Kinto Attachment plugin for Kinto, used by Firefox Remote Settings.
+レコードの処理の詳細については、Firefox リモート設定で使用される Kinto 用の Kinto 添付ファイルプラグインを参照してください。
+
+Certificates provided via Intermediate CA Preloading are added to a local cache and are not imbued with trust. Trust is still derived from the standard Web PKI algorithms.
+中間 CA プリロードを介して提供された証明書は、ローカルキャッシュに追加され、信頼が組み込まれていません。 信頼は、依然として標準の Web PKI アルゴリズムから派生しています。
+
+Our collected telemetry confirms that enabling Intermediate CA Preloading in Firefox 68 has led to a decrease of unknown issuers errors in the TLS Handshake.
+収集した遠隔測定により、Firefox 68 で中間 CA プリロードを有効にすると、TLS ハンドシェイクでの不明な発行者エラーが減少することが確認されています。
+
+
+unknown issuer errors declining after Firefox Beta 68
+Firefox Beta 68 以降の不明な発行者エラーの減少
+
+
+While there are other factors that affect the relative prevalence of this error, this data supports the conclusion that Intermediate CA Preloading is achieving the goal of avoiding these connection errors for Firefox users.
+このエラーの相対的な蔓延に影響を与える他の要因がありますが、このデータは、中間 CA プリロードが Firefox ユーザーのためにこれらの接続エラーを回避するという目標を達成しているという結論を裏付けています。
+
+Intermediate CA Preloading is reducing errors today in Firefox for desktop users, and we’ll be working to roll it out to our mobile users in the future.
+中間 CA プリロードは、デスクトップユーザー向けの Firefox での現在のエラーを減らしており、将来的にはモバイルユーザーへの展開に取り組んでいます。 
+
+
+
+
+
+Tags: Certificates, TLS, WebPKI
