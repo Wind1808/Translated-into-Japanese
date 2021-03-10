@@ -1,0 +1,78 @@
+https://blog.mozilla.org/security/2020/08/04/firefox-79-includes-protections-against-redirect-tracking/
+
+Firefox 79 includes protections against redirect tracking
+Firefox 79 には、リダイレクト追跡に対する保護が含まれています
+
+Steven Englehardt August 4, 2020
+スティーブン イングルハート 2020年8月4日 
+
+
+
+
+
+A little over a year ago we enabled Enhanced Tracking Protection (ETP) by default in Firefox. We did so because we recognize that tracking poses a threat to society, user safety, and the autonomy of individuals and we’re committed to protecting users against these threats by default. ETP was our first step in fulfilling that commitment, but the web provides many covert avenues trackers can use to continue their data collection.
+1年ちょっと前に、Firefox でデフォルトで ETP（Enhanced Tracking Protection、強化された追跡保護）を有効にしました。 これは、追跡が社会、ユーザーの安全性、個人の自律性に脅威をもたらすことを認識しており、デフォルトでこれらの脅威からユーザーを保護することに取り組んでいるためです。 ETP は、その約束を実現するための最初のステップでしたが、ウェブは、追跡者がデータ収集を継続するために使用できる多くの秘密の手段を提供します。
+
+Today’s Firefox release introduces the next step in providing a safer and more private experience for our users with Enhanced Tracking Protection 2.0, where we will block a new advanced tracking technique called redirect tracking, also known as bounce tracking. ETP 2.0 clears cookies and site data from tracking sites every 24 hours, except for those you regularly interact with. We’ll be rolling ETP 2.0 out to all Firefox users over the course of the next few weeks.
+本日の Firefox リリースでは、 ETP 2.0（Enhanced Tracking Protection 2.0）を使用して、より安全でプライベートなエクスペリエンスをユーザーに提供するための次のステップが導入されています。 ここでは、バウンス追跡（bounce tracking）とも呼ばれるリダイレクト追跡（redirect tracking）と呼ばれる新しい高度な追跡手法をブロックします。 ETP 2.0 は、定期的にやり取りするサイトを除き、24時間ごとに追跡サイトからクッキーとサイトデータを消去します。 今後数週間の間に、すべての Firefox ユーザーに ETP 2.0 を展開する予定です。 
+
+
+
+
+What is “redirect” tracking?
+「リダイレクト」追跡とは何ですか？
+
+When we browse the web we constantly navigate between websites; we might search for “best running shoes” on a search engine, click a result to read reviews, and finally click a link to buy a pair of shoes from an online store. In the past, each of these websites could embed resources from the same tracker, and the tracker could use its cookies to link all of these page visits to the same person. To protect your privacy ETP 1.0 blocks trackers from using cookies when they are embedded in a third party context, but still allows them to use cookies as a first party because blocking first party cookies causes websites to break. Redirect tracking takes advantage of this to circumvent third-party cookie blocking.
+ウェブを閲覧するときは、常にウェブサイト間を移動します。 検索エンジンで「最高のランニングシューズ」を検索し、結果をクリックしてレビューを読み、最後にリンクをクリックしてオンラインストアから靴を購入する場合があります。 以前は、これらの各ウェブサイトに同じ追跡者からのリソースを埋め込むことができ、追跡者はクッキーを使用して、これらのページへのすべてのアクセスを同じ人物にリンクすることができました。 プライバシーを保護するために、ETP 1.0 は、追跡者がサードパーティのコンテキストに埋め込まれている場合にクッキーを使用することをブロックしますが、ファーストパーティのクッキーをブロックするとウェブサイトが破損するため、追跡者はクッキーをファーストパーティとして使用できます。 リダイレクト追跡はこれを利用して、サードパーティのクッキーのブロックを回避します。
+
+Redirect trackers work by forcing you to make an imperceptible and momentary stopover to their website as part of that journey. So instead of navigating directly from the review website to the retailer, you end up navigating to the redirect tracker first rather than to the retailer. This means that the tracker is loaded as a first party and therefore is allowed to store cookies. The redirect tracker associates tracking data with the identifiers they have stored in their first-party cookies and then forwards you to the retailer.
+リダイレクト追跡者は、その旅の一環として、彼らのウェブサイトへの一時的な立ち寄りを強制することで機能します。 したがって、レビューウェブサイトから小売業者に直接移動する代わりに、小売業者ではなく、最初にリダイレクト追跡者に移動することになります。 これは、追跡者がファーストパーティとしてロードされるため、クッキーを保存できることを意味します。 リダイレクト追跡者は、追跡データをファーストパーティのクッキーに保存されている識別子に関連付けてから、小売業者に転送します。
+
+A visual example of redirect tracking: a review site redirects to the redirect tracker, which redirects to a retail site.
+リダイレクト追跡の視覚的な例：レビューサイトは、小売サイトにリダイレクトするリダイレクト追跡者にリダイレクトします。
+
+
+
+
+A step-by-step explanation of redirect tracking: 
+リダイレクト追跡のステップバイステップの説明
+
+Let’s say you’re browsing a product review website and you click a link to purchase a pair of shoes from an online retailer. A few seconds later Firefox navigates to the retailer’s website and the product page loads. Nothing looks out of place to you, but behind the scenes you were tracked using redirect tracking. Here’s how it happened:
+商品レビューのウェブサイトを閲覧していて、リンクをクリックしてオンライン小売店から靴を購入したとします。 数秒後、Firefox は小売業者のウェブサイトに移動し、製品ページが読み込まれます。 何もないように見えますが、舞台裏では、リダイレクト追跡を使用して追跡されています。 その時の様子はこんな感じです。
+
+    Step 1: On the review website you click a link that appears to take you to the retail site. The URL that was visible when you hovered over the link belonged to the retail site.
+    ステップ1：レビューウェブサイトで、小売サイトに移動するように見えるリンクをクリックします。 リンクにカーソルを合わせたときに表示された URL は、小売サイトのものでした。
+
+    Step 2: A redirect tracker embedded in the review site intercepts your click and sends you to their website instead. The tracker also saves the intended destination—the retailer’s URL that you actually thought you were visiting when you clicked the link.
+    ステップ2：レビューサイトに埋め込まれたリダイレクト追跡者がクリックをインターセプトし、代わりに彼らのウェブサイトに送信します。 追跡者は、目的の宛先、つまりリンクをクリックしたときに実際にアクセスしたと思っている小売業者の URL も保存します。
+
+    Step 3: When the redirect tracker is loaded as a first party, the tracker will be able to access its cookies. It can associate information about which website you’re coming from (and where you’re headed) with identifiers stored in those cookies. If a lot of websites redirect through this tracker, the tracker can effectively track you across the web.
+    ステップ3：リダイレクト追跡者がファーストパーティとして読み込まれると、追跡者はそのクッキーにアクセスできるようになります。 それはあなたがどのウェブサイトから来ているか（そしてあなたがどこに向かっているのか）に関する情報をそれらのクッキーに保存されている識別子と関連付けることができます。 多くのウェブサイトがこの追跡者を介してリダイレクトする場合、追跡者はウェブ全体で効果的にユーザーを追跡できます。
+
+    Step 4: After it finishes saving its tracking data, it automatically redirects you to the original destination.
+    ステップ4：追跡データの保存が完了すると、元の宛先に自動的にリダイレクトされます。
+
+
+
+
+
+How does Firefox protect against redirect tracking?
+Firefox はリダイレクト追跡からどのように保護しますか？
+
+Once every 24 hours ETP 2.0 will completely clear out any cookies and site data stored by known trackers. This prevents redirect trackers from being able to build a long-term profile of your activity.
+ETP 2.0 は、24時間に1回、既知の追跡者によって保存されているクッキーとサイトデータを完全に消去します。 これにより、リダイレクト追跡者がユーザーの活動の長期プロファイルを作成できなくなります。
+
+When you first visit a redirect tracker it can store a unique identifier in its cookies. Any redirects to that tracker during the 24 hour window will be able to associate tracking data with that same identifying cookie. However, once ETP 2.0’s cookie clearing runs, the identifying cookies will be deleted from Firefox and you’ll look like a fresh user the next time you visit the tracker.
+リダイレクト追跡者に初めてアクセスすると、クッキーに一意の識別子を保存できます。 24時間のウィンドウ内にその追跡者にリダイレクトすると、追跡データを同じ識別クッキーに関連付けることができます。 ただし、ETP 2.0 のクッキー消去が実行されると、識別クッキーは Firefox から削除され、次に追跡者にアクセスしたときに新しいユーザーのように見えます。
+
+This only applies to known trackers; cookies from non-tracking sites are unaffected. Sometimes trackers do more than just track; trackers may also offer services you engage with, such as a search engine or social network. If Firefox cleared cookies for these services we’d end up logging you out of your email or social network every day. To prevent this, we provide a 45 day exception for any trackers that you’ve interacted with directly, so that you can continue to have a good experience on their websites. This means that the sites you visit and interact with regularly will continue to work as expected, while the invisible “redirect” trackers will have their storage regularly cleared. A detailed technical description of our protections is available on MDN.
+これは既知の追跡者にのみ適用されます。 非追跡サイトからのクッキーは影響を受けません。 追跡者は、追跡するだけではない場合があります。 追跡者は、検索エンジンやソーシャルネットワークなど、ユーザーが関与するサービスを提供する場合もあります。 Firefox がこれらのサービスのクッキーを消去した場合、メールまたはソーシャルネットワークから毎日ログアウトすることになります。 これを防ぐために、直接やり取りした追跡者には45日間の例外を設けており、追跡者のウェブサイトで引き続き優れたエクスペリエンスを提供できます。 つまり、定期的にアクセスしてやり取りするサイトは引き続き期待どおりに機能しますが、非表示の「リダイレクト」追跡者ではストレージが定期的に消去されます。 私たちの保護に関する詳細な技術的説明は、MDN で入手できます。
+
+ETP 2.0 is an upgrade to our suite of default-on tracking protections. Expect to see us continue to iterate on our protections to ensure you stay protected while using Firefox.
+ETP 2.0 は、デフォルトでオンの追跡保護スイートのアップグレードです。 Firefox を使用している間、保護された状態を維持するために、保護を改良し続けることを期待してください。
+
+
+
+
+
+Tags: anti-tracking, cookies, redirect-tracking
