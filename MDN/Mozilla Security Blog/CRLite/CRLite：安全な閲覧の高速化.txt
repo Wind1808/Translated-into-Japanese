@@ -1,0 +1,184 @@
+https://blog.mozilla.org/security/2020/01/21/crlite-part-3-speeding-up-secure-browsing/
+
+CRLite: Speeding Up Secure Browsing
+CRLite：安全な閲覧の高速化
+
+J.C. Jones January 21, 2020
+J.C.ジョーンズ 2020年1月21日 
+
+
+
+
+
+CRLite pushes bulk certificate revocation information to Firefox users, reducing the need to actively query such information one by one. Additionally this new technology eliminates the privacy leak that individual queries can bring, and does so for the whole Web, not just special parts of it. The first two posts in this series about the newly-added CRLite technology provide background: Introducing CRLite: All of the Web PKI’s revocations, compressed and The End-to-End Design of CRLite.
+CRLite は、証明書失効情報を Firefox ユーザーに一括でプッシュし、そのような情報を1つずつ積極的に照会する必要性を減らします。 さらに、この新しい技術は、個々の照会がもたらす可能性のあるプライバシー漏洩を排除し、ウェブの特別な部分だけでなく、ウェブ全体に対してもそうします。 新しく追加された CRLite 技術に関するこのシリーズの最初の2つの投稿の CRLite の紹介：圧縮された Web PKI のすべての失効、および CRLite の設計の隅々は、背景を提供します。
+
+Since mid-December, our pre-release Firefox Nightly users have been evaluating our CRLite system while performing normal web browsing. Gathering information through Firefox Telemetry has allowed us to verify the effectiveness of CRLite.
+12月中旬以降、プレリリース版の Firefox Nightly ユーザーは、通常のウェブ閲覧を実行しながら CRLite システムを評価しています。 Firefox 遠隔測定を介して情報を収集することで、CRLite の有効性を検証することができました。
+
+The questions we particularly wanted to ask about Firefox when using CRLite are:
+CRLite を使用するときに Firefox について特に尋ねたかった質問は次のとおりです。
+
+    What were the results of checking the CRLite filter?
+    1. CRLite フィルターをチェックした結果はどうでしたか？
+
+        Did it find the certificate was too new for the installed CRLite filter;
+        a. インストールされている CRLite フィルターに対して証明書が新しすぎることがわかりましたか？
+
+        Was the certificate valid, revoked, or not included;
+        b. 証明書は有効であったか、失効されたか、含まれていませんでしたか？
+
+        Was the CRLite filter unavailable?
+        c. CRLite フィルターは使用できませんでしたか？
+
+    How quickly did the CRLite filter check return compared to actively querying status using the Online Certificate Status Protocol (OCSP)?
+    2. オンライン証明書ステータスプロトコル（Online Certificate Status Protocol、OCSP）を使用してステータスをアクティブに照会する場合と比較して、CRLite フィルターチェックはどのくらいの速さで戻りましたか？
+
+
+
+
+
+How Well Does CRLite Work?
+CRLite はどの程度うまく機能しますか？
+
+With Telemetry enabled in Firefox Nightly, each invocation of CRLite emits one of these results:
+Firefox Nightly で遠隔測定を有効にすると、CRLite を呼び出すたびに次のいずれかの結果が生成されます。
+
+    Certificate Valid, indicating that CRLite authoritatively returned that the certificate was valid.
+    証明書が有効（Certificate Valid）は、CRLite が証明書が有効であることを正式に返したことを示します。
+
+    Certificate Revoked, indicating that CRLite authoritatively returned that the certificate was revoked.
+    証明書が失効（Certificate Revoked）は、CRLite が証明書が失効されたことを正式に返したことを示します。
+
+    Issuer Not Enrolled, meaning the certificate being evaluated wasn’t included in the CRLite filter set, likely because the issuing Certificate Authority (CA) did not publish CRLs.
+    発行者が未登録（Issuer Not Enrolled）は、評価対象の証明書が CRLite フィルターセットに含まれていなかったことを意味します。 これは、発行元の認証局（CA）が CRL を公開しなかったことが原因と考えられます。
+
+    Certificate Too New, meaning the certificate being evaluated was newer than the CRLite filter.
+    新しすぎる証明書（Certificate Too New）は、評価される証明書が CRLite フィルターよりも新しいことを意味します。
+
+    Filter Not Available, meaning that the CRLite filter either had not yet been downloaded from Remote Settings, or had become so stale as to be out-of-service.
+    フィルターが利用不可（Filter Not Available）は、CRLite フィルターがまだリモート設定からダウンロードされていないか、サービスが停止するほど古くなっていることを意味します。
+
+
+Show that >50% of TLS connections would have been using CRLite
+TLS 接続の50%以上が CRLite を使用していたことを示します
+
+Figure 1: One month of CRLite results in Firefox Nightly (5 December 2019 to 6 Jan 2020)
+図1：Firefox Nightly での1か月の CRLite 結果（2019年12月5日から2020年1月6日）
+
+
+Immediately, one sees that over 54% of secure connections (500M) could have benefited from the improved privacy and performance of CRLite for Firefox Nightly users.
+すぐに、Firefox Nightly ユーザー向けの CRLite のプライバシーとパフォーマンスの向上により、安全な接続（5億）の54%以上が恩恵を受けた可能性があることがわかります。
+
+Of the other data:
+その他のデータ：
+
+    We plan to publish updates up to 4 times per day, which will reduce the incidence of the Certificate Too New result.
+    更新を1日4回まで公開する予定です。 これにより、新しすぎる証明書の結果の発生率が減少します。
+
+    The Filter Not Available bucket correlates well with independent telemetry indicating a higher-than-expected level of download issues retrieving CRLite filters from Remote Settings; work to improve that is underway.
+    フィルターが利用不可バケットは、独立した遠隔測定とよく相関しており、リモート設定から CRLite フィルターを取得する際のダウンロードの問題のレベルが予想よりも高いことを示しています。 それを改善するための作業が進行中です。
+
+    Certificates Revoked but used actively on the Web PKI are, and should be, rare. This number is in-line with other Firefox Nightly telemetry for TLS connection results.
+    証明書が失効されたが Web PKI で積極的に使用されていることは、まれであり、まれであるはずです。 この数値は、TLS 接続結果に関する他の Firefox Nightly 遠隔測定と一致しています。
+
+
+
+
+
+How Much Faster is CRLite?
+CRLite はどれくらい速いですか？
+
+In contrast to OCSP which requires a network round-trip to complete before a web page can load, CRLite needs only to perform a handful of hash calculations and memory or disk lookups. We expected that CRLite would generally outperform OCSP, but to confirm we added measurements and let OCSP and CRLite race each other in Firefox Nightly.
+ウェブページを読み込む前にネットワークの往復を完了する必要がある OCSP とは対照的に、CRLite は少数のハッシュ計算とメモリまたはディスクのルックアップを実行するだけで済みます。 CRLite は一般的に OCSP を上回ると予想していましたが、確認のために測定値を追加し、Firefox Nightly で OCSP と CRLite を互いに競い合わさせました。
+
+
+Show that CRLite is faster than existing technology 99% of the time
+CRLite が既存の技術よりも99%の割合で高速であることを示す
+
+Figure 2: How often is CRLite faster than OCSP? (11 December 2019 to 6 January 2020)
+図2：CRLite は OCSP よりもどのくらいの頻度で高速ですか？ （2019年12月11日から2020年1月6日）
+
+
+Over the month of data, CRLite was faster to query than OCSP 98.844% of the time.
+1か月のデータで、CRLite は OCSP よりも照会が98.844%の割合で高速でした。 
+
+
+
+
+CRLite is Faster 99% of the Time
+CRLite は99%の割合で高速
+
+The speedup of CRLite versus OCSP was rather stark; 56% of the time, CRLite was over 100 milliseconds faster than OCSP, which is a substantial and perceptible improvement in browsing performance.
+CRLite と OCSP の高速化はかなり顕著でした。 56%の割合で、CRLite は OCSP よりも100ミリ秒以上高速でした。 これは、閲覧性能の大幅で知覚可能な改善です。
+
+
+Distribution of speedups of CRLite
+CRLite のスピードアップの分布
+
+Figure 3: Distribution of occurrences where CRLite outperformed OCSP, which was 99% of CRLite operations. [source]
+図3：CRLite が OCSP を上回った発生頻度の分布。 これは CRLite 操作の99%でした。 [ソース]
+
+
+Almost 10% of the collected data reports showed an entire second of speedup, indicating that the OCSP reached the default timeout. The delay in this figure shows time spent where a Firefox user is waiting for the page to start loading, so this has a substantial impact to perceived quickness in the browser.
+収集されたデータレポートのほぼ10%は、1秒のスピードアップを示しており、OCSP がデフォルトのタイムアウトに達したことを示しています。 この図の遅延は、Firefox ユーザーがページの読み込み開始を待機している時間を示しているため、ブラウザーで認識される速度に大きな影響を与えます。
+
+To verify that outlier at the timeout, our OCSP telemetry probe shows that over the same period, 9.9% of OCSP queries timed out:
+タイムアウト時の外れ値を検証すると、OCSP 遠隔測定プローブは、同じ期間に、OCSP 照会の9.9%がタイムアウトしたことを示しています。
+
+
+10% of OCSP queries time out
+OCSP 照会の10%がタイムアウトします
+
+Figure 4: Results of Live OCSP queries in Firefox Nightly [source]
+図4：Firefox Nightly でのライブ OCSP 照会の結果 [ソース]
+
+
+Generally speaking, when loading a website where OCSP wasn’t already cached, 10% of the time Firefox users pause for a full second before the site loads, and they don’t even get revocation data in exchange for the wait.
+一般的に言えば、OCSP がまだキャッシュされていないウェブサイトを読み込む場合、Firefox ユーザーの10%はサイトが読み込まれる前に1秒間一時停止し、待機と引き換えに失効データを取得することさえありません。
+
+
+
+
+
+The 1% When OCSP is Faster
+OCSP が高速の場合の1%
+
+The 500k times that OCSP was faster than CRLite, it was generally not much faster: 50% of these occasions it was less than 40 milliseconds faster. Only 20% of the occasions found OCSP 100 milliseconds faster.
+OCSP が CRLite よりも高速であった50万回は、一般的にはそれほど高速ではありませんでした。 これらの場合の50%は、40ミリ秒未満高速でした。 OCSP が100ミリ秒速いとわかったのはわずか20%でした。
+
+
+Distribution of slowdowns from CRLite
+CRLite からのスローダウンの分布
+
+Figure 5: Distribution of occurrences where OCSP outperformed CRLite, which was 1% of CRLite operations. [source]
+図5：OCSP が CRLite を上回った発生頻度の分布。 これは CRLite 操作の1%でした。 [ソース]
+
+
+Interesting as this is, it represents only 1% of CRLite invocations for Firefox Nightly users in this time period. Almost 99% of CRLite operations were faster, much faster.
+興味深いことに、この期間の Firefox Nightly ユーザーの CRLite 呼び出しの1%にすぎません。 CRLite 操作のほぼ99%がより速く、はるかに高速でした。 
+
+
+
+
+
+Much Faster, More Private, and Still Secure
+はるかに速く、よりプライベートで、それでも安全
+
+Our study confirmed that CRLite will maintain the integrity of our live revocation checking mechanisms while also speeding up TLS connections.
+私たちの調査では、CRLite がライブ失効チェックメカニズムの整合性を維持しながら、TLS 接続を高速化することを確認しました。
+
+At this point it’s clear that CRLite lets us keep checking certificate revocations in the Web PKI without compromising on speed, and the remaining areas for improvement are on shrinking our update files closer to the ideal described in the original CRLite paper.
+この時点で、CRLite を使用すると、速度を犠牲にすることなく Web PKI で証明書の失効をチェックし続けることができます。 残りの改善点は、更新ファイルを元の CRLite ペーパーで説明されている理想に近づけることです。
+
+In the upcoming Part 4 of this series, we’ll discuss the architecture of the CRLite back-end infrastructure, the iteration from the initial research prototype, and interesting challenges of working in a “big data” context for the Web PKI.
+このシリーズの次のパート4では、CRLite バックエンドインフラストラクチャーのアーキテクチャー、最初の調査プロトタイプからの反復、および Web PKI の「ビッグデータ」コンテキストで作業する際の興味深い課題について説明します。
+
+In Part 5 of this series, we will discuss what we’re doing to make CRLite as robust and as safe as possible.
+このシリーズのパート5では、CRLite を可能な限り堅牢で安全にするために何をしているのかについて説明します。 
+
+
+
+
+
+Tags: Certificates, CRLite, Research, TLS
