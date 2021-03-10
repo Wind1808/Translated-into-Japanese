@@ -1,0 +1,119 @@
+https://blog.mozilla.org/security/2020/01/09/crlite-part-1-all-web-pki-revocations-compressed/
+
+Introducing CRLite: All of the Web PKI’s revocations, compressed
+CRLite の紹介：圧縮された Web PKI のすべての失効
+
+J.C. Jones January 9, 2020
+J.C.ジョーンズ 2020年1月9日 
+
+
+
+
+
+CRLite is a technology proposed by a group of researchers at the IEEE Symposium on Security and Privacy 2017 that compresses revocation information so effectively that 300 megabytes of revocation data can become 1 megabyte. It accomplishes this by combining Certificate Transparency data and Internet scan results with cascading Bloom filters, building a data structure that is reliable, easy to verify, and easy to update.
+CRLite は、IEEE セキュリティとプライバシーに関するシンポジウム 2017 の研究者グループによって提案された技術であり、失効情報を非常に効果的に圧縮して、300メガバイトの失効データを1メガバイトにすることができます。 これは、Certificate Transparency のデータとインターネットのスキャン結果をカスケーディングブルームフィルター（cascading Bloom filters）と組み合わせて、信頼性が高く、検証が容易で、更新が容易なデータ構造を構築することで実現されます。
+
+Since December, Firefox Nightly has been shipping with with CRLite, collecting telemetry on its effectiveness and speed. As can be imagined, replacing a network round-trip with local lookups makes for a substantial performance improvement. Mozilla currently updates the CRLite dataset four times per day, although not all updates are currently delivered to clients.
+12月以降、Firefox Nightly は CRLite とともに出荷され、その有効性と速度に関する遠隔測定を収集しています。 想像できるように、ネットワークの往復をローカルなルックアップに置き換えると、パフォーマンスが大幅に向上します。 現在、Mozilla は CRLite データセットを1日4回更新していますが、現在すべての更新がクライアントに配信されているわけではありません。 
+
+
+
+
+Revocations on the Web PKI: Past and Present
+Web PKI での失効：過去と現在
+
+The design of the Web’s Public Key Infrastructure (PKI) included the idea that website certificates would be revocable to indicate that they are no longer safe to trust: perhaps because the server they were used on was being decommissioned, or there had been a security incident. In practice, this has been more of an aspiration, as the imagined mechanisms showed their shortcomings:
+ウェブの公開鍵インフラストラクチャー（Public Key Infrastructure、PKI）の設計には、ウェブサイトの証明書を失効させて、信頼できなくなったことを示すという考えが含まれていました。 おそらく、使用されていたサーバーが廃止されたか、セキュリティ上の問題が発生したためです。 実際には、想像されたメカニズムが次のような欠点を示したので、これはどちらかというと願望でした。
+
+    Certificate Revocation Lists (CRLs) quickly became large, and contained mostly irrelevant data, so web browsers didn’t download them;
+    証明書失効リスト（Certificate Revocation Lists、CRL）はすぐに大きくなり、ほとんど無関係なデータが含まれていたため、ウェブブラウザーはそれらをダウンロードしませんでした。
+
+    The Online Certificate Status Protocol (OCSP) was unreliable, and so web browsers had to assume if it didn’t work that the website was still valid.
+    オンライン証明書ステータスプロトコル（Online Certificate Status Protocol、OCSP）は信頼性が低いため、ウェブブラウザーは、それが機能しない場合、ウェブサイトがまだ有効であると仮定する必要がありました。
+
+Since revocation is still crucial for protecting users, browsers built administratively-managed, centralized revocation lists: Firefox’s OneCRL, combined with Safe Browsing’s URL-specific warnings, provide the tools needed to handle major security incidents, but opinions differ on what to do about finer-grained revocation needs and the role of OCSP.
+失効は依然としてユーザーを保護するために重要であるため、ブラウザーは管理者によって管理された一元化された失効リストを作成しました。 Firefox の OneCRL は、安全な閲覧（Safe Browsing、セーフブラウジング）の URL 固有の警告と組み合わせて、主要なセキュリティ上の問題を処理するために必要なツールを提供しますが、よりきめ細かい失効の必要性と OCSP の役割についてどうするかについて意見は異なります。
+
+
+
+
+The Unreliability of Online Status Checks
+オンラインステータスチェックの信頼性の欠如
+
+Much has been written on the subject of OCSP reliability, and while reliability has definitely improved in recent years (per Firefox telemetry; failure rate), it still suffers under less-than-perfect network conditions: even among our Beta population, which historically has above-average connectivity, over 7% of OCSP checks time out today.
+OCSP の信頼性については多くのことが書かれており、信頼性は近年確実に向上していますが（Firefox 遠隔測定による失敗率）、ネットワークの状態は完全ではありません。 歴史的に平均以上の接続性を持つ Beta 集団の中でも、OCSP チェックの 7% 以上が今日タイムアウトします。
+
+Because of this, it’s impractical to require OCSP to succeed for a connection to be secure, and in turn, an adversarial monster-in-the-middle (MITM) can simply block OCSP to achieve their ends. For more on this, a couple of classic articles are:
+このため、接続を安全にするために OCSP を成功させることを要求することは現実的ではありません。 その結果、敵対的な中間者（monster-in-the-middle、MITM）は、単に OCSP をブロックすることで目的を達成できます。 これについての詳細は、次のようないくつかの古典的な記事があります。
+
+    Cloudflare: High-reliability OCSP stapling and why it matters
+    Cloudflare：信頼性の高い OCSP ステープリングとその重要性
+
+    Adam Langley: Revocation doesn’t work
+    Adam Langley：失効は機能しません
+
+Mozilla has been making improvements in this realm for some time, implementing OCSP Must-Staple, which was designed as a solution to this problem, while continuing to use online status checks whenever there’s no stapled response.
+Mozilla はこの領域でしばらくの間改善を行っており、この問題の解決策として設計された OCSP Must-Staple を実装し、ステープルされた応答がない場合は常にオンラインステータスチェックを使用し続けています。
+
+We’ve also made Firefox skip revocation information for short-lived certificates; however, despite improvements in automation, such short-lived certificates still make up a very small portion of the Web PKI, because the majority of certificates are long-lived.
+また、Firefox で有効期間の短い証明書の失効情報をスキップするようにしました。 ただし、自動化が改善されたにもかかわらず、証明書の大部分は有効期間が長いため、このような有効期間の短い証明書は Web PKI のごく一部を占めています。
+
+
+
+
+Does Decentralized Revocation Bring Dangers?
+分散型失効は危険をもたらしますか？
+
+The ideal in question is whether a Certificate Authority’s (CA) revocation should be directly relied upon by end-users.
+疑問視される理想は、認証局（Certificate Authority、CA）の失効をエンドユーザーが直接信頼する必要があるかどうかです。
+
+There are legitimate concerns that respecting CA revocations could be a path to enabling CAs to censor websites. This would be particularly troubling in the event of increased consolidation in the CA market. However, at present, if one CA were to engage in censorship, the website operator could go to a different CA.
+CA の失効を尊重することが、CA がウェブサイトを検閲できるようにするための道となる可能性があるという正当な懸念があります。 これは、CA 市場での統合が進んだ場合に特に厄介です。 ただし、現時点では、ある CA が検閲を行う場合、ウェブサイトの運営者は別の CA に移動する可能性があります。
+
+If censorship concerns do bear out, then Mozilla has the option to use its root store policy to influence the situation in accordance with our manifesto.
+検閲の懸念が明らかになった場合、Mozilla は、マニフェストに従って状況に影響を与えるためにルートストアポリシーを使用するオプションがあります。 
+
+
+
+
+Does Decentralized Revocation Bring Value?
+分散型失効は価値をもたらしますか？
+
+Legitimate revocations are either done by the issuing CA because of a security incident or policy violation, or they are done on behalf of the certificate’s owner, for their own purposes. The intention becomes codified to render the certificate unusable, perhaps due to key compromise or service provider change, or as was done in the wake of Heartbleed.
+正当な失効は、セキュリティ上の問題またはポリシー違反のために発行元の CA によって行われるか、証明書の所有者に代わって独自の目的で行われます。 おそらくキーの侵害やサービスプロバイダーの変更のため、またはハートブリード（Heartbleed、2014年4月に発覚した OpenSSL のセキュリティ上の重大な脆弱性のこと）をきっかけに行われたように、証明書を使用できなくする意図が成文化されます。
+
+Choosing specific revocations to honor and refusing others dismisses the intentions of all left-behind revocations attempts. For Mozilla, it violates principle 6 of our manifesto, limiting participation in the Web PKI’s security model.
+特定の失効を選択して尊重し、他を拒否することは、取り残されたすべての失効の試みの意図を却下します。 Mozilla の場合、これはマニフェストの原則6に違反し、Web PKI のセキュリティモデルへの参加を制限します。
+
+There is a cost to supporting all revocations – checking OCSP:
+すべての失効をサポートするには、次のような OCSP をチェックするコストがかかります。
+
+    Slows down our first connection by ~130 milliseconds (CERT_VALIDATION_HTTP_REQUEST_SUCCEEDED_TIME, https://mzl.la/2ogT8TJ),
+    1. 最初の接続が約130ミリ秒遅くなり（CERT_VALIDATION_HTTP_REQUEST_SUCCEEDED_TIME、https://mzl.la/2ogT8TJ）、
+
+    Fails unsafe, if an adversary is in control of the web connection, and
+    2. 敵対者がウェブ接続を制御している場合、安全でなく失敗し、
+
+    Periodically reveals to the CA the HTTPS web host that a user is visiting.
+    3. ユーザーがアクセスしている HTTPS ウェブホストを CA に定期的に公開します。
+
+Luckily, CRLite gives us the ability to deliver all the revocation knowledge needed to replace OCSP, and do so quickly, compactly, and accurately.
+幸い、CRLite を使用すると、OCSP を置き換えるために必要なすべての失効知識を提供し、迅速、コンパクト、正確に行うことができます。
+
+
+
+
+Can CRLite Replace OCSP?
+CRLite は OCSP を置き換えることができますか？
+
+Firefox Nightly users are currently only using CRLite for telemetry, but by changing the preference security.pki.crlite_mode to 2, CRLite can enter “enforcing” mode and respect CRLite revocations for eligible websites. There’s not yet a mode to disable OCSP; there’ll be more on that in subsequent posts.
+Firefox Nightly ユーザーは現在遠隔測定に CRLite のみを使用していますが、設定 security.pki.crlite_mode を 2 に変更することにより、CRLite は「強制」モードに入り、適格なウェブサイトの CRLite 失効を尊重できます。 OCSP を無効にするモードはまだありません。 これについては、以降の投稿で詳しく説明します。
+
+This blog post is the first in a series discussing the technology for CRLite, the observed effects, and the nature of a collaboration of this magnitude between industry and academia. The next post discusses the end-to-end design of the CRLite mechanism, and why it works. Additionally, some FAQs about CRLite are available on Github.
+このブログ投稿は、CRLite の技術、観察された効果、および産業界と学界の間のこの規模の協力の性質について説明するシリーズの最初の投稿です。 次の投稿では、CRLite メカニズムの設計の隅々と、それが機能する理由について説明します。 さらに、CRLite に関するいくつかの FAQ が Github で入手できます。 
+
+
+
+
+
+Tags: CRLite, Crypto Engineering, Research, TLS
