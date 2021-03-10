@@ -27,7 +27,7 @@ Firefox 内の状態をもつウェブ API は次のとおりです。
     通信チャンネル：放送チャンネル
 
 To fight against web tracking, Firefox currently relies on Enhanced Tracking Protection (ETP) which blocks cookies and other shared state from known trackers, based on the Disconnect list. This form of cookie blocking is an effective approach to stop tracking, but it has its limitations. ETP protects users from the 3000 most common and pervasive identified trackers, but its protection relies on the fact that the list is complete and always up-to-date. Ensuring completeness is difficult, and trackers can try to circumvent the list by registering new domain names. Additionally, identifying trackers is a time-consuming task and commonly adds a delay on a scale of months before a new tracking domain is added to the list.
-Firefox は現在、ウェブ追跡と戦うために、切断リスト（Disconnect list）に基づいて、既知の追跡者からのクッキーやその他の共有状態をブロックする ETP（Enhanced Tracking Protection、強化された追跡保護）に依存しています。 この形式のクッキーのブロッキングは、追跡を停止するための効果的なアプローチですが、制限があります。 ETP は、3000 の最も一般的で普及している識別された追跡者からユーザーを保護しますが、その保護は、リストが完全で常に最新であるという事実に依存しています。 完全性を確保することは困難であり、追跡者は新しいドメイン名を登録することでリストを回避しようとする可能性があります。 さらに、追跡者の特定は時間のかかる作業であり、通常、新しい追跡ドメインがリストに追加されるまでに数か月の遅延が追加されます。
+Firefox は現在、ウェブ追跡と戦うために、Disconnect のリストに基づいて、既知の追跡者からのクッキーやその他の共有状態をブロックする ETP（Enhanced Tracking Protection、強化された追跡保護）に依存しています。 この形式のクッキーのブロッキングは、追跡を停止するための効果的なアプローチですが、制限があります。 ETP は、3000 の最も一般的で普及している識別された追跡者からユーザーを保護しますが、その保護は、リストが完全で常に最新であるという事実に依存しています。 完全性を確保することは困難であり、追跡者は新しいドメイン名を登録することでリストを回避しようとする可能性があります。 さらに、追跡者の特定は時間のかかる作業であり、通常、新しい追跡ドメインがリストに追加されるまでに数か月の遅延が追加されます。
 
 To address the limitations of ETP and provide comprehensive protection against trackers, we introduce a technique called State Partitioning, which will prevent cookie-based tracking universally, without the need for a list.
 ETP の制限に対処し、追跡者に対する包括的な保護を提供するために、ステートパーティショニングと呼ばれる手法を導入します。 これにより、リストを必要とせずに、クッキーベースの追跡を普遍的に防ぐことができます。
@@ -76,7 +76,7 @@ It is important to understand that State Partitioning will apply to every embedd
 ステートパーティショニングは、追跡者であるかどうかに関係なく、すべての埋め込まれたサードパーティのリソースに適用されることを理解することが重要です。
 
 This brings great benefits for privacy allowing us to extend protections beyond the Disconnect list and it allows embedded websites to continue to use their cookies and storage as they normally would, as long as they don’t need cross-site access. In the next section we will examine what embedded websites can do if they have a legitimate need for cross-site shared state.
-これにより、プライバシーに大きなメリットがもたらされ、切断リストを超えて保護を拡張できます。 また、埋め込まれたウェブサイトは、クロスサイト（cross-site、サイトをまたがった）アクセスを必要としない限り、通常どおりにクッキーとストレージを使用できます。 次のセクションでは、クロスサイト共有状態が正当に必要な場合に、埋め込まれたウェブサイトで何ができるかを調べます。 
+これにより、プライバシーに大きなメリットがもたらされ、Disconnect のリストを超えて保護を拡張できます。 また、埋め込まれたウェブサイトは、クロスサイト（cross-site、サイトをまたがった）アクセスを必要としない限り、通常どおりにクッキーとストレージを使用できます。 次のセクションでは、クロスサイト共有状態が正当に必要な場合に、埋め込まれたウェブサイトで何ができるかを調べます。 
 
 
 
@@ -355,7 +355,7 @@ I'm okay with Mozilla handling my info as explained in this Privacy Policy.
         「ETP 厳密モード」を選択すると、prefs.js に5つの設定が設定されます：browser.contentblocking.category = strict, network.cookie.cookieBehavior = 5, privacy.annotate_channels.strict_list.enabled = true, privacy.trackingprotection.enabled = true, privacy.trackingprotection.socialtracking.enabled = true。
 
         Is it enough to set “network.cookie.cookieBehavior = 5” to only activate State Partitioning (without enabling tracking protection based on the Disconnect blocking list) ?
-        “network.cookie.cookieBehavior = 5”を設定して、ステートパーティショニングのみをアクティブ化するだけで十分ですか（切断ブロッキングリストに基づく追跡保護を有効にしないで）？ 
+        “network.cookie.cookieBehavior = 5”を設定して、ステートパーティショニングのみをアクティブ化するだけで十分ですか（Disconnect のブロッキングリストに基づく追跡保護を有効にしないで）？ 
 
     February 26th, 2021 at 00:46
 
