@@ -1,0 +1,61 @@
+https://blog.mozilla.org/security/2020/04/14/expanding-client-certificates-in-firefox-75/
+
+Expanding Client Certificates in Firefox 75
+Firefox 75 でのクライアント証明書の拡張
+
+Dana Keeler April 14, 2020
+ダナ キーラー 2020年4月14日 
+
+
+
+
+
+Starting in version 75, Firefox can be configured to use client certificates provided by the operating system on Windows and macOS.
+バージョン 75 以降、Firefox は、Windows および macOS のオペレーティングシステムによって提供されるクライアント証明書を使用するように構成できます。
+
+
+
+
+Background
+背景
+
+When Firefox negotiates a secure connection with a website, the web server sends a certificate to the browser for verification. In some cases, such as corporate authentication systems, the server requests that the browser send a certificate back to it as well. This client certificate, combined with a signature from the private key corresponding to that certificate, allows the user to authenticate to the website.
+Firefox がウェブサイトとの安全な接続をネゴシエートすると、ウェブサーバーは検証のために証明書をブラウザーに送信します。 企業の認証システムなど、場合によっては、サーバーはブラウザーに証明書を返送するように要求します。 このクライアント証明書は、その証明書に対応する秘密鍵からの署名と組み合わされて、ユーザーがウェブサイトに対して認証できるようにします。
+
+These client certificates and private keys are often stored in hardware tokens or in storage provided by the operating system.
+これらのクライアント証明書と秘密鍵は、多くの場合、ハードウェアトークンまたはオペレーティングシステム提供のストレージに保存されます。
+
+Using Firefox to access a client certificate stored on a hardware token typically involves loading a shared library written by either the vendor of the token or another third party into Firefox’s process. These third party libraries can cause stability issues with Firefox and are concerning from a security perspective. For instance, a vulnerability in one of these libraries can potentially put Firefox users at risk.
+Firefox を使用してハードウェアトークンに保存されているクライアント証明書にアクセスするには、通常、トークンのベンダーまたは別のサードパーティによって作成された共有ライブラリーを Firefox のプロセスにロードする必要があります。 これらのサードパーティライブラリーは Firefox で安定性の問題を引き起こす可能性があり、セキュリティの観点から懸念されています。 たとえば、これらのライブラリーの1つに脆弱性があると、Firefox ユーザーが危険にさらされる可能性があります。
+
+Alternatively, Firefox can use client certificates that have exportable keys if they are manually saved to a file and then imported into a Firefox profile. Though this storage mechanism can be protected by a password, this option increases the potential for a private key to be compromised. Additionally, this method does not work at all for unexportable keys.
+または、Firefox は、手動でファイルに保存してから Firefox プロファイルにインポートする場合、エクスポート可能なキーを持つクライアント証明書を使用できます。 このストレージメカニズムはパスワードで保護できますが、このオプションを使用すると、秘密鍵が危険にさらされる可能性が高くなります。 さらに、この方法は、エクスポート不可能なキーに対してはまったく機能しません。
+
+
+
+
+A New Approach
+新しいアプローチ
+
+To address these issues, we have developed a library that allows Firefox to interface with certificate storage provided by the operating system. Rather than loading third-party libraries to communicate with hardware tokens, Firefox can delegate this task to the operating system. Also, instead of forcing the user to export client certificates and re-import them into their Firefox profile, Firefox can look for these certificates directly. In addition to protecting private keys, this new mechanism allows Firefox to make use of client certificates with unexportable keys.
+これらの問題に対処するために、Firefox がオペレーティングシステム提供の証明書ストレージとインターフェイスできるようにするライブラリーを開発しました。 Firefox は、ハードウェアトークンと通信するためにサードパーティのライブラリーをロードするのではなく、このタスクをオペレーティングシステムに委任できます。 また、ユーザーにクライアント証明書をエクスポートして Firefox プロファイルに再インポートするように強制する代わりに、Firefox はこれらの証明書を直接検索できます。 この新しいメカニズムにより、秘密鍵の保護に加えて、Firefox はエクスポート不可能な鍵を持つクライアント証明書を利用できるようになります。
+
+Because this library is entirely new, we took the opportunity to select an implementation language that would allow us to access the low-level operating system APIs we needed while enforcing strong safety properties. Rust was the obvious choice to fill those needs.
+このライブラリーはまったく新しいため、強力な安全特性を適用しながら、必要な低レベルのオペレーティングシステム API にアクセスできる実装言語を選択する機会を得ました。 Rust はそれらのニーズを満たすための明白な選択でした。 
+
+
+
+
+Availability
+可用性
+
+This library is shipping as part of Firefox Desktop on Windows and macOS, starting with version 75. To enable it, set the about:config preference “security.osclientcerts.autoload” to true.
+このライブラリーは、バージョン 75 以降、Windows および macOS 上の Firefox デスクトップの一部として出荷されます。 これを有効にするには、about:config プリファレンス「security.osclientcerts.autoload」を true に設定します。
+
+For users running various flavors of Linux, the OpenSC project (https://github.com/OpenSC/OpenSC/wiki) can provide similar functionality.
+さまざまな種類の Linux を実行しているユーザーの場合、OpenSC プロジェクト（https://github.com/OpenSC/OpenSC/wiki）で同様の機能を提供できます。
+
+We expect this feature to be of great benefit to our enterprise users who have previously gone to great lengths to configure Firefox to work in their environment.
+この機能は、以前に Firefox を環境で動作するように構成するために多大な労力を費やしてきた企業ユーザーにとって大きなメリットになると期待しています。 
+
+
