@@ -1,0 +1,212 @@
+https://blog.mozilla.org/security/2020/12/01/crlite-part-4-infrastructure-design/
+
+Design of the CRLite Infrastructure
+CRLite インフラストラクチャーの設計
+
+J.C. Jones December 1, 2020
+J.C.ジョーンズ 2020年12月1日 
+
+
+
+
+Firefox is the only major browser that still evaluates every website it connects to whether the certificate used has been reported as revoked. Firefox users are notified of all connections involving untrustworthy certificates, regardless the popularity of the site. Inconveniently, checking certificate status sometimes slows down the connection to websites. Worse, the check reveals cleartext information about the website you’re visiting to network observers.
+Firefox は、使用している証明書が失効されたと報告されているかどうかに接続するすべてのウェブサイトを評価する唯一の主要なブラウザーです。 Firefox ユーザーには、サイトの人気に関係なく、信頼できない証明書に関連するすべての接続が通知されます。 不便なことに、証明書のステータスを確認すると、ウェブサイトへの接続が遅くなることがあります。 さらに悪いことに、このチェックにより、アクセスしているウェブサイトに関するクリアテキスト（cleartext、平文）情報がネットワーク観察者に明らかになります。
+
+We’re now testing a technology named CRLite which provides Firefox users with the confidence that the revocations in the Web PKI are enforced by the browser without this privacy compromise. This is a part of our goal to use encryption everywhere. (See also: Encrypted SNI and DNS-over-HTTPS)
+現在、Firefox ユーザーに、このプライバシーを侵害することなく Web PKI での失効がブラウザーによって強制されるという確信を与える CRLite という名前の技術をテストしています。 これは、あらゆる場所で暗号化を使用するという私たちの目標の一部です。 （参照：暗号化された SNI および DNS-over-HTTPS ）
+
+The first three posts in this series are about the newly-added CRLite technology and provide background that will be useful for following along with this post:
+このシリーズの最初の3つの投稿は、新しく追加された CRLite 技術に関するものであり、この投稿に沿ってフォローするのに役立つ背景を提供します。
+
+    Introducing CRLite: All of the Web PKI’s revocations, compressed,
+    CRLite の紹介：圧縮された Web PKI のすべての失効、
+
+    CRLite: Speeding Up Secure Browsing, and specifically useful is
+    CRLite：安全な閲覧の高速化、そして特に有用なのが
+
+    The End-to-End Design of CRLite. 
+    CRLite の設計の隅々。
+
+This blog post discusses the back-end infrastructure that produces the data which Firefox uses for CRLite. To begin with, we’ll trace that data in reverse, starting from what Firefox needs to use for CRLite’s algorithms, back to the inputs derived from monitoring the whole Web PKI via Certificate Transparency.
+このブログ投稿では、Firefox が CRLite に使用するデータを生成するバックエンドインフラストラクチャーについて説明しています。 まず、Firefox が CRLite のアルゴリズムに使用する必要があるものから始めて、Certificate Transparency を介して Web PKI 全体を監視することから得られた入力に戻って、そのデータを逆にトレースします。
+
+
+
+
+Tracing the Flow of Data
+データの流れをトレースする
+
+Individual copies of Firefox maintain in their profiles a CRLite database which is periodically updated via Firefox’s Remote Settings. Those updates come in the form of CRLite filters and “stashes”.
+Firefox の個々のコピーは、Firefox のリモート設定を介して定期的に更新される CRLite データベースをプロファイルに保持します。 これらの更新は、CRLite フィルターと「スタッシュ（stashes、隠し場所）」の形式で提供されます。 
+
+
+
+
+Filters and Stashes
+フィルターとスタッシュ
+
+The general mechanism for how the filters work is explained in Figure 3 of The End-to-End Design of CRLite.
+フィルターがどのように機能するかについての一般的なメカニズムは、CRLite の設計の隅々の図3で説明されています。
+
+Introduced in this post is the concept of CRLite stashes. These are lists of certificate issuers and the certificate serial numbers that those issuers revoked, which the CRLite infrastructure distributes to Firefox users in lieu of a whole new filter. If a certificate’s identity is contained within any of the issued stashes, then that certificate is invalid.
+この投稿で紹介されているのは、CRLite スタッシュの概念です。 これらは、証明書発行者とそれらの発行者が失効させた証明書のシリアル番号のリストであり、CRLite インフラストラクチャーはまったく新しいフィルターの代わりに Firefox ユーザーに配布します。 証明書の身元が発行されたスタッシュのいずれかに含まれている場合、その証明書は無効です。
+
+Combining stashes with the CRLite filters produces an algorithm which, in simplified terms, proceeds like this:
+スタッシュを CRLite フィルターと組み合わせると、簡単に言えば、次のように進行するアルゴリズムが生成されます。
+
+
+A representation of the CRLite Algorithm: Is this website’s Certificate Authority enrolled in CRLite? If not, use the online status check, OCSP. If it is enrolled, should I expect this website’s certificate to be a part of the CRLite filter available in my local profile? If it should be in the CRLite filter, does this website’s certificate appear in the filter as having been revoked by its issuer? If it’s not in the filter as having been revoked, does this website’s certificate appear in any of my local profile’s CRLite stashes as being revoked? If either the CRLite filter or the stashes indicate the website’s certificate is revoked, don’t trust it and show an error page. If it’s not in the CRLite filter nor in the CRLite stashes as revoked, then proceed to run the rest of the Web PKI validity and trust checks. If for any reason we can’t tell from the above, for example the local filters or stashes are too old or we encounter an error, then we go back to using the online status check, OCSP.
+CRLite アルゴリズムの表現：このウェブサイトの認証局は CRLite に登録されていますか？ そうでない場合は、オンラインステータスチェック（OCSP）を使用してください。 登録されている場合、このウェブサイトの証明書がローカルプロファイルで使用可能な CRLite フィルターの一部であると期待する必要がありますか？ CRLite フィルターに含める必要がある場合、このウェブサイトの証明書は、発行者によって失効されたものとしてフィルターに表示されますか？ 失効されたものとしてフィルターに含まれていない場合、このウェブサイトの証明書は、ローカルプロファイルの CRLite スタッシュのいずれかに、失効されたものとして現れますか？ CRLite フィルターまたはスタッシュのいずれかが、ウェブサイトの証明書が失効されていることを示している場合は、それを信頼せず、エラーページを表示します。 CRLite フィルターにも、失効された CRLite スタッシュにも含まれていない場合は、残りの Web PKI の有効性と信頼性のチェックを実行します。 ローカルフィルターやスタッシュが古すぎる、エラーが発生したなど、何らかの理由で上記から判断できない場合は、オンラインステータスチェック（OCSP）の使用に戻ります。
+
+
+Figure 1: Simplified CRLite Decision Tree
+図1：簡略化された CRLite のデシジョンツリー
+
+Every time the CRLite infrastructure updates its dataset, it produces both a new filter and a stash containing all of the new revocations (compared with the previous run). Firefox’s CRLite is up-to-date if it has a filter and all issued stashes for that filter.
+CRLite インフラストラクチャーは、データセットを更新するたびに、新しいフィルターと、すべての新しい失効を含むスタッシュの両方を生成します（前回の実行と比較して）。 Firefox の CRLite は、フィルターがあり、そのフィルターに対して発行されたすべてのスタッシュがある場合、最新です。
+
+
+
+
+Enrolled, Valid and Revoked
+登録済み、有効、失効済み
+
+To produce the filters and stashes, CRLite needs as input:
+フィルタとスタッシュを生成するには、CRLite は入力として次のものを必要とします。
+
+    The list of trusted certificate authority issuers which are enrolled in CRLite,
+    1. CRLite に登録されている信頼できる認証局の発行者のリスト、
+
+    The list of all currently-valid certificates issued by each of those enrolled certificate authorities, e.g. information from Certificate Transparency,
+    2. 登録された各認証局によって発行された、すべての現在有効な証明書のリスト（Certificate Transparency からの情報など）。 
+
+    The list of all unexpired-but-revoked certificates issued by each of those enrolled certificate authorities, e.g. from Certificate Revocation Lists.
+    3. 登録された各認証局によって発行された、すべての有効期限が切れていないが失効された証明書のリスト（証明書失効リスト（Certificate Revocation Lists、CRL）などから）。
+
+These bits of data are the basis of the CRLite decision-making.
+これらのデータビットは、CRLite の意思決定の基礎となります。
+
+The enrolled issuers are communicated to Firefox clients as updates within the existing Intermediate Preloading feature, while the certificate sets are compressed into the CRLite filters and stashes. Whether a certificate issuer is enrolled or not is directly related to obtaining the list of their revoked certificates.
+登録された発行者は、既存の中間プリロード機能内の更新として Firefox クライアントに伝達され、証明書セットは CRLite フィルターとスタッシュに圧縮されます。 証明書発行者が登録されているかどうかは、失効した証明書のリストを取得することに直接関係しています。 
+
+
+
+
+Collecting Revocations
+失効の収集
+
+To obtain all the revoked certificates for a given issuer, the CRLite infrastructure reads the Certificate Revocation List (CRL) Distribution Point extension out of all that issuer’s unexpired certificates and filters the list down to those CRLs which are available over HTTP/HTTPS. Then, every URL in that list is downloaded and verified: Does it have a valid, trusted signature? Is it up-to-date? If any could not be downloaded, do we have a cached copy which is still both valid and up-to-date?
+特定の発行者の失効されたすべての証明書を取得するために、CRLite インフラストラクチャーは、発行者の有効期限が切れていないすべての証明書から証明書失効リスト（CRL）配布ポイント（Distribution Point）拡張機能を読み取り、HTTP / HTTPS で使用できる CRL にリストを絞り込みます。 次に、そのリスト内のすべての URL がダウンロードされ、検証されます。 有効で信頼できる署名がありますか？ 最新ですか？ ダウンロードできなかったものがある場合、まだ有効で最新のキャッシュされたコピーがありますか？
+
+For issuers which are considered enrolled, all of the entries in the CRLs are collected and saved as a complete list of all revoked certificates for that issuer.
+登録済みと見なされる発行者の場合、CRL のすべてのエントリが収集され、その発行者の失効されたすべての証明書の完全なリストとして保存されます。 
+
+
+
+
+Lists of Unexpired Certificates
+有効期限が切れていない証明書のリスト
+
+The lists of currently-valid certificates and unexpired-but-revoked certificates have to be calculated, as the data sources that CRLite uses consist of:
+CRLite が使用するデータソースは次のもので構成されているため、現在有効な証明書と有効期限が切れていないが失効された証明書のリストを計算する必要があります。
+
+    Certificate Transparency’s list of all certificates in the WebPKI, and
+    1. Certificate Transparency の Web PKI 内のすべての証明書のリスト、および
+
+    All the published certificate revocations from the previous step.
+    2. 前のステップで公開されたすべての証明書の失効。
+
+By policy now, Certificate Transparency (CT) Logs, in aggregate, are assumed to provide a complete list of all certificates in the public Web PKI. CRLite then filters the complete CT dataset down to certificates which haven’t yet reached their expiration date, but which have been issued by certificate authorities trusted by Firefox.
+現在のポリシーでは、Certificate Transparency（CT）ログは、全体として、公開 Web PKI 内のすべての証明書の完全なリストを提供すると想定されています。 次に、CRLite は、完全な CT データセットを、有効期限にまだ達していないが、Firefox によって信頼されている認証局によって発行された証明書に絞り込みます。
+
+Filtering CT data down to a list of unexpired certificates allows CRLite to derive the needed data sets using set math:
+CT データを有効期限が切れていない証明書のリストにフィルタリングすると、CRLite は数学の集合を使用して必要なデータセットを導出できます。
+
+    The currently-valid certificates are those which are unexpired and not included in any revocation list,
+    現在有効な証明書とは、有効期限が切れておらず、失効リストに含まれていない証明書です。
+
+    The unexpired-but-revoked certificates are those which are unexpired and are included in a revocation list.
+    有効期限が切れていないが失効された証明書とは、有効期限が切れておらず、失効リストに含まれている証明書です。
+
+The CT data simply comes from a continual monitoring of the Certificate Transparency ecosystem. Every known CT log is monitored by Mozilla’s infrastructure, and every certificate added to the ecosystem is processed.
+CT データは、Certificate Transparency エコシステムの継続的な監視から得られたものです。 既知のすべての CT ログは Mozilla のインフラストラクチャーによって監視され、エコシステムに追加されたすべての証明書が処理されます。
+
+
+
+
+The Kubernetes Pods
+Kubernetes ポッド
+
+All these functions are orchestrated as four Kubernetes pods with the descriptive names Fetch, Generate, Publish, and Sign-off.
+これらの機能はすべて、フェッチ（Fetch）、生成（Generate）、発行（Publish）、サインオフ（Sign-off）という説明的な名前を持つ4つの Kubernetes ポッドとして編成されています。 
+
+
+
+
+Fetch
+フェッチ
+
+Fetch is a Kubernetes deployment, or always-on task, which constantly monitors Certificate Transparency data from all Certificate Transparency logs. Certificates that aren’t expired are inserted into a Redis database, configured so that certificates are expunged automatically when they reach their expiration time. This way, whenever the CRLite infrastructure requires a list of all unexpired certificates known to Certificate Transparency, it can iterate through all of the certificates in the Redis database. The actual data stored in Redis is described in our FAQ.
+フェッチ（Fetch）は、Kubernetes の展開（deployment）、つまり常時オンのタスクであり、すべての Certificate Transparency ログから Certificate Transparency データを常に監視します。 有効期限が切れていない証明書は Redis データベースに挿入され、有効期限に達すると証明書が自動的に消去されるように構成されます。 このように、CRLite インフラストラクチャーで、Certificate Transparency が認識しているすべての有効期限が切れていない証明書のリストが必要な場合は常に、Redis データベース内のすべての証明書を反復処理できます。 Redis に保存されている実際のデータは、FAQ に記載されています。
+
+
+Figure 2: The Fetch task reads from Certificate Transparency and stores data in a Redis database
+図2：フェッチタスクは Certificate Transparency から読み取り、Redis データベースにデータを保存します 
+
+
+
+
+Generate
+生成
+
+The Generate pod is a periodic task, which currently runs four times a day. This task reads all known unexpired certificates from the Redis database, downloads and validates all CRLs from the issuing certificate authorities, and synthesizes a filter and a stash from those data sources. The resulting filters and stashes are uploaded into a Google Cloud Storage bucket, along with all the source input data, for both public audit and distribution.
+ポッドの生成（Generate pod）は定期的なタスクであり、現在1日に4回実行されます。 このタスクは、Redis データベースからすべての既知の有効期限が切れていない証明書を読み取り、発行元の認証局からすべての CRL をダウンロードして検証し、それらのデータソースからフィルターとスタッシュを合成します。 結果のフィルターとスタッシュは、公開監査と配布の両方のために、すべてのソース入力データとともに Google Cloud Storage バケットにアップロードされます。
+
+
+Figure 3: The Generate task reads from a Redis database and the Internet, and writes its results to Google Cloud Storage
+
+図3：生成タスクは Redis データベースとインターネットから読み取り、その結果を Google Cloud Storage に書き込みます 
+
+
+
+
+Publish
+発行
+
+The Publish task is also a periodic task, running often. It looks for new filters and stashes in the Google Cloud Storage bucket, and stages either a new filter or a stash to Firefox’s Remote Settings when the Generate task finishes producing one.
+発行（Publish）タスクも定期的なタスクであり、頻繁に実行されます。 Google Cloud Storage バケットで新しいフィルターとスタッシュを探し、生成タスクがフィルターの作成を終了すると、新しいフィルターまたはスタッシュを Firefox のリモート設定（Remote Settings）にステージングします。
+
+
+Figure 4: The Publish job reads from Google Cloud Storage and writes to Remote Settings
+図4：発行ジョブは Google Cloud Storage から読み取り、リモート設定に書き込みます 
+
+
+
+
+Sign-Off
+サインオフ
+
+Finally, a separate Sign-Off task runs periodically, also often. When there is an updated filter or stash staged at Firefox’s Remote Settings, the sign-off task downloads the staged data and tests it, looking for coherency and to make sure that CRLite does not accidentally include revocations that could break Firefox. If all the tests pass, the Sign-Off task approves the new CRLite data for distribution, which triggers Megaphone to push the update to Firefox users that are online.
+最後に、個別のサインオフ（Sign-Off）タスクが定期的に、また頻繁に実行されます。 Firefox のリモート設定でステージングされた更新されたフィルターまたはスタッシュがある場合、サインオフタスクはステージングされたデータをダウンロードしてテストし、一貫性を探し、Firefox を壊す可能性のある失効が CRLite に誤って含まれていないことを確認します。 すべてのテストに合格すると、サインオフタスクは新しい CRLite データの配布を承認します。 これにより、Megaphone は、オンラインの Firefox ユーザーに更新をプッシュします。
+
+
+Figure 5: The Sign-Off task interacts with both Remote Settings and the public Internet
+図5：サインオフタスクは、リモート設定と公開インターネットの両方と相互作用します 
+
+
+
+
+Using CRLite
+CRLite の使用
+
+We recently announced in the mozilla.dev.platform mailing list that Firefox Nightly users on Desktop are relying on CRLite, after collecting encouraging performance measurements for most of 2020. We’re working on plans to begin tests for Firefox Beta users soon. If you want to try using CRLite, you can use Firefox Nightly, or for the more adventurous reader, interact with the CRLite data directly.
+最近、mozilla.dev.platform メーリングリストで、デスクトップ上の Firefox Nightly ユーザーが2020年のほとんどの有望なパフォーマンス測定値を収集した後、CRLite に依存していることを発表しました。 Firefox Beta ユーザーのテストを間もなく開始する計画に取り組んでいます。 CRLite を試してみたい場合は、Firefox Nightly を使用できます。 より冒険的な読者の場合は、CRLite データを直接操作できます。
+
+Our final blog post in this series, Part 5, will reflect on the collaboration between Mozilla Security Engineering and the several research teams that designed and have analyzed CRLite to produce this impressive system.
+このシリーズの最後のブログ投稿であるパート5では、Mozilla Security Engineering と、この印象的なシステムを作成するために CRLite を設計および分析したいくつかの研究チームとの協力について考察します。 
+
+
+
+
+
+Tags: Certificates, CRLite, Research, TLS
