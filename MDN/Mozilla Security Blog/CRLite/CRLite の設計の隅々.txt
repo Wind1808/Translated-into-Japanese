@@ -1,0 +1,231 @@
+https://blog.mozilla.org/security/2020/01/09/crlite-part-2-end-to-end-design/
+
+The End-to-End Design of CRLite
+CRLite の設計の隅々
+
+J.C. Jones January 9, 2020
+J.C.ジョーンズ 2020年1月9日 
+
+
+
+
+
+CRLite is a technology to efficiently compress revocation information for the whole Web PKI into a format easily delivered to Web users. It addresses the performance and privacy pitfalls of the Online Certificate Status Protocol (OCSP) while avoiding a need for some administrative decisions on the relative value of one revocation versus another. For details on the background of CRLite, see our first post, Introducing CRLite: All of the Web PKI’s revocations, compressed.
+CRLite は、Web PKI 全体の失効情報をウェブユーザーに簡単に配信できる形式に効率的に圧縮する技術です。 これは、オンライン証明書ステータスプロトコル（OCSP）のパフォーマンスとプライバシーの落とし穴に対処すると同時に、ある失効と別の失効の相対的な価値に関する管理上の決定の必要性を回避します。 CRLite の背景の詳細については、最初の投稿の CRLite の紹介：圧縮された Web PKI のすべての失効を参照してください。
+
+To discuss CRLite’s design, let’s first discuss the input data, and from that we can discuss how the system is made reliable.
+CRLite の設計について説明するために、最初に入力データについて説明し、そこからシステムの信頼性を高める方法について説明します。 
+
+
+
+
+Designing CRLite
+CRLite の設計
+
+When Firefox securely connects to a website, the browser validates that the website’s certificate has a chain of trust back to a Certificate Authority (CA) in the Mozilla Root CA Program, including whether any of the CAs in the chain of trust are themselves revoked. At this time Firefox knows the issuing certificate’s identity and public key, as well as the website’s certificate’s identity and public key.
+Firefox がウェブサイトに安全に接続すると、ブラウザーは、ウェブサイトの証明書が Mozilla ルート CA プログラムの認証局（CA）に戻る信頼チェーンを持っていることを検証します。 これには、信頼チェーン内の CA のいずれかがそれ自体で失効されているかどうかも含まれます。 この時点で、Firefox は発行元の証明書の身元と公開鍵、およびウェブサイトの証明書の身元と公開鍵を認識しています。
+
+To determine whether the website’s certificate is trusted, Firefox verifies that the chain of trust is unbroken, and then determines whether the website’s certificate is revoked. Normally that’s done via OCSP, but with CRLite Firefox simply has to answer the following questions:
+Firefox は、ウェブサイトの証明書が信頼されているかどうかを判断するために、信頼の連鎖が途切れていないことを確認してから、ウェブサイトの証明書が失効されているかどうかを判断します。 通常、これは OCSP を介して行われますが、CRLite を使用すると、Firefox は次の質問に答えるだけで済みます。
+
+    Is this website’s certificate older than my local CRLite Filter, e.g., is my filter fresh enough?
+    1. このウェブサイトの証明書は私のローカル CRLite フィルターよりも古いですか？ たとえば、私のフィルターは十分に新鮮ですか？
+
+    Is the CA that issued this website’s certificate included in my local CRLite Filter, e.g. is that CA participating?
+    2. このウェブサイトの証明書を発行した CA は、私のローカル CRLite フィルターに含まれていますか？ たとえば、その CA は参加していますか？
+
+    If “yes” to the above, and Firefox queries the local CRLite Filter, does it indicate the website’s certificate is revoked?
+    3. 上記に「はい」で、Firefox がローカルの CRLite フィルターに照会した場合、ウェブサイトの証明書が失効されていることを示していますか？
+
+That’s a lot of moving parts, but let’s inspect them one by one.
+それは多くの可動部分ですが、それらを1つずつ調べてみましょう。
+
+
+
+
+Freshness of CRLite Filter Data
+CRLite フィルターデータの鮮度
+
+Mozilla’s infrastructure continually monitors all of the known Certificate Transparency logs for new certificates using our CRLite tooling; the details of how that works will be in a later blog post about the infrastructure. Since multiple browsers now require that all website certificates are disclosed to Certificate Transparency logs to be trusted, in effect the tooling has total knowledge of the certificates in the public Web PKI.
+Mozilla のインフラストラクチャーは、CRLite ツールを使用して、既知のすべての Certificate Transparency ログで新しい証明書を継続的に監視します。 それがどのように機能するかの詳細は、インフラストラクチャーに関する後のブログ投稿にあります。 複数のブラウザーでは、信頼できるようにすべてのウェブサイト証明書を Certificate Transparency ログに開示する必要があるため、事実上、ツールは公開 Web PKI の証明書を完全に認識しています。
+
+
+CRLite high level information blocks
+CRLite 高レベル情報ブロック
+
+Figure 1: CRLite Information Flow. More details on the infrastructure will be in Part 4 of this blog post series.
+図1：CRLite の情報の流れ。 インフラストラクチャーの詳細については、このブログ投稿シリーズのパート4に記載されています。
+
+
+Four times per day, all website certificates that haven’t reached their expiration date are processed, drawing out lists of their Certificate Authorities, their serial numbers, and the web URLs where they might be mentioned in a Certificate Revocation List (CRL).
+1日に4回、有効期限に達していないすべてのウェブサイト証明書が処理され、認証局、シリアル番号、および証明書失効リスト（Certificate Revocation List、CRL）に記載されている可能性のあるウェブ URL のリストが抽出されます。
+
+All of the referenced CRLs are downloaded, verified, processed, and correlated against the lists of unexpired website certificates.
+参照されているすべての CRL がダウンロードされ、検証され、処理され、有効期限が切れていないウェブサイト証明書のリストと関連付けられます。
+
+
+The process flow for generating CRLite filters
+CRLite フィルターを生成するためのプロセスフロー
+
+Figure 2: CRLite Filter Generation Process
+図2：CRLite フィルター生成プロセス
+
+
+At the end, we have a set of all known issuers that publish CRLs we could use, the identification numbers of every certificate they issued that is still unexpired, and the identification numbers of every certificate they issued that hasn’t expired but was revoked.
+最後に、使用できる CRL を公開しているすべての既知の発行者のセット、発行されたすべての証明書の有効期限が切れていない識別番号、および発行されたすべての証明書の有効期限が切れていないが失効された識別番号があります。
+
+With this knowledge, we can build a CRLite Filter.
+この知識があれば、CRLite フィルターを構築できます。
+
+
+
+
+Structure of A CRLite Filter
+CRLite フィルターの構造
+
+CRLite data comes in the form of a series of cascading Bloom filters, with each filter layer adding data to the one before it. Individual Bloom filters have a certain chance of false-positives, but using Certificate Transparency as an oracle, the whole Web PKI’s certificate corpus is verified through the filter. When a false-positive is discovered, the algorithm adds it to another filter layer to resolve the false positive.
+CRLite データは、一連のカスケーディングブルームフィルターの形式で提供され、各フィルター層はその前のフィルター層にデータを追加します。 個々のブルームフィルターには誤検知の可能性がありますが、Certificate Transparency をオラクル（お告げ）として使用して、Web PKI の証明書コーパス（corpus、全集）全体がフィルターを介して検証されます。 誤検知が検出されると、アルゴリズムはそれを別のフィルター層に追加して、誤検知を解決します。
+
+
+The query structure of a CRLite filter
+CRLite フィルターの照会構造
+
+Figure 3: CRLite Filter Structure
+図3：CRLite フィルター構造
+
+
+The certificate’s identifier is defined as shown in Figure 4:
+証明書の識別子は、図4に示すように定義されています。
+
+
+The data structure used for certificate identification
+証明書の識別に使用されるデータ構造
+
+Figure 4: CRLite Certificate Identifier
+図4：CRLite 証明書識別子
+
+
+For complete details of this construction see Section III.B of the CRLite paper.
+この構造の詳細については、CRLite ペーパーのセクション III.B を参照してください。
+
+After construction, the included Web PKI’s certificate corpus is again verified through the filter, ensuring accuracy at that point-in-time.
+構築後、含まれている Web PKI の証明書コーパスがフィルターを介して再度検証され、その時点での正確性が保証されます。 
+
+
+
+
+Ensuring Filter Accuracy
+フィルターの精度の確保
+
+A CRLite filter is accurate at a given point-in-time, and should only be used for the certificates that were both known to the filter generator, and for which there is revocation information.
+CRLite フィルターは、特定の時点で正確であり、フィルタージェネレーターに認識されており、失効情報がある証明書にのみ使用する必要があります。
+
+We can know whether a certificate could be included in the filter if that certificate has delivered with it a Signed Certificate Timestamp from a participating Certificate Transparency log that is at least one Maximum Merge Delay older than our CRLite filter date.
+証明書が、CRLite フィルターの日付よりも少なくとも1つ古い最大マージ遅延（Maximum Merge Delay）である参加 Certificate Transparency ログから署名付き証明書のタイムスタンプとともに配信された場合、証明書をフィルターに含めることができるかどうかを知ることができます。
+
+If that is true, we also determine whether the certificate’s issuer is included in the CRLite filter, by referencing our preloaded Intermediate data for a boolean flag reporting whether CRLite includes its data. Specifically, the CA must be publishing accessible, fresh, verified CRL files at a URL included within their certificates’ Authority Information Access data. This flag is updated with the same cadence as CRLite itself, and generally remains constant.
+それが当てはまる場合は、CRLite にデータが含まれているかどうかを報告するブールフラグについて、プリロードされた中間データを参照することにより、証明書の発行者が CRLite フィルターに含まれているかどうかも判断します。 具体的には、CA は、証明書の認証機関情報アクセス（Authority Information Access）データに含まれている URL で、アクセス可能で最新の検証済み CRL ファイルを公開している必要があります。 このフラグは、CRLite 自体と同じリズムで更新され、通常は一定のままです。 
+
+
+
+
+Firefox’s Revocation Checking Algorithm Today
+今日の Firefox の失効チェックアルゴリズム
+
+Today, Firefox Nightly is using CRLite in telemetry-only mode, meaning that Firefox will continue to rely on OCSP to determine whether a website’s certificate is valid. If an OCSP response is provided by the webserver itself — via OCSP Stapling — that is used. However, at the same time, CRLite is evaluated, and that result is reported via Firefox Telemetry but not used for revocation.
+今日、Firefox Nightly は遠隔測定専用モードで CRLite を使用しています。 つまり、Firefox は引き続き OCSP に依存して、ウェブサイトの証明書が有効かどうかを判断します。 OCSP 応答がウェブサーバー自体によって（OCSP ステープリングを介して）提供される場合、それが使用されます。 ただし、同時に CRLite が評価され、その結果は Firefox 遠隔測定を介して報告されますが、失効には使用されません。
+
+At a future date, we will prefer to use CRLite for revocation checks, and only if the website cannot be validated via CRLite would we use OCSP, either live or stapled.
+将来的には、失効チェックに CRLite を使用することをお勧めします。 また、CRLite を介してウェブサイトを検証できない場合にのみ、ライブまたはステープルで OCSP を使用します。
+
+Firefox Nightly has a preference security.pki.crlite_mode which controls CRLite; set to 1 it gathers telemetry as stated above. Set to 2, CRLite will enforce revocations in the CRLite filter, but still use OCSP if the CRLite filter does not indicate a revocation.  A future mode will permit CRLite-eligible certificates to bypass OCSP entirely, which is our ultimate goal.
+Firefox Nightly には、CRLite を制御する設定 security.pki.crlite_mode があります。 1 に設定すると、上記のように遠隔測定が収集されます。 2 に設定すると、CRLite は CRLite フィルターで失効を強制しますが、CRLite フィルターが失効を示さない場合は OCSP を使用します。 将来のモードでは、CRLite 適格証明書が OCSP を完全にバイパスできるようになります。 これが私たちの究極の目標です。
+
+
+
+
+Participating Certificate Authorities
+参加している認証局
+
+Only public CAs within the Mozilla Root Program are eligible to be included, and CAs are automatically enrolled when they publish CRLs. If a CA stops publishing CRLs, or problems arise with their CRLs, they will be automatically excluded from CRLite filters until the situation is resolved.
+Mozilla ルートプログラム内の公開 CA のみが含まれる資格があり、CA は CRL を公開するときに自動的に登録されます。 CA が CRL の公開を停止した場合、または CRL に問題が発生した場合、状況が解決されるまで、それらは CRLite フィルターから自動的に除外されます。
+
+As mentioned earlier, if a CA chooses not to log a certificate to a known Certificate Transparency log, then CRLite will not be used to perform revocation checking for that certificate.
+前述のように、CA が証明書を既知の Certificate Transparency ログに記録しないことを選択した場合、CRLite はその証明書の失効チェックを実行するために使用されません。
+
+Ultimately, we expect CAs to be very interested in participating in CRLite, as it could significantly reduce the cost of operating their OCSP infrastructure.
+最終的には、CA が CRLite に参加することに非常に興味を持っていると予想されます。 これは、OCSP インフラストラクチャーの運用コストを大幅に削減できるためです。
+
+
+
+Listing Enrolled Certificate Authorities
+登録された認証局の一覧表示
+
+The list of CAs currently enrolled is in our Intermediate Preloading data served via Firefox Remote Settings. In the FAQ for CRLite on Github, there’s information on how to download and process that data yourself to see what CAs revocations are included in the CRLite state.
+現在登録されている CA のリストは、Firefox のリモート設定を介して提供される中間プリロード（Intermediate Preloading）データにあります。 Github の CRLite に関する FAQ には、そのデータを自分でダウンロードして処理し、CRLite 状態に含まれる CA の失効を確認する方法に関する情報があります。
+
+Notably, Let’s Encrypt currently does not publish CRLs, and as such their revocations are not included in CRLite. The CRLite filters will increase in size as more CAs become enrolled, but the size increase is modeled to be modest.
+特に、Let’s Encrypt は現在 CRL を公開していないため、それらの失効は CRLite に含まれていません。 CRLite フィルターは、登録される CA が増えるにつれてサイズが大きくなりますが、サイズの増加は控えめにモデル化されています。 
+
+
+
+
+Portion of the Web PKI Enrolled
+登録された Web PKI の一部
+
+Currently CRLite covers only a portion of the Web PKI as a whole, though a sizable portion: As-generated through roughly a period covering December 2019, CRLite covered approximately 100M certificates in the WebPKI, of which about 750k were revoked.
+現在、CRLite は Web PKI 全体の一部のみをカバーしていますが、かなりの部分があります。 2019年12月をカバーするおよその期間を通じて生成された CRLite は、Web PKI で約1億の証明書をカバーし、そのうち約75万が失効されました。
+
+
+100M enrolled unrevoked vs 700k enrolled revoked certificates
+1億の登録済みの失効されていない証明書と70万の登録済みの失効された証明書
+
+Figure 5: Number of Enrolled Revoked vs Enrolled But Not Revoked Certificates
+図5：登録済みの失効された証明書と登録済みの失効されていない証明書の数
+
+
+The whole size of the WebPKI trusted by Mozilla with any CRL distribution point listed is 152M certificates, so CRLite today includes 66% of the potentially-compatible WebPKI  [Censys.io]. The missing portion is mostly due to CRL downloading or processing errors which are being addressed. That said, approximately 300M additional trusted certificates do not include CRL revocation information, and are not currently eligible to be included in CRLite.
+リストされている CRL 配布ポイントで Mozilla によって信頼されている Web PKI の全体のサイズは1億5200万の証明書であるため、今日の CRLite には互換性のある可能性のある Web PKI の66%が含まれています [Censys.io]。 欠落している部分は主に、対処されている CRL のダウンロードまたは処理エラーが原因です。 とはいえ、約3億の追加の信頼できる証明書には、CRL 失効情報が含まれておらず、現在 CRLite に含める資格はありません。 
+
+
+
+
+Data Sizes, Update Frequency, and the Future
+データサイズ、更新頻度、および将来
+
+CRLite promises substantial compression of the dataset; the binary form of all unexpired certificate serial numbers comprises about 16 GB of memory in Redis; the hexadecimal form of all enrolled and unexpired certificate serial numbers comprises about 6.7 GB on disk, while the resulting binary Bloom filter compresses to approximately 1.3 MB.
+CRLite は、データセットの大幅な圧縮を約束します。 有効期限が切れていないすべての証明書のシリアル番号のバイナリ形式は、Redis の約16GBのメモリで構成されます。 登録済みで有効期限が切れていないすべての証明書のシリアル番号の16進形式は、ディスク上で約6.7 GBで構成されますが、結果のバイナリブルームフィルターは約1.3MBに圧縮されます。
+
+
+Size of CRLite filters over time
+時間の経過に伴う CRLite フィルターのサイズ
+
+Figure 6: CRLite Filter Sizes over the month of December 2019 (in kilobytes)
+図6：2019年12月の CRLite フィルターサイズ（キロバイト単位）
+
+
+To ensure freshness, our initial target was to produce new filters four times per day, with Firefox users generally downloading small delta difference files to catch-up to the current filter. At present, we are not shipping delta files, as we’re still working toward an efficient delta-expression format.
+鮮度を確保するために、私たちの当初の目標は、新しいフィルターを1日4回作成することでした。 通常、Firefox ユーザーは、現在のフィルターに追いつくために小さなデルタ差分ファイルをダウンロードします。 現在、効率的なデルタ式形式に向けて取り組んでいるため、デルタファイルは出荷していません。
+
+Filter generation is a reasonably fast process even on modest hardware, with the majority of time being spent aggregating together all unexpired certificate serial numbers, all revoked serial numbers, and producing a final set of known-revoked and known-not-revoked certificate issuer-serial numbers (mean of 35 minutes). These aggregated lists are then fed into the CRLite bloom filter generator, which follows the process in Figure 2 (mean of 20 minutes).
+フィルタの生成は、適度なハードウェアでもかなり高速なプロセスであり、時間の大部分は、すべての有効期限が切れていない証明書のシリアル番号、すべての失効されたシリアル番号を集約し、失効された既知および失効されていない既知の証明書発行者の最終セットを生成するために費やされます。 シリアル番号（平均35分）。 これらの集約されたリストは、CRLite ブルームフィルタージェネレーターに送られます。 CRLite ブルームフィルタージェネレーターは、図2のプロセスに従います（平均20分）。
+
+ 
+Distribution of time needed to generate filters
+フィルタの生成に必要な時間の分布
+
+Figure 7: Filter Generation Time [source]
+図7：フィルター生成時間 [ソース]
+
+
+For the most part, faster disks and more efficient (but not human-readable) file formats would speed this process up, but the current speeds are more than sufficient to meet our initial goals, particularly while we continue improving other aspects of the system.
+ほとんどの場合、より高速なディスクとより効率的な（ただし人間が読める形式ではない）ファイル形式でこのプロセスが高速化されますが、特にシステムの他の側面を改善し続けている間は、現在の速度で当初の目標を達成できます。
+
+Our next blog post in this series, Part 3, will discuss the telemetry results that our current users of Firefox Nightly are seeing, while Part 4 will discuss the design of the infrastructure.
+このシリーズの次のブログ投稿であるパー​​ト3では、Firefox Nightly の現在のユーザーが見ている遠隔測定の結果について説明し、パート4ではインフラストラクチャーの設計について説明します。
+
+
+
+
+
+Tags: CRLite, Crypto Engineering, Research, TLS
