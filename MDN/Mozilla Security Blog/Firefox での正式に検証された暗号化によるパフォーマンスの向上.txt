@@ -1,0 +1,59 @@
+https://blog.mozilla.org/security/2020/07/06/performance-improvements-via-formally-verified-cryptography-in-firefox/
+
+Performance Improvements via Formally-Verified Cryptography in Firefox
+Firefox での正式に検証された暗号化によるパフォーマンスの向上
+
+Kevin Jacobs and Benjamin Beurdouche July 6, 2020
+ケビン・ジェイコブスとベンジャミン・ブールドゥーシュ 2020年7月6日 
+
+
+
+
+
+Cryptographic primitives, while extremely complex and difficult to implement, audit, and validate, are critical for security on the web. To ensure that NSS (Network Security Services, the cryptography library behind Firefox) abides by Mozilla’s principle of user security being fundamental, we’ve been working with Project Everest and the HACL* team to bring formally-verified cryptography into Firefox.
+暗号化プリミティブは、非常に複雑で、実装、監査、および検証が困難ですが、ウェブのセキュリティにとって重要です。 NSS（Network Security Services、Firefox の背後にある暗号化ライブラリ）が Mozilla のユーザーセキュリティの基本原則を確実に順守するために、私たちは Project Everest および HACL* チームと協力して、正式に検証された暗号化を Firefox に導入しました。
+
+In Firefox 57, we introduced formally-verified Curve25519, which is a mechanism used for key establishment in TLS and other protocols. In Firefox 60, we added ChaCha20 and Poly1305, providing high-assurance authenticated encryption. Firefox 69, 77, and 79 improve and expand these implementations, providing increased performance while retaining the assurance granted by formal verification.
+Firefox 57 では、TLS やその他のプロトコルでの鍵の確立に使用されるメカニズムである正式に検証された Curve25519 を導入しました。 Firefox 60 では、ChaCha20 と Poly1305 を追加して、高保証の認証付き暗号化を提供しました。 Firefox 69、77、および 79 は、これらの実装を改善および拡張し、正式な検証によって付与された保証を維持しながら、パフォーマンスを向上させます。 
+
+
+
+
+Performance & Specifics
+パフォーマンスと詳細
+
+For key establishment, we recently replaced the 32-bit implementation of Curve25519 with one from the Fiat-Crypto project. The arbitrary-precision arithmetic functions of this implementation are proven to be functionally correct, and it improves performance by nearly 10x over the previous code. Firefox 77 updates the 64-bit implementation with new HACL* code, benefitting from a ~27% speedup. Most recently, Firefox 79 also brings this update to Windows. These improvements are significant: Telemetry shows Curve25519 to be the most widely used elliptic curve for ECDH(E) key establishment in Firefox, and increased throughput reduces energy consumption, which is particularly important for mobile devices.
+キーを確立するために、最近、Curve25519 の32ビット実装を Fiat-Crypto プロジェクトのものに置き換えました。 この実装の任意精度の算術関数は機能的に正しいことが証明されており、以前のコードのほぼ10倍のパフォーマンスが向上しています。 Firefox 77 は、64ビットの実装を新しい HACL* のコードで更新し、最大27％の高速化の恩恵を受けています。 最近では、Firefox 79 もこのアップデートを Windows にもたらします。 これらの改善は重要です。遠隔測定は、Curve25519 が Firefox の ECDH(E) キー確立に最も広く使用されている楕円曲線であることを示し、スループットの向上により、モバイルデバイスにとって特に重要なエネルギー消費が削減されます。 
+
+
+64-bit Curve25519 with HACL*
+	
+
+32-bit Curve25519 with Fiat-Crypto
+
+
+For encryption and decryption, we improved the performance of ChaCha20-Poly1305 in Firefox 77. Throughput is doubled by taking advantage of vectorization with 128-bit and 256-bit integer arithmetic (via the AVX2 instruction set on x86-64 CPUs). When these features are unavailable, NSS will fall back to an AVX or scalar implementation, both of which have been further optimized.
+暗号化と復号化について、Firefox 77 の ChaCha20-Poly1305 のパフォーマンスを改善しました。 128ビットおよび256ビット整数演算によるベクトル化を利用することでスループットが2倍になります（x86-64 CPU の AVX2 命令セットを使用）。 これらの機能が利用できない場合、NSS は AVX またはスカラーの実装にフォールバックします。 どちらもさらに最適化されています。
+
+
+ChaCha20-Poly1305 with HACL* and AVX2
+
+
+The HACL* project has introduced new techniques and libraries to improve efficiency in writing verified primitives for both scalar and vectorized variants. This allows aggressive code sharing and reduces the verification effort across many different platforms.
+HACL* プロジェクトは、スカラーバリアントとベクトル化バリアントの両方の検証済みプリミティブの記述効率を向上させるための新しい手法とライブラリーを導入しました。 これにより、積極的なコード共有が可能になり、さまざまなプラットフォーム間での検証作業が軽減されます。
+
+
+
+
+What’s Next?
+次は何？
+
+
+For Firefox 81, we intend to incorporate a formally-verified implementation of the P256 elliptic curve for ECDSA and ECDH. Middle-term targets for verified implementations include GCM, the P384 and P521 elliptic curves, and the ECDSA signature scheme itself. While there remains work to be done, these updates provide an improved user experience and ease the implementation burden for future inclusion of platform-optimized primitives.
+Firefox 81 の場合、ECDSA および ECDH の P256 楕円曲線の正式に検証された実装を組み込む予定です。 検証済みの実装の中間目標には、GCM、P384 および P521 楕円曲線、および ECDSA 署名スキーム自体が含まれます。 やるべきことはまだ残っていますが、これらの更新により、ユーザーエクスペリエンスが向上し、プラットフォームに最適化されたプリミティブを将来含めるための実装の負担が軽減されます。 
+
+
+
+
+
+Tags: NSS, performance, Security, TLS
