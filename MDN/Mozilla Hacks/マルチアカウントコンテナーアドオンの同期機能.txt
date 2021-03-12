@@ -1,0 +1,26 @@
+https://blog.mozilla.org/security/2020/02/06/multi-account-containers-sync/
+
+Multi-Account Containers Add-on Sync Feature
+マルチアカウントコンテナーアドオンの同期機能
+
+Kendall Werts February 6, 2020
+ケンダル ワーツ 2020年2月6日 
+
+
+
+
+
+Image of the Multi-Account Containers Sync On-boarding ScreenThe Multi-Account Containers Add-on will now sync your container configuration and site assignments.
+マルチアカウントコンテナー同期のオンボーディング画面の画像    マルチアカウントコンテナーアドオン（Multi-Account Containers Add-on）は、コンテナーの構成とサイトの割り当てを同期するようになりました。
+
+Firefox Multi-Account Containers allows users to separate their online identities into different tab types called Containers. Each Container has its own separate storage and cookies.  This way, their browsing activity in one Container is not accessible to websites in other Containers. This privacy feature allows users to assign sites to only open in a specific Container. For instance, it permits them to set your shopping websites to always open in a Shopping Container. This keeps advertising tracking data from those websites separate from the user’s Work Container. Users can also use Containers for separate areas of their life, like work and personal email. The user can separate email accounts from the same provider, so they don’t have to log in and out of each account. For more information about how to use the containers add on, visit the Mozilla support page.
+Firefox マルチアカウントコンテナーを使用すると、ユーザーはオンラインの身元をコンテナーと呼ばれるさまざまなタブの種類に分けることができます。 各コンテナーには、独自のストレージとクッキーがあります。 このように、1つのコンテナーでの閲覧行動は、他のコンテナーのウェブサイトからはアクセスできません。 このプライバシー機能により、ユーザーは特定のコンテナーでのみ開くようにサイトを割り当てることができます。 たとえば、お買い物のウェブサイトを常にお買い物コンテナーで開くように設定できます。 これにより、これらのウェブサイトからの広告追跡データがユーザーの仕事コンテナーとは別になります。 ユーザーは、仕事や個人の電子メールなど、生活のさまざまな領域にコンテナーを使用することもできます。 ユーザーは同じプロバイダーからメールアカウントを分離できるため、各アカウントにログインしたりログアウトしたりする必要はありません。 コンテナーアドオンの使用方法の詳細については、Mozilla サポートページにアクセスしてください。
+
+The new sync feature will align Multi-Account Containers on different computers. The add-on carries over Container names, colors, icons, and site assignments on to any other machines with the same Firefox account.
+新しい同期機能は、異なるコンピューター上のマルチアカウントコンテナーを調整します。 アドオンは、コンテナー名、色、アイコン、およびサイトの割り当てを、同じ Firefox アカウントを持つ他のマシンに引き継ぎます。
+
+If you have allowed automatic updates of the add-on, your extension should update on its own. The first time you click the Multi-Account Container icon after the update, an on-boarding panel will allow you to activate sync.
+アドオンの自動更新を許可している場合は、拡張機能が自動的に更新されます。 更新後に初めてマルチアカウントコンテナーアイコンをクリックすると、オンボーディングパネルで同期をアクティブ化できます。
+
+In order to use this feature, you will need to be signed in to a Firefox account in Firefox.
+この機能を使用するには、Firefox で Firefox アカウントにサインインする必要があります。
