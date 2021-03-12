@@ -1,0 +1,42 @@
+https://blog.mozilla.org/security/2020/01/07/firefox-72-fingerprinting/
+
+Firefox 72 blocks third-party fingerprinting resources
+Firefox 72 はサードパーティの指紋採取リソースをブロックします
+
+Steven Englehardt January 7, 2020
+スティーブン・イングルハート 2020年1月7日 
+
+
+
+
+
+Privacy is a human right, and is core to Mozilla’s mission. However many companies on the web erode privacy when they collect a significant amount of personal information. Companies record our browsing history and the actions we take across websites. This practice is known as cross-site tracking, and its harms include unwanted targeted advertising and divisive political messaging.
+プライバシーは人権であり、Mozilla の使命の中核です。 ただし、 ウェブ上の多くの企業は、大量の個人情報を収集する際にプライバシーを侵害します。 企業は、私たちの閲覧履歴とウェブサイト全体で実行した活動を記録します。 この行為はクロスサイト追跡（cross-site tracking）として知られており、その害には、不要なターゲット広告や分裂的な政治的メッセージが含まれます。
+
+Last year we launched Enhanced Tracking Protection (ETP) to protect our users from cross-site tracking. In Firefox 72, we are expanding that protection to include a particularly invasive form of cross-site tracking: browser fingerprinting. This is the practice of identifying a user by the unique characteristics of their browser and device. A fingerprinting script might collect the user’s screen size, browser and operating system type, the fonts the user has installed, and other device properties—all to build a unique “fingerprint” that differentiates one user’s browser from another.
+昨年、クロスサイト追跡からユーザーを保護するために、ETP（Enhanced Tracking Protection、強化された追跡保護）を開始しました。 Firefox 72 では、その保護を拡張して、特に侵襲的な形式のクロスサイト追跡であるブラウザーの指紋採取（fingerprinting、フィンガープリンティング）を含めています。 これは、ブラウザーとデバイスの固有の特性によってユーザーを識別する行為です。 指紋採取スクリプトは、ユーザーの画面サイズ、ブラウザーとオペレーティングシステムの種類、ユーザーがインストールしたフォント、その他のデバイスのプロパティを収集して、あるユーザーのブラウザーを別のユーザーのものと区別する独自の「指紋（fingerprint、フィンガープリント）」を構築します。
+
+Fingerprinting is bad for the web. It allows companies to track users for months, even after users clear their browser storage or use private browsing mode. Despite a near complete agreement between standards bodies and browser vendors that fingerprinting is harmful, its use on the web has steadily increased over the past decade.
+指紋採取はウェブによくないです。 これにより、ユーザーがブラウザーストレージをクリアしたり、プライベートブラウジングモードを使用したりした後でも、企業はユーザーを数か月間追跡できます。 指紋採取は有害であるという標準化団体とブラウザーベンダー間のほぼ完全な合意にもかかわらず、ウェブ上での指紋採取の使用は過去10年間で着実に増加しています。
+
+We are committed to finding a way to protect users from fingerprinting without breaking the websites they visit. There are two primary ways to protect against fingerprinting: to block parties that participate in fingerprinting, or to change or remove APIs that can be used to fingerprint users.
+私たちは、ユーザーが訪問するウェブサイトを壊すことなく、指紋採取からユーザーを保護する方法を見つけることに取り組んでいます。 指紋採取から保護するには、主に2つの方法があります。 指紋採取に参加するパーティをブロックする方法と、ユーザーの指紋に使用できる API を変更または削除する方法です。
+
+Firefox 72 protects users against fingerprinting by blocking all third-party requests to companies that are known to participate in fingerprinting. This prevents those parties from being able to inspect properties of a user’s device using JavaScript. It also prevents them from receiving information that is revealed through network requests, such as the user’s IP address or the user agent header.
+Firefox 72 は、指紋採取に参加していることがわかっている企業へのすべてのサードパーティの要求をブロックすることにより、ユーザーを指紋採取から保護します。 これにより、これらのパーティは JavaScript を使用してユーザーのデバイスのプロパティを検査できなくなります。 また、ユーザーの IP アドレスやユーザーエージェントヘッダーなど、ネットワーク要求を通じて明らかにされた情報を受信するのを防ぎます。
+
+We’ve partnered with Disconnect to provide this protection. Disconnect maintains a list of companies that participate in cross-site tracking, as well a list as those that fingerprint users. Firefox blocks all parties that meet both criteria [0]. We’ve adapted measurement techniques  from past academic research to help Disconnect discover new fingerprinting domains. Disconnect performs a rigorous, public evaluation of each potential fingerprinting domain before adding it to the blocklist.
+この保護を提供するために、Disconnect と提携しています。 Disconnect は、クロスサイト追跡に参加している企業のリストと、ユーザーの指紋を作成している企業のリストを維持しています。 Firefox は、両方の基準を満たすすべての関係者をブロックします [0]。 過去の学術研究の測定手法を採用して、Disconnect が新しい指紋採取ドメインを発見できるようにしました。 Disconnect は、ブロックリストに追加する前に、潜在的な指紋採取ドメインごとに厳密な公開評価を実行します。
+
+Firefox’s blocking of fingerprinting resources represents our first step in stemming the adoption of fingerprinting technologies. The path forward in the fight against fingerprinting will likely involve both script blocking and API-level protections. We will continue to monitor fingerprinting on the web, and will work with Disconnect to build out the set of domains blocked by Firefox. Expect to hear more updates from us as we continue to strengthen the protections provided by ETP.
+Firefox による指紋採取リソースのブロックは、指紋採取技術の採用を食い止めるための最初のステップです。 指紋採取との戦いの前進には、スクリプトのブロックと API レベルの保護の両方が含まれる可能性があります。 今後もウェブ上の指紋採取を監視し、Disconnect と連携して、Firefox によってブロックされるドメインのセットを構築します。 ETP によって提供される保護を引き続き強化するため、今後さらに多くの更新情報が届くことを期待してください。
+
+ 
+
+[0] A tracker on Disconnect’s blocklist is any domain in the Advertising, Analytics, Social, Content, or Disconnect category. A fingerprinter is any domain in the Fingerprinting category. Firefox blocks domains in the intersection of these two classifications, i.e., a domain that is both in one of the tracking categories and in the fingerprinting category.
+[0] Disconnect のブロックリストの追跡者は、広告（Advertising）、分析（Analytics）、社会的（Social）、コンテンツ（Content）、または切断（Disconnect）のカテゴリの任意のドメインです。 指紋採取者（fingerprinter）は、指紋採取カテゴリの任意のドメインです。 Firefox は、これら2つの分類の共通部分にあるドメイン、つまり、追跡カテゴリの1つと指紋採取カテゴリの両方にあるドメインをブロックします。
+
+
+
+
+Tags: anti-tracking, fingerprinting, tracking
