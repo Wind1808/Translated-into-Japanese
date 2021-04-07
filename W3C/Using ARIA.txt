@@ -1,0 +1,1404 @@
+W3C
+
+Using ARIA
+ARIA の使用
+
+W3C Working Draft 27 September 2018
+W3C ワーキングドラフト 2018年9月27日 
+
+This version:
+このバージョン：
+
+    https://www.w3.org/TR/2018/WD-using-aria-20180927/
+
+Latest published version:
+最新の公開バージョン：
+
+    https://www.w3.org/TR/using-aria/
+
+Latest editor's draft:
+最新の編集者の下書き：
+
+    https://w3c.github.io/using-aria/
+
+Previous version:
+前のバージョン：
+
+    https://www.w3.org/TR/2018/WD-using-aria-20180924/
+
+Editors:
+編集者：
+
+    Steve Faulkner (The Paciello Group)
+
+    David MacDonald (CanAdapt Solutions Inc.)
+
+Participate:
+参加する：
+
+    GitHub w3c/using-aria 
+
+    File a bug 
+
+    Commit history 
+
+    Pull requests 
+
+Copyright © 2018 W3C® (MIT, ERCIM, Keio, Beihang). W3C liability, trademark and permissive document license rules apply.
+Copyright © 2018 W3C®（MIT、ERCIM、慶應義塾大学、北京航空航天大学）。 W3C の責任、商標、およびパーミッシブ文書のライセンス規則が適用されます。
+
+
+
+
+Abstract
+概要
+
+This document is a practical guide for developers on how to add accessibility information to HTML elements using the Accessible Rich Internet Applications specification [WAI-ARIA-1.1], which defines a way to make Web content and Web applications more accessible to people with disabilities. This document demonstrates how to use WAI-ARIA in [HTML51], which especially helps with dynamic content and advanced user interface controls developed with Ajax, HTML, JavaScript, and related technologies.
+この文書は、Accessible Rich Internet Applications 仕様 [WAI-ARIA-1.1] を使用して HTML 要素にアクセシビリティ情報を追加する方法に関する開発者向けの実用的なガイドです。 この仕様では、障害を持つ人々がウェブコンテンツとウェブアプリケーションにアクセスしやすくする方法を定義しています。 この文書は、[HTML51] で WAI-ARIA を使用する方法を示しています。 これは、Ajax、HTML、JavaScript、および関連テクノロジーで開発された動的コンテンツと高度なユーザーインターフェイスコントロールに特に役立ちます。
+
+
+
+
+
+Status of This Document
+この文書のステータス
+
+This section describes the status of this document at the time of its publication. Other documents may supersede this document. A list of current W3C publications and the latest revision of this technical report can be found in the W3C technical reports index at https://www.w3.org/TR/.
+このセクションでは、発行時のこの文書のステータスについて説明します。 他の文書がこの文書に取って代わる場合があります。 現在の W3C 出版物のリストとこのテクニカルレポートの最新リビジョンは、https://www.w3.org/TR/ の W3C テクニカルレポートインデックスにあります。
+
+Note
+注意
+
+This document is informative only. Resources are for information purposes only, no endorsement implied.
+この文書は参考情報です。 リソースは情報提供のみを目的としており、推奨を意味するものではありません。
+
+It is published by the Web Platform Working Group.
+これは、ウェブプラットフォームワーキンググループによって公開されています。
+
+It is a draft document and its contents is subject to change without notice.
+これはドラフト文書であり、その内容は予告なしに変更される場合があります。
+
+Note
+注意
+
+If you find an issue or have suggestions please file a bug.
+問題を見つけたり、提案がある場合は、バグを報告してください。
+
+This document was published by the Web Platform Working Group as a Working Draft.
+この文書は、ウェブプラットフォームワーキンググループ（Web Platform Working Group）によってワーキングドラフトとして公開されました。
+
+GitHub Issues are preferred for discussion of this specification. Alternatively, you can send comments to our mailing list. Please send them to public-html@w3.org (archives).
+この仕様の議論には、GitHub の Issues が推奨されます。 または、メーリングリストにコメントを送信することもできます。 それらを public-html@w3.org（アーカイブ）に送ってください。
+
+Publication as a Working Draft does not imply endorsement by the W3C Membership. This is a draft document and may be updated, replaced or obsoleted by other documents at any time. It is inappropriate to cite this document as other than work in progress.
+ワーキングドラフトとしての公開は、W3C メンバーシップによる承認を意味するものではありません。 これはドラフト文書であり、いつでも他の文書によって更新、置換、または廃止される可能性があります。 この文書を進行中の作業以外のものとして引用することは不適切です。
+
+This document was produced by a group operating under the W3C Patent Policy. The group does not expect this document to become a W3C Recommendation. W3C maintains a public list of any patent disclosures made in connection with the deliverables of the group; that page also includes instructions for disclosing a patent. An individual who has actual knowledge of a patent which the individual believes contains Essential Claim(s) must disclose the information in accordance with section 6 of the W3C Patent Policy.
+この文書は、W3C 特許ポリシーに基づいて運営されているグループによって作成されました。 このグループは、この文書が W3C 勧告になることを期待していません。 W3C は、グループの成果物に関連して行われた特許開示の公開リストを維持しています。 そのページには、特許を開示するための指示も含まれています。 エッセンシャルクレームが含まれていると個人が信じる特許について実際の知識を持っている個人は、W3C 特許ポリシーのセクション 6 に従って情報を開示する必要があります。
+
+This document is governed by the 1 February 2018 W3C Process Document.
+この文書は、2018年2月1日の W3C プロセス文書に準拠しています。
+
+
+
+
+
+Table of Contents
+目次
+
+    1. Introduction
+    1. はじめに
+
+    2. Notes on ARIA Use in HTML
+    2. HTML での ARIA の使用に関する注意
+
+        2.1 First Rule of ARIA Use
+        2.1 ARIA 使用の最初のルール
+
+        2.2 Second Rule of ARIA Use
+        2.2 ARIA 使用の2番目のルール
+
+        2.3 Third Rule of ARIA Use
+        2.3 ARIA 使用の3番目のルール
+
+        2.4 Fourth Rule of ARIA Use
+        2.4 ARIA 使用の4番目のルール
+
+        2.5 Fifth Rule of ARIA Use
+        2.5 ARIA 使用の5番目のルール
+
+        2.6 What Does Adding a Role Do to the Native Semantics?
+        2.6 ロールの追加はネイティブな意味論に何をしますか？
+
+        2.7 Add ARIA Inline or via Script?
+        2.7 ARIA をインラインで追加しますか、それともスクリプトで追加しますか？
+
+        2.8 ARIA Validation
+        2.8 ARIA 検証
+
+        2.9 Use of Role=presentation or Role=none
+        2.9 role=presentation または role=none の使用
+
+        2.10 Practical Support: aria-label, aria-labelledby and aria-describedby
+        2.10 実用的なサポート：aria-label、aria-labelledby および aria-describedby
+
+            2.10.1 The Effect of Accessible Name on Background Images
+            2.10.1 アクセス可能な名前が背景画像に与える影響
+
+        2.11 Using ARIA role=application
+        2.11 ARIA role=application の使用
+
+        2.12 Custom Control Accessible Development Checklist:
+        2.12 カスタムコントロールでアクセス可能な開発のチェックリスト：
+
+        2.13 ARIA Adds Nothing to Default Semantics of Most HTML Elements
+        2.13 ARIA は、ほとんどの HTML 要素のデフォルトの意味論に何も追加しません
+
+            2.13.1 Some Examples of Redundant ARIA
+            2.13.1 冗長な ARIA のいくつかの例
+
+        2.14 Aria Roles and Properties Not Available as Features in HTML
+        2.14 HTML の機能として使用できない ARIA のロールとプロパティ
+
+            2.14.1 ARIA Roles
+            2.14.1 ARIA のロール
+
+            2.14.2 ARIA States and Properties (aria-* Attributes)
+            2.14.2 ARIA の状態とプロパティ（aria-* 属性）
+
+        2.15 ARIA Design Patterns and Touch Device Support
+        2.15 ARIA デザインパターンとタッチデバイスのサポート
+
+        2.16 Recommendations Table:
+        2.16 推奨事項の表：
+
+        2.17 ARIA Role, State, and Property Quick Reference
+        2.17 ARIA のロール、状態、およびプロパティのクイックリファレンス
+
+    A. References
+    A. 参考文献
+
+        A.1 Informative references
+        A.1 情報的な参考文献
+
+
+
+
+
+1. Introduction
+1. はじめに
+
+This document is a practical guide for developers on how to add accessibility information to HTML elements using the Accessible Rich Internet Applications specification [WAI-ARIA-1.1], which defines a way to make Web content and Web applications more accessible to people with disabilities. This document demonstrates how to use WAI-ARIA in HTML5, it especially helps with dynamic content and advanced user interface controls developed with Ajax, HTML, JavaScript, and related technologies.
+この文書は、Accessible Rich Internet Applications 仕様 [WAI-ARIA-1.1] を使用して HTML 要素にアクセシビリティ情報を追加する方法に関する開発者向けの実用的なガイドです。 この仕様では、障害を持つ人々がウェブコンテンツとウェブアプリケーションにアクセスしやすくする方法を定義しています。 この文書は、HTML5 で WAI-ARIA を使用する方法を示しています。 特に、Ajax、HTML、JavaScript、および関連テクノロジーで開発された動的コンテンツと高度なユーザーインターフェイスコントロールに役立ちます。
+
+This document provides advice for use of ARIA attributes in [HTML51].
+この文書は、[HTML51] で ARIA 属性を使用するためのアドバイスを提供します。
+
+For general best-practice information about using ARIA, see the [wai-aria-practices-1.1] document.
+ARIA の使用に関する一般的なベストプラクティス情報については、[wai-aria-practices-1.1] 文書を参照してください。
+
+The following is a longer list of resources that provide relevant information:
+以下は、関連情報を提供するリソースのより長いリストです。 
+
+    ARIA in HTML
+
+    WAI-ARIA 1.1 Authoring Practices
+
+    Accessible Rich Internet Applications (WAI-ARIA) 1.1
+
+    HTML 5.1
+
+    HTML5 Accessibility
+
+
+
+
+
+2. Notes on ARIA Use in HTML
+2. HTML での ARIA の使用に関する注意
+
+
+
+
+2.1 First Rule of ARIA Use
+2.1 ARIA 使用の最初のルール
+
+If you can use a native HTML element [HTML51] or attribute with the semantics and behavior you require already built in, instead of re-purposing an element and adding an ARIA role, state or property to make it accessible, then do so.
+要素を転用して ARIA のロール、状態、またはプロパティを追加してアクセス可能にする代わりに、必要な意味論と振る舞いがすでに組み込まれているネイティブの HTML 要素 [HTML51] または属性を使用できる場合は、そうします。
+
+Under what circumstances may this not be possible?
+どのような状況で、これが不可能になる可能性がありますか？
+
+    If the feature is available in HTML [HTML51] but it is not implemented or it is implemented, but accessibility support is not.
+    その機能が HTML [HTML51] で利用可能であるが、実装されていないか、実装されているが、アクセシビリティのサポートが実装されていない場合。
+
+    If the visual design constraints rule out the use of a particular native element, because the element cannot be styled as required.
+    視覚的なデザインの制約により、特定のネイティブな要素の使用が除外されている場合。 これは、要素のスタイルを必要に応じて設定できないためです。
+
+    If the feature is not currently available in HTML.
+    その機能が現在 HTML で利用できない場合。 
+
+
+
+
+
+2.2 Second Rule of ARIA Use
+2.2 ARIA 使用の2番目のルール
+
+Do not change native semantics, unless you really have to.
+本当に必要な場合を除いて、ネイティブの意味論を変更しないでください。
+
+For example: Developer wants to build a heading that's a tab.
+例：開発者は、タブのような見出しを作成したいと考えています。
+
+Do not do this:
+このようにしないでください：
+
+<h2 role=tab>heading tab</h2>
+<h2 role=tab>見出しタブ</h2>
+
+Do this:
+このようにしてください：
+
+<div role=tab><h2>heading tab</h2></div>
+<div role=tab><h2>見出しタブ</h2></div>
+
+Note
+注意
+
+If a non-interactive element is used as the basis for an interactive element, developers have to add the semantics using ARIA and the appropriate interaction behavior using scripting. In the case of a button, for example, it is much better and easier to Just use a (native HTML) button.
+相互作用的でない要素が相互作用的な要素の基礎として使用される場合、開発者は ARIA を使用して意味論を追加し、スクリプトを使用して適切な相互作用の振る舞いを追加する必要があります。 たとえば、ボタンの場合は、（ネイティブな HTML の）ボタンを使用する方がはるかに優れています。
+
+Note
+注意
+
+It is OK to use native HTML elements, that have similar semantics to ARIA roles used, for fallback. For example, using HTML list elements for the skeleton of an ARIA-enabled, scripted tree widget.
+フォールバックには、使用されている ARIA ロールと同様の意味論を持つネイティブな HTML 要素を使用できます。 たとえば、ARIA 対応のスクリプト付きツリーウィジェットのスケルトンに HTML リスト要素を使用します。 
+
+
+
+
+
+2.3 Third Rule of ARIA Use
+2.3 ARIA 使用の3番目のルール
+
+All interactive ARIA controls must be usable with the keyboard.
+すべての相互作用的な ARIA コントロールは、キーボードで使用できる必要があります。
+
+If you create a widget that a user can click or tap or drag or drop or slide or scroll, a user must also be able to navigate to the widget and perform an equivalent action using the keyboard.
+ユーザーがクリック、タップ、ドラッグ、ドロップ、スライド、スクロールできるウィジェットを作成する場合、ユーザーはウィジェットにナビゲートして、キーボードを使用して同等のアクションを実行できる必要があります。
+
+All interactive widgets must be scripted to respond to standard keystrokes or keystroke combinations where applicable.
+すべての相互作用的なウィジェットは、該当する場合、標準のキーストロークまたはキーストロークの組み合わせに反応するようにスクリプト化する必要があります。
+
+For example, if using role=button the element must be able to receive focus and a user must be able to activate the action associated with the element using both the enter (on WIN OS) or return (MAC OS) and the space key.
+たとえば、role=button を使用する場合、要素はフォーカスを受け取ることができ、ユーザーは Enter（Windows の場合）または Return（MAC OS の場合）とスペースキーの両方を使用して要素に関連付けられたアクションをアクティブ化できる必要があります。
+
+Refer to the Design Patterns and Widgets and Developing a Keyboard Interface sections of [wai-aria-practices-1.1]
+[wai-aria-practices-1.1] の「デザインパターンとウィジェット」および「キーボードインターフェイスの開発」のセクションを参照してください。 
+
+
+
+
+
+2.4 Fourth Rule of ARIA Use
+2.4 ARIA 使用の4番目のルール
+
+Do not use role="presentation" or aria-hidden="true" on a focusable element .
+フォーカス可能な要素で role="presentation" または aria-hidden="true" を使用しないでください。
+
+Using either of these on a focusable element will result in some users focusing on 'nothing'.
+フォーカス可能な要素でこれらのいずれかを使用すると、一部のユーザーは「何もない」ところにフォーカスすることになります。
+
+Do not do this:
+このようにしないでください：
+
+<button role=presentation>press me</button>
+<button role=presentation>押してください</button>
+
+Do not do this:
+このようにしないでください：
+
+<button aria-hidden="true">press me</button>
+<button aria-hidden="true">押してください</button>
+
+Note
+注意
+
+Applying aria-hidden to a parent/ancestor of a visible interactive element will also result in the interactive element being hidden, so don't do this either:
+表示されている相互作用的な要素の親/祖先に aria-hidden を適用すると、相互作用的な要素も非表示になるため、これもこのようにしないでください：
+
+<div aria-hidden="true"> 
+
+<button>press me</button>
+<button>押してください</button>
+
+</div>
+
+Note
+注意
+
+If an interactive element cannot be seen or interacted with, then you can apply aria-hidden, as long as it's not focusable. For example:
+相互作用的な要素を表示したり相互作用したりできない場合は、フォーカスできない場合に限り、aria-hidden を適用できます。 例えば： 
+
+button {opacity:0}
+
+<button tabindex="-1" aria-hidden="true">press me</button>
+<button tabindex="-1" aria-hidden="true">押してください</button>
+
+Note
+注意
+
+If an interactive element is hidden using display:none or visibility:hidden (either on the element itself, or any of the element's ancestors), it won't be focusable, and it will also be removed from the accessibility tree. This makes the addition of aria-hidden="true" or explicitly setting tabindex="-1" unnecessary.
+相互作用的な要素が display:none または visibility:hidden （要素自体または要素の祖先のいずれか）を使用して非表示になっている場合、フォーカス可能ではなく、アクセシビリティツリーからも削除されます。 これにより、aria-hidden="true" を追加したり、tabindex="-1" を明示的に設定したりする必要がなくなります。 
+
+
+
+
+
+2.5 Fifth Rule of ARIA Use
+2.5 ARIA 使用の5番目のルール
+
+All interactive elements must have an accessible name.
+すべての相互作用的な要素には、アクセス可能な名前が必要です。
+
+An interactive element only has an accessible name when its Accessibility API accessible name (or equivalent) property has a value.
+相互作用的な要素には、アクセシビリティ API のアクセス可能な名前（または同等の）プロパティに値がある場合にのみ、アクセス可能な名前があります。
+
+For example, the input type=text in the code example below has a visible label 'user name' , but no accessible name:
+たとえば、以下のコード例の input type=text には、表示可能なラベル「ユーザー名」がありますが、アクセス可能な名前はありません。
+
+    user name <input type="text">
+    ユーザー名 <input type="text">
+
+    or
+    または
+
+    <span>user name</span> <input type="text">
+    <span>ユーザー名</span> <input type="text">
+
+
+The control's MSAA accName property is empty:
+コントロールの MSAA accName プロパティが空です：
+
+example control with MSAA name and role information displayed. The accName property has no value, the accRole property is 'editable text'.
+MSAA の名前とロールの情報が表示されたコントロールの例。 accName プロパティには値がなく、accRole プロパティは「編集可能なテキスト」です。
+
+
+In comparison, the input type=text in the code example below has a visible label 'user name' and an accessible name. This example has an accessible name because the input element is a labelable element and the label element is used correctly to associate the label text with the input.
+比較すると、以下のコード例の input type=text には、表示可能なラベル「ユーザー名」とアクセス可能な名前があります。 入力要素はラベル付け可能な要素であり、ラベル要素はラベルテキストを入力に関連付けるために正しく使用されるため、この例にはアクセス可能な名前が付いています。 
+
+
+<!-- Note: use of for/id or wrapping label around text
+<!-- 注：for / id を使用するか、テキストとコントロールの
+
+and control methods will result in an accessible name -->
+周りをラベルで包む方法で、アクセス可能な名前になります -->
+
+<input type="text" aria-label="User Name">
+<input type="text" aria-label="ユーザー名">
+
+or
+または、
+
+<span id="p1">user name</span> <input type="text" aria-labelledby="p1">
+<span id="p1">ユーザー名</span> <input type="text" aria-labelledby="p1">
+
+
+The control's MSAA accName property has a value of "user name":
+コントロールの MSAA accName プロパティの値は「ユーザー名」です。
+
+example control with MSAA name and role information displayed. The accName property has a value of 'user name', the accRole property is 'editable text'.
+MSAA の名前とロールの情報が表示されたコントロールの例。 accName プロパティの値は「ユーザー名」で、accRole プロパティの値は「編集可能なテキスト」です。 
+
+
+Note
+注意
+
+Note: The example above is for ARIA widgets. For regular HTML inputs, follow the First Rule of ARIA, and use the label element with a for attribute to associate labels with input elements.
+注：上記の例は ARIA ウィジェット用です。 通常の HTML 入力の場合は、ARIA の最初のルールに従い、ラベル要素を for 属性とともに使用して、ラベルを入力要素に関連付けます。 
+
+
+
+
+
+HTML label element and labelable elements
+HTML のラベル要素とラベル付け可能な要素
+
+The following is about using the label in HTML. If you are building ARIA widgets, refer to the ARIA Authoring Practices Document
+以下は、HTML でのラベルの使用についてです。 ARIA ウィジェットを作成している場合は、ARIA Authoring Practices 文書を参照してください。
+
+The label element cannot be used to provide an accessible name for custom controls, unless the label is referencing a native HTML labelable element.
+ラベルがネイティブな HTML のラベル付け可能な要素を参照していない限り、ラベル要素を使用してカスタムコントロールにアクセス可能な名前を提供することはできません。 
+
+     <!-- HTML input element with combox role -->
+     <!-- コンボボックスロールを持つ HTML 入力要素 -->
+
+      <label>
+
+      user name <input type="text" role="combobox">
+      ユーザー名 <input type="text" role="combobox">
+
+      </label>
+
+
+The control's MSAA accName property has a value of "user name":
+コントロールの MSAA accName プロパティの値は「ユーザー名」です。
+
+example input element with MSAA name and role information displayed. The accName property has a value of 'user name', the accRole property is 'combo box'.
+MSAA の名前とロールの情報が表示された入力要素の例。 accName プロパティの値は「ユーザー名」で、accRole プロパティの値は「コンボボックス」です。 
+
+
+A div element regardless of what role is assigned is not an HTML labelable element.
+割り当てられているロールに関係なく、div 要素は HTML のラベル付け可能な要素ではありません。
+
+     <!-- HTML div element with combox role -->
+     <!-- コンボボックスロールを持つ HTML div 要素 -->
+
+      <label>
+
+      user name <div  role="combobox"></div>
+      ユーザー名 <div  role="combobox"></div>
+
+      </label>
+
+
+The control's MSAA accName property is empty:
+コントロールの MSAA accName プロパティが空です：
+
+example div element with MSAA name and role information displayed. The accName property is empty, the accRole property is 'combo box'.
+MSAA の名前とロールの情報が表示された div 要素の例。 accName プロパティは空で、accRole プロパティは「コンボボックス」です。
+
+
+Note
+注意
+
+5th rule is a work in progress
+5番目のルールは進行中の作業です 
+
+
+
+
+
+2.6 What Does Adding a Role Do to the Native Semantics?
+2.6 ロールの追加はネイティブな意味論に何をしますか？
+
+Adding an ARIA role overrides the native role semantics in the accessibility tree which is reported via the accessibility API, and therefore ARIA indirectly affects what is reported to a screen reader or other assistive technology.
+ARIA ロールを追加すると、アクセシビリティ API を介して報告されるアクセシビリティツリーのネイティブなロールの意味論が上書きされるため、ARIA はスクリーンリーダーやその他の支援技術に報告される内容に間接的に影響します。
+
+For example, this code in the HTML tree:
+たとえば、HTML ツリーのこのコードは：
+
+<h1 role=button>text</h1>
+<h1 role=button>テキスト</h1>
+
+
+Becomes this in the accessibility tree:
+アクセシビリティツリーではこのようになります：
+
+button with a label of 'heading text'
+「見出しテキスト」のラベルが付いたボタン 
+
+
+
+
+
+What Adding a Role Does Not Do
+ロールの追加ではできないこと
+
+
+Adding an ARIA role will not make an element look or act differently for people not using assistive technology. It does not change the behaviors, states and properties of the host element but only the native role semantics.
+ARIA のロールを追加しても、支援技術を使用していない人にとって、要素の外観や動作が変わることはありません。 ホスト要素の振る舞い、状態、プロパティは変更されませんが、ネイティブなロールの意味論のみが変更されます。
+
+For example, this code in the HTML tree:
+たとえば、HTML ツリーのこのコードは：
+
+<button role=heading aria-level=1>text</button>
+<button role=heading aria-level=1>テキスト</button>
+
+Becomes this in the accessibility tree:
+アクセシビリティツリーではこのようになります：
+
+a heading
+見出し
+
+But it can still be pressed, it is still in the default tab order, still looks like a button and still triggers any associated actions when pressed. That's why it is an HTML5 conformance error to change a button into a heading.
+ただし、押すことはできますし、デフォルトのタブ順序のままで、ボタンのように見え、押すと関連するアクションがトリガーされます。 そのため、ボタンを見出しに変更するのは HTML5 適合性エラーです。
+
+Note: Changing the role of an element does not add behaviors, properties or states to the role used. ARIA does not change the way it looks or acts in a browser. For instance, when links are used to behave like buttons, adding role=button alone is not sufficient. It will also be necessary to make act like a button, by including a key event handler that listens for the space key which native buttons do, because native buttons can be activated using the enter key or the spacebar.
+注：要素のロールを変更しても、使用されるロールに振る舞い、プロパティ、または状態は追加されません。 ARIA は、ブラウザーでの外観や動作を変更しません。 たとえば、リンクがボタンのように振る舞うために使用される場合、role=button を追加するだけでは不十分です。 ネイティブなボタンは Enter キーまたはスペースバーを使用してアクティブ化できるため、ネイティブなボタンが行うスペースキーをリッスンするキーイベントハンドラーを含めることにより、ボタンのように動作させる必要もあります。
+
+
+
+
+
+2.7 Add ARIA Inline or via Script?
+2.7 ARIA をインラインで追加しますか、それともスクリプトで追加しますか？
+
+If the ARIA role or aria-* attribute does not rely on scripting to provide interaction behavior, then it is safe to include the ARIA markup inline. For example, it is fine to add ARIA landmark roles or ARIA labeling and describing attributes inline.
+ARIA のロールまたは aria-* 属性が相互作用の振る舞いを提供するためにスクリプトに依存していない場合は、ARIA マークアップをインラインで含めるのが安全です。 たとえば、ARIA ランドマークロールまたは ARIA のラベル付けと説明の属性をインラインで追加することは問題ありません。
+
+If the content and interaction is only supported in a scripting-enabled browsing context, i.e. Google docs (its applications require JavaScript enabled to work), it is also safe to include the ARIA markup inline as the application simply will not work (for anyone) without JavaScript enabled.
+コンテンツとの相互作用がスクリプト対応の閲覧コンテキストでのみサポートされている場合、つまり Google ドキュメント（アプリケーションが機能するには JavaScript が有効になっている必要があります）の場合、JavaScript が有効になっていないと（誰にとっても）アプリケーションは単に機能しないため、ARIA マークアップをインラインで含めても安全です。
+
+Otherwise insert, change and remove ARIA via scripting. For instance, a collapsed section of a tree widget might look like this:
+それ以外の場合は、スクリプトを使用して ARIA を挿入、変更、および削除します。 たとえば、ツリーウィジェットの折りたたまれたセクションは次のようになります。 
+
+<li role=treeitem aria-expanded=false ...
+
+When the user opens the section, it is changed to this using JavaScript :
+ユーザーがセクションを開くと、JavaScript を使用してこれに変更されます。
+
+<li role=treeitem aria-expanded=true ...
+
+
+
+
+
+2.8 ARIA Validation
+2.8 ARIA 検証
+
+The easiest method is to use the HTML5 DOCTYPE with ARIA markup and validate using the W3C Nu Markup Checker. ARIA works equally well with any other DOCTYPE, but validation tools will produce errors when they encounter ARIA markup as the associated DTDs have not been updated to recognize ARIA markup and it is unlikely they ever will be.
+最も簡単な方法は、ARIA マークアップで HTML5 DOCTYPE を使用し、W3C Nu マークアップチェッカーを使用して検証することです。 ARIA は他の DOCTYPE でも同様に機能しますが、関連する DTD が ARIA マークアップを認識するように更新されておらず、更新される可能性が低いため、検証ツールは ARIA マークアップに遭遇するとエラーを生成します。
+
+These validation errors in versions of HTML prior to HTML5 are in no way indicative of ARIA creating any real world accessibility problems nor do they mean there will be a negative user experience. They are merely the result of old automated validation tests that do not accommodate ARIA accessibility annotations.
+HTML5 より前のバージョンの HTML でのこれらの検証エラーは、ARIA が実際のアクセシビリティの問題を引き起こしていることを示すものではなく、ユーザーエクスペリエンスが低下することを意味するものでもありません。 これらは、ARIA アクセシビリティアノテーションに対応していない古い自動検証テストの結果にすぎません。
+
+Note: The W3C Nu Markup Checker support for ARIA checking is a work in progress, so cannot be wholly relied upon (though it is pretty darn good!) to provide the correct results. It is recommended that if you encounter a result that conflicts with the ARIA conformance requirements in the ARIA specification or the HTML specification, please raise an issue.
+注：ARIA チェックに対する W3C Nu マークアップチェッカーのサポートは進行中の作業であるため、正しい結果を提供するために完全に信頼することはできません（かなり良いですが！）。 ARIA 仕様または HTML 仕様の ARIA 適合性要件と矛盾する結果が発生した場合は、問題を提起することをお勧めします。
+
+
+
+
+
+2.9 Use of Role=presentation or Role=none
+2.9 role=presentation または role=none の使用
+
+role=presentation, or its synonym role=none, removes the semantics from the element it is on.
+role=presentation またはその同義語 role=none は、それが存在する要素から意味論を削除します。 
+
+For example, this code in the HTML tree:
+たとえば、HTML ツリーのこのコードは：
+
+<h1 role="presentation">text</h1>
+<h1 role="presentation">テキスト</h1>
+
+
+Becomes this in the accessibility tree:
+アクセシビリティツリーではこのようになります：
+
+text, no heading
+テキスト、見出しでない
+
+
+In other words, it is just reported in the accessibility tree as a text string with no semantic meaning.
+つまり、意味論的な意味を持たないテキスト文字列としてアクセシビリティツリーに報告されるだけです。
+
+For elements with no required children, any elements nested inside the element with role=presentation/none preserve their semantics.
+子を必要としない要素の場合、role=presentation / none の要素内にネストされた要素は、意味論を保持します。 
+
+For example, this code in the HTML tree:
+たとえば、HTML ツリーのこのコードは：
+
+<h1 role="presentation"><abbr>API</abbr></h1>
+
+
+Becomes this in the accessibility tree:
+アクセシビリティツリーではこのようになります：
+
+abbr with text of API
+API というテキストを持つ略語
+
+
+For elements with required children (such as ul or table) any required child elements nested inside the element with role=presentation/none also have their semantics removed.
+子を必要とする要素（ul や table など）の場合、role=presentation / none の要素内にネストされた必須の子要素も、意味論が削除されます。
+
+For example, this code in the HTML tree:
+たとえば、HTML ツリーのこのコードは：
+
+<table role="presentation">
+
+  <tr>
+
+    <td>
+
+      <abbr>API</abbr>
+
+    </td>
+
+  </tr>
+
+</table>
+
+
+Becomes this in the accessibility tree:
+アクセシビリティツリーではこのようになります：
+
+abbr with text of API
+API というテキストを持つ略語
+
+
+Note: Any elements that are not required children of the element with a role=presentation/none keep their semantics. This includes other elements with required children such as nested lists or nested tables.
+注：role=presentation / none を持つ要素の子として必須ではない要素は、意味論を保持します。 これには、ネストされたリストやネストされたテーブルなど、必須の子を持つ他の要素が含まれます。
+
+For example this code, consisting of a table with another table nested inside it, in the HTML tree:
+たとえば、HTML ツリー内で別のテーブルがネストされたテーブルで構成されるこのコードは： 
+
+<table>
+
+ <tr>
+
+  <td>
+
+    <table>
+
+     <tr>
+
+      <td>
+
+       <abbr>API</abbr>
+
+      </td>
+
+     </tr>
+
+    </table>
+
+  </td>
+
+ </tr>
+
+</table>
+
+
+Becomes this in the accessibility tree:
+アクセシビリティツリーではこのようになります：
+
+outer ttable with 1 row and 1 cell containg another table with 1 row and 1 cell containing an abbr element.
+1行1セルの外側のテーブルには、abbr 要素を含む1行1セルの別のテーブルが含まれています。
+
+
+By adding role=presentation/none to the outer table element, this code in the HTML tree:
+外側のテーブル要素に role = presentation / none を追加することにより、HTML ツリーのこのコードは：
+
+<table role="presentation">
+
+ <tr>
+
+  <td>
+
+    <table>
+
+     <tr>
+
+      <td>
+
+       <abbr>API</abbr>
+
+      </td>
+
+     </tr>
+
+    </table>
+
+  </td>
+
+ </tr>
+
+</table>
+
+
+Becomes this in the accessibility tree, the semantics of the outer table including its required children (the tr and td elements) are removed by the addition of role=presentation/none:
+アクセシビリティツリーでこれになり、必要な子（tr 要素と td 要素）を含む外側のテーブルの意味論は、role=presentation / none の追加によって削除されて、アクセシビリティツリーではこのようになります：
+
+table with 1 row and 1 cell containing an abbr element
+abbr 要素を含む1行1セルのテーブル 
+
+
+
+
+
+Examples of role=presentation/none Use
+role=presentation / none の使用例
+
+Use in fixing an incorrect table structure
+誤ったテーブル構造の修正に使用
+
+<div aria-readonly="true" role="grid">
+
+    <table role="presentation">
+
+    <tbody><tr role="row">
+
+    <th role="columnheader">Dog Names</th>
+
+    <th role="columnheader">Cat Names</th>
+
+    <th role="columnheader">Cow names</th>
+
+    </tr>
+
+    </tbody></table>
+
+    <table role="none">
+
+    <tbody><tr role="row">
+
+    <td role="gridcell">Fido</td>
+
+    <td role="gridcell">Whiskers</td>
+
+    <td role="gridcell">Clarabella</td>
+
+    </tr>
+
+    <tr role="row">
+
+    <td role="gridcell">Woofie</td>
+
+    <td role="gridcell">Claws</td>
+
+    <td role="gridcell">Glenn</td>
+
+    </tr>
+
+    </tbody></table>
+
+    </div>
+
+
+
+
+
+2.10 Practical Support: aria-label, aria-labelledby and aria-describedby
+2.10 実用的なサポート：aria-label、aria-labelledby および aria-describedby
+
+Here is a summary as of this writing:
+この記事の執筆時点での要約は次のとおりです。
+
+    aria-labelledby and aria-describedby are robustly supported for interactive content elements such as links and form controls including the many input types.
+    aria-labelledby と aria-describedby は、リンクや多くの入力タイプを含むフォームコントロールなどの相互作用的なコンテンツ要素に対して堅牢にサポートされています。
+
+    For most assistive technology it's fine to use aria-label or aria-labelledby on the <nav>, and <main> elements but not on <footer>, <section>, <article>, or <header> .
+    ほとんどの支援技術では、<nav> 要素と <main> 要素で aria-label や aria-labelledby を使用できますが、<footer>、<section>、<article>、または <header> では使用できません。
+
+    There is mixed support for aria-label or aria-labelledby on <aside>.
+    <aside> では、aria-label または aria-labelledby のサポートが混在しています。
+
+    Talkback on Android overrides the content of all landmarks with aria-label or aria-labelledby.
+    Android の Talkback は、すべてのランドマークのコンテンツを aria-label または aria-labelledby で上書きします。
+
+    Its fine to use aria-label or aria-labelledby on div elements with role=navigation, role=search, role=main, JAWS doesn't support them on role=banner, role=complementary, role=contentinfo. NVDA, VoiceOver, and Talkback are OK
+    role=navigation、role=search、role=main の div 要素で aria-label または aria-labelledby を使用するのは問題ありませんが、JAWS は role=banner、role=complementary、role=contentinfo でそれらをサポートしていません。 NVDA、VoiceOver、および Talkback は OK です
+
+    aria-label, aria-labelledby and aria-describedby work well on table, th and td elements with a few exceptions for NVDA, VoiceOver on iOS, and Talkback discussed in next section.
+    aria-label、aria-labelledby、および aria-describedby は、次のセクションで説明する NVDA、iOS の VoiceOver、および Talkback のいくつかの例外を除いて、table、th、および td 要素でうまく機能します。
+
+    Don't use aria-label or aria-labelledby on any heading elements because it overrides them on NVDA, VoiceOver and Talkback. JAWS ignores them.
+    NVDA、VoiceOver、および Talkback は、それらをオーバーライドするため、見出し要素で aria-label または aria-labelledby を使用しないでください。 JAWS はそれらを無視します。
+
+    Don't use aria-label or aria-labelledby on any other non-interactive content such as p, legend, li, or ul, because it is ignored.
+    aria-label または aria-labelledby は、無視されるため、p、legend、li、ul などの相互作用的でないコンテンツには使用しないでください。
+
+    Don't use aria-label or aria-labelledby on a span or div unless its given a role. When aria-label or aria-labelledby are on interactive roles (such as a link or button) or an img role, they override the contents of the div or span. Other roles besides Landmarks (discussed above) are ignored.
+    ロールが与えられていない限り、span や div で aria-label や aria-labelledby を使用しないでください。 aria-label や aria-labelledby が相互作用的なロール（リンクやボタンなど）または img ロールにある場合、それらは div または span のコンテンツをオーバーライドします。 ランドマーク（上記で説明）以外のロールは無視されます。
+
+    aria-describedby on a span or div will be ignored by NVDA and VoiceOver unless given an interactive role, an image or landmark role. JAWS and Talkback are OK.
+    span または div の aria-describedby は、相互作用的なロール、画像やランドマークのロールが与えられていない限り、NVDA および VoiceOver によって無視されます。 JAWS と Talkback は OK です。
+
+    aria-describedby will be ignored by NVDA and VoiceOver on any other static content. JAWS and Talkback are OK.
+    aria-describedby は、他の静的コンテンツでは NVDA と VoiceOver によって無視されます。 JAWS と Talkback は OK です。
+
+All of the above also work the same in iframe elements. Both aria-label and aria-labelledby have the same behaviour with screen readers and the Accessibility API, but aria-label should be reserved for when there is no visible text on the page to reference or when keeping track of id values would be too difficult.
+上記のすべては、iframe 要素でも同じように機能します。 aria-label と aria-labelledby はどちらも、スクリーンリーダーとアクセシビリティ APIで同じ振る舞いをしますが、参照するページに表示されるテキストがない場合、または id 値を追跡するのが難しすぎる場合に備えて、aria-label を予約する必要があります。
+
+
+
+
+
+Internet explorer notes on aria-labelledby, aria-label, and aria-describedby
+aria-labelledby、aria-label、および aria-describedby に関する Internet Explorer のメモ
+
+In Internet Explorer, if you use aria-labelledby with multiple id references or aria-describedby with single or multiple id references, the referenced elements must be what Microsoft terms as accessible HTML elements.
+Internet Explorer で、複数の id 参照を使用して aria-labelledby を使用する場合、または単一または複数の id 参照を使用して aria-describedby を使用する場合、参照される要素は、Microsoft がアクセス可能な HTML 要素と呼ぶものである必要があります。
+
+The following example of aria-labelledby with multiple references uses a span with a tabindex=-1 added. Refer to Making Non accessible Elements Accessible.
+次の複数の参照を持つ aria-labelledby の例では、tabindex=-1 が追加されたスパンを使用しています。 「アクセスできない要素をアクセス可能にする」を参照してください。
+
+<label id="l1" for="f3">label text</label>
+<label id="l1" for="f3">ラベルテキスト</label>
+
+<input type="text" id="f3" aria-labelledby="l1 l2" >
+
+<p>other content</p>
+<p>その他のコンテンツ</p>
+
+<span tabindex="-1" id="l2" >more label text</span>
+<span tabindex="-1" id="l2" >ラベルテキストの追加</span>
+
+Elements also become accessible HTML elements in Internet Explorer when the element has an ARIA role. For example:
+要素に ARIA ロールがある場合、要素は Internet Explorer でアクセス可能な HTML 要素にもなります。 例えば：
+
+<div aria-describedby="test">text</div>
+<div aria-describedby="test">テキスト</div>
+
+<div id="test" role="tooltip" >tooltip text</div>
+<div id="test" role="tooltip" >ツールチップテキスト</div>
+
+
+
+
+
+Hiding Content Has No Effect on Accessible Name or Description Calculation
+コンテンツを非表示にしても、アクセス可能な名前や説明の計算には影響しません
+
+By design, hiding the content (using CSS display:none or visibility:hidden or the HTML hidden attribute) of the element(s) referenced by aria-labelledby and aria-describedby does not stop the content from being used to provide the name/description.
+設計上、aria-labelledby および aria-describedby によって参照される要素のコンテンツを（CSS display:none または visibility:hidden またはHTML hidden 属性を使用して）非表示にしても、名前や説明の提供にコンテンツが使用されるのを防ぐことはできません。
+
+    By default, assistive technologies do not relay hidden information, but an author can explicitly override that and include hidden text as part of the accessible name or accessible description by using aria-labelledby or aria-describedby.
+    デフォルトでは、支援技術は非表示の情報を中継しませんが、作成者はそれを明示的にオーバーライドし、aria-labelledby または aria-describedby を使用して、アクセス可能な名前またはアクセス可能な説明の一部として非表示のテキストを含めることができます。
+
+    - Accessible Name and Description: Computation and API Mappings 1.1
+    - アクセス可能な名前と説明：計算と API マッピング 1.1
+
+In the following example the description will be available to assistive technology users in both states:
+次の例では、次の両方の状態の支援技術ユーザーが説明を利用できます。
+
+Non-error state: message visually hidden
+エラー以外の状態：メッセージが視覚的に非表示
+
+<label>Name <input type="text"  aria-describedby="error-message"></label>
+<label>名前 <input type="text"  aria-describedby="error-message"></label>
+
+<span id="error-message" style="display:none">
+
+You have provided an incorrect name</span>
+間違った名前を指定しました</span>
+
+Note: addition of aria-hidden=true to the referenced element makes no difference:
+注：次のように、参照される要素に aria-hidden=true を追加しても、違いはありません。
+
+<span id="error-message" style="display:none" aria-hidden="true">
+
+ You have provided an incorrect name</span>
+ 間違った名前を指定しました</span>
+
+Error state: message visible
+エラー状態：メッセージが表示されます
+
+<span id="error-message" style="display:inline">
+
+You have provided an incorrect name</span>
+間違った名前を指定しました</span>
+
+
+
+
+
+Methods to Provide Context Sensitive Name/Description Text
+コンテキストに敏感な名前や説明のテキストを提供する方法
+
+If you want to associate context sensitive text, such as an error message, you can:
+エラーメッセージなどの状況依存テキストを関連付ける場合は、次のことができます。
+
+    Add the referenced element to the DOM when the error state occurs.
+    エラー状態が発生したときに、参照される要素を DOM に追加します。
+
+    Add the error text as child of the referenced element in the DOM when the error state occurs.
+    エラー状態が発生したときに、DOM 内の参照される要素の子としてエラーテキストを追加します。
+
+    Add the id reference in the DOM to the aria-labelledby/aria-describedby attribute, when the error state occurs.
+    エラー状態が発生したときに、DOM の id 参照を aria-labelledby 属性や aria-describedby 属性に追加します。 
+
+
+
+
+
+2.10.1 The Effect of Accessible Name on Background Images
+2.10.1 アクセス可能な名前が背景画像に与える影響
+
+Try to avoid presenting informational images in CSS backgrounds. If your image contains important information for the end user, then it should be provided in an HTML <img> tag with proper alt text. The CSS Spec says this:
+CSS 背景に情報提供の画像を表示しないようにしてください。 画像にエンドユーザーにとって重要な情報が含まれている場合は、適切な代替テキストを含む HTML <img> タグで提供する必要があります。 CSS 仕様は次のように述べています。
+
+    For accessibility reasons, authors should not use background images as the sole method of conveying important information. See WCAG failure #F3 [WCAG20] . Images are not accessible in non-graphical presentations, and background images specifically might be turned off in high-contrast display modes. Source . 
+    アクセシビリティ上の理由から、作成者は重要な情報を伝達する唯一の方法として背景画像を使用しないでください。 WCAG failure #F3 [WCAG20] を参照してください。 グラフィカルでない表現方法では画像にアクセスできません。 特に、高コントラスト表示モードでは背景画像がオフになる場合があります。 ソース。
+
+
+
+
+
+What If You Can't Avoid Using CSS Images or If You Want Alternate Text for "Non-important" Ambient Photos, Etc.?
+CSS 画像の使用を避けられない場合、または「重要でない」周囲を取り巻く写真などの代替テキストが必要な場合はどうなりますか？
+
+The CSS spec makes its discouragement of CSS informational background images a "SHOULD" not a "MUST" because there are times when visual design or existing code makes it difficult to change it to an HTML image without redesigning the front-end. Other times the author may want to provide alternate text for an ambient image that is not "important" to the understanding of the content but as a courtesy to screen reader users who prefer knowing what is in the image. Here is a detailed article on ambient images vs pure decoration vs informational images.
+CSS 仕様では、CSS 情報提供背景画像を「MUST」ではなく「SHOULD」で推奨していません。 これは、視覚的なデザインや既存のコードにより、フロントエンドを再設計せずに HTML 画像に変更することが難しい場合があるためです。 また、作成者は、コンテンツの理解にとって「重要」ではなくても、画像の内容を知りたいスクリーンリーダーのユーザーへの礼儀として、周囲を取り巻く画像に代替テキストを提供したい場合があります。 これは、周囲を取り巻く画像と純粋な装飾と情報提供画像に関する詳細な記事です。
+
+
+
+
+
+When Providing Alternate Text for the CSS Image, There Are Number of Considerations
+CSS 画像の代替テキストを提供する場合、いくつかの考慮事項があります
+
+If the <div> tag has any content inside it, then a role="img" and aria-label could obscure the inside content because of the accessible name calculation, or the assistive technology might just ignore the aria-label.
+<div> タグ内にコンテンツが含まれている場合、role="img" と aria-label は、アクセス可能な名前の計算のために内部コンテンツを覆い隠すか、支援技術が aria-label を無視する可能性があります。
+
+So do not put the CSS background image inside a <div> that contains any content. It's best to use an empty <span> and an aria-label with role="img"
+したがって、CSS 背景画像をコンテンツを含む <div> 内に置かないでください。 空の <span> と role="img" の aria-label を使用することをお勧めします
+
+Do this:
+このようにしてください：
+
+<div>
+
+<span class="background-image" role="img" aria-label="[place alt text here]"> </span>
+<span class="background-image" role="img" aria-label="[ここに代替テキストを配置します]"> </span>
+
+[all the rest of my content]
+[残りのすべてのコンテンツ]
+
+</div>
+
+Don't do this:
+このようにしないでください：
+
+<div class="background-image" role="img" aria-label="blah blah blah">
+
+[all the rest of my content]
+[残りのすべてのコンテンツ]
+
+</div>
+
+
+
+
+
+What If the Author Has to Have a CSS Image on a <div> that Contains Content?
+作成者がコンテンツを含む <div> に CSS 画像を持っている必要がある場合はどうなりますか？
+
+Sometimes there are dependencies in the CSS stack and messing with it can upset the design and layout of the site, or a request to change the code could get hung up in approval from various stakeholders. In cases where the author has to have the background image in the <div> that wraps up other content, then here is a fallback.
+CSS スタックに依存関係があり、それをいじるとサイトのデザインとレイアウトが混乱したり、コードを変更するリクエストがさまざまな利害関係者の承認を得られなくなったりすることがあります。 作成者が他のコンテンツをまとめる背景画像を <div> に含める必要がある場合は、ここにフォールバックがあります。 
+
+<div class="background-image" >
+
+<span role="img" aria-label="[place alt text here]"> </span>
+<span role="img" aria-label="[ここに代替テキストを配置します]"> </span>
+
+[all the rest of my content]
+[残りのすべてのコンテンツ]
+
+</div>
+
+This is a hack because semantically the alternate text is not on the element that actually has the image. However, from a screen reader perspective the <div> with the background image is ignored and so placing the <span> directly following it will provide that information in a way that will seem as if the alternate text was in the same place as the background image.
+意味論的には代替テキストが実際に画像を持っている要素上にないため、これはハックです。 ただし、スクリーンリーダーの観点からは、背景画像を含む <div> は無視されるため、その直後に <span> を配置すると、代替テキストが背景画像と同じ場所にあるかのように情報が提供されます。 
+
+
+
+
+
+2.11 Using ARIA role=application
+2.11 ARIA role=application の使用
+
+
+
+
+How Does role="application" Affect a Screen Reader?
+role="application" はスクリーンリーダーにどのように影響しますか？
+
+On many popular screen readers today, most keystrokes are captured by the screen reader and not the web page when the user is in browse mode. This is necessary for efficient navigation of a page. As of this writing, when application mode is set, many screen readers stop intercepting keystrokes, and pass all keystrokes directly to the browser. Then the user won't be able to navigate the page as easily. For instance they won't be able to skip around the page by headings or read a paragraph of static text line-by-line. However, several screen readers do not behave differently when there is an application role set.
+今日の多くの一般的なスクリーンリーダーでは、ほとんどのキーストロークは、ユーザーが閲覧モードのときにウェブページではなく、スクリーンリーダーによってキャプチャーされます。 これは、ページを効率的にナビゲートするために必要です。 この記事の執筆時点では、アプリケーションモードが設定されている場合、多くのスクリーンリーダーはキーストロークの傍受を停止し、すべてのキーストロークをブラウザーに直接渡します。 そうすると、ユーザーはページを簡単にナビゲートできなくなります。 たとえば、見出しでページをスキップしたり、静的テキストの段落を1行ずつ読んだりすることはできません。 ただし、アプリケーションロールが設定されていても、いくつかのスクリーンリーダーは異なる振る舞いをしません。 
+
+
+
+
+
+So When Should I Use It, and When Not?
+では、いつ使用する必要があり、いつ使用しないのですか？
+
+In determining when to use role=application, one should consider, among other things, the advantages of screen reader keyboard shortcuts weighed against the loss of those features. It generally should not be used, and if it is, usability testing with screen reader users should be conducted.
+role=application をいつ使用するかを決定する際には、とりわけ、スクリーンリーダーのキーボードショートカットの利点とそれらの機能の喪失を比較検討する必要があります。 一般的には使用すべきではなく、使用する場合は、スクリーンリーダーのユーザーによるユーザビリティテストを実施する必要があります。
+
+You do not use role="application" if a set of controls only contains these widgets, that are all part of standard HTML. This also applies if you mark them up and create an interaction model using WAI-ARIA roles instead of standard HTML widgets:
+コントロールのセットに次のウィジェットのみが含まれている場合は、role="application" を使用しません。 これらのウィジェットはすべて、標準 HTML の一部です。 これは、それらをマークアップし、標準の HTML ウィジェットの代わりに WAI-ARIA ロールを使用して相互作用モデルを作成する場合にも当てはまります。
+
+NOTE: It's not recommended that authors develop custom text input widgets. It's almost always best to use the native inputs for these.
+注：作成者がカスタムテキスト入力ウィジェットを開発することはお勧めしません。 ほとんどの場合、これらにはネイティブ入力を使用するのが最善です。
+
+    text box. This also applies to password, search, tel and other newer input type derivatives
+    テキストボックス。 これは、パスワード（password）、検索（search）、電話番号（tel）、およびその他の新しい入力タイプの派生物にも適用されます 
+
+    textarea
+    テキストエリア
+
+    check box
+    チェックボックス
+
+    button
+    ボタン
+
+    radio button (usually inside a fieldset/legend element wrapper)
+    ラジオボタン（通常はフィールドセット/凡例要素ラッパー内）
+
+    select + option(s)
+    選択とオプション
+
+    links, paragraphs, headings, and other elements that are classic/native to documents on the Web.
+    リンク、段落、見出し、およびウェブ上の文書に欠かせない（古典的/ネイティブなその他の）要素。 
+
+You also do not use the application role if your widget is one of the following more dynamic and non-native widgets. Screen readers and other assistive technologies that support WAI-ARIA will support switching between browse and focus modes for these by default too:
+また、ウィジェットが次の動的であるがネイティブでないウィジェットのいずれかである場合は、アプリケーションロールを使用しません。 WAI-ARIA をサポートするスクリーンリーダーやその他の支援技術は、デフォルトでこれらの閲覧モードとフォーカスモードの切り替えもサポートします。
+
+    tree view
+    ツリービュー
+
+    slider
+    スライダー
+
+    table that has focusable items and is being navigated via the arrow keys, for example, a list of e-mail messages where you provide specific information. Other examples are interactive grids, tree grids, etc.
+    フォーカス可能なアイテムがあり、矢印キーを介してナビゲートされているテーブル。 たとえば、特定の情報を提供する電子メールメッセージのリスト。 他の例は、相互作用的なグリッド、ツリーグリッドなどです。
+
+    A list of tabs (tab, tablist) where the user selects tabs via the left and right arrow keys. Remember that you have to implement the keyboard navigation model for this!
+    ユーザーが左右の矢印キーを使用してタブを選択するタブのリスト（タブ、タブリスト）。 このためにキーボードナビゲーションモデルを実装する必要があることを忘れないでください！
+
+    dialog and alertdialog. These causes some screen readers to go into a sort of application mode (implicitly) once focus moves to a control inside them. Note that for these to work best, set the aria-describedby attribute of the element whose role is dialog to the id of the text that explains the dialog's purpose, and set focus to the first interactive control when you open it:
+    ダイアログとアラートダイアログ (alertdialog) 。 これらにより、フォーカスが内部のコントロールに移動すると、一部のスクリーンリーダーが（暗黙的に）一種のアプリケーションモードになります。 これらを最適に機能させるには、ロールがダイアログである要素の aria-describedby 属性を、ダイアログの目的を説明するテキストの id に設定し、ダイアログを開いたときに最初の相互作用的なコントロールにフォーカスを設定することに注意してください。
+
+    <div role="dialog" aria-label="login" aria-describedby="log1">
+
+    <div id="log1" tabindex="-1">Provide user name and password to login.</div>
+    <div id="log1" tabindex="-1">ログインするためのユーザー名とパスワードを入力します。</div>
+
+    ...
+
+    ...
+
+    </div>
+
+    toolbar and toolbar buttons, menus and menu items, and similar.
+    ツールバーとツールバーボタン、メニューとメニュー項目など。
+
+You only want to use role=application if the content you’re providing consists of only focusable, interactive controls, and of those, mostly advanced widgets that emulate a real desktop application. Note that, despite many things now being called a web application, most of the content these web applications work with are still document-based information, be it Facebook posts and comments, blogs, Twitter feeds, or even accordions that show and hide certain types of information dynamically. We primarily still deal with documents on the web, even though they may have a desktop-ish feel to them on the surface.
+提供するコンテンツが、フォーカス可能で相互作用的なコントロールと、実際のデスクトップアプリケーションをエミュレートする高度なウィジェットのみで構成されている場合にのみ、role=application を使用する必要があります。 現在ウェブアプリケーションと呼ばれているものがたくさんありますが、これらのウェブアプリケーションが処理するコンテンツのほとんどは、Facebook の投稿やコメント、ブログ、Twitter のフィード、または動的に情報の特定の種類を表示および非表示にするアコーディオンなど、依然として文書ベースの情報であることに注意してください。 表面上はデスクトップっぽい感じがするかもしれませんが、私たちは主にウェブ上の文書を扱います。
+
+It is not necessary to use role=application to have control-specific keyboard shortcuts while the user is in forms (focus) mode on their screen reader. For instance, a custom control with ARIA role=listbox can easily capture all keys pressed including arrow keys, while the user is interacting with it.
+ユーザーがスクリーンリーダーでフォーム（フォーカス）モードになっているときに、コントロール固有のキーボードショートカットを使用するために role=application を使用する必要はありません。 たとえば、ARIA role=listbox を使用したカスタムコントロールは、ユーザーが相互作用しているときに、矢印キーを含む押されたすべてのキーを簡単にキャプチャーできます。
+
+In short: The times when you actually will use role=application will probably be very rare!
+要するに、実際に role=application を使用することは、おそらく非常にまれです！
+
+
+
+
+
+So Where Do I Put role=application in the Rare Cases It Is Useful?
+では、まれなケースで role=application をどこに置くと便利ですか？
+
+Put it on the closest containing element of your widget, for example, the parent div of your element that is your outer most widget element. If that outer div wraps only widgets that need the application interaction model, this will make sure focus mode is switched off once the user tabs out of this widget.
+ウィジェットの最も近い包含要素、たとえば、最も外側のウィジェット要素である要素の親の div に配置します。 その外側の div がアプリケーション相互作用モデルを必要とするウィジェットのみをラップする場合、これにより、ユーザーがこのウィジェットから Tab で外に移動すると、フォーカスモードがオフになります。
+
+Only put it on the body element if your page consists solely of a widget or set of widgets that all need the focus mode to be turned on. If you have a majority of these widgets, but also have something you want the user to browse, use role=document on the outermost element of this document-ish part of the page. It is the counterpart to role=application and will allow you to tell the screen reader to use browse mode for this part. Also make this element tabbable by setting a tabindex=0 on it so the user has a chance to reach it.
+ページがウィジェットのみ、またはすべてフォーカスモードをオンにする必要があるウィジェットのセットのみで構成されている場合にのみ、body 要素に配置してください。 これらのウィジェットが大部分であり、ユーザーに閲覧してもらいたいものがある場合は、ページのこの文書的な部分の最も外側の要素で role=document を使用します。 これは role=application に対応し、この部分に閲覧モードを使用するようにスクリーンリーダーに指示できます。 また、tabindex=0 を設定してこの要素をタブ可能にし、ユーザーがこの要素に到達する機会を得られるようにします。
+
+As a rule of thumb: If your page consists of over 90 or even 95 percent of widgets, role=application may be appropriate. Even then, find someone knowledgeable who can actually test two versions of this: One with and one without role=application set to see which model works best.
+経験則として：ページがウィジェットの 90% 以上、さらには 95% で構成されている場合は、role=application が適切な場合があります。 それでも、2つのバージョンを実際にテストできる知識のある人を見つけてください。 1つは role=application が設定されているものと、もう1つはないもので、どちらのモデルが最適に機能するかを確認します。
+
+NEVER put role=application on a widely containing element such as body if your page consists mostly of traditional widgets or page elements such as links that the user does not have to interact with in focus mode. This will cause huge headaches for any assistive technology user trying to use your site/application.
+ページが従来のウィジェットや、ユーザーがフォーカスモードで相互作用する必要のないリンクなどのページ要素で主に構成されている場合は、body などの広範囲を含む要素に role=application を配置しないでください。 これは、サイトやアプリケーションを使用しようとする支援技術ユーザーにとって大きな頭痛の種になります。
+
+For further information on the use of role=application refer to If you use the WAI-ARIA role "application", please do so wisely!
+role=application の使用の詳細については、「WAI-ARIA ロール "application" を使用する場合は、賢明に使用してください！（英語）」を参照してください。
+
+
+
+
+
+2.12 Custom Control Accessible Development Checklist:
+2.12 カスタムコントロールでアクセス可能な開発のチェックリスト：
+
+Check your custom control against the following design considerations. If the answer to any of them is 'No' then consider fixing before release or at least documenting the issues to inform other developers that your custom control will not be usable by some people due to limited accessibility support.
+次の設計上の考慮事項に対してカスタムコントロールを確認してください。 それらのいずれかの答えが「いいえ」の場合は、リリース前に修正するか、少なくとも問題を文書化して、アクセシビリティのサポートが制限されているためにカスタムコントロールを使用できない人がいることを他の開発者に通知することを検討してください。 
+
+
+Custom Control Design Considerations design Consideration 	description 	Yes/No
+カスタムコントロール設計の考慮事項 設計の考慮事項 	説明 	はい・いいえ
+
+
+focusable 	Can you get to the control via the keyboard? Refer to Providing Keyboard Focus
+フォーカス可能 	キーボードからコントロールにアクセスできますか？ キーボードフォーカスの提供を参照してください
+
+	
+keyboard operable 	Can you use the control with the keyboard? Refer to Keyboard Navigation 	
+キーボード操作可能 	キーボードでコントロールを使用できますか？ キーボードナビゲーションを参照してください
+
+
+touch operable 	Can you use the control with touch gestures? With assistive technology enabled? 	
+タッチ操作可能 	タッチジェスチャーでコントロールを使用できますか？ 支援技術を有効にしていますか？
+
+
+expected operation 	Can you operate the control using the standard keys (Refer to ARIA Widget Design Patterns) and/or touch gestures for the control type? 	
+想定される操作 	標準のキー（ARIA ウィジェットのデザインパターンを参照）やコントロールタイプのタッチジェスチャを使用してコントロールを操作できますか？
+
+
+clear indication of focus 	Can you easily see it when the control has focus? Refer to Visible Focus (WCAG2) 	
+フォーカスを明確に示す 	コントロールにフォーカスがあると簡単にわかりますか？ Visible Focus (WCAG2) を参照してください
+
+
+label 	The control has a text label that is exposed as an accessible name in accessibility APIs 	
+ラベル 	コントロールには、アクセシビリティ API でアクセス可能な名前として公開されるテキストラベルがあります
+
+
+role 	The control has an appropriate role exposed in accessibility APIs 	
+ロール 	コントロールには、アクセシビリティ API で公開されている適切なロールがあります 	
+
+
+states and properties 	The control has any UI states and properties that it has exposed in accessibility APIs 	
+状態とプロパティ 	コントロールには、アクセシビリティ API で公開されている UI の状態とプロパティがあります
+
+
+color contrast 	The control label/description/icon is perceivable/usable for low vision users (Use a color contrast checker.) 	
+カラーコントラスト 	コントロールのラベル/説明/アイコンは、弱視のユーザーにとって認識可能/使用可能です（カラーコントラストチェッカーを使用してください）。
+
+
+high contrast mode 	The control is perceivable/usable when High Contrast Mode is enabled (e.g. Windows HC mode) 	
+ハイコントラストモード 	ハイコントラストモードが有効になっている場合（Windows HC モードなど）、コントロールは認識可能/使用可能です。
+
+
+
+
+
+2.13 ARIA Adds Nothing to Default Semantics of Most HTML Elements
+2.13 ARIA は、ほとんどの HTML 要素のデフォルトの意味論に何も追加しません
+
+Note
+注意
+
+In some cases the semantics of an HTML element can be expressed by an ARIA role, state or property. This is known as the element's 'Default Implicit ARIA semantics'
+場合によっては、HTML 要素の意味論は、ARIA のロール、状態、またはプロパティで表すことができます。 これは、要素の「デフォルトの暗黙的な ARIA 意味論」として知られています。
+
+None of the elements defined in HTML4 need ARIA roles added to expose their default semantics. Adding an ARIA role is extra work for no gain and could lead to pain for you or somebody else. The new features defined in HTML5 , where implemented, now have their default semantics exposed by most browsers. The HTML Specification includes this note:
+HTML4 で定義されている要素はいずれも、デフォルトの意味論を公開するために ARIA ロールを追加する必要はありません。 ARIA のロールを追加することは、何の得にもならない余分な作業であり、あなたや他の誰かに苦痛をもたらす可能性があります。 HTML5 で定義された新機能は、実装されている場合、ほとんどのブラウザーでデフォルトの意味論が公開されるようになりました。 HTML 仕様には、次の注記が含まれています。
+
+    In the majority of cases setting an ARIA role and/or aria-* attribute that matches the default implicit ARIA semantics is unnecessary and not recommended as these properties are already set by the browser.
+     ほとんどの場合、デフォルトの暗黙的な ARIA 意味論に一致する ARIA ロールや aria-* 属性を設定する必要はなく、これらのプロパティはブラウザーによってすでに設定されているため、お勧めしません。 
+
+
+
+
+
+2.13.1 Some Examples of Redundant ARIA
+2.13.1 冗長な ARIA のいくつかの例
+
+Adding default implicit roles to interactive elements listed in the HTML5 Recommendation is a waste of time:
+次のように、HTML5 勧告にリストされている相互作用的な要素にデフォルトの暗黙的なロールを追加するのは時間の無駄です。 
+
+<button role="button">press me</button>
+<button role="button">押してください</button>
+
+Adding ARIA state or property attributes in addition to their native HTML counterparts is a waste of time:
+次のように、ネイティブの HTML 属性に加えて、ARIA の状態またはプロパティの属性を追加するのは時間の無駄です。
+
+<input type="text" required aria-required="true">
+
+<div hidden aria-hidden="true">
+
+Adding ARIA roles and states or properties to long-implemented structural elements is a waste of time:
+次のように、昔から実装されている構造的な要素に ARIA のロールと状態またはプロパティを追加することは、時間の無駄です。
+
+<h1 role="heading" aria-level="1">heading text</h1>
+<h1 role="heading" aria-level="1">見出しテキスト</h1>
+
+
+
+
+
+2.14 Aria Roles and Properties Not Available as Features in HTML
+2.14 HTML の機能として使用できない ARIA のロールとプロパティ
+
+Below are listed the ARIA roles and properties not considered to be available natively in HTML. It is clear that many roles and properties provided by ARIA, which can be used to convey information to users, are not available in HTML.
+以下に、HTML でネイティブに使用できるとは見なされない ARIA のロールとプロパティを示します。 ユーザーに情報を伝えるために使用できる ARIA によって提供される多くのロールとプロパティが HTML で利用できないことは明らかです。 
+
+
+
+
+
+2.14.1 ARIA Roles
+2.14.1 ARIA のロール
+
+    alert
+
+    alertdialog
+
+    application
+
+    directory
+
+    document
+
+    feed
+
+    grid
+
+    gridcell
+
+    group
+
+    log
+
+    marquee
+
+    menu
+
+    menubar
+
+    menuitemcheckbox
+
+    menuitemradio
+
+    none
+
+    note
+
+    presentation
+
+    scrollbar
+
+    search
+
+    status
+
+    switch
+
+    tab
+
+    tablist
+
+    tabpanel
+
+    timer
+
+    toolbar
+
+    tooltip
+
+    tree
+
+    treegrid
+
+    treeitem
+
+
+
+
+
+2.14.2 ARIA States and Properties (aria-* Attributes)
+2.14.2 ARIA の状態とプロパティ (aria-* 属性)
+
+    aria-activedescendant
+
+    aria-atomic
+
+    aria-busy (state)
+    aria-busy (状態)
+
+    aria-controls
+
+    aria-describedby
+
+    aria-dropeffect
+
+    aria-expanded (state)
+    aria-expanded (状態)
+
+    aria-flowto
+
+    aria-grabbed (state)
+    aria-grabbed (状態)
+
+    aria-haspopup
+
+    aria-hidden (state)
+    aria-hidden (状態)
+
+    aria-label
+
+    aria-labelledby
+
+    aria-level
+
+    aria-live
+
+    aria-orientation
+
+    aria-owns
+
+    aria-posinset
+
+    aria-pressed (state)
+    aria-pressed (状態)
+
+    aria-relevant
+
+    aria-setsize
+
+    aria-sort
+
+
+
+
+
+2.15 ARIA Design Patterns and Touch Device Support
+2.15 ARIA デザインパターンとタッチデバイスのサポート
+
+Warning
+警告
+
+The ARIA Design Patterns in WAI-ARIA Authoring Practices 1.1 describe how to implement custom UI elements so that they are usable by keyboard only users and understandable to users of assistive technology. Some of the ARIA design patterns currently specify, and rely on, keyboard-specific event handling. This is not supported on devices which only provide a touch screen, and has limited or no support (depending on the specific operating system) on mobile phones/tablets with an additional physical keyboard. An in progress ARIA design patterns - touch UA/AT gap analysis (Google sheet) is available (Also available as a static file in .ods format). Related WAI-ARIA Authoring Practices 1.1 issue
+WAI-ARIA Authoring Practices 1.1 の ARIA デザインパターンは、カスタム UI 要素を実装して、キーボードのみのユーザーが使用でき、支援技術のユーザーが理解できるようにする方法を説明しています。 現在、ARIA デザインパターンの一部は、キーボード固有のイベント処理を指定しており、それに依存しています。 これは、タッチスクリーンのみを提供するデバイスではサポートされておらず、追加の物理キーボードを備えた携帯電話/タブレットではサポートが制限されているか、まったくサポートされていません（特定のオペレーティングシステムによって異なります）。 進行中の ARIA デザインパターン - タッチ UA / AT ギャップ分析（Google シート）が利用可能です（.ods 形式の静的ファイルとしても利用可能）。 関連する WAI-ARIA オーサリングプラクティス 1.1 の問題 
+
+
+
+
+
+2.16 Recommendations Table:
+2.16 推奨事項の表：
+
+Refer to the Document conformance requirements for use of ARIA attributes in HTML table in the ARIA in HTML specification.
+ARIA in HTML 仕様の「HTML で ARIA 属性を使用するための文書適合性要件」の表を参照してください。 
+
+
+
+
+
+2.17 ARIA Role, State, and Property Quick Reference
+2.17 ARIA のロール、状態、およびプロパティのクイックリファレンス
+
+Refer to the Allowed ARIA roles, states and properties table in the ARIA in HTML specification.
+ARIA in HTML 仕様の「許可された ARIA のロール、状態、およびプロパティ」の表を参照してください。 
+
+
+
+
+
+A. References
+A. 参考文献
+
+
+
+
+
+A.1 Informative references
+A.1 情報的な参考文献 
+
+[HTML51]
+
+    HTML 5.1 2nd Edition. Steve Faulkner; Arron Eicholz; Travis Leithead; Alex Danilo. W3C. 3 October 2017. W3C Recommendation. URL: https://www.w3.org/TR/html51/
+
+[WAI-ARIA-1.1]
+
+    Accessible Rich Internet Applications (WAI-ARIA) 1.1. Joanmarie Diggs; Shane McCarron; Michael Cooper; Richard Schwerdtfeger; James Craig. W3C. 14 December 2017. W3C Recommendation. URL: https://www.w3.org/TR/wai-aria-1.1/
+
+[wai-aria-practices-1.1]
+
+    WAI-ARIA Authoring Practices 1.1. Matthew King; James Nurthen; Michiel Bijl; Michael Cooper; Joseph Scheuhammer; Lisa Pappas; Richard Schwerdtfeger. W3C. 26 July 2018. W3C Note. URL: https://www.w3.org/TR/wai-aria-practices-1.1/
+
+↑
