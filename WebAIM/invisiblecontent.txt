@@ -187,7 +187,7 @@ Instructional cues and indicators
 操作の手がかりと指標
 
 One fairly common use case for screen reader-only content is a search text input that is readily identified visually as a search field due to its position on a page and adjacent search button, but for which adjacent text is not provided. A hidden, associated <label> element with "Search terms" (or similar) text would ensure that the field is properly identified to screen reader users.
-スクリーンリーダーのみのコンテンツのよくある使用例の1つは、ページ上の位置と隣接する検索ボタンによって検索フィールドとして視覚的に簡単に識別できますが、隣接するテキストは提供されない検索テキスト入力があります。「検索語」（または同様の）テキストに関連付けられた隠された <label> 要素により、スクリーンリーダーのユーザーがフィールドを正しく識別できるようになります。
+スクリーンリーダーのみのコンテンツのよくある使用例の1つは、ページ上の位置と隣接する検索ボタンによって検索フィールドとして視覚的に簡単に識別できますが、隣接するテキストは提供されない検索テキスト入力があります。「検索語」 (または同様の) テキストに関連付けられた隠された <label> 要素により、スクリーンリーダーのユーザーがフィールドを正しく識別できるようになります。
 
 Another use case might be page breadcrumbs (such as the "Home > Articles > CSS in Action..." text near the top of this page). These are a common convention due to their visual location and presentation. Because a screen reader accesses the breadcrumb links and content linearly, it may not be readily apparent to them that it is breadcrumbs. As such, hidden text of "You are here:" has been added just prior to the breadcrumbs to provide a cue/indicator to screen reader users about what follows.
 別の使用例は、ページのパンくずリスト (このページの上部にある「ホーム > 記事 > CSS の活用...」のテキストなど) です。 これらは、視覚的な位置と提示のために一般的な規約です。 スクリーンリーダーはパンくずリストのリンクとコンテンツに直線的にアクセスするため、パンくずリストであることがすぐにはわかりません。 そのため、パンくずリストの直前に「現在地:」の非表示のテキストを追加して、スクリーンリーダーのユーザーに次が何かについての手がかりや指標を提供しています。
@@ -200,7 +200,7 @@ Another use case might be page breadcrumbs (such as the "Home > Articles > CSS i
 「スキップ」リンク
 
 "Skip to main content" or "Skip navigation" links are one of the few places where accessibility has a potentially negative impact on visual design and usability for some users. To be useful, the "skip" link should be one of the first on the page. Designers may balk at the idea of providing such a prominent link—particularly when that link will not be used by most site visitors. However, hiding the "skip" link visually using a technique above makes it much less usable to sighted keyboard users—a user group that can greatly benefit from this link.
-「メインコンテンツにスキップ」または「ナビゲーションをスキップ」のリンクは、アクセシビリティが一部のユーザーの視覚的デザインと使いやすさに潜在的に悪影響を与える数少ない場所の1つです。 便利なように、「スキップ」リンクはページの最初のリンクの1つであるべきです。 設計者は、特にそのリンクがほとんどのサイト訪問者によって使用されない場合に、そのような目立つリンクを提供するという考えに躊躇する可能性があります。 ただし、上記のテクニックを使用して「スキップ」リンクを視覚的に隠すと、目の見えるキーボードユーザー（このリンクから大きなメリットを得ることができるユーザーグループ）にとっては、使いにくくなります。
+「メインコンテンツにスキップ」または「ナビゲーションをスキップ」のリンクは、アクセシビリティが一部のユーザーの視覚的デザインと使いやすさに潜在的に悪影響を与える数少ない場所の1つです。 便利なように、「スキップ」リンクはページの最初のリンクの1つであるべきです。 設計者は、特にそのリンクがほとんどのサイト訪問者によって使用されない場合に、そのような目立つリンクを提供するという考えに躊躇する可能性があります。 ただし、上記のテクニックを使用して「スキップ」リンクを視覚的に隠すと、目の見えるキーボードユーザー (このリンクから大きなメリットを得ることができるユーザーグループ) にとっては、使いにくくなります。
 
 One way to reconcile this conflict is to visually hide the link until the user tabs to it at which point it becomes visible to sighted users.
 この競合を調整する1つの方法は、ユーザーがリンクにタブで移動するまでリンクを視覚的に隠し、タブで移動してきたら目の見えるユーザーにリンクが見えるようにすることです。
