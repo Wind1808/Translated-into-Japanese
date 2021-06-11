@@ -1,0 +1,316 @@
+https://webaim.org/techniques/css/invisiblecontent/
+
+CSS in Action
+CSS の活用
+
+Invisible Content Just for Screen Reader Users
+スクリーン リーダーのユーザーのためだけの目に見えないコンテンツ
+
+You are here: Home > Articles > CSS in Action: Invisible Content Just for Screen Reader Users
+現在地: ホーム > 記事 > CSS の活用: スクリーン リーダーのユーザーのためだけの目に見えないコンテンツ
+
+Article Contents
+記事の内容
+
+    Introduction
+    前書き
+
+    Techniques for hiding text
+    テキストを隠すためのテクニック
+
+    Examples
+    例
+
+        Instructional cues and indicators
+        操作の手がかりと指標
+
+        "Skip" links
+        「スキップ」リンク 
+
+
+
+
+
+Introduction
+前書き
+
+A woman hides behind her hands.There are occasional instances where content should be made available to screen reader users but hidden from sighted users. In the vast majority cases, content that is available visually should be available to screen reader users, and vice versa. Verbose cues or instructions that are only read by screen reader users usually do more harm than good. However, there are a few cases where information or meaning is apparent visually but may not be apparent to screen reader users. In these rare cases, it may be appropriate to cause content to be read by a screen reader, but have the content remain invisible to sighted users.
+(写真) 女性が彼女の手の後ろに隠れています。 場合によっては、スクリーンリーダーのユーザーには利用できるべきコンテンツが、目の見えるユーザーには隠されていることもあります。 ほとんどの場合、視覚的に利用できるコンテンツは、スクリーンリーダーのユーザーが利用できるべきであり、その逆も同様です。 スクリーンリーダーのユーザーだけが読む、冗長な手がかりや指示は、通常、善よりも害を及ぼします。 しかし、情報や意味が視覚的には明らかであっても、スクリーンリーダーのユーザーには明らかでない場合もあります。 これらのまれなケースでは、コンテンツをスクリーンリーダーで読めても、目の見えるユーザーにはコンテンツが見えないままにしておくことが適切な場合があります。 
+
+
+
+
+
+Techniques for hiding content
+コンテンツを隠すためのテクニック
+
+There are several mechanisms that can be used for hiding content. It's important that a technique be implemented that results in the desired outcome and accessibility.
+コンテンツを隠すために使用できるメカニズムがいくつかあります。 望ましい結果とアクセシビリティをもたらすテクニックを実装することが重要です。 
+
+
+
+
+
+display:none or visibility: hidden
+display:none や visibility: hidden
+
+These styles will hide content from all users. The content is removed from the visual flow of the page and is ignored by screen readers. Do not use this CSS if you want the content to be read by a screen reader. But DO use it for content you want hidden from all users.
+これらのスタイルは、すべてのユーザーからコンテンツを隠します。 コンテンツはページの視覚的な流れから取り除かれ、スクリーンリーダーによって無視されます。 コンテンツをスクリーンリーダーで読み上げたい場合は、この CSS を使用しないでください。 ただし、すべてのユーザーから隠したいコンテンツには使用してください。 
+
+
+
+
+
+hidden attribute
+hidden 属性
+
+The HTML hidden attribute is relatively new and not supported on older browsers like IE11. When supported, it functions the same as CSS display:none—elements with this attribute will not be presented to any user.
+HTML の hidden 属性は比較的新しく、IE11 などの古いブラウザーではサポートされていません。 サポートされている場合、CSS の display:none と同じように機能し、この属性を持つ要素は、どのユーザーにも示されません。
+
+
+
+
+
+width:0px, height:0px or other 0 pixel sizing techniques (not recommended)
+width:0px, height:0px やその他の0ピクセルのサイズ設定テクニック (非推奨)
+
+An element with no height or width, whether defined in HTML or CSS, is typically removed from the flow of the page, so most screen readers will not read it. Do not size content to 0 pixels if you want the content to be read by a screen reader. Content styled with font-size:0px or line-height:0 may work, though the elements would still take horizontal space on the screen. All these techniques may result in search engine penalties as they may be interpreted as malicious.
+HTML または CSS で定義されているかどうかに関係なく、高さまたは幅のない要素は通常、ページの流れから取り除かれるため、ほとんどのスクリーンリーダーはその要素を読み上げません。 コンテンツをスクリーンリーダーで読み上げたい場合は、コンテンツのサイズを0ピクセルにしないでください。 font-size:0px または line-height:0 でスタイル設定されたコンテンツは機能する可能性がありますが、要素は画面上で水平方向のスペースを取ります。 これらのテクニックはすべて、悪意のあるものとして解釈される可能性があるため、検索エンジンからペナルティが課せられる可能性があります。 
+
+
+
+
+
+text-indent: -10000px;
+
+This approach moves the content to the left 10000 pixels - thus off the visible screen. Screen readers will still read text with this style.
+このアプローチでは、コンテンツが左に10000ピクセル移動します。 つまり、表示されている画面から外れます。 スクリーンリーダーは、このスタイルでもテキストを読み上げます。
+
+However, if a link, form control, or other focusable element is given this style, the element would be focusable, but not visible on the page—sighted keyboard users would likely be confused. This approach may be a viable option if the element does not contain navigable elements, though better techniques are available.
+ただし、リンク、フォームコントロール、またはその他のフォーカス可能な要素にこのスタイルを指定すると、要素はフォーカス可能になりますが、ページには表示されないため、目の見えるキーボードユーザーは混乱してしまう可能性があります。 このアプローチは、要素にナビゲート可能な要素が含まれていない場合に実行可能なオプションかもしれませんが、より優れたテクニックが利用可能です。 
+
+
+
+
+
+Absolutely positioning content off-screen
+コンテンツを画面外に絶対配置する
+
+The following are the recommended styles for visually hiding content that will be read by a screen reader.
+以下は、スクリーンリーダーによって読み上げられるコンテンツを視覚的に隠すための推奨スタイルです。 
+
+
+.sr-only {
+
+position:absolute;
+
+left:-10000px;
+
+top:auto;
+
+width:1px;
+
+height:1px;
+
+overflow:hidden;
+
+}
+
+
+The .sr-only CSS class ("sr-only" meaning "screen reader only", though the class name does not really matter) should then be referenced from within the tag of the element being hidden, as shown:
+次に、.sr-only の CSS クラスは、次のように、隠される要素のタグ内から参照する必要があります (「.sr-only」は「スクリーンリーダーのみ」を意味しますが、クラス名は実際には重要ではありません) 。
+
+<div class="sr-only">This text is hidden.</div>
+<div class="sr-only">このテキストは非表示です。</div>
+
+Sighted users will not see the hidden content at all—it will be hidden well to the left of the visible browser window. Because it is still part of the page content, screen readers will read it.
+視力のあるユーザーには、隠されたコンテンツはまったく見えません — 見えているブラウザーウィンドウの左側に隠されます。 これでもページコンテンツの一部であるため、スクリーンリーダーが読み上げてくれます。
+
+Let's analyze the styles in detail. position:absolute; tells the browser to remove the element from the page flow and to begin positioning it. left:-10000px; moves the content 10000 pixels to the left. top:auto; tells the browser to position the content vertically at the same location it was originally. width:1px;, height:1px; and overflow:hidden; tell the browser to make the element one pixel in size and to visually hide everything that does not fit into that pixel—this is useful in instances where positioning may be end-user disabled, but all other styles remain enabled.
+スタイルを詳しく分析してみましょう。 position:absolute; は、ページの流れから要素を取り除き、配置を開始するようにブラウザーに指示します。 left:-10000px; は、コンテンツを10000ピクセル左に移動します。 top:auto; は、コンテンツを元の場所と同じ場所に垂直に配置するようにブラウザーに指示します。 width:1px; height:1px; overflow:hidden; は、要素のサイズを1ピクセルにし、そのピクセルに収まらないものをすべて視覚的に隠すようにブラウザーに指示します — これは、配置がエンドユーザーによって無効にされているが、他のすべてのスタイルは有効なままである場合に役立ちます。
+
+
+Note
+注意
+
+Navigable elements, such as links and form controls, should not be hidden off-screen. They would still be navigable by sighted keyboard users, but would not be visible to them, unless they are styled to become visible when they receive keyboard focus.
+リンクやフォームコントロールなどのナビゲート可能な要素を画面外に隠すべきではありません。 目の見えるキーボードユーザーは引き続きナビゲートできますが、キーボードフォーカスを受け取ったときに表示されるようにスタイル設定しない限り、表示されません。 
+
+
+
+
+
+CSS clip
+CSS クリップ
+
+
+{clip: rect(1px, 1px, 1px, 1px);
+
+clip-path: inset(50%);
+
+height: 1px;
+
+width: 1px;
+
+margin: -1px;
+
+overflow: hidden;
+
+padding: 0;
+
+position: absolute;}
+
+
+This fairly modern technique will hide or clip content that does not fit into a 1-pixel visible area. Like off-screen content, it will be visually hidden but still readable by modern screen readers.
+このかなりモダンなテクニックは、1ピクセルの可視領域に収まらないコンテンツを隠したりクリップします。 画面外のコンテンツと同様に、視覚的に隠されますが、モダンなスクリーンリーダーで読みやすくなります。
+
+
+
+
+Examples
+例
+
+Below are examples where off-screen or clipped content might be used to improve accessibility.
+以下は、アクセシビリティを向上させるために画面外のコンテンツまたはクリップされたコンテンツが使用される可能性のある例です。 
+
+
+Important!
+重要!
+
+Use these techniques judiciously! Keep in mind that many screen reader users have some vision—what they see and what they hear should typically be in harmony. In general, screen reader-only content should be reserved for information is apparent visually but not apparent to blind screen reader users.
+これらのテクニックを慎重に使用してください。 多くのスクリーンリーダーのユーザーは、ある程度の視覚を持っていることに注意してください。 通常、見るものと聞くものは調和しているべきです。 一般的に、スクリーンリーダーのみのコンテンツは、視覚的には明らかでも、目の不自由なスクリーンリーダーのユーザーには明らかでない情報のために用意するべきです 
+
+
+
+
+Instructional cues and indicators
+操作の手がかりと指標
+
+One fairly common use case for screen reader-only content is a search text input that is readily identified visually as a search field due to its position on a page and adjacent search button, but for which adjacent text is not provided. A hidden, associated <label> element with "Search terms" (or similar) text would ensure that the field is properly identified to screen reader users.
+スクリーンリーダーのみのコンテンツのよくある使用例の1つは、ページ上の位置と隣接する検索ボタンによって検索フィールドとして視覚的に簡単に識別できますが、隣接するテキストは提供されない検索テキスト入力があります。「検索語」（または同様の）テキストに関連付けられた隠された <label> 要素により、スクリーンリーダーのユーザーがフィールドを正しく識別できるようになります。
+
+Another use case might be page breadcrumbs (such as the "Home > Articles > CSS in Action..." text near the top of this page). These are a common convention due to their visual location and presentation. Because a screen reader accesses the breadcrumb links and content linearly, it may not be readily apparent to them that it is breadcrumbs. As such, hidden text of "You are here:" has been added just prior to the breadcrumbs to provide a cue/indicator to screen reader users about what follows.
+別の使用例は、ページのパンくずリスト (このページの上部にある「ホーム > 記事 > CSS の活用...」のテキストなど) です。 これらは、視覚的な位置と提示のために一般的な規約です。 スクリーンリーダーはパンくずリストのリンクとコンテンツに直線的にアクセスするため、パンくずリストであることがすぐにはわかりません。 そのため、パンくずリストの直前に「現在地:」の非表示のテキストを追加して、スクリーンリーダーのユーザーに次が何かについての手がかりや指標を提供しています。
+
+
+
+
+
+"Skip" links
+「スキップ」リンク
+
+"Skip to main content" or "Skip navigation" links are one of the few places where accessibility has a potentially negative impact on visual design and usability for some users. To be useful, the "skip" link should be one of the first on the page. Designers may balk at the idea of providing such a prominent link—particularly when that link will not be used by most site visitors. However, hiding the "skip" link visually using a technique above makes it much less usable to sighted keyboard users—a user group that can greatly benefit from this link.
+「メインコンテンツにスキップ」または「ナビゲーションをスキップ」のリンクは、アクセシビリティが一部のユーザーの視覚的デザインと使いやすさに潜在的に悪影響を与える数少ない場所の1つです。 便利なように、「スキップ」リンクはページの最初のリンクの1つであるべきです。 設計者は、特にそのリンクがほとんどのサイト訪問者によって使用されない場合に、そのような目立つリンクを提供するという考えに躊躇する可能性があります。 ただし、上記のテクニックを使用して「スキップ」リンクを視覚的に隠すと、目の見えるキーボードユーザー（このリンクから大きなメリットを得ることができるユーザーグループ）にとっては、使いにくくなります。
+
+One way to reconcile this conflict is to visually hide the link until the user tabs to it at which point it becomes visible to sighted users.
+この競合を調整する1つの方法は、ユーザーがリンクにタブで移動するまでリンクを視覚的に隠し、タブで移動してきたら目の見えるユーザーにリンクが見えるようにすることです。
+
+This technique uses two style definitions—one to visually hide the link, and another using the a:focus pseudo-class to visually reveal the link while it has focus.
+このテクニックでは、2つのスタイル定義を使用します。 1つはリンクを視覚的に隠すため、もう1つは a:focus 疑似クラスを使用してフォーカスがあるときにリンクを視覚的に公開するためです。 
+
+
+#skip a
+
+{
+
+position:absolute;
+
+left:-10000px;
+
+top:auto;
+
+width:1px;
+
+height:1px;
+
+overflow:hidden;
+
+}
+
+ 
+
+#skip a:focus
+
+{
+
+position:static;
+
+width:auto;
+
+height:auto;
+
+}
+
+
+These styles should then be applied to the "skip" link:
+次に、これらのスタイルを「スキップ」リンクに適用します。
+
+
+<div id="skip"><a href="#content">Skip to Main Content</a></div>
+<div id="skip"><a href="#content">メインコンテンツにスキップ</a></div>
+
+
+One possible drawback to this approach is that the sudden appearance of a link that was previously invisible will be unexpected and could potentially confuse the sighted keyboard user. The WebAIM.org site address this by implementing CSS transitions to animate the focused "skip" link from above the top of the page (as opposed to off-screen left) to the top left corner of the page, then back above the page when focus is lost. This ensures that the link is highly visible on screen for a longer period of time. You can see this in action by pressing the "Tab" key with focus at the top of this page.
+このアプローチの1つの考えられる欠点は、今まで見えなかったリンクのが突然現れて、目の見えるキーボードユーザーを混乱させる可能性があることです。 WebAIM.org のサイトは、CSS トランジションを実装して、フォーカスされた「スキップ」リンクをページの左上隅にページの上部 (画面外の左ではなく) からアニメーション化し、フォーカスが失われた場合にページの上に戻ることでこれに対処します。 これにより、画面上でのリンクの視認性が高まり、より長い時間、リンクが表示されるようになります。 このページの上部にフォーカスのある状態で「Tab」キーを押すことで、その動作を見ることができます。 
+
+
+
+
+
+Last updated: Sep 25, 2020
+最終更新日：2020年9月25日
+
+
+
+
+Translations
+
+    German by Gabriele Strache
+
+Related Resources
+
+    Accessible CSS
+
+©2021 WebAIM
+
+Center for Persons with Disabilities
+
+Utah State University
+
+6807 Old Main Hill
+
+Logan, UT 84322-6807
+
+435.797.7024
+
+Check Your Accessibility
+
+Web site address:
+
+From the Blog
+
+    Show Up to Disrupt
+
+    WebAIM Million - 2021 Update
+
+    Survey of Web Accessibility Practitioners #3 Results
+
+    Accessibility of COVID-19 Vaccine Pages and Barriers to Individuals with Disabilities
+
+Popular Resources
+
+    WebAIM Training
+
+    WCAG 2 Checklist
+
+    WebAIM Monthly Newsletter
+
+    Color Contrast Checker
+
+    Web Accessibility for Designers
+
+    WAVE Web Accessibility Evaluation Tool
+
+    Contact About RSS Feeds Twitter Copyright & Terms of Use 
+
+

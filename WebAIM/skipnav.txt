@@ -143,6 +143,7 @@ Important
 Review the article on Invisible Content Just for Screen Reader Users for details on using CSS to hide "skip" links off-screen.
 CSS を使用して「スキップ」リンクを画面外に隠す方法の詳細については、「スクリーン リーダーのユーザーのためだけの目に見えないコンテンツ」に関する記事を確認してください。 
 https://webaim.org/techniques/css/invisiblecontent/
+https://raw.githubusercontent.com/Wind1808/Translated-into-Japanese/main/WebAIM/invisiblecontent.txt
 
 
 One potential issue with this approach is that if the user navigates very quickly using the Tab key, the link may be visible on the page for only a fraction of a second and may be overlooked. This can be partially addressed by ensuring that the "skip" link is visually distinctive at the top of the page. Additionally, one could use scripting of (optimally) CSS3 transitions to cause the link to animate so it remains visible on screen for a period of time.
