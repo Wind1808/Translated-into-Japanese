@@ -190,7 +190,7 @@ One fairly common use case for screen reader-only content is a search text input
 スクリーンリーダーのみのコンテンツのよくある使用例の1つは、ページ上の位置と隣接する検索ボタンによって検索フィールドとして視覚的に簡単に識別できますが、隣接するテキストは提供されない検索テキスト入力があります。「検索語」 (または同様の) テキストに関連付けられた隠された <label> 要素により、スクリーンリーダーのユーザーがフィールドを正しく識別できるようになります。
 
 Another use case might be page breadcrumbs (such as the "Home > Articles > CSS in Action..." text near the top of this page). These are a common convention due to their visual location and presentation. Because a screen reader accesses the breadcrumb links and content linearly, it may not be readily apparent to them that it is breadcrumbs. As such, hidden text of "You are here:" has been added just prior to the breadcrumbs to provide a cue/indicator to screen reader users about what follows.
-別の使用例は、ページのパンくずリスト (このページの上部にある「ホーム > 記事 > CSS の活用...」のテキストなど) です。 これらは、視覚的な位置と提示のために一般的な規約です。 スクリーンリーダーはパンくずリストのリンクとコンテンツに直線的にアクセスするため、パンくずリストであることがすぐにはわかりません。 そのため、パンくずリストの直前に「現在地:」の非表示のテキストを追加して、スクリーンリーダーのユーザーに次が何かについての手がかりや指標を提供しています。
+別の使用例は、ページのパンくずリスト (このページの上部にある「ホーム > 記事 > CSS の活用...」のテキストなど) です。 これらは、視覚的な位置と提示のための一般的な規約です。 スクリーンリーダーはパンくずリストのリンクとコンテンツに直線的にアクセスするため、パンくずリストであることがすぐにはわかりません。 そのため、パンくずリストの直前に「現在地:」の隠されたテキストを追加して、スクリーンリーダーのユーザーに次が何かについての手がかりや指標を提供しています。
 
 
 
@@ -206,7 +206,7 @@ One way to reconcile this conflict is to visually hide the link until the user t
 この競合を調整する1つの方法は、ユーザーがリンクにタブで移動するまでリンクを視覚的に隠し、タブで移動してきたら目の見えるユーザーにリンクが見えるようにすることです。
 
 This technique uses two style definitions—one to visually hide the link, and another using the a:focus pseudo-class to visually reveal the link while it has focus.
-このテクニックでは、2つのスタイル定義を使用します。 1つはリンクを視覚的に隠すため、もう1つは a:focus 疑似クラスを使用してフォーカスがあるときにリンクを視覚的に公開するためです。 
+このテクニックでは、2つのスタイル定義を使用します。 1つはリンクを視覚的に隠すため、もう1つは a:focus 疑似クラスを使用してフォーカスがあるときにリンクを視覚的に公開するためのものです。 
 
 
 #skip a
@@ -251,7 +251,7 @@ These styles should then be applied to the "skip" link:
 
 
 One possible drawback to this approach is that the sudden appearance of a link that was previously invisible will be unexpected and could potentially confuse the sighted keyboard user. The WebAIM.org site address this by implementing CSS transitions to animate the focused "skip" link from above the top of the page (as opposed to off-screen left) to the top left corner of the page, then back above the page when focus is lost. This ensures that the link is highly visible on screen for a longer period of time. You can see this in action by pressing the "Tab" key with focus at the top of this page.
-このアプローチの1つの考えられる欠点は、今まで見えなかったリンクのが突然現れて、目の見えるキーボードユーザーを混乱させる可能性があることです。 WebAIM.org のサイトは、CSS トランジションを実装して、フォーカスされた「スキップ」リンクをページの左上隅にページの上部 (画面外の左ではなく) からアニメーション化し、フォーカスが失われた場合にページの上に戻ることでこれに対処します。 これにより、画面上でのリンクの視認性が高まり、より長い時間、リンクが表示されるようになります。 このページの上部にフォーカスのある状態で「Tab」キーを押すことで、その動作を見ることができます。 
+このアプローチの1つの考えられる欠点は、今まで見えなかったリンクが突然現れて、目の見えるキーボードユーザーを混乱させる可能性があることです。 WebAIM.org のサイトは、CSS トランジションを実装して、フォーカスされた「スキップ」リンクをページの左上隅にページの上部 (画面外の左ではなく) からアニメーション化し、フォーカスが失われた場合にページの上に戻ることでこれに対処します。 これにより、画面上でのリンクの視認性が高まり、より長い時間、リンクが表示されるようになります。 このページの上部にフォーカスのある状態で「Tab」キーを押すことで、その動作を見ることができます。 
 
 
 
