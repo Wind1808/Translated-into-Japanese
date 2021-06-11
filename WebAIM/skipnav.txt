@@ -195,7 +195,7 @@ Browser Quirks
 ブラウザーの癖
 
 "Skip navigation" links are such a simple concept that it's hard to believe there would be any browser quirks in implementing it, but there are. Some browsers do not fully support in-page links. While they may visually shift focus to the location of the target or named anchor for the "skip" link, they do not actually set keyboard focus to this location. These bugs can potentially be addressed by using JavaScript to set focus (using JavaScript focus()) to the target element.
-「スキップナビ」リンクは非常に単純な概念なので、それを実装する際にブラウザーの癖があるとは信じがたいですが、実際にはあります。 一部のブラウザーは、ページ内リンクを完全にはサポートしていません。 「スキップ」リンクのターゲットまたは名前付きアンカーの場所に視覚的にフォーカスを移動できますが、実際にはキーボード フォーカスをこの場所に設定しません。 これらのバグは、JavaScript を使用して (JavaScript の focus() を使用して) ターゲット要素にフォーカスを設定することで解決できる可能性があります。 
+「スキップナビ」リンクは非常に単純な概念なので、それを実装する際にブラウザーの癖があるとは信じがたいですが、実際にはあります。 一部のブラウザーは、ページ内リンクを完全にはサポートしていません。 「スキップ」リンクのターゲットまたは名前付きアンカーの場所に視覚的にフォーカスを移動できますが、実際にはキーボード フォーカスをこの場所に設定しません。 これらのバグは、JavaScript を使用して (JavaScript の focus() を使用して) ターゲット要素にフォーカスを設定することで解決できる可能性があります。 (訳注: Firefox では、設定の「ページ中の移動にカーソルを使用する (キャレットブラウズモード)(K)」で解決できます。)
 
 
 
