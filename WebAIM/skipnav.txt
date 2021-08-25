@@ -278,7 +278,7 @@ Alternate reading orders
 代替の読み上げ順序
 
 Some developers place the main content first in the reading order and the navigation last - generally using CSS to maintain the navigation first in the page visually. This method makes "skip navigation" links unnecessary, but it raises another question. Should such sites provide "skip to navigation" links? This is a tricky question. Links taking users to the navigation are unexpected, and can lead to some confusion. With or without "skip to navigation" links, screen reader users who want to access the navigation may get lost in the page, wondering if there is any navigation.
-一部の開発者は、メイン コンテンツを読み上げ順序の最初に配置し、ナビゲーションを最後に配置します - 通常、CSS を使用してナビゲーションをページの最初に視覚的に維持します。 この方法により、「スキップナビ」リンクが不要になりますが、別の問題が発生します。 そのようなサイトは、「ナビゲーションへスキップ」リンクを提供するべきでしょうか?  これは難しい質問です。 ユーザーをナビゲーションに導くリンクは予期しないものであり、混乱を招く可能性があります。 「ナビゲーションへスキップ」リンクの有無にかかわらず、ナビゲーションにアクセスしたいスクリーン リーダーのユーザーは、ナビゲーションがあるかどうか疑問に思ってページ内で迷ってしまうかもしれません
+一部の開発者は、メイン コンテンツを読み上げ順序の最初に配置し、ナビゲーションを最後に配置します - 通常、CSS を使用してナビゲーションをページの最初に視覚的に維持します。 この方法により、「スキップナビ」リンクが不要になりますが、別の問題が発生します。 そのようなサイトは、「ナビゲーションへスキップ」リンクを提供するべきでしょうか?  これは難しい質問です。 ユーザーをナビゲーションに導くリンクは予期しないものであり、混乱を招く可能性があります。 「ナビゲーションへスキップ」リンクの有無にかかわらず、ナビゲーションにアクセスしたいスクリーン リーダーのユーザーは、ナビゲーションがあるかどうか疑問に思ってページ内で迷ってしまうかもしれません。
 
 This approach also causes a reading and navigation order that is very atypical - and that can be very confusing, particularly for sighted users who are visually tracking the navigation focus that seemingly jumps around the page rather than starting at the beginning.
 このアプローチはまた、読み上げとナビゲーションの順序が非常に不規則なものになり、特に目の見えるユーザーにとっては、ページの最初から始まるのではなく、ページのあちこちを飛び回るようなナビゲーションのフォーカスを目で追うことになるため、とても混乱する可能性があります。
