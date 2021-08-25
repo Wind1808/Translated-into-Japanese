@@ -1,6 +1,7 @@
 https://webaim.org/techniques/skipnav/
 
 skip to main content
+メインコンテンツへスキップ
 
 "Skip Navigation" Links
 「スキップナビ」リンク
@@ -17,14 +18,23 @@ Article Contents
     Creating "Skip Navigation" Links
     「スキップナビ」リンクの作成
 
-    Browser Quirks
-    ブラウザーの癖
+        Visible "skip" links
+        目に見える「スキップ」リンク
 
-    Multiple "Skip" Links
-    複数の「スキップ」リンク
+        Hidden "Skip" Links
+        隠された「スキップ」リンク
+
+        Which wording is best?
+        どの言葉遣いが良いですか?
+
+        Multiple "Skip" Links
+        複数の「スキップ」リンク
+
+    WCAG Conformance
+    WCAG への適合性
 
     Alternatives to "Skip Navigation" Links
-    「スキップナビ」リンクの代替 
+    「スキップナビ」リンクの代替
 
 
 
@@ -33,14 +43,281 @@ Article Contents
 Overview
 概要
 
-The main content is not usually the first thing on a web page. Keyboard and screen reader users generally must navigate a long list of navigation links, sub-lists of links, corporate icons, site searches, and other elements before ever arriving at the main content. This is particularly difficult for users with some forms of motor disabilities.
-通常、メイン コンテンツはウェブページの最初のものではありません。 キーボードとスクリーン リーダーのユーザーは、通常、メイン コンテンツに到達する前に、ナビゲーション リンクの長いリスト、リンクのサブリスト、企業アイコン、サイト検索、およびその他の要素をナビゲートする必要があります。 これは、ある種の運動障害を持つユーザーにとって特に困難です。
+Because the main content is not usually the first thing on a web page, keyboard and screen reader users often must navigate a long list of navigation links and other elements before ever arriving at the main content. This can be particularly difficult for users with some forms of motor disabilities. Consider users with no or limited arm movement who navigate a web page by tapping their heads on a switch or that use a stick in their mouth to press keyboard keys. Requiring users to perform any action numerous times before reaching the main content poses an accessibility barrier.
+通常、メインコンテンツはウェブページの最初のものではないため、キーボードとスクリーンリーダーのユーザーは、メインコンテンツに到達する前に、ナビゲーションリンクやその他の要素の長いリストをナビゲートする必要があります。 これは、ある種の運動障害を持つユーザーにとっては特に難しい場合があります。 腕が動かない、または制限されているユーザーが、頭をスイッチに当てたり、棒を口にくわえてキーボードのキーを押したりして、ウェブページをナビゲートする場合を考えてみてください。 メインコンテンツに到達する前にユーザーにアクションを何度も実行するように要求することは、アクセシビリティの障壁となります。
 
-Without some sort of system for bypassing the long list of links, some users are at a huge disadvantage. Consider users with no arm movement, who use computers by tapping their heads on a switch or that use a stick in their mouth to press keyboard keys. Requiring users to perform any action perhaps 100s of times before reaching the main content is simply unacceptable.
-リンクの長いリストをバイパスするための何らかのシステムがなければ、一部のユーザーは非常に不利な立場に置かれます。 腕が動かないユーザーで、頭をスイッチに当ててコンピューターを使用するユーザーや、棒を口にくわえてキーボードのキーを押すユーザーを考えてみましょう。 メイン コンテンツに到達するまでに、おそらく何百回ものアクションを実行することをユーザーに要求することは、単純に受け入れられません。
+Of course, sighted people who use their mouse do not have any trouble with web pages like this. They can almost immediately scan over the page and identify where the main content is. In effect, sighted users have a built-in "skip navigation" mechanism: their eyes. "Skip navigation" links are useful to give screen reader and keyboard users the same capability of navigating directly to the main content.
+もちろん、マウスを使用する目の見える人は、このようなウェブページに問題はありません。 彼らはほとんどすぐにページをスキャンして、メインコンテンツがどこにあるかを特定できます。 つまり、目の見えるユーザーは、目という「スキップナビ (skip navigation、ナビゲーションをスキップ) 」の仕組みを内蔵しているのです。 「スキップナビ」リンクは、スクリーンリーダーとキーボードのユーザーにメインコンテンツに直接移動するのと同様の機能を提供するのに役立ちます。 
 
-Of course, sighted people who use their mouse do not have any trouble with pages such as this. They can almost immediately scan over the page and identify where the main content is. In effect, sighted users have a built-in "skip navigation" mechanism: their eyes. They can also bypass the many links before the main content and click directly on the link they want with the mouse. The "skip navigation" idea was invented to give screen reader and keyboard users the same capability of going directly to the main content that sighted mouse users take for granted.
-もちろん、マウスを使っている目の見える人は、このようなページでも問題ありません。 彼らは、ほとんどすぐにページをスキャンして、メイン コンテンツの場所を特定できます。 つまり、目の見えるユーザーは、目という「スキップナビ (skip navigation、ナビゲーションをスキップ) 」の仕組みを内蔵しているのです。 また、メイン コンテンツの前にある多くのリンクをバイパスして、必要なリンクをマウスで直接クリックすることもできます。 「スキップナビ」というアイデアは、スクリーン リーダーのユーザーとキーボードのユーザーが、目の見えるマウスのユーザーが当たり前のように使っているメイン コンテンツに直接移動するのと同じ機能を提供するために考案されました。
+
+
+
+
+Creating "Skip Navigation" Links
+「スキップナビ」リンクの作成
+
+The idea is simple enough: provide a link at the top of the page that, when activated, jumps the user to the beginning of the main content area.
+アイデアは非常に単純です。 ページの上部にリンクを提供して、それをアクティブ化すると、ユーザーをメインコンテンツ領域の先頭にジャンプさせます。 
+
+
+
+
+Visible "skip" links
+目に見える「スキップ」リンク
+
+The easiest method of creating a "skip navigation" link is to put it at or near the top of the page in regular text. The horizontal location of the link doesn't matter much. The key is to make sure the link is one of the first items that screen readers hear and that keyboard users navigate to using the keyboard (typically by pressing the Tab key). Otherwise, users may not realize there is a "skip navigation" link there at all, and may waste time navigating through extraneous links.
+「スキップナビ」リンクを作成する最も簡単な方法は、通常のテキストでページの上部またはその近くにリンクを配置することです。 リンクの水平方向の位置はそれほど重要ではありません。 重要なのは、リンクがスクリーンリーダーで聞く最初の項目のひとつであり、キーボードユーザーがキーボードを使用して (通常は Tab キーを押して) それにナビゲートできるようにすることです。 そうしないと、ユーザーはそこに「スキップナビ」リンクがあることにまったく気付かず、無関係なリンクをナビゲートして時間を無駄にする可能性があります。
+
+The link must also be visually apparent to be optimally usable. A very small or hidden link does not benefit the audience that most needs "skip" links—sighted keyboard users.
+リンクは、最適に使用できるように視覚的にも明らかである必要があります。 非常に小さいリンクや非表示のリンクは、「スキップ」リンクを最も必要としているオーディエンス、つまり目の見えるキーボードユーザーにはメリットがありません。
+
+
+Example
+例
+
+The link is the first item in the page. The anchor or target for the link (where the link will jump the user to) is the main content region.
+リンクはページの最初の項目です。 リンクのアンカーまたはターゲット (リンクがユーザーをジャンプさせる場所) は、メインコンテンツのリージョンです。
+
+
+<body>
+
+<a href="#maincontent">Skip to main content</a>
+<a href="#maincontent">メインコンテンツへスキップ</a>
+
+...
+
+<main id="maincontent">
+
+<h1>Heading</h1>
+<h1>見出し</h1>
+
+<p>This is the first paragraph</p>
+<p>これは最初のパラグラフです</p>
+
+
+The target is identified by its id attribute value matching the href value (minus the "#") of the "skip" link. When the "skip" link is activated, keyboard focus will be placed on the <main> element. Navigation and reading will proceed from this location in the page.
+ターゲットは、「スキップ」リンクの href 値 (「#」を除いたもの) と一致する id 属性値によって識別されます。 「スキップ」リンクがアクティブ化すると、キーボードフォーカスは <main> 要素に配置されます。 ナビゲーションと読み上げは、ページのこの場所から続行されます。
+
+Alternatively, you can use a named anchor to identify the target for the link, though named anchors are no longer conforming in HTML5.
+代わりに、名前付きアンカーを使用してリンクのターゲットを識別することもできますが、名前付きアンカーは HTML5 に準拠しなくなりました。 
+
+
+<h1><a name="maincontent" id="maincontent"></a> Heading</h1>
+<h1><a name="maincontent" id="maincontent"></a> 見出し</h1>
+
+<p>This is the first paragraph</p>
+<p>これは最初のパラグラフです</p>
+
+
+
+
+
+Hidden "skip" links
+隠された「スキップ」リンク
+
+Many designers worry about the aesthetic impact of visible "skip navigation" links. They may think these links don't look particularly attractive, that they get in the way of artistic expression, or that they may be confusing to some users that do not need them—especially because they are one of the first things within a page. While a visible "skip" link declares a type of distinct commitment to accessibility, to address these concerns, the link can be visually hidden until it is navigated to.
+多くの設計者は、目に見える「スキップナビ」リンクの美的影響について心配しています。 彼らは、これらのリンクが特に魅力的に見えない、芸術的な表現の邪魔になる、または、特に、ページ内の最初のものの1つであるため、リンクを必要としない一部のユーザーを混乱させる可能性があると考えるかもしれません。 目に見える「スキップ」リンクは、アクセシビリティへの明確な取り組みを宣言していますが、これらの懸念に対処するために、リンクはナビゲートされるまで視覚的に隠しておくことができます。
+
+To be usable by all keyboard users, particularly sighted keyboard users, the link must:
+すべてのキーボードユーザー、特に目の見えるキーボードユーザーが使用できるようにするには、リンクは次の条件を満たしている必要があります。
+
+    be hidden by default
+    デフォルトで非表示にする
+
+    be accessible to keyboard navigation
+    キーボードナビゲーションでアクセスできる
+
+    become prominently visible when it is focused
+    フォーカスされると視覚的に目立つようになる
+
+    properly set focus to the main content area when activated
+    アクティブ化されたときにメインコンテンツ領域にフォーカスを適切に設定する 
+
+Probably the most accessible method for visually hiding a skip link is to hide it off screen with CSS, then cause it to be positioned on screen when it receives keyboard focus. Because the link is still part of the accessible content on the page, keyboard and screen reader users can navigate it, and the link will become visible when accessed.
+スキップリンクを視覚的に隠すための最もアクセス可能な方法は、おそらく、CSS を使用して画面外に隠しておき、キーボードフォーカスを受け取ったときに画面上に配置することです。 リンクは引き続きページ上のアクセス可能なコンテンツの一部であるため、キーボードとスクリーンリーダーのユーザーはリンクをナビゲートでき、アクセスするとリンクが表示されます。
+
+Some techniques, such as hiding the "skip" link with CSS display:none or the hidden attribute, will remove the link from keyboard navigation making it inaccessible to all users. Making the link the same color as the background or fully transparent, sizing the link to 0 pixels, or placing it on a one pixel transparent image can also pose accessibility issues.
+CSS の display:none または hidden 属性で「スキップ」リンクを非表示にするなどの一部の手法では、キーボードナビゲーションからリンクが取り除かれ、すべてのユーザーがアクセス不可能になります。 リンクを背景と同じ色にするか、完全に透明にする、リンクのサイズを0ピクセルにする、または1ピクセルの透明な画像に配置することも、アクセシビリティの問題を引き起こす可能性があります。
+
+
+Important
+重要
+
+Review the article on Invisible Content Just for Screen Reader Users for details on using CSS to hide "skip" links off-screen.
+CSS を使用して「スキップ」リンクを画面外に隠す方法の詳細については、「スクリーンリーダーのユーザーのためだけの目に見えないコンテンツ」に関する記事を確認してください。 
+https://webaim.org/techniques/css/invisiblecontent/
+https://raw.githubusercontent.com/Wind1808/Translated-into-Japanese/main/WebAIM/invisiblecontent.txt
+
+One potential issue with this approach is that if the user navigates very quickly using the Tab key, the link may be visible on the page for only a fraction of a second and may be overlooked. This can be partially addressed by ensuring that the "skip" link is very visually distinctive at the top of the page when visible. Additionally, one could use scripting or CSS transitions to cause the link to animate so it remains visible on screen for a period of time.
+このアプローチの潜在的な問題の1つは、ユーザーが Tab キーを使用して非常にすばやくナビゲートすると、リンクがページにほんの一瞬しか表示されず、見落とされる可能性があることです。 これは、「スキップ」リンクがページ上部に表示されているときに、視覚的に非常に目立つようにすることで、部分的に対処できます。 さらに、スクリプトや CSS トランジションを使用してリンクをアニメーション化して、一定期間画面に表示されたままにすることもできます。
+
+
+Note
+注
+
+Navigate the links at the beginning of this page using the Tab key to see an example of a hidden skip link that becomes visible on keyboard focus using CSS transitions to make it visually distinctive and persistent on screen for at least a brief moment.
+このページの最初にあるリンクを Tab キーを使用してナビゲートすると、キーボードフォーカスで表示される隠されたスキップリンクの例を見ることができます。 CSS トランジションを使用して視覚的に目立たせ、少なくともほんの一瞬でも、画面上に留まるようにしています。 
+
+
+
+
+Which wording is best?
+どの言葉遣いが良いですか?
+
+There are multiple ways that the "skip" link could be worded:
+「スキップ」リンクを表現する方法は、次のように複数あります。
+
+    Skip navigation
+    ナビゲーションをスキップ
+
+    Skip main navigation
+    メインナビゲーションをスキップ
+
+    Skip navigation links
+    ナビゲーションリンクをスキップ
+
+    Skip to main content
+    メインコンテンツへスキップ
+
+    Skip to content
+    コンテンツへスキップ
+
+Any of these may be sufficient so long as the purpose of the link is clearly described. In general, we prefer "Skip to main content" as it explains where the user is navigating to versus what they are navigating past.
+リンクの目的が明確に説明されている限り、これらのいずれでも構いません。 私たちは、一般的には、「メインコンテンツへスキップ」の方が、ユーザーがどこに向かってナビゲートしているのか、何を通り過ぎてナビゲートしようとしているのかを説明できるため、好ましいと考えています。
+
+
+
+
+Multiple "Skip" Links
+複数の「スキップ」リンク
+
+What if a page has multiple sections or multiple levels of navigational links? Should developers provide a "skip navigation" link to each of these sections or to skip over each level of navigational?
+ページに複数のセクションまたは複数レベルのナビゲーションリンクがある場合はどうしますか?  開発者は、これらのセクションのそれぞれに「スキップナビ」リンクを提供したり、それとも各レベルのナビゲーションをスキップしたりするべきでしょうか?
+
+In most cases, a single "skip" link is sufficient. For pages that have very few navigable items preceding the main content, a "skip" link may not be necessary at all. On the other hand, a very complex page with several repeated elements may necessitate additional "skip" links. Remember, the purpose of "skip navigation" links is to reduce the clutter of numerous links. Adding more links increases link-clutter. If numerous "skip" links are present, it raises the question of whether a "Skip the skip links" link is necessary!
+ほとんどの場合、1つの「スキップ」リンクで十分です。 メインコンテンツの前にナビゲート可能な項目がほとんどないページの場合、「スキップ」リンクはまったく必要ない場合があります。 一方、複数の要素が繰り返される非常に複雑なページでは、追加の「スキップ」リンクが必要になる場合があります。 「スキップナビ」リンクの目的は、多数のリンクの乱雑さを減らすことであることを忘れないでください。 リンクを増やすと、リンクが乱雑さも増大します。 多数の「スキップ」リンクが存在する場合、「スキップリンクをスキップする」リンクが必要かどうかという疑問が生じます!
+
+Skip links or other in-page links can also be used to allow users to jump to or jump over other types of page content. The "Article Contents" at the top of this page, for example, includes in-page links to facilitate navigation to major page sections. A "skip" link could also be used to allow the user to quickly bypass confusing or potentially inaccessible content, such as ASCII art, complex tables, or complex social media feeds.
+スキップリンクまたは他のページ内リンクを使用して、ユーザーが他の種類のページコンテンツにジャンプしたり、飛び越えたりできるようにすることもできます。 たとえば、このページの上部にある「記事の内容」には、主要なページセクションへのナビゲーションを容易にするページ内リンクが含まれています。 「スキップ」リンクを使用して、ユーザーが ASCII アート、複雑な表、複雑なソーシャルメディアフィードなどのわかりにくいコンテンツやアクセス不可能かもしれないコンテンツをすばやくバイパスできるようにすることもできます。
+
+
+
+
+
+WCAG Conformance
+WCAG への適合性
+
+WCAG 2.4.1 (Bypass Blocks - Level A) states, "A mechanism is available to bypass blocks of content that are repeated on multiple Web pages." This does not necessarily require that a "skip" link be present. Beginning the main content with an <h1> or using a <main> region would be a sufficient "mechanism". However because neither of these techniques are highly useful for sighted keyboard users absent a screen reader or specialized software, a "skip" link is strongly recommended for optimal accessibility on pages with repeated navigation.
+WCAG 2.4.1 (ブロックのバイパス - レベル A) は、「複数のウェブページで繰り返されるコンテンツのブロックをバイパスする仕組みが利用可能です」と述べています。 これは、必ずしも「スキップ」リンクが存在する必要はありません。 メインコンテンツを <h1> で開始するか、<main> リージョンを使用することで、十分な「仕組み」が得られます。 ただし、これらの手法はどちらも、スクリーンリーダーや特殊なソフトウェアがない目の見えるキーボードユーザーにはあまり役立たないため、ナビゲーションを繰り返すページで最適なアクセシビリティを実現するには、「スキップ」リンクを強くお勧めします。
+
+
+
+
+
+Alternatives to "Skip Navigation" Links
+「スキップナビ」リンクの代替
+
+Implementing proper heading structures (especially starting the main content with an <h1>) and regions (especially <nav> and <main>) is a vital aspect of keyboard accessibility. Unfortunately, browsers do not yet natively support this type of navigation without the use of extensions or a screen reader. Even though "skip navigation" links are a rather clumsy and obtrusive solution to a real world problem, they are still often necessary to best meet the needs of all keyboard users.
+適切な見出し構造 (特にメインコンテンツを <h1> で開始) とリージョン (特に <nav> と <main>) を実装することは、キーボードのアクセシビリティの重要な側面です。 残念ながら、ブラウザーは、拡張機能やスクリーンリーダーを使用せずに、この種のナビゲーションをまだネイティブにサポートしていません。 「スキップナビ」リンクは、現実世界の問題に対するかなり不器用で目障りな解決策ではありますが、それでもすべてのキーボードユーザーのニーズを最大限に満たすためには、やはり必要な場合が多いのです。
+
+Within web pages and applications, focus management may be necessary to ensure that keyboard focus is set on content elements when they are presented or activated. When a dialog pop-up appears, for example, focus will likely need to be set to it using JavaScript.
+ウェブページおよびアプリケーション内では、コンテンツ要素が表示またはアクティブ化されたときにキーボードフォーカスがコンテンツ要素に確実に設定されるようにするために、フォーカス管理が必要になる場合があります。 たとえば、ダイアログのポップアップが表示された場合、JavaScript を使用してフォーカスを設定する必要があります。
+
+
+
+
+
+Alternate reading orders
+代替の読み上げ順序
+
+Some web sites use CSS to change page layouts so the main content is presented before the navigation in the underlying source code (which is what determines the screen reader reading and keyboard navigation order), but after the navigation visually. Because the navigation is encountered first for keyboard and screen reader users, this method may make a "skip navigation" link unnecessary, but it raises other questions. Should a "skip to navigation" link be provided? Will non-visual users even be aware of the navigation?
+一部のウェブサイトでは、CSS を使用してページレイアウトを変更しているため、メインコンテンツは、基になるソースコード (スクリーンリーダーの読み上げとキーボードナビゲーションの順序を決定するもの) では、ナビゲーションの前に現れますが、視覚的には、ナビゲーションの後に現れます。 キーボードとスクリーンリーダーのユーザーはナビゲーションが最初に発生するため、この方法では「スキップナビ」リンクが不要になる場合がありますが、他の疑問が発生します。 「ナビゲーションへスキップする」リンクを提供するべきですか?  視覚に頼らないユーザーもナビゲーションに気づくことができるか?
+
+When the visual order does not align with the navigation and reading order, sighted keyboard or screen reader users may be confused when what they are seeing or navigating to seemingly jumps around the visual page.
+視覚的な順序がナビゲーションと読み上げの順序と一致しない場合、目の見えるキーボードやスクリーンリーダーのユーザーは、見ているものやナビゲートしているものが視覚的なページを飛び回っているように見えて、混乱するかもしれません。
+
+Because these types of layouts are very atypical and can pose confusion and difficulty, they are not recommended.
+このようなレイアウトは非常に非典型的であり、混乱や困難をもたらす可能性があるため、お勧めしません。
+
+
+
+
+Last updated: Aug 11, 2021
+最終更新日: 2021 年 8 月 11 日
+
+
+
+
+
+Related Resources
+関連リソース
+
+    Motor Disabilities
+    運動障害
+
+    Links and Hypertext
+    リンクとハイパーテキスト
+
+    CSS in Action: Invisible Content Just for Screen Reader Users
+    CSS の活用: スクリーンリーダーのユーザーのためだけの目に見えないコンテンツ
+
+    Creating Accessible JavaScript
+    アクセシブルな JavaScript の作成
+
+    Site Searches, Indexes, and Site Maps
+    サイト検索、インデックス、サイト マップ 
+
+
+
+
+
+©2021 WebAIM
+
+Institute for Disability Research, Policy, and Practice
+障害者研究・政策・実践機構
+
+
+Utah State University
+ユタ州立大学
+
+6807 Old Main Hill
+6807 オールド・メイン・ヒル
+
+Logan, UT 84322-6807
+ローガン、ユタ州 84322-6807 
+
+435.797.7024
+
+Check Your Accessibility
+
+Web site address:
+
+From the Blog
+
+    Google Announces Seismic Change to Docs
+
+    Colorado Mandates Accessibility for State and Local Government Websites
+
+    Evaluating Color and Contrast - How hard can it be?
+
+    Show Up to Disrupt
+
+Popular Resources
+
+    WebAIM Training
+
+    WCAG 2 Checklist
+
+    WebAIM Monthly Newsletter
+
+    Color Contrast Checker
+
+    Web Accessibility for Designers
+
+    WAVE Web Accessibility Evaluation Tool
+
+    Contact About RSS Feeds Twitter Copyright & Terms of Use 
+
 
 
 
